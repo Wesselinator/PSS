@@ -46,8 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business_Logic\Agent.cs" />
+    <Compile Include="Business_Logic\BusinessClient.cs" />
     <Compile Include="Business_Logic\Client.cs" />
     <Compile Include="Business_Logic\Employee.cs" />
+    <Compile Include="Business_Logic\IndividualClient.cs" />
     <Compile Include="Business_Logic\Person.cs" />
     <Compile Include="Data_Access\DataHandler.cs" />
     <Compile Include="Presentation_Layer\Form1.cs">
