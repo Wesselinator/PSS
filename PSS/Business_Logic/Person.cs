@@ -22,7 +22,7 @@ namespace PSS.Business_Logic
         public string Province { get => province; set => province = value; }
         public int IdNumber { get => idNumber; set => idNumber = value; }
 
-        protected Person(int idNumber, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province)
+        public Person(int idNumber, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
