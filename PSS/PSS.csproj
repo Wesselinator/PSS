@@ -46,7 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business_Logic\ClientFollowUpFunctionality.cs" />
+    <Compile Include="Business_Logic\CreateTicketFunctionality.cs" />
+    <Compile Include="Business_Logic\FollowUp.cs" />
+    <Compile Include="Business_Logic\JobFunctionality.cs" />
     <Compile Include="Business_Logic\Person.cs" />
+    <Compile Include="Business_Logic\RegisterFunctionality.cs" />
     <Compile Include="Data_Access\DataHandler.cs" />
     <Compile Include="Presentation_Layer\Form1.cs">
       <SubType>Form</SubType>

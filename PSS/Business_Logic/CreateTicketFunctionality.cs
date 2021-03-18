@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace PSS.Business_Logic
 {
-    class Person
+    public class CreateTicketFunctionality
     {
-
-        public Person()
+        public void LogTicket(int ticket)
         {
-            
+
         }
+
+        public void AssignTechnician()
+        {
+
+        }
+
 
     }
 }

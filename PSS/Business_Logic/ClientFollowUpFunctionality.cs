@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace PSS.Business_Logic
 {
-    class Person
+    public class ClientFollowUpFunctionality
     {
-
-        public Person()
+        public void CheckStatus(int ticketNumber)
         {
-            
-        }
 
+        }
     }
 }

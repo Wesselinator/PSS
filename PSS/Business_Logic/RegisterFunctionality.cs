@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace PSS.Business_Logic
 {
-    class Person
+    class RegisterFunctionality
     {
-
-        public Person()
+        public void RegisterClient()
         {
-            
-        }
 
+        }
     }
 }

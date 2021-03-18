@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace PSS.Business_Logic
 {
-    class Person
+    class JobFunctionality
     {
-
-        public Person()
+        public void ExecuteJob()
         {
-            
-        }
 
+        }
     }
 }
