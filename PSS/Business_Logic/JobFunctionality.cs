@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PSS.Data_Access
+namespace PSS.Business_Logic
 {
-    class DataHandler
+    class JobFunctionality
     {
-        public DataHandler()
+        public void ExecuteJob()
         {
 
         }
     }
 }
-
