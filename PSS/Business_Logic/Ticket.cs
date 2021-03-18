@@ -8,30 +8,36 @@ namespace PSS.Business_Logic
 {
     class Ticket
     {
-        private DateTime startTime;
-        private DateTime endTime;
-        private int callInstanceID;
+        private int ticketID;
         private int clientID;
-        private string subject;
+        private string department;
+        private string status;
+        private string problemDescription;
 
-        public DateTime StartTime { get => startTime; set => startTime = value; }
-        public DateTime EndTime { get => endTime; set => endTime = value; }
-        public int CallInstanceID { get => callInstanceID; set => callInstanceID = value; }
         public int ClientID { get => clientID; set => clientID = value; }
-        public string Subject { get => subject; set => subject = value; }
+        public string Department { get => department; set => department = value; }
+        public string Status { get => status; set => status = value; }
+        public string ProblemDescription { get => problemDescription; set => problemDescription = value; }
+        public int TicketID { get => ticketID; set => ticketID = value; }
 
         public Ticket()
         {
 
         }
 
-        public Ticket(DateTime startTime, DateTime endTime, int callInstanceID, int clientID, string subject)
+        public Ticket(int ticketID, int clientID, string department, string status, string problemDescription)
         {
-            this.startTime = startTime;
-            this.endTime = endTime;
-            this.callInstanceID = callInstanceID;
+            this.ticketID = ticketID;
             this.clientID = clientID;
-            this.subject = subject;
+            this.department = department;
+            this.status = status;
+            this.problemDescription = problemDescription;
+        }
+
+        public override string ToString()
+        {
+            String output = "Ticket ID:" + TicketID;
+            return output;
         }
     }
 }
