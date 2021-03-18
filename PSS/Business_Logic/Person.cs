@@ -8,7 +8,7 @@ namespace PSS.Business_Logic
 {
     public abstract class Person
     {
-        private String firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province;
+        private string firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province;
         private int idNumber;
 
         public string FirstName { get => firstName; set => firstName = value; }
@@ -22,7 +22,7 @@ namespace PSS.Business_Logic
         public string Province { get => province; set => province = value; }
         public int IdNumber { get => idNumber; set => idNumber = value; }
 
-        protected Person(string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province)
+        protected Person(int idNumber, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
@@ -33,6 +33,7 @@ namespace PSS.Business_Logic
             this.CityAddress = cityAddress;
             this.PostalCode = postalCode;
             this.Province = province;
+            this.IdNumber = idNumber;
         }
 
         public Person()
