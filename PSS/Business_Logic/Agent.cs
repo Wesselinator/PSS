@@ -10,10 +10,13 @@ namespace PSS.Business_Logic
     {
         private string department; 
         
+        public int AgentID { get => IdNumber; set => IdNumber = value; }
         public string Department { get => department; set => department = value; }
 
-        public Agent()
+        public Agent(int agentID, string department, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(agentID, firstName,lastName,cellphoneNumber,telephoneNumber,email,streetAddress,cityAddress,postalCode,province)
         {
+            this.AgentID = agentID;
+            this.Department = department;
         }
 
         public Agent(string department)

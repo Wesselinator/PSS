@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace PSS.Business_Logic
 {
-    class BusinessClient : Client
+    class BusinessClient : Person
     {
         private string businessName;
-        private string contactPersoneName;
-        private string contactPersonSurname;
 
+        public int BusinessID { get => IdNumber; set => IdNumber = value; }
         public string BusinessName { get => businessName; set => businessName = value; }
-        public string ContactPersoneName { get => contactPersoneName; set => contactPersoneName = value; }
-        public string ContactPersonSurname { get => contactPersonSurname; set => contactPersonSurname = value; }
+        public string ContactPersoneName { get => FirstName; set => FirstName = value; }
+        public string ContactPersonSurname { get => LastName; set => LastName = value; }
         
-        public BusinessClient(string businessName, string contactPersoneName, string contactPersonSurname)
+        public BusinessClient(int businessID, string businessName, string contactPersoneName, string contactPersonSurname, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(businessID, contactPersoneName, contactPersonSurname, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
         {
             BusinessName = businessName;
             ContactPersoneName = contactPersoneName;

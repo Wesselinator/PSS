@@ -11,6 +11,7 @@ namespace PSS.Business_Logic
         private string firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province;
         private int idNumber;
 
+        public int IdNumber { get => idNumber; set => idNumber = value; }
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
         public string CellphoneNumber { get => cellphoneNumber; set => cellphoneNumber = value; }
@@ -20,7 +21,6 @@ namespace PSS.Business_Logic
         public string CityAddress { get => cityAddress; set => cityAddress = value; }
         public string PostalCode { get => postalCode; set => postalCode = value; }
         public string Province { get => province; set => province = value; }
-        public int IdNumber { get => idNumber; set => idNumber = value; }
 
         public Person(int idNumber, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province)
         {
