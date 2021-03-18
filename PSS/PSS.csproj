@@ -59,6 +59,7 @@
     <Compile Include="Business_Logic\Person.cs" />
     <Compile Include="Business_Logic\RegisterFunctionality.cs" />
     <Compile Include="Business_Logic\Service.cs" />
+    <Compile Include="Business_Logic\Technician.cs" />
     <Compile Include="Business_Logic\Ticket.cs" />
     <Compile Include="Data_Access\DataHandler.cs" />
     <Compile Include="Presentation_Layer\Form1.cs">
