@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business_Logic\Client.cs" />
+    <Compile Include="Business_Logic\Employee.cs" />
     <Compile Include="Business_Logic\Person.cs" />
     <Compile Include="Data_Access\DataHandler.cs" />
     <Compile Include="Presentation_Layer\Form1.cs">
