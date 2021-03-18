@@ -38,7 +38,7 @@ namespace PSS.Business_Logic
 
         public Person()
         {
-
+            
         }
     }
 }
