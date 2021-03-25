@@ -53,6 +53,38 @@ namespace PSS.Data_Access
 
             return data;
         }
+
+        private void executeNonQuery(string Query)//for insert, update and delete statements
+        {
+
+            using(conn)
+            {
+                command = new SqlCommand(Query, conn);
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Some error message");
+                }
+            }
+        }
+
+        public void Insert(string Query)
+        {
+            executeNonQuery(Query);
+        }
+
+        public void Update(string Query)
+        {
+            executeNonQuery(Query);
+        }
+
+        public void Delete(string Query)
+        {
+            executeNonQuery(Query);
+        }
     }
 }
 
