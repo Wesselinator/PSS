@@ -30,6 +30,9 @@ namespace PSS.Presentation_Layer
         private void InitializeComponent()
         {
             this.grbxClientInfo = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblPostal = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.lblAdressTag = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblTelephone = new System.Windows.Forms.Label();
@@ -44,17 +47,14 @@ namespace PSS.Presentation_Layer
             this.lblName = new System.Windows.Forms.Label();
             this.lblNameTag = new System.Windows.Forms.Label();
             this.grbxProblem = new System.Windows.Forms.GroupBox();
+            this.btnLogProblem = new System.Windows.Forms.Button();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.grbxContractInfo = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.grbxTransfer = new System.Windows.Forms.GroupBox();
-            this.btnLogProblem = new System.Windows.Forms.Button();
-            this.btnClientMaintence = new System.Windows.Forms.Button();
-            this.lblPostal = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnServiceDept = new System.Windows.Forms.Button();
             this.btnClientSatisfaction = new System.Windows.Forms.Button();
+            this.btnServiceDept = new System.Windows.Forms.Button();
+            this.btnClientMaintence = new System.Windows.Forms.Button();
             this.grbxClientInfo.SuspendLayout();
             this.grbxProblem.SuspendLayout();
             this.grbxContractInfo.SuspendLayout();
@@ -85,6 +85,33 @@ namespace PSS.Presentation_Layer
             this.grbxClientInfo.TabIndex = 0;
             this.grbxClientInfo.TabStop = false;
             this.grbxClientInfo.Text = "Client Information";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(469, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "1245";
+            // 
+            // lblPostal
+            // 
+            this.lblPostal.AutoSize = true;
+            this.lblPostal.Location = new System.Drawing.Point(424, 48);
+            this.lblPostal.Name = "lblPostal";
+            this.lblPostal.Size = new System.Drawing.Size(42, 13);
+            this.lblPostal.TabIndex = 14;
+            this.lblPostal.Text = "Postal: ";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(469, 26);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(234, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "14 Street Lane, Suburbia, City Vile, Best Country";
             // 
             // lblAdressTag
             // 
@@ -214,6 +241,23 @@ namespace PSS.Presentation_Layer
             this.grbxProblem.TabStop = false;
             this.grbxProblem.Text = "Problem";
             // 
+            // btnLogProblem
+            // 
+            this.btnLogProblem.Location = new System.Drawing.Point(298, 108);
+            this.btnLogProblem.Name = "btnLogProblem";
+            this.btnLogProblem.Size = new System.Drawing.Size(202, 41);
+            this.btnLogProblem.TabIndex = 2;
+            this.btnLogProblem.Text = "Log Problem";
+            this.btnLogProblem.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(6, 19);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(764, 83);
+            this.richTextBox2.TabIndex = 1;
+            this.richTextBox2.Text = "";
+            // 
             // grbxContractInfo
             // 
             this.grbxContractInfo.Controls.Add(this.richTextBox1);
@@ -232,23 +276,6 @@ namespace PSS.Presentation_Layer
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(469, 26);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(234, 13);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "14 Street Lane, Suburbia, City Vile, Best Country";
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Location = new System.Drawing.Point(6, 19);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(764, 83);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
-            // 
             // grbxTransfer
             // 
             this.grbxTransfer.Controls.Add(this.btnClientSatisfaction);
@@ -261,41 +288,15 @@ namespace PSS.Presentation_Layer
             this.grbxTransfer.TabStop = false;
             this.grbxTransfer.Text = "Transfer";
             // 
-            // btnLogProblem
+            // btnClientSatisfaction
             // 
-            this.btnLogProblem.Location = new System.Drawing.Point(298, 108);
-            this.btnLogProblem.Name = "btnLogProblem";
-            this.btnLogProblem.Size = new System.Drawing.Size(202, 41);
-            this.btnLogProblem.TabIndex = 2;
-            this.btnLogProblem.Text = "Log Problem";
-            this.btnLogProblem.UseVisualStyleBackColor = true;
-            // 
-            // btnClientMaintence
-            // 
-            this.btnClientMaintence.Location = new System.Drawing.Point(147, 19);
-            this.btnClientMaintence.Name = "btnClientMaintence";
-            this.btnClientMaintence.Size = new System.Drawing.Size(142, 31);
-            this.btnClientMaintence.TabIndex = 3;
-            this.btnClientMaintence.Text = "Client Maintence";
-            this.btnClientMaintence.UseVisualStyleBackColor = true;
-            // 
-            // lblPostal
-            // 
-            this.lblPostal.AutoSize = true;
-            this.lblPostal.Location = new System.Drawing.Point(424, 48);
-            this.lblPostal.Name = "lblPostal";
-            this.lblPostal.Size = new System.Drawing.Size(42, 13);
-            this.lblPostal.TabIndex = 14;
-            this.lblPostal.Text = "Postal: ";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(469, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "1245";
+            this.btnClientSatisfaction.Location = new System.Drawing.Point(499, 19);
+            this.btnClientSatisfaction.Name = "btnClientSatisfaction";
+            this.btnClientSatisfaction.Size = new System.Drawing.Size(142, 31);
+            this.btnClientSatisfaction.TabIndex = 5;
+            this.btnClientSatisfaction.Text = "Client Satisfaction";
+            this.btnClientSatisfaction.UseVisualStyleBackColor = true;
+            this.btnClientSatisfaction.Click += new System.EventHandler(this.btnClientSatisfaction_Click);
             // 
             // btnServiceDept
             // 
@@ -305,15 +306,17 @@ namespace PSS.Presentation_Layer
             this.btnServiceDept.TabIndex = 4;
             this.btnServiceDept.Text = "Service Dept.";
             this.btnServiceDept.UseVisualStyleBackColor = true;
+            this.btnServiceDept.Click += new System.EventHandler(this.btnServiceDept_Click);
             // 
-            // btnClientSatisfaction
+            // btnClientMaintence
             // 
-            this.btnClientSatisfaction.Location = new System.Drawing.Point(499, 19);
-            this.btnClientSatisfaction.Name = "btnClientSatisfaction";
-            this.btnClientSatisfaction.Size = new System.Drawing.Size(142, 31);
-            this.btnClientSatisfaction.TabIndex = 5;
-            this.btnClientSatisfaction.Text = "Client Satisfaction";
-            this.btnClientSatisfaction.UseVisualStyleBackColor = true;
+            this.btnClientMaintence.Location = new System.Drawing.Point(147, 19);
+            this.btnClientMaintence.Name = "btnClientMaintence";
+            this.btnClientMaintence.Size = new System.Drawing.Size(142, 31);
+            this.btnClientMaintence.TabIndex = 3;
+            this.btnClientMaintence.Text = "Client Maintence";
+            this.btnClientMaintence.UseVisualStyleBackColor = true;
+            this.btnClientMaintence.Click += new System.EventHandler(this.btnClientMaintence_Click);
             // 
             // CallCentre
             // 
