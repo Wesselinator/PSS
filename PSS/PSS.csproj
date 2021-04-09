@@ -107,6 +107,9 @@
     <EmbeddedResource Include="Presentation_Layer\ClientMaintenance.resx">
       <DependentUpon>ClientMaintenance.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentation_Layer\ServiceDepartment.resx">
+      <DependentUpon>ServiceDepartment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
