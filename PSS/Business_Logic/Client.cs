@@ -13,6 +13,7 @@ namespace PSS.Business_Logic
 
         public int ClientID { get => IdNumber; set => IdNumber = value; }
         public DateTime RegistrationDate { get => registrationDate; set => registrationDate = value; }
+        public string FullName { get => string.Format("{0} {1}", FirstName, LastName); }
 
         public Client(int clientID, DateTime registrationDate, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(clientID, firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
         {
