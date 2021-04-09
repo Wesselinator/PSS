@@ -20,6 +20,12 @@ namespace PSS.Business_Logic
             this.registrationDate = registrationDate;
         }
 
+        public Client(int clientID, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(clientID, firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
+        {
+            this.ClientID = clientID;
+            this.registrationDate = DateTime.Now;
+        }
+
         public Client() 
         {
         

@@ -15,6 +15,13 @@ namespace PSS.Business_Logic
         public string ContactPersoneName { get => FirstName; set => FirstName = value; }
         public string ContactPersonSurname { get => LastName; set => LastName = value; }
         
+        public BusinessClient(int businessID, DateTime registrationDate, string businessName, string contactPersoneName, string contactPersonSurname, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(businessID, registrationDate, contactPersoneName, contactPersonSurname, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
+        {
+            BusinessName = businessName;
+            ContactPersoneName = contactPersoneName;
+            ContactPersonSurname = contactPersonSurname;
+        }
+
         public BusinessClient(int businessID, string businessName, string contactPersoneName, string contactPersonSurname, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(businessID, contactPersoneName, contactPersonSurname, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
         {
             BusinessName = businessName;
