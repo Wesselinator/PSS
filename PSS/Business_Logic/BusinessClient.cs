@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PSS.Business_Logic
 {
-    class BusinessClient : Person
+    class BusinessClient : Client
     {
         private string businessName;
 
