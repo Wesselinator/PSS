@@ -69,6 +69,12 @@
     <Compile Include="Presentation_Layer\CallCentre.Designer.cs">
       <DependentUpon>CallCentre.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentation_Layer\ClientFollowUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation_Layer\ClientFollowUp.Designer.cs">
+      <DependentUpon>ClientFollowUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentation_Layer\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +85,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Presentation_Layer\CallCentre.resx">
       <DependentUpon>CallCentre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation_Layer\ClientFollowUp.resx">
+      <DependentUpon>ClientFollowUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation_Layer\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
