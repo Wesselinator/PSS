@@ -113,6 +113,9 @@
     <EmbeddedResource Include="Presentation_Layer\ClientMaintenance.resx">
       <DependentUpon>ClientMaintenance.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentation_Layer\ServiceDepartment.resx">
+      <DependentUpon>ServiceDepartment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentation_Layer\Technician.resx">
       <DependentUpon>Technician.cs</DependentUpon>
     </EmbeddedResource>
