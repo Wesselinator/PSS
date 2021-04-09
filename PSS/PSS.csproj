@@ -75,9 +75,9 @@
     <Compile Include="Presentation_Layer\CallSimulation.Designer.cs">
       <DependentUpon>CallSimulation.cs</DependentUpon>
     </Compile>
-	<Compile Include="Presentation_Layer\ClientMaintenance.cs">
-		<SubType>Form</SubType>
-	</Compile>
+    <Compile Include="Presentation_Layer\ClientMaintenance.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Presentation_Layer\ClientFollowUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +86,12 @@
     </Compile>
     <Compile Include="Presentation_Layer\ClientMaintenance.Designer.cs">
       <DependentUpon>ClientMaintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation_Layer\ServiceDepartment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation_Layer\ServiceDepartment.Designer.cs">
+      <DependentUpon>ServiceDepartment.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
