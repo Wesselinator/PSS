@@ -32,11 +32,11 @@ namespace PSS.Presentation_Layer
             this.grbxClientInfo = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblPostal = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblAdress = new System.Windows.Forms.Label();
             this.lblAdressTag = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblEmail = new System.Windows.Forms.Label();
             this.lblTelephone = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblCellphone = new System.Windows.Forms.Label();
             this.lblCellTag = new System.Windows.Forms.Label();
             this.lblEmailTag = new System.Windows.Forms.Label();
             this.lblTellTag = new System.Windows.Forms.Label();
@@ -47,8 +47,8 @@ namespace PSS.Presentation_Layer
             this.lblName = new System.Windows.Forms.Label();
             this.lblNameTag = new System.Windows.Forms.Label();
             this.grbxProblem = new System.Windows.Forms.GroupBox();
-            this.btnLogProblem = new System.Windows.Forms.Button();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.btnUpdateTicket = new System.Windows.Forms.Button();
+            this.rtbProblem = new System.Windows.Forms.RichTextBox();
             this.grbxContractInfo = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.grbxTransfer = new System.Windows.Forms.GroupBox();
@@ -65,11 +65,11 @@ namespace PSS.Presentation_Layer
             // 
             this.grbxClientInfo.Controls.Add(this.label1);
             this.grbxClientInfo.Controls.Add(this.lblPostal);
-            this.grbxClientInfo.Controls.Add(this.label7);
+            this.grbxClientInfo.Controls.Add(this.lblAdress);
             this.grbxClientInfo.Controls.Add(this.lblAdressTag);
-            this.grbxClientInfo.Controls.Add(this.label6);
+            this.grbxClientInfo.Controls.Add(this.lblEmail);
             this.grbxClientInfo.Controls.Add(this.lblTelephone);
-            this.grbxClientInfo.Controls.Add(this.label4);
+            this.grbxClientInfo.Controls.Add(this.lblCellphone);
             this.grbxClientInfo.Controls.Add(this.lblCellTag);
             this.grbxClientInfo.Controls.Add(this.lblEmailTag);
             this.grbxClientInfo.Controls.Add(this.lblTellTag);
@@ -104,17 +104,18 @@ namespace PSS.Presentation_Layer
             this.lblPostal.TabIndex = 14;
             this.lblPostal.Text = "Postal: ";
             // 
-            // label7
+            // lblAdress
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(469, 26);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(234, 13);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "14 Street Lane, Suburbia, City Vile, Best Country";
+            this.lblAdress.AutoSize = true;
+            this.lblAdress.Location = new System.Drawing.Point(469, 26);
+            this.lblAdress.Name = "lblAdress";
+            this.lblAdress.Size = new System.Drawing.Size(236, 13);
+            this.lblAdress.TabIndex = 13;
+            this.lblAdress.Text = "14 Street Lane, Suburbia, City Ville, Best Country";
             // 
             // lblAdressTag
             // 
+            this.lblAdressTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAdressTag.AutoSize = true;
             this.lblAdressTag.Location = new System.Drawing.Point(421, 26);
             this.lblAdressTag.Name = "lblAdressTag";
@@ -122,14 +123,14 @@ namespace PSS.Presentation_Layer
             this.lblAdressTag.TabIndex = 12;
             this.lblAdressTag.Text = "Adress: ";
             // 
-            // label6
+            // lblEmail
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(295, 93);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "john.doe@mail.com";
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Location = new System.Drawing.Point(295, 93);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(100, 13);
+            this.lblEmail.TabIndex = 11;
+            this.lblEmail.Text = "john.doe@mail.com";
             // 
             // lblTelephone
             // 
@@ -140,14 +141,14 @@ namespace PSS.Presentation_Layer
             this.lblTelephone.TabIndex = 10;
             this.lblTelephone.Text = "00 000 0000";
             // 
-            // label4
+            // lblCellphone
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(295, 48);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "00 000 0000";
+            this.lblCellphone.AutoSize = true;
+            this.lblCellphone.Location = new System.Drawing.Point(295, 48);
+            this.lblCellphone.Name = "lblCellphone";
+            this.lblCellphone.Size = new System.Drawing.Size(67, 13);
+            this.lblCellphone.TabIndex = 9;
+            this.lblCellphone.Text = "00 000 0000";
             // 
             // lblCellTag
             // 
@@ -205,6 +206,7 @@ namespace PSS.Presentation_Layer
             // 
             // lblBusinessNameTag
             // 
+            this.lblBusinessNameTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBusinessNameTag.AutoSize = true;
             this.lblBusinessNameTag.Location = new System.Drawing.Point(6, 51);
             this.lblBusinessNameTag.Name = "lblBusinessNameTag";
@@ -223,6 +225,7 @@ namespace PSS.Presentation_Layer
             // 
             // lblNameTag
             // 
+            this.lblNameTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNameTag.AutoSize = true;
             this.lblNameTag.Location = new System.Drawing.Point(51, 26);
             this.lblNameTag.Name = "lblNameTag";
@@ -232,8 +235,8 @@ namespace PSS.Presentation_Layer
             // 
             // grbxProblem
             // 
-            this.grbxProblem.Controls.Add(this.btnLogProblem);
-            this.grbxProblem.Controls.Add(this.richTextBox2);
+            this.grbxProblem.Controls.Add(this.btnUpdateTicket);
+            this.grbxProblem.Controls.Add(this.rtbProblem);
             this.grbxProblem.Location = new System.Drawing.Point(12, 313);
             this.grbxProblem.Name = "grbxProblem";
             this.grbxProblem.Size = new System.Drawing.Size(776, 167);
@@ -241,22 +244,23 @@ namespace PSS.Presentation_Layer
             this.grbxProblem.TabStop = false;
             this.grbxProblem.Text = "Problem";
             // 
-            // btnLogProblem
+            // btnUpdateTicket
             // 
-            this.btnLogProblem.Location = new System.Drawing.Point(298, 108);
-            this.btnLogProblem.Name = "btnLogProblem";
-            this.btnLogProblem.Size = new System.Drawing.Size(202, 41);
-            this.btnLogProblem.TabIndex = 2;
-            this.btnLogProblem.Text = "Log Problem";
-            this.btnLogProblem.UseVisualStyleBackColor = true;
+            this.btnUpdateTicket.Location = new System.Drawing.Point(298, 108);
+            this.btnUpdateTicket.Name = "btnUpdateTicket";
+            this.btnUpdateTicket.Size = new System.Drawing.Size(202, 41);
+            this.btnUpdateTicket.TabIndex = 2;
+            this.btnUpdateTicket.Text = "Update Ticket";
+            this.btnUpdateTicket.UseVisualStyleBackColor = true;
+            this.btnUpdateTicket.Click += new System.EventHandler(this.btnUpdateTicket_Click);
             // 
-            // richTextBox2
+            // rtbProblem
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(6, 19);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(764, 83);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
+            this.rtbProblem.Location = new System.Drawing.Point(6, 19);
+            this.rtbProblem.Name = "rtbProblem";
+            this.rtbProblem.Size = new System.Drawing.Size(764, 83);
+            this.rtbProblem.TabIndex = 1;
+            this.rtbProblem.Text = "";
             // 
             // grbxContractInfo
             // 
@@ -352,15 +356,15 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Label lblRegDateTag;
         private System.Windows.Forms.Label lblBusinessName;
         private System.Windows.Forms.Label lblAdressTag;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblTelephone;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblCellphone;
         private System.Windows.Forms.Label lblCellTag;
         private System.Windows.Forms.Label lblEmailTag;
         private System.Windows.Forms.Label lblPostal;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnLogProblem;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Label lblAdress;
+        private System.Windows.Forms.Button btnUpdateTicket;
+        private System.Windows.Forms.RichTextBox rtbProblem;
         private System.Windows.Forms.GroupBox grbxTransfer;
         private System.Windows.Forms.Button btnClientMaintence;
         private System.Windows.Forms.Label label1;
