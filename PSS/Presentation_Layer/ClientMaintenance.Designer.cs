@@ -29,8 +29,8 @@ namespace PSS.Presentation_Layer
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.txtBusinessName = new System.Windows.Forms.TextBox();
+            this.lblBusinessName = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
@@ -73,7 +73,7 @@ namespace PSS.Presentation_Layer
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblTask = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -87,23 +87,23 @@ namespace PSS.Presentation_Layer
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtBusinessName
             // 
-            this.textBox1.Location = new System.Drawing.Point(128, 120);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(151, 20);
-            this.textBox1.TabIndex = 48;
+            this.txtBusinessName.Location = new System.Drawing.Point(128, 120);
+            this.txtBusinessName.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBusinessName.Name = "txtBusinessName";
+            this.txtBusinessName.Size = new System.Drawing.Size(151, 20);
+            this.txtBusinessName.TabIndex = 48;
             // 
-            // label8
+            // lblBusinessName
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(22, 122);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(78, 13);
-            this.label8.TabIndex = 47;
-            this.label8.Text = "Business name";
+            this.lblBusinessName.AutoSize = true;
+            this.lblBusinessName.Location = new System.Drawing.Point(22, 122);
+            this.lblBusinessName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBusinessName.Name = "lblBusinessName";
+            this.lblBusinessName.Size = new System.Drawing.Size(78, 13);
+            this.lblBusinessName.TabIndex = 47;
+            this.lblBusinessName.Text = "Business name";
             // 
             // groupBox3
             // 
@@ -554,15 +554,15 @@ namespace PSS.Presentation_Layer
             this.label4.TabIndex = 41;
             this.label4.Text = "Client Type";
             // 
-            // label3
+            // lblTask
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(111, 44);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 13);
-            this.label3.TabIndex = 40;
-            this.label3.Text = "Update client";
+            this.lblTask.AutoSize = true;
+            this.lblTask.Location = new System.Drawing.Point(111, 44);
+            this.lblTask.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTask.Name = "lblTask";
+            this.lblTask.Size = new System.Drawing.Size(70, 13);
+            this.lblTask.TabIndex = 40;
+            this.lblTask.Text = "Update client";
             // 
             // label2
             // 
@@ -631,15 +631,15 @@ namespace PSS.Presentation_Layer
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 577);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txtBusinessName);
+            this.Controls.Add(this.lblBusinessName);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblTask);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -664,8 +664,8 @@ namespace PSS.Presentation_Layer
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtBusinessName;
+        private System.Windows.Forms.Label lblBusinessName;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RichTextBox richTextBox3;
@@ -708,7 +708,7 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblTask;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
