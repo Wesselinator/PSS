@@ -16,74 +16,75 @@ namespace PSS.Data_Access
         private SqlDataAdapter adapter;
         private SqlDataReader reader;
 
-        public DataHandler()
+        public DataHandler(string sql)
         {
-            
+            command = new SqlCommand(sql, conn);
         }
 
         //
         //=====================================
         //
-        public SqlConnection Conn { get => conn;}
-        public SqlCommand Command { get => command;}
-        public SqlDataAdapter Adapter { get => adapter;}
-        public SqlDataReader Reader { get => reader;}
+        public SqlConnection Conn { get => conn; }
+        public SqlCommand Command { get => command; }
+        public SqlDataAdapter Adapter { get => adapter; }
+        public SqlDataReader Reader { get => reader; }
         //
         //=====================================
         // 
 
 
-        public DataTable getDataTable(string Query)
+        public DataTable getDataTable()
         {
             DataTable data = new DataTable();
 
-            using (conn)
+            try
             {
-                command = new SqlCommand(Query, conn);
-                try
-                {
-                    adapter = new SqlDataAdapter(command);
-                    adapter.Fill(data);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Some error message");
-                }
+                conn.Open();
+                adapter = new SqlDataAdapter(command);
+                adapter.Fill(data);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Some error message");
+            }
+            finally
+            {
+                conn.Close();
             }
 
             return data;
         }
 
-        private void executeNonQuery(string Query)//for insert, update and delete statements
+        private void executeNonQuery()//for insert, update and delete statements
         {
-
-            using(conn)
+            try
             {
-                command = new SqlCommand(Query, conn);
-                try
-                {
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Some error message");
-                }
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Some error message");
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 
-        public void Insert(string Query)
+        public void Insert()
         {
-            executeNonQuery(Query);
+            executeNonQuery();
         }
 
-        public void Update(string Query)
+        public void Update()
         {
-            executeNonQuery(Query);
+            executeNonQuery();
         }
 
-        public void Delete(string Query)
+        public void Delete()
         {
-            executeNonQuery(Query);
+            executeNonQuery();
         }
     }
 }

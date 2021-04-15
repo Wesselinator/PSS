@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using PSS.Business_Logic.DataBaseThings;
 
 namespace PSS.Business_Logic
 {
-    class Call
+    class Call : IDataInDataBase
     {
         private DateTime startTime;
         private DateTime endTime;
@@ -38,6 +39,8 @@ namespace PSS.Business_Logic
         {
             return "Call started on " + StartTime ;
         }
+
+        //TODO: upgrade TableDataBase to handle 2 IDs
     }
 }
 

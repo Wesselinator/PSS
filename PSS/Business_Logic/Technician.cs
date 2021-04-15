@@ -6,20 +6,19 @@ using System.Threading.Tasks;
 
 namespace PSS.Business_Logic
 {
+    //not sure how the database distinguses between them so wont try right now
     class Technician : Employee
     {
         private string type;
         private bool isBusy;
+        private int technicianID;
 
-        public int TechnicianID { get => IdNumber; set => IdNumber = value; }
+        public int TechnicianID { get => technicianID; set => technicianID = value; }
         public string Type { get => type; set => type = value; }
         public bool IsBusy { get => isBusy; set => isBusy = value; }
 
-        public Technician() : base()
-        {
-        }
 
-        public Technician(int technicianID, string type, bool isBusy) : base()
+        public Technician(int technicianID, string type, bool isBusy)
         {
             this.TechnicianID = technicianID;
             this.Type = type;
@@ -30,6 +29,11 @@ namespace PSS.Business_Logic
         {
             this.Type = type;
             this.IsBusy = isBusy;
+        }
+
+        public Technician()
+        {
+
         }
 
 
