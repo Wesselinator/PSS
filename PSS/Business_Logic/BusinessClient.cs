@@ -8,7 +8,7 @@ using System.Data;
 
 namespace PSS.Business_Logic
 {
-    class BusinessClient : Client, IDataInDataBase, IClient
+    class BusinessClient : Client, IDataInDataBase
     {
         private string businessName;
 
@@ -78,14 +78,15 @@ namespace PSS.Business_Logic
 
         //P4 Methods
 
-        public void SetUpdate()
+        public override void SetUpdate()
         {
             BusinessClient.DBTable.Set(this, ClientID);
         }
 
-        public BusinessClient GetSelect(int ID)
+        public override Client GetSelect(int ID)
         {
-            return BusinessClient.DBTable.GetByID(ID);
+            Client c = BusinessClient.DBTable.GetByID(ID);
+            return c;
         }
     }
 }

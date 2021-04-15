@@ -9,7 +9,7 @@ using System.Data;
 
 namespace PSS.Business_Logic
 {
-    public class Client : IClient
+    public class Client
     {
         private int clientID;
         private Person person;
@@ -34,6 +34,16 @@ namespace PSS.Business_Logic
         public Client()
         {
             
+        }
+
+        public virtual void SetUpdate()
+        {
+            return;
+        }
+
+        public virtual Client GetSelect(int ID)
+        {
+            return null;
         }
     }
 }

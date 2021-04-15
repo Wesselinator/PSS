@@ -10,13 +10,14 @@ namespace PSS.Business_Logic.DataBaseThings
     //C# 7.3 does not have the ability for static fields/methods in Interfaces
     //Need to either wait for .NET Framework to get C# 8.0 or switch to .NET 5.x / .NET Core 3.x
 
-    //This is imposible at the momment
+    //This is imposible at the momment:
     /*
-    public interface TableInDataBase
-    {
-        private static string IDColumn;
-        private static string TableName;
-    }
+
+        public interface TableInDataBase
+        {
+            private static string IDColumn;
+            private static string TableName;
+        }
 
     */
 

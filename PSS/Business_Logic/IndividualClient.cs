@@ -8,7 +8,7 @@ using System.Data;
 
 namespace PSS.Business_Logic
 {
-    class IndividualClient : Client, IDataInDataBase, IClient
+    class IndividualClient : Client, IDataInDataBase
     {
         public int IndividualID { get => ClientID; set => ClientID = value; }
         public string ClientName { get => Person.FullName; }
@@ -47,14 +47,15 @@ namespace PSS.Business_Logic
 
         //P4 Methods
 
-        public void SetUpdate()
+        public override void SetUpdate()
         {
             IndividualClient.DBTable.Set(this, ClientID);
         }
 
-        public IClient GetSelect(int ID)
+        public override Client GetSelect(int ID)
         {
-            return DBTable.GetByID(ID);
+            Client c = IndividualClient.DBTable.GetByID(ID);
+            return c;
         }
     }
 }

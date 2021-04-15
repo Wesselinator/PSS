@@ -31,7 +31,7 @@ namespace PSS.Business_Logic
             this.problemDescription = problemDescription;
         }
 
-        public Ticket(IClient client, string department, string status, string problemDescription)
+        public Ticket(Client client, string department, string status, string problemDescription)
         {
             new Ticket(Ticket.DBTable.GetNextId(), client, department, status, problemDescription);
         }
@@ -68,7 +68,7 @@ namespace PSS.Business_Logic
         void IDataInDataBase.FillWith(DataRow DataRow)
         {
             ticketID = DataRow.Field<int>(idColumn);
-            client = Client.GetSelect(Client.ClientID);
+            client = Client.GetSelect(DataRow.Field<int>("ClientID"));
             department = DataRow.Field<string>("Department");
             status = DataRow.Field<string>("Status");
             problemDescription = DataRow.Field<string>("Description");
@@ -93,7 +93,7 @@ namespace PSS.Business_Logic
         public void SetUpdate()
         {
             Ticket.DBTable.Set(this, TicketID); //figure out order
-            //client.SetUpdate();
+            client.SetUpdate();
         }
 
         public static Ticket GetSelect(int ID)

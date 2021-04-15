@@ -7,7 +7,7 @@ using PSS.Business_Logic.DataBaseThings;
 
 namespace PSS.Business_Logic
 {
-    class Call : IDataInDataBase
+    class Call
     {
         private DateTime startTime;
         private DateTime endTime;
