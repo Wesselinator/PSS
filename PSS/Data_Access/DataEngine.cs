@@ -12,13 +12,8 @@ namespace PSS.Data_Access
     {
         public static List<Client> GetAllClients()
         {
-            DataHandler dh = new DataHandler();
-
-            string ICsql = "SELECT * FROM IndividualClient";
-            string BCsql = "SELECT * FROM BusinessClient";
-
-            DataTable IC = dh.getDataTable(ICsql);
-            DataTable BC = dh.getDataTable(BCsql);
+            DataTable IC = GetAll("IndividualClient");
+            DataTable BC = GetAll("BusinessClient");
 
 
             List<Client> ret = new List<Client>();
@@ -50,6 +45,26 @@ namespace PSS.Data_Access
             return dt.Rows[0];
         }
 
+        public static bool IDExists(string TableName, string IDColumn, int ID)
+        {
+            //TODO: Implement Exception
+            /*
+            try
+            {
+                DataRow row = GetByID(TableName, IDColumn, ID);
+                return true;
+            }
+            catch (EmptyListException)
+            {
+                return false;
+            }
+            */
+            string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
+            DataHandler dh = new DataHandler();
+            DataTable dt = dh.getDataTable(sql);
+            return dt.Rows.Count != 0;
+        }
+
         public static int GetNextID(string TableName, string IDColumn)
         {
             string sql = string.Format("SELECT * FROM {0} GROUP BY {1} DESC", TableName, IDColumn);
@@ -57,6 +72,25 @@ namespace PSS.Data_Access
             return dh.getDataTable(sql).Rows[0].Field<int>(IDColumn) + 1;
         }
 
+        public static void UpdateORInsert(IModifyable data, string TableName, string IDColumn, int ID)
+        {
+            DataHandler dh = new DataHandler();
+            if (IDExists(TableName, IDColumn, ID))
+            {
+                dh.Update(data.Update());
+            }
+            else
+            {
+                dh.Insert(data.Insert());
+            }
+        }
+
+        public static DataTable GetAll(string TableName)
+        {
+            DataHandler dh = new DataHandler();
+            string sql = string.Format("SELECT * FROM {0}", TableName);
+            return dh.getDataTable(sql);
+        }
 
         public static string GetProgressRapport(string ticketNo)
         {

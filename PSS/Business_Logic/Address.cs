@@ -5,7 +5,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public class Address
+    public class Address : IModifyable
     {
         public int AddressID { get; set; }
         public string Street { get; set; }
@@ -21,15 +21,18 @@ namespace PSS.Business_Logic
             this.PostalCode = postalCode;
             this.Province = province;
         }
-
-        public Address(string street, string city, string postalCode, string province)
-        {
-            new Address(DataEngine.GetNextID("Address", "AddressID"), street, city, postalCode, province);
-        }
-
         public Address()
         {
 
+        }
+
+
+        private static readonly string TableName = "Address";
+        private static readonly string IDColumn = "AddressID";
+
+        public Address(string street, string city, string postalCode, string province)
+        {
+            new Address(DataEngine.GetNextID(TableName, IDColumn), street, city, postalCode, province);
         }
 
         public Address(DataRow row)
@@ -38,19 +41,24 @@ namespace PSS.Business_Logic
             this.City = row.Field<string>("City");
             this.PostalCode = row.Field<string>("PostalCode");
             this.Province = row.Field<string>("Province");
-        }
+        }        
 
         //P3
         public static Address GetID(int ID)
         {
-            return new Address(DataEngine.GetByID("Address", "AddressID", ID));
+            return new Address(DataEngine.GetByID(TableName, IDColumn, ID));
         }
 
         //P4
-        public void Update()
+        public void Save()
+        {
+            DataEngine.UpdateORInsert(this, TableName, IDColumn, AddressID);
+        }
+
+        string IUpdateable.Update()
         {
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("UPDATE Address");
+            sql.AppendLine("UPDATE " + TableName);
 
             sql.Append("SET ");
             sql.Append("Street = '"+ Street +"',");
@@ -58,17 +66,15 @@ namespace PSS.Business_Logic
             sql.Append("PostalCode = '" + PostalCode + "',");
             sql.AppendLine("Province = '" + Province + "'");
 
-            sql.AppendLine("WHERE AddressID = " + AddressID);
+            sql.AppendLine("WHERE " + IDColumn + " = " + AddressID);
 
-            DataHandler dh = new DataHandler();
-            dh.Update(sql.ToString());
+            return sql.ToString();
         }
 
-        //order very important
-        public void Insert()
+        string IInsertable.Insert()
         {
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO Address");
+            sql.AppendLine("INSERT INTO " + TableName);
 
             sql.Append("VALUES (");
             sql.Append("'" + AddressID + "',");
@@ -78,18 +84,19 @@ namespace PSS.Business_Logic
             sql.Append("'" + Province + "'");
             sql.AppendLine(");");
 
-            DataHandler dh = new DataHandler();
-            dh.Update(sql.ToString());
+            return sql.ToString();
         }
 
-        public override string ToString()
-        {
-            return string.Format("AddressID: {0} | Street: {1} | City: {2} | Postal Code: {3} | Province: {4}", AddressID, Street, City, PostalCode, Province);
-        }
 
         public string ToFormattedString()
         {
             return string.Format("{0}, {1}, {2} | {3}", Street, City, Province, PostalCode);
+        }
+
+
+        public override string ToString()
+        {
+            return string.Format("AddressID: {0} | Street: {1} | City: {2} | Postal Code: {3} | Province: {4}", AddressID, Street, City, PostalCode, Province);
         }
 
         public override bool Equals(object obj)
