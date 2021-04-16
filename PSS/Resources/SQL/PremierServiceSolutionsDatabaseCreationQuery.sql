@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS PremierServiceSolutionsDB.CallInstance
+USE master
 GO
+DROP TABLE IF EXISTS PremierServiceSolutionsDB.CallInstance
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.TechnicianTaskFeedback
-Go
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.TechnicianTask
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.Technician
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.Task
@@ -19,6 +19,9 @@ DROP TABLE IF EXISTS PremierServiceSolutionsDB.ContactInformation
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.ServiceLevelAgreement
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.CallChangeAssociation
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.ServiceLevelAgreement
+DROP TABLE IF EXISTS PremierServiceSolutionsDB.[Contract]
+DROP TABLE IF EXISTS PremierServiceSolutionsDB.[Service]
+GO
 DROP DATABASE IF EXISTS PremierServiceSolutionsDB
 GO
 
@@ -44,14 +47,14 @@ USE PremierServiceSolutionsDB
 GO
 
 
-CREATE TABLE Service
+CREATE TABLE [Service]
 (ServiceID INT PRIMARY KEY,
  ServiceName VARCHAR(30) NOT NULL,
  ServiceDescription VARCHAR(MAX) NOT NULL
 )
 
 
-CREATE TABLE Contract
+CREATE TABLE [Contract]
 (ContractID INT PRIMARY KEY,
  ContractName VARCHAR(30) NOT NULL,
  ServiceLevel VARCHAR(15) NOT NULL,
@@ -63,7 +66,7 @@ CREATE TABLE Contract
 
 GO
 
-ALTER TABLE Contract
+ALTER TABLE [Contract]
 ADD CONSTRAINT CK_OfferEndDateAfterStartDate CHECK(OfferEndDate>=OfferStartDate)
 
 CREATE TABLE ServiceLevelAgreement
