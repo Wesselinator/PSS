@@ -35,38 +35,38 @@ namespace PSS.Presentation_Layer
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.listView3 = new System.Windows.Forms.ListView();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label23 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.listView4 = new System.Windows.Forms.ListView();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.richTextBox5 = new System.Windows.Forms.RichTextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.richTextBox5 = new System.Windows.Forms.RichTextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.listView4 = new System.Windows.Forms.ListView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.listView3 = new System.Windows.Forms.ListView();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -146,6 +146,101 @@ namespace PSS.Presentation_Layer
             this.tabPage1.Text = "Create Job";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker2.Location = new System.Drawing.Point(462, 324);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(151, 20);
+            this.dateTimePicker2.TabIndex = 27;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(345, 327);
+            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(98, 13);
+            this.label23.TabIndex = 26;
+            this.label23.Text = "Job Date and TIme";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(19, 327);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 13);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Description";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(91, 324);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(190, 20);
+            this.textBox1.TabIndex = 11;
+            // 
+            // richTextBox3
+            // 
+            this.richTextBox3.Location = new System.Drawing.Point(22, 383);
+            this.richTextBox3.Name = "richTextBox3";
+            this.richTextBox3.Size = new System.Drawing.Size(591, 58);
+            this.richTextBox3.TabIndex = 10;
+            this.richTextBox3.Text = "";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(19, 359);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Notes";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(652, 383);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(182, 36);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Assign Job to selected Technician";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(492, 204);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(154, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Maintenance technician details";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(492, 54);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(154, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Service level agreement details";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(348, 226);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(430, 71);
+            this.richTextBox2.TabIndex = 5;
+            this.richTextBox2.Text = "";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(348, 82);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(430, 81);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.button4);
@@ -168,146 +263,93 @@ namespace PSS.Presentation_Layer
             this.tabPage2.Text = "Track Job";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // richTextBox1
+            // button4
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(348, 82);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(430, 81);
-            this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.Text = "";
+            this.button4.Location = new System.Drawing.Point(638, 374);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(182, 38);
+            this.button4.TabIndex = 39;
+            this.button4.Text = "Re-assign Job";
+            this.button4.UseVisualStyleBackColor = true;
             // 
-            // richTextBox2
+            // groupBox1
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(348, 226);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(430, 71);
-            this.richTextBox2.TabIndex = 5;
-            this.richTextBox2.Text = "";
+            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.textBox3);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.listView4);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.richTextBox5);
+            this.groupBox1.Location = new System.Drawing.Point(402, 19);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(484, 309);
+            this.groupBox1.TabIndex = 38;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Maintenance Technician";
             // 
-            // label3
+            // button3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(492, 54);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(154, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Service level agreement details";
+            this.button3.Location = new System.Drawing.Point(147, 251);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(182, 38);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "Assign Technician";
+            this.button3.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // textBox3
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(492, 204);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(154, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Maintenance technician details";
+            this.textBox3.Location = new System.Drawing.Point(147, 18);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(140, 20);
+            this.textBox3.TabIndex = 39;
             // 
-            // button1
+            // label13
             // 
-            this.button1.Location = new System.Drawing.Point(652, 383);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(182, 36);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Assign Job to selected Technician";
-            this.button1.UseVisualStyleBackColor = true;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(22, 25);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(105, 13);
+            this.label13.TabIndex = 38;
+            this.label13.Text = "Selected Technician";
             // 
-            // button2
+            // listView4
             // 
-            this.button2.Location = new System.Drawing.Point(364, 538);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(182, 38);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Return to Call Centre";
-            this.button2.UseVisualStyleBackColor = true;
+            this.listView4.HideSelection = false;
+            this.listView4.Location = new System.Drawing.Point(25, 73);
+            this.listView4.Name = "listView4";
+            this.listView4.Size = new System.Drawing.Size(290, 72);
+            this.listView4.TabIndex = 34;
+            this.listView4.UseCompatibleStateImageBehavior = false;
+            this.listView4.View = System.Windows.Forms.View.List;
             // 
-            // label5
+            // label11
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(129, 19);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(62, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Active Jobs";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(22, 153);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(154, 13);
+            this.label11.TabIndex = 37;
+            this.label11.Text = "Maintenance technician details";
             // 
-            // listView3
+            // label12
             // 
-            this.listView3.HideSelection = false;
-            this.listView3.Location = new System.Drawing.Point(19, 44);
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(290, 141);
-            this.listView3.TabIndex = 2;
-            this.listView3.UseCompatibleStateImageBehavior = false;
-            this.listView3.View = System.Windows.Forms.View.List;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(22, 48);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(100, 13);
+            this.label12.TabIndex = 35;
+            this.label12.Text = "Change Technician";
             // 
-            // textBox16
+            // richTextBox5
             // 
-            this.textBox16.Location = new System.Drawing.Point(132, 207);
-            this.textBox16.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(140, 20);
-            this.textBox16.TabIndex = 22;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(20, 210);
-            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(54, 13);
-            this.label25.TabIndex = 21;
-            this.label25.Text = "Task Title";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 359);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Notes";
-            // 
-            // richTextBox3
-            // 
-            this.richTextBox3.Location = new System.Drawing.Point(22, 383);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(591, 58);
-            this.richTextBox3.TabIndex = 10;
-            this.richTextBox3.Text = "";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(91, 324);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(190, 20);
-            this.textBox1.TabIndex = 11;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(19, 327);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 13);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Description";
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker2.Location = new System.Drawing.Point(462, 324);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(151, 20);
-            this.dateTimePicker2.TabIndex = 27;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(345, 327);
-            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(98, 13);
-            this.label23.TabIndex = 26;
-            this.label23.Text = "Job Date and TIme";
+            this.richTextBox5.Location = new System.Drawing.Point(25, 172);
+            this.richTextBox5.Name = "richTextBox5";
+            this.richTextBox5.Size = new System.Drawing.Size(430, 71);
+            this.richTextBox5.TabIndex = 36;
+            this.richTextBox5.Text = "";
             // 
             // dateTimePicker1
             // 
@@ -341,7 +383,7 @@ namespace PSS.Presentation_Layer
             // 
             this.textBox2.Location = new System.Drawing.Point(132, 242);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(190, 20);
+            this.textBox2.Size = new System.Drawing.Size(254, 20);
             this.textBox2.TabIndex = 30;
             // 
             // richTextBox4
@@ -361,93 +403,51 @@ namespace PSS.Presentation_Layer
             this.label10.TabIndex = 28;
             this.label10.Text = "Notes";
             // 
-            // label11
+            // textBox16
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(22, 153);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(154, 13);
-            this.label11.TabIndex = 37;
-            this.label11.Text = "Maintenance technician details";
+            this.textBox16.Location = new System.Drawing.Point(132, 207);
+            this.textBox16.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new System.Drawing.Size(177, 20);
+            this.textBox16.TabIndex = 22;
             // 
-            // richTextBox5
+            // label25
             // 
-            this.richTextBox5.Location = new System.Drawing.Point(25, 172);
-            this.richTextBox5.Name = "richTextBox5";
-            this.richTextBox5.Size = new System.Drawing.Size(430, 71);
-            this.richTextBox5.TabIndex = 36;
-            this.richTextBox5.Text = "";
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(20, 210);
+            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(54, 13);
+            this.label25.TabIndex = 21;
+            this.label25.Text = "Task Title";
             // 
-            // label12
+            // label5
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(22, 48);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(100, 13);
-            this.label12.TabIndex = 35;
-            this.label12.Text = "Change Technician";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(129, 19);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(62, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Active Jobs";
             // 
-            // listView4
+            // listView3
             // 
-            this.listView4.HideSelection = false;
-            this.listView4.Location = new System.Drawing.Point(25, 73);
-            this.listView4.Name = "listView4";
-            this.listView4.Size = new System.Drawing.Size(290, 72);
-            this.listView4.TabIndex = 34;
-            this.listView4.UseCompatibleStateImageBehavior = false;
-            this.listView4.View = System.Windows.Forms.View.List;
+            this.listView3.HideSelection = false;
+            this.listView3.Location = new System.Drawing.Point(19, 44);
+            this.listView3.Name = "listView3";
+            this.listView3.Size = new System.Drawing.Size(290, 141);
+            this.listView3.TabIndex = 2;
+            this.listView3.UseCompatibleStateImageBehavior = false;
+            this.listView3.View = System.Windows.Forms.View.List;
             // 
-            // groupBox1
+            // button2
             // 
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.listView4);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.richTextBox5);
-            this.groupBox1.Location = new System.Drawing.Point(402, 19);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(484, 309);
-            this.groupBox1.TabIndex = 38;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Maintenance Technician";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(147, 18);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(140, 20);
-            this.textBox3.TabIndex = 39;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(22, 25);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(105, 13);
-            this.label13.TabIndex = 38;
-            this.label13.Text = "Selected Technician";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(147, 251);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(182, 38);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Assign Technician";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(638, 374);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(182, 38);
-            this.button4.TabIndex = 39;
-            this.button4.Text = "Re-assign Job";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button2.Location = new System.Drawing.Point(364, 538);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(182, 38);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Return to Call Centre";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // ServiceDepartment
             // 
