@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace PSS.Business_Logic
 {
@@ -10,7 +11,6 @@ namespace PSS.Business_Logic
     {
         private string businessName;
 
-        public int BusinessID { get => IdNumber; set => IdNumber = value; }
         public string BusinessName { get => businessName; set => businessName = value; }
         public string ContactPersoneName { get => FirstName; set => FirstName = value; }
         public string ContactPersonSurname { get => LastName; set => LastName = value; }
@@ -31,6 +31,12 @@ namespace PSS.Business_Logic
 
         public BusinessClient()
         {
+
+        }
+
+        public BusinessClient(DataRow row)
+        {
+
         }
     }
 }

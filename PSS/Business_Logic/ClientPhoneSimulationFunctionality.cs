@@ -8,23 +8,11 @@ using System.Data;
 
 namespace PSS.Business_Logic
 {
-    class ClientPhoneSimulationFunctionality
+    static class ClientPhoneSimulationFunctionality
     {
-        public List<Client> GetClientList()
+        public static List<Client> GetClientList()
         {
-            DataHandler handler = new DataHandler();
-            List<Client> getClients = new List<Client>();
-
-            string query = @"SELECT * FROM ";
-
-            DataTable dt = handler.getDataTable(query);
-
-            foreach (Client item in dt.TableName)
-            {
-                //not complete
-            }
-
-            return getClients;
+            return DataEngine.GetAllClients();
         }
     }
 }

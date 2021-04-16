@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PSS.Business_Logic;
 
 namespace PSS.Presentation_Layer
 {
@@ -15,6 +16,23 @@ namespace PSS.Presentation_Layer
         public CallSimulation()
         {
             InitializeComponent();
+        }
+
+        private void btnLogRequest_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CallSimulation_Load(object sender, EventArgs e)
+        {
+            LoadDropDown();
+        }
+
+        private void LoadDropDown()
+        {
+            cbClientDropDown.DisplayMember = "ListString";
+
+            cbClientDropDown.Items.AddRange(ClientPhoneSimulationFunctionality.GetClientList().ToArray());
         }
     }
 }

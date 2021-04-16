@@ -11,8 +11,9 @@ namespace PSS.Business_Logic
         private DateTime registrationDate;
         //private List<Contact> contracts;
 
-        public int ClientID { get => IdNumber; set => IdNumber = value; }
+        public int ClientID { get => IdNumber; set => IdNumber = value; }  //this makes sense
         public DateTime RegistrationDate { get => registrationDate; set => registrationDate = value; }
+        public string ListString { get => CellphoneNumber + " | " + FirstName; }
 
         public Client(int clientID, DateTime registrationDate, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(clientID, firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
         {
@@ -22,13 +23,12 @@ namespace PSS.Business_Logic
 
         public Client(int clientID, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(clientID, firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
         {
-            this.ClientID = clientID;
-            this.registrationDate = DateTime.Now;
+            new Client(clientID, DateTime.Now, firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
         }
 
         public Client() 
         {
-        
+            
         }
     }
 }
