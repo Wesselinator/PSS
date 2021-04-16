@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using PSS.Data_Access;
 
@@ -55,16 +52,21 @@ namespace PSS.Business_Logic
             //test if exist
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("UPDATE Address");
-            sql       += "SET Street = '"+ Street +"'";
-            sql += "SET Street = '" + Street + "'";
+            sql.Append("SET ");
+            sql.AppendLine("Street = '"+ Street +"'");
+            sql.AppendLine("City = '" + City + "'");
+            sql.AppendLine("PostalCode = '" + PostalCode + "'");
+            sql.AppendLine("Province = '" + Province + "'");
         }
-
-
 
         public override string ToString()
         {
-            //TODO: Create the string!
-            return base.ToString();
+            return string.Format("AddressID: {0} | Street: {1} | City: {2} | Postal Code: {3} | Province: {4}", AddressID, Street, City, PostalCode, Province);
+        }
+
+        public string ToFormattedString()
+        {
+            return string.Format("{0}, {1}, {2} | {3}", Street, City, Province, PostalCode);
         }
 
         public override bool Equals(object obj)
