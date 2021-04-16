@@ -14,7 +14,7 @@ namespace PSS.Business_Logic
         private bool isBusy;
         private float payRate;
 
-        public int TechnicianID { get => IdNumber; set => IdNumber = value; }
+        public int TechnicianID { get => PersonID; set => PersonID = value; }
         public string Type { get => type; set => type = value; }
         public bool IsBusy { get => isBusy; set => isBusy = value; }
         public float PayRate { get => payRate; set => payRate = value; }
@@ -51,12 +51,12 @@ namespace PSS.Business_Logic
         {
             return obj is Technician technician &&
                    base.Equals(obj) &&
-                   IdNumber == technician.IdNumber &&
+                   PersonID == technician.PersonID &&
                    FirstName == technician.FirstName &&
                    LastName == technician.LastName &&
                    FullName == technician.FullName &&
                    CellphoneNumber == technician.CellphoneNumber &&
-                   TelephoneNumber == technician.TelephoneNumber &&
+                   TellephoneNumber == technician.TellephoneNumber &&
                    Email == technician.Email &&
                    EmployeeID == technician.EmployeeID &&
                    type == technician.type &&
@@ -70,12 +70,12 @@ namespace PSS.Business_Logic
         {
             int hashCode = 1042436649;
             hashCode = hashCode * -1521134295 + base.GetHashCode();
-            hashCode = hashCode * -1521134295 + IdNumber.GetHashCode();
+            hashCode = hashCode * -1521134295 + PersonID.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FirstName);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(LastName);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FullName);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CellphoneNumber);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TelephoneNumber);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TellephoneNumber);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
             hashCode = hashCode * -1521134295 + EmployeeID.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(type);

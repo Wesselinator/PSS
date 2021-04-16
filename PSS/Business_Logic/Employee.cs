@@ -8,7 +8,7 @@ namespace PSS.Business_Logic
 {
     public class Employee : Person
     {
-        public int EmployeeID { get => IdNumber; set => IdNumber = value; }
+        public int EmployeeID { get => PersonID; set => PersonID = value; }
 
         public Employee(int employeeID, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(employeeID, firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
         {
