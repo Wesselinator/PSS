@@ -32,9 +32,16 @@ namespace PSS.Business_Logic
 
         public void RegisterClient(Client client)
         {
-            String query = @"INSERT INTO ";
+            string query = @"INSERT INTO ";
             Data_Access.DataHandler handler = new DataHandler();
             handler.Insert(query);
+        }
+
+        public void UpdateClient(Client client)
+        {
+            string query = @"UPDATE ";
+            Data_Access.DataHandler handler = new DataHandler();
+            handler.Update(query);
         }
 
         public bool AddClientContract(Client newClient)
