@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public abstract class Person
+    public class Person
     {
         public int IdNumber { get; set; }
         public string FirstName { get; set; }
@@ -40,6 +41,18 @@ namespace PSS.Business_Logic
             this.CellphoneNumber = row.Field<string>("CellphoneNumber");
             this.TelephoneNumber = row.Field<string>("TelephoneNumber");
             this.Email = row.Field<string>("Email");
+        }
+
+        //P3
+        public static Person GetID(int ID)
+        {
+            return new Person(DataEngine.GetByID("Person", "PersonID", ID));
+        }
+
+        //P4
+        public void Update()
+        {
+            //TODO: SQL
         }
     }
 }

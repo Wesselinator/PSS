@@ -40,7 +40,7 @@ namespace PSS.Data_Access
 
         public static DataRow GetByID(string TableName, string IDColumn, int ID)
         {
-            string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}");
+            string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
             DataHandler dh = new DataHandler();
             DataTable dt = dh.getDataTable(sql);
             if (dt.Rows.Count == 0)
@@ -49,5 +49,13 @@ namespace PSS.Data_Access
             }
             return dt.Rows[0];
         }
+
+        public static int GetNextID(string TableName, string IDColumn)
+        {
+            string sql = string.Format("SELECT * FROM {0} GROUP BY {1} DESC", TableName, IDColumn);
+            DataHandler dh = new DataHandler();
+            return dh.getDataTable(sql).Rows[0].Field<int>(IDColumn) + 1;
+        }
+
     }
 }
