@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
@@ -38,6 +39,11 @@ namespace PSS.Business_Logic
         {
             String output = "Ticket ID:" + TicketID;
             return output;
+        }
+
+        public static string GetProgressRapport(string ticketNo)
+        {
+            return DataEngine.GetProgressRapport(ticketNo);
         }
     }
 }
