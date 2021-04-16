@@ -13,35 +13,34 @@ namespace PSS.Presentation_Layer
 {
     public partial class CallCentre : Form
     {
+        private static ClientMaintenance ClientMaintenance = CallSimulation.ClientMaintenance; //bemby!
+
         public CallCentre()
         {
             InitializeComponent();
+            Hide(); // I hope this can work in the constructor
         }
 
 
-        private Business_Logic.Task currentTicket = null;
+        private ServiceRequest currentRequest = null;
         private Client currentClient = null;
         public void Populate(Client client)
         {
-            Business_Logic.Task stub = new Business_Logic.Task();
-            stub.TicketID = 1; //figure out how this will happen
-            stub.ClientID = client.ClientID;
-            stub.Status = "Unresolved";
-            stub.Department = "Call Center"; //should be changed in the next department
+            ServiceRequest sr = new ServiceRequest("Unknown", "Unkown Type", "Unknown Problem", client);
 
-            Populate(client, stub);
+            Populate(client, sr);
         }
-        public void Populate(Client client, Business_Logic.Task existingTicket)
+        public void Populate(Client client, ServiceRequest existingServiceRequest)
         {
 
-            if (existingTicket.Verify(client))
+            if (!existingServiceRequest.Verify(client))
             {
                 return;
                 //throw
             }
             
             
-            currentTicket = existingTicket;
+            currentRequest = existingServiceRequest;
             currentClient = client;
 
             PopulateClientInfo();
@@ -52,13 +51,13 @@ namespace PSS.Presentation_Layer
 
         private void PopulateTicket()
         {
-            if (currentTicket is null)
+            if (currentRequest is null)
             {
                 return;
                 //trow
             }
 
-            rtbProblem.Text = currentTicket.ProblemDescription;
+            rtbProblem.Text = currentRequest.Description;
         }
 
         private void PopulateClientInfo()
@@ -71,13 +70,13 @@ namespace PSS.Presentation_Layer
 
             PopulateContracts();
 
-            lblRegDate.Text = currentClient.RegistrationDate.ToString("yyyy/MM/dd");
+            //lblRegDate.Text = currentClient.RegistrationDate.ToString("yyyy/MM/dd");
             lblCellphone.Text = currentClient.Person.CellphoneNumber;
             lblTelephone.Text = currentClient.Person.TellephoneNumber;
             lblEmail.Text = currentClient.Person.Email;
 
-            lblAdress.Text = currentClient.Person.FullAddress;
-            lblPostal.Text = currentClient.Person.PostalCode;
+            lblAdress.Text = currentClient.Address.AdressString();
+            lblPostal.Text = currentClient.Address.PostalCode;
 
 
             if (currentClient is IndividualClient)
@@ -110,14 +109,14 @@ namespace PSS.Presentation_Layer
         {
             lblNameTag.Text = "Name: ";
             lblBusinessName.Text = "N/A";
-            lblName.Text = individualClient.ClientName;
+            lblName.Text = individualClient.Person.FullName;
         }
 
         private void PopulateBusinessInfo(BusinessClient businessClient)
         {
             lblNameTag.Text = "Contact Person: ";
             lblBusinessName.Text = businessClient.BusinessName;
-            lblName.Text = businessClient.ContactPersonFullName;
+            lblName.Text = businessClient.ContactPerson.FullName;
         }
 
         #endregion
@@ -125,6 +124,8 @@ namespace PSS.Presentation_Layer
 
         private void btnClientMaintence_Click(object sender, EventArgs e)
         {
+            ClientMaintenance.ReceiveClient(currentClient); //I think this is the method?
+            ClientMaintenance.Show();
             Hide();
         }
 
@@ -141,14 +142,15 @@ namespace PSS.Presentation_Layer
 
         private void btnUpdateTicket_Click(object sender, EventArgs e)
         {
-            if (currentTicket is null)
+            if (currentRequest is null)
             {
-                MessageBox.Show("Ticket Not Updated! No Active Ticket", "Failure!");
+                MessageBox.Show("Service Request Not Updated! No Active Service Request", "Failure!");
             }
             else
             {
+                currentRequest.Title = txtProblemTitle.Text;
+                currentRequest.Description = rtbProblem.Text;
                 MessageBox.Show("Ticket Updated!", "Success!");
-                currentTicket.ProblemDescription = rtbProblem.Text;
             }
         }
     }

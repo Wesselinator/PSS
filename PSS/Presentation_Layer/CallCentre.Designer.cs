@@ -40,14 +40,17 @@ namespace PSS.Presentation_Layer
             this.lblCellTag = new System.Windows.Forms.Label();
             this.lblEmailTag = new System.Windows.Forms.Label();
             this.lblTellTag = new System.Windows.Forms.Label();
-            this.lblRegDate = new System.Windows.Forms.Label();
+            this.lblBirthDay = new System.Windows.Forms.Label();
             this.lblRegDateTag = new System.Windows.Forms.Label();
             this.lblBusinessName = new System.Windows.Forms.Label();
             this.lblBusinessNameTag = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.lblNameTag = new System.Windows.Forms.Label();
             this.grbxProblem = new System.Windows.Forms.GroupBox();
-            this.btnUpdateTicket = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.lblProblemTitleTag = new System.Windows.Forms.Label();
+            this.txtProblemTitle = new System.Windows.Forms.TextBox();
+            this.btnUpdateSR = new System.Windows.Forms.Button();
             this.rtbProblem = new System.Windows.Forms.RichTextBox();
             this.grbxContractInfo = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -73,7 +76,7 @@ namespace PSS.Presentation_Layer
             this.grbxClientInfo.Controls.Add(this.lblCellTag);
             this.grbxClientInfo.Controls.Add(this.lblEmailTag);
             this.grbxClientInfo.Controls.Add(this.lblTellTag);
-            this.grbxClientInfo.Controls.Add(this.lblRegDate);
+            this.grbxClientInfo.Controls.Add(this.lblBirthDay);
             this.grbxClientInfo.Controls.Add(this.lblRegDateTag);
             this.grbxClientInfo.Controls.Add(this.lblBusinessName);
             this.grbxClientInfo.Controls.Add(this.lblBusinessNameTag);
@@ -103,6 +106,7 @@ namespace PSS.Presentation_Layer
             this.lblPostal.Size = new System.Drawing.Size(42, 13);
             this.lblPostal.TabIndex = 14;
             this.lblPostal.Text = "Postal: ";
+            this.lblPostal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblAdress
             // 
@@ -122,6 +126,7 @@ namespace PSS.Presentation_Layer
             this.lblAdressTag.Size = new System.Drawing.Size(45, 13);
             this.lblAdressTag.TabIndex = 12;
             this.lblAdressTag.Text = "Adress: ";
+            this.lblAdressTag.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblEmail
             // 
@@ -158,6 +163,7 @@ namespace PSS.Presentation_Layer
             this.lblCellTag.Size = new System.Drawing.Size(60, 13);
             this.lblCellTag.TabIndex = 8;
             this.lblCellTag.Text = "Cellphone: ";
+            this.lblCellTag.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblEmailTag
             // 
@@ -167,33 +173,37 @@ namespace PSS.Presentation_Layer
             this.lblEmailTag.Size = new System.Drawing.Size(38, 13);
             this.lblEmailTag.TabIndex = 7;
             this.lblEmailTag.Text = "Email: ";
+            this.lblEmailTag.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblTellTag
             // 
             this.lblTellTag.AutoSize = true;
-            this.lblTellTag.Location = new System.Drawing.Point(229, 70);
+            this.lblTellTag.Location = new System.Drawing.Point(225, 70);
             this.lblTellTag.Name = "lblTellTag";
             this.lblTellTag.Size = new System.Drawing.Size(64, 13);
             this.lblTellTag.TabIndex = 6;
             this.lblTellTag.Text = "Telephone: ";
+            this.lblTellTag.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblRegDate
+            // lblBirthDay
             // 
-            this.lblRegDate.AutoSize = true;
-            this.lblRegDate.Location = new System.Drawing.Point(295, 26);
-            this.lblRegDate.Name = "lblRegDate";
-            this.lblRegDate.Size = new System.Drawing.Size(65, 13);
-            this.lblRegDate.TabIndex = 5;
-            this.lblRegDate.Text = "1999/01/01";
+            this.lblBirthDay.AutoSize = true;
+            this.lblBirthDay.Location = new System.Drawing.Point(295, 26);
+            this.lblBirthDay.Name = "lblBirthDay";
+            this.lblBirthDay.Size = new System.Drawing.Size(65, 13);
+            this.lblBirthDay.TabIndex = 5;
+            this.lblBirthDay.Text = "1999/01/01";
             // 
             // lblRegDateTag
             // 
+            this.lblRegDateTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRegDateTag.AutoSize = true;
-            this.lblRegDateTag.Location = new System.Drawing.Point(194, 26);
+            this.lblRegDateTag.Location = new System.Drawing.Point(233, 26);
             this.lblRegDateTag.Name = "lblRegDateTag";
-            this.lblRegDateTag.Size = new System.Drawing.Size(95, 13);
+            this.lblRegDateTag.Size = new System.Drawing.Size(56, 13);
             this.lblRegDateTag.TabIndex = 4;
-            this.lblRegDateTag.Text = "Registration Date: ";
+            this.lblRegDateTag.Text = "Birth Day: ";
+            this.lblRegDateTag.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblBusinessName
             // 
@@ -213,6 +223,7 @@ namespace PSS.Presentation_Layer
             this.lblBusinessNameTag.Size = new System.Drawing.Size(86, 13);
             this.lblBusinessNameTag.TabIndex = 2;
             this.lblBusinessNameTag.Text = "Business Name: ";
+            this.lblBusinessNameTag.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblName
             // 
@@ -232,33 +243,69 @@ namespace PSS.Presentation_Layer
             this.lblNameTag.Size = new System.Drawing.Size(41, 13);
             this.lblNameTag.TabIndex = 0;
             this.lblNameTag.Text = "Name: ";
+            this.lblNameTag.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // grbxProblem
             // 
-            this.grbxProblem.Controls.Add(this.btnUpdateTicket);
+            this.grbxProblem.Controls.Add(this.comboBox1);
+            this.grbxProblem.Controls.Add(this.lblProblemTitleTag);
+            this.grbxProblem.Controls.Add(this.txtProblemTitle);
+            this.grbxProblem.Controls.Add(this.btnUpdateSR);
             this.grbxProblem.Controls.Add(this.rtbProblem);
             this.grbxProblem.Location = new System.Drawing.Point(12, 313);
             this.grbxProblem.Name = "grbxProblem";
-            this.grbxProblem.Size = new System.Drawing.Size(776, 167);
+            this.grbxProblem.Size = new System.Drawing.Size(776, 240);
             this.grbxProblem.TabIndex = 1;
             this.grbxProblem.TabStop = false;
             this.grbxProblem.Text = "Problem";
             // 
-            // btnUpdateTicket
+            // comboBox1
             // 
-            this.btnUpdateTicket.Location = new System.Drawing.Point(298, 108);
-            this.btnUpdateTicket.Name = "btnUpdateTicket";
-            this.btnUpdateTicket.Size = new System.Drawing.Size(202, 41);
-            this.btnUpdateTicket.TabIndex = 2;
-            this.btnUpdateTicket.Text = "Update Ticket";
-            this.btnUpdateTicket.UseVisualStyleBackColor = true;
-            this.btnUpdateTicket.Click += new System.EventHandler(this.btnUpdateTicket_Click);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Unknown Problem",
+            "Business As Usual",
+            "Straight Forward",
+            "Irregular",
+            "Strange",
+            "Esoteric"});
+            this.comboBox1.Location = new System.Drawing.Point(624, 19);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(128, 21);
+            this.comboBox1.TabIndex = 17;
+            // 
+            // lblProblemTitleTag
+            // 
+            this.lblProblemTitleTag.AutoSize = true;
+            this.lblProblemTitleTag.Location = new System.Drawing.Point(9, 22);
+            this.lblProblemTitleTag.Name = "lblProblemTitleTag";
+            this.lblProblemTitleTag.Size = new System.Drawing.Size(86, 13);
+            this.lblProblemTitleTag.TabIndex = 16;
+            this.lblProblemTitleTag.Text = "Business Name: ";
+            this.lblProblemTitleTag.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtProblemTitle
+            // 
+            this.txtProblemTitle.Location = new System.Drawing.Point(101, 19);
+            this.txtProblemTitle.Name = "txtProblemTitle";
+            this.txtProblemTitle.Size = new System.Drawing.Size(495, 20);
+            this.txtProblemTitle.TabIndex = 3;
+            // 
+            // btnUpdateSR
+            // 
+            this.btnUpdateSR.Location = new System.Drawing.Point(298, 193);
+            this.btnUpdateSR.Name = "btnUpdateSR";
+            this.btnUpdateSR.Size = new System.Drawing.Size(202, 41);
+            this.btnUpdateSR.TabIndex = 2;
+            this.btnUpdateSR.Text = "Update Service Request";
+            this.btnUpdateSR.UseVisualStyleBackColor = true;
+            this.btnUpdateSR.Click += new System.EventHandler(this.btnUpdateTicket_Click);
             // 
             // rtbProblem
             // 
-            this.rtbProblem.Location = new System.Drawing.Point(6, 19);
+            this.rtbProblem.Location = new System.Drawing.Point(6, 45);
             this.rtbProblem.Name = "rtbProblem";
-            this.rtbProblem.Size = new System.Drawing.Size(764, 83);
+            this.rtbProblem.Size = new System.Drawing.Size(764, 142);
             this.rtbProblem.TabIndex = 1;
             this.rtbProblem.Text = "";
             // 
@@ -285,7 +332,7 @@ namespace PSS.Presentation_Layer
             this.grbxTransfer.Controls.Add(this.btnClientSatisfaction);
             this.grbxTransfer.Controls.Add(this.btnServiceDept);
             this.grbxTransfer.Controls.Add(this.btnClientMaintence);
-            this.grbxTransfer.Location = new System.Drawing.Point(12, 486);
+            this.grbxTransfer.Location = new System.Drawing.Point(12, 559);
             this.grbxTransfer.Name = "grbxTransfer";
             this.grbxTransfer.Size = new System.Drawing.Size(776, 61);
             this.grbxTransfer.TabIndex = 2;
@@ -326,7 +373,7 @@ namespace PSS.Presentation_Layer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(798, 550);
+            this.ClientSize = new System.Drawing.Size(798, 632);
             this.Controls.Add(this.grbxTransfer);
             this.Controls.Add(this.grbxContractInfo);
             this.Controls.Add(this.grbxProblem);
@@ -336,6 +383,7 @@ namespace PSS.Presentation_Layer
             this.grbxClientInfo.ResumeLayout(false);
             this.grbxClientInfo.PerformLayout();
             this.grbxProblem.ResumeLayout(false);
+            this.grbxProblem.PerformLayout();
             this.grbxContractInfo.ResumeLayout(false);
             this.grbxTransfer.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -352,7 +400,7 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Label lblNameTag;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label lblTellTag;
-        private System.Windows.Forms.Label lblRegDate;
+        private System.Windows.Forms.Label lblBirthDay;
         private System.Windows.Forms.Label lblRegDateTag;
         private System.Windows.Forms.Label lblBusinessName;
         private System.Windows.Forms.Label lblAdressTag;
@@ -363,12 +411,15 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Label lblEmailTag;
         private System.Windows.Forms.Label lblPostal;
         private System.Windows.Forms.Label lblAdress;
-        private System.Windows.Forms.Button btnUpdateTicket;
+        private System.Windows.Forms.Button btnUpdateSR;
         private System.Windows.Forms.RichTextBox rtbProblem;
         private System.Windows.Forms.GroupBox grbxTransfer;
         private System.Windows.Forms.Button btnClientMaintence;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClientSatisfaction;
         private System.Windows.Forms.Button btnServiceDept;
+        private System.Windows.Forms.Label lblProblemTitleTag;
+        private System.Windows.Forms.TextBox txtProblemTitle;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
