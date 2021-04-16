@@ -34,9 +34,42 @@ namespace PSS.Business_Logic
             this.subject = subject;
         }
 
+
+
         public override string ToString()
         {
             return "Call started on " + StartTime ;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Call call &&
+                   startTime == call.startTime &&
+                   endTime == call.endTime &&
+                   callInstanceID == call.callInstanceID &&
+                   clientID == call.clientID &&
+                   subject == call.subject &&
+                   StartTime == call.StartTime &&
+                   EndTime == call.EndTime &&
+                   CallInstanceID == call.CallInstanceID &&
+                   ClientID == call.ClientID &&
+                   Subject == call.Subject;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -13129892;
+            hashCode = hashCode * -1521134295 + startTime.GetHashCode();
+            hashCode = hashCode * -1521134295 + endTime.GetHashCode();
+            hashCode = hashCode * -1521134295 + callInstanceID.GetHashCode();
+            hashCode = hashCode * -1521134295 + clientID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(subject);
+            hashCode = hashCode * -1521134295 + StartTime.GetHashCode();
+            hashCode = hashCode * -1521134295 + EndTime.GetHashCode();
+            hashCode = hashCode * -1521134295 + CallInstanceID.GetHashCode();
+            hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Subject);
+            return hashCode;
         }
     }
 }

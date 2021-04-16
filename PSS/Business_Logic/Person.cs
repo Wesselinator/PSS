@@ -54,5 +54,35 @@ namespace PSS.Business_Logic
         {
             //TODO: SQL
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Person person &&
+                   IdNumber == person.IdNumber &&
+                   FirstName == person.FirstName &&
+                   LastName == person.LastName &&
+                   FullName == person.FullName &&
+                   CellphoneNumber == person.CellphoneNumber &&
+                   TelephoneNumber == person.TelephoneNumber &&
+                   Email == person.Email;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -2023036441;
+            hashCode = hashCode * -1521134295 + IdNumber.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FirstName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(LastName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FullName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CellphoneNumber);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TelephoneNumber);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
+            return hashCode;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

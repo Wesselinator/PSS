@@ -41,5 +41,45 @@ namespace PSS.Business_Logic
             Address = Address.GetID(row.Field<int>("AddressID"));
             Person = Person.GetID(row.Field<int>(ClientID));
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Client client &&
+                   IdNumber == client.IdNumber &&
+                   FirstName == client.FirstName &&
+                   LastName == client.LastName &&
+                   FullName == client.FullName &&
+                   CellphoneNumber == client.CellphoneNumber &&
+                   TelephoneNumber == client.TelephoneNumber &&
+                   Email == client.Email &&
+                   ClientID == client.ClientID &&
+                   Type == client.Type &&
+                   Status == client.Status &&
+                   Notes == client.Notes &&
+                   ListString == client.ListString;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -33787204;
+            hashCode = hashCode * -1521134295 + IdNumber.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FirstName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(LastName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FullName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CellphoneNumber);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TelephoneNumber);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
+            hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Status);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Notes);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ListString);
+            return hashCode;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

@@ -39,6 +39,37 @@ namespace PSS.Business_Logic
             String output = "Ticket ID:" + TicketID;
             return output;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Ticket ticket &&
+                   ticketID == ticket.ticketID &&
+                   clientID == ticket.clientID &&
+                   department == ticket.department &&
+                   status == ticket.status &&
+                   problemDescription == ticket.problemDescription &&
+                   ClientID == ticket.ClientID &&
+                   Department == ticket.Department &&
+                   Status == ticket.Status &&
+                   ProblemDescription == ticket.ProblemDescription &&
+                   TicketID == ticket.TicketID;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1703972206;
+            hashCode = hashCode * -1521134295 + ticketID.GetHashCode();
+            hashCode = hashCode * -1521134295 + clientID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(department);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(status);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(problemDescription);
+            hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Department);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Status);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ProblemDescription);
+            hashCode = hashCode * -1521134295 + TicketID.GetHashCode();
+            return hashCode;
+        }
     }
 }
 
