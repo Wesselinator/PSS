@@ -10,7 +10,7 @@ namespace PSS.Business_Logic
 {
     public class Client
     {
-        public virtual int ClientID { get; set; }
+        public virtual int ClientID { get; protected set; }
         public string Type { get; set; }
         public string Status { get; set; }
         public string Notes { get; set; }
@@ -18,7 +18,7 @@ namespace PSS.Business_Logic
         public Address Address { get; set; }
         public Person Person { get; set; }
 
-        public Client(int clientID, string type, string status, string notes, Address address, Person person)
+        protected Client(int clientID, string type, string status, string notes, Address address, Person person) //should not be able to create half a client
         {
             this.ClientID = clientID;
             this.Type = type;
@@ -28,41 +28,78 @@ namespace PSS.Business_Logic
             this.Person = person;
         }
 
-        public Client() 
+        public Client() //usefull
         {
             
         }
+
+        #region DataBase
 
         public Client(DataRow row, string ClientID)
         {
             Type = row.Field<string>("Type");
             Status = row.Field<string>("Status");
             Notes = row.Field<string>("Notes");
-            Address = Address.GetID(row.Field<int>("AddressID"));
-            Person = Person.GetID(row.Field<int>(ClientID));
+            Address = new Address(row.Field<int>("AddressID"));
+            Person = new Person(row.Field<int>(ClientID));
         }
 
-        protected void Update(StringBuilder sql)
+        //P3
+        public static Client GetByClientID(int ID)
         {
-            sql.Append("Type = '" + Type + "',");
-            sql.Append("Status = '" + Status + "',");
-            sql.Append("Notes = '" + Notes + "',");
-
-            Address.Update();
-            Person.Update();
-
-            sql.AppendLine("WHERE ClientID = " + ClientID); //Tested: Will access correctly
-
-            DataHandler dh = new DataHandler();
-            dh.Update(sql.ToString());
+            Client ret;
+            try
+            {
+                ret = new BusinessClient(ID);
+                return ret; //ID was a Business Client
+            }
+            catch (Exception)
+            {
+                try
+                {
+                    ret = new IndividualClient(ID);
+                    return ret; //ID was an Individual Client
+                }
+                catch (Exception e)
+                {
+                    throw e; //ID did not exist in client tables
+                }
+            }
         }
-        public void Insert()
+        //P3
+        public virtual void Save()
         {
-            //TODO: this
+            throw new NotImplementedException(); //This is Correct. It should never hit this.
         }
+
+        protected string Update(StringBuilder sql)
+        {
+            sql.Append("Type = '" + Type + "', ");
+            sql.Append("Status = '" + Status + "', ");
+            sql.Append("Notes = '" + Notes + "', ");
+            sql.AppendLine("AddressID = " + Address.AddressID);
+
+            sql.AppendLine("WHERE ClientID = " + ClientID); //Tested: Will access correctly.
+
+            return sql.ToString();
+        }
+
+        protected string Insert(StringBuilder sql)
+        {
+            sql.Append("'" + Type + "', ");
+            sql.Append("'" + Status + "', ");
+            sql.Append("'" + Notes + "', ");
+            sql.Append(Address.AddressID);
+            sql.AppendLine(");");
+
+            return sql.ToString();
+        }
+
+        #endregion
 
         public override bool Equals(object obj)
         {
+            //add if branch for businsess/individual testing?
             return obj is Client client &&
                    ClientID == client.ClientID &&
                    Type == client.Type &&

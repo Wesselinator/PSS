@@ -21,33 +21,30 @@ namespace PSS.Business_Logic
             this.PostalCode = postalCode;
             this.Province = province;
         }
+        public Address(string street, string city, string postalCode, string province)
+                : this(DataEngine.GetNextID(TableName, IDColumn), street, city, postalCode, province)
+        { }
         public Address()
-        {
+        {  }
 
-        }
-
+        #region DataBase
 
         private static readonly string TableName = "Address";
         private static readonly string IDColumn = "AddressID";
 
-        public Address(string street, string city, string postalCode, string province)
-        {
-            new Address(DataEngine.GetNextID(TableName, IDColumn), street, city, postalCode, province);
-        }
-
         public Address(DataRow row)
         {
+            this.AddressID = row.Field<int>(IDColumn);
             this.Street = row.Field<string>("Street");
             this.City = row.Field<string>("City");
             this.PostalCode = row.Field<string>("PostalCode");
             this.Province = row.Field<string>("Province");
-        }        
+        }
 
         //P3
-        public static Address GetID(int ID)
-        {
-            return new Address(DataEngine.GetByID(TableName, IDColumn, ID));
-        }
+        public Address(int ID)
+                : this(DataEngine.GetByID(TableName, IDColumn, ID))
+        { }
 
         //P4
         public void Save()
@@ -61,9 +58,9 @@ namespace PSS.Business_Logic
             sql.AppendLine("UPDATE " + TableName);
 
             sql.Append("SET ");
-            sql.Append("Street = '"+ Street +"',");
-            sql.Append("City = '" + City + "',");
-            sql.Append("PostalCode = '" + PostalCode + "',");
+            sql.Append("Street = '"+ Street +"', ");
+            sql.Append("City = '" + City + "', ");
+            sql.Append("PostalCode = '" + PostalCode + "', ");
             sql.AppendLine("Province = '" + Province + "'");
 
             sql.AppendLine("WHERE " + IDColumn + " = " + AddressID);
@@ -77,20 +74,22 @@ namespace PSS.Business_Logic
             sql.AppendLine("INSERT INTO " + TableName);
 
             sql.Append("VALUES (");
-            sql.Append("'" + AddressID + "',");
-            sql.Append("'" + Street + "',");
-            sql.Append("'" + City + "',");
-            sql.Append("'" + PostalCode + "',");
-            sql.Append("'" + Province + "'");
+            sql.Append(AddressID +", ");
+            sql.Append("'" + Street + "', ");
+            sql.Append("'" + City + "', ");
+            sql.Append("'" + PostalCode + "', ");
+            sql.Append("'" + Province + "' ");
             sql.AppendLine(");");
 
             return sql.ToString();
         }
 
+        #endregion
 
-        public string ToFormattedString()
+
+        public string AdressString()
         {
-            return string.Format("{0}, {1}, {2} | {3}", Street, City, Province, PostalCode);
+            return string.Format("{0}, {1}, {2}", Street, City, Province);
         }
 
 
