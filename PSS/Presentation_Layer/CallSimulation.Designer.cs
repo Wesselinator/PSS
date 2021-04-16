@@ -66,6 +66,7 @@ namespace PSS.Presentation_Layer
             this.btnLogRequest.TabIndex = 8;
             this.btnLogRequest.Text = "2. Log a request";
             this.btnLogRequest.UseVisualStyleBackColor = true;
+            this.btnLogRequest.Click += new System.EventHandler(this.btnLogRequest_Click);
             // 
             // btnRegister
             // 
@@ -130,6 +131,7 @@ namespace PSS.Presentation_Layer
             this.Controls.Add(this.pictureBox1);
             this.Name = "CallSimulation";
             this.Text = "CallSimulation";
+            this.Load += new System.EventHandler(this.CallSimulation_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
