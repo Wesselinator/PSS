@@ -49,6 +49,7 @@
     <Compile Include="Business_Logic\Agent.cs" />
     <Compile Include="Business_Logic\BusinessClient.cs" />
     <Compile Include="Business_Logic\Call.cs" />
+    <Compile Include="Business_Logic\ClientPhoneSimulationFunctionality.cs" />
     <Compile Include="Business_Logic\Contract.cs" />
     <Compile Include="Business_Logic\Client.cs" />
     <Compile Include="Business_Logic\ClientFollowUpFunctionality.cs" />
@@ -144,6 +145,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Phone.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\SQL\PremierServiceSolutionsDatabaseCreationQuery.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

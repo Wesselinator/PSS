@@ -11,7 +11,7 @@ namespace PSS.Data_Access
 {
     public class DataHandler
     {
-        private SqlConnection conn = new SqlConnection(@"Data Source = //datarequired// ;Initial Catalog = //DataRequired// ; Integrated Security = //DataRequired//");
+        private SqlConnection conn = new SqlConnection(@"Data Source =. ;Initial Catalog = PremierServiceSolutionsDB ; Integrated Security = SSPI");
         private SqlCommand command;
         private SqlDataAdapter adapter;
         private SqlDataReader reader;
