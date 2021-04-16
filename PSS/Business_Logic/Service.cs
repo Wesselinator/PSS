@@ -18,5 +18,27 @@ namespace PSS.Business_Logic
             ServiceName = serviceName;
             ServiceDescription = serviceDescription;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Service service &&
+                   ServiceID == service.ServiceID &&
+                   ServiceName == service.ServiceName &&
+                   ServiceDescription == service.ServiceDescription;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 723082494;
+            hashCode = hashCode * -1521134295 + ServiceID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ServiceName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ServiceDescription);
+            return hashCode;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

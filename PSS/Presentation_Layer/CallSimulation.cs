@@ -30,7 +30,7 @@ namespace PSS.Presentation_Layer
 
         private void LoadDropDown()
         {
-            cbClientDropDown.DisplayMember = "ListString";
+            cbClientDropDown.DisplayMember = "CBXString";
 
             cbClientDropDown.Items.AddRange(ClientPhoneSimulationFunctionality.GetClientList().ToArray());
         }

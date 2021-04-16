@@ -110,7 +110,7 @@ namespace PSS.Presentation_Layer
             this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Controls.Add(this.comboBox4);
             this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Location = new System.Drawing.Point(23, 395);
+            this.groupBox3.Location = new System.Drawing.Point(23, 398);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);

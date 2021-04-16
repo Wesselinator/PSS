@@ -46,9 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business_Logic\Address.cs" />
     <Compile Include="Business_Logic\Agent.cs" />
     <Compile Include="Business_Logic\BusinessClient.cs" />
     <Compile Include="Business_Logic\Call.cs" />
+    <Compile Include="Business_Logic\CallFunctionality.cs" />
     <Compile Include="Business_Logic\ClientPhoneSimulationFunctionality.cs" />
     <Compile Include="Business_Logic\Contract.cs" />
     <Compile Include="Business_Logic\Client.cs" />
@@ -89,6 +91,12 @@
     <Compile Include="Presentation_Layer\ClientMaintenance.Designer.cs">
       <DependentUpon>ClientMaintenance.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentation_Layer\ContractMaintenance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation_Layer\ContractMaintenance.Designer.cs">
+      <DependentUpon>ContractMaintenance.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentation_Layer\ServiceDepartment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation_Layer\ClientMaintenance.resx">
       <DependentUpon>ClientMaintenance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation_Layer\ContractMaintenance.resx">
+      <DependentUpon>ContractMaintenance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation_Layer\ServiceDepartment.resx">
       <DependentUpon>ServiceDepartment.cs</DependentUpon>

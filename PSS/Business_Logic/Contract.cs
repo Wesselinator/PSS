@@ -24,5 +24,33 @@ namespace PSS.Business_Logic
             EndDate = endDate;
             MonthlyFee = monthlyFee;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Contract contract &&
+                   ContractID == contract.ContractID &&
+                   ContractName == contract.ContractName &&
+                   ServiceLevel == contract.ServiceLevel &&
+                   StartDate == contract.StartDate &&
+                   EndDate == contract.EndDate &&
+                   MonthlyFee == contract.MonthlyFee;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1066324823;
+            hashCode = hashCode * -1521134295 + ContractID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ContractName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ServiceLevel);
+            hashCode = hashCode * -1521134295 + StartDate.GetHashCode();
+            hashCode = hashCode * -1521134295 + EndDate.GetHashCode();
+            hashCode = hashCode * -1521134295 + MonthlyFee.GetHashCode();
+            return hashCode;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

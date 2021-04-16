@@ -4,39 +4,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
     class BusinessClient : Client
     {
-        private string businessName;
-
-        public string BusinessName { get => businessName; set => businessName = value; }
-        public string ContactPersoneName { get => FirstName; set => FirstName = value; }
-        public string ContactPersonSurname { get => LastName; set => LastName = value; }
+        public string BusinessName { get; set; }
+        public Person Contact { get => Person; set => Person = value; }
         
-        public BusinessClient(int businessID, DateTime registrationDate, string businessName, string contactPersoneName, string contactPersonSurname, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(businessID, registrationDate, contactPersoneName, contactPersonSurname, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
+        public BusinessClient(int businessID, string businessName, string contactPersoneName, string contactPersonSurname, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province, Address address) : base(businessID, contactPersoneName, contactPersonSurname, cellphoneNumber, telephoneNumber, email)
         {
             BusinessName = businessName;
-            ContactPersoneName = contactPersoneName;
-            ContactPersonSurname = contactPersonSurname;
+            Address = address;
         }
-
-        public BusinessClient(int businessID, string businessName, string contactPersoneName, string contactPersonSurname, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(businessID, contactPersoneName, contactPersonSurname, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
-        {
-            BusinessName = businessName;
-            ContactPersoneName = contactPersoneName;
-            ContactPersonSurname = contactPersonSurname;
-        }
-
         public BusinessClient()
         {
 
         }
 
-        public BusinessClient(DataRow row)
+        public BusinessClient(DataRow row) : base(row, "PrimaryContactPersonID")
         {
+            BusinessName = row.Field<string>("BusinessName");            
+        }
 
+        public static BusinessClient GetID(int ID)
+        {
+            return new BusinessClient(DataEngine.GetByID("BusinessClient", "BusinessID", ID));
+        }
+
+        public override void Update()
+        {
+            Address.Update();
+            base.Update();
         }
     }
 }
