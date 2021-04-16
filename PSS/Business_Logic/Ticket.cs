@@ -68,7 +68,7 @@ namespace PSS.Business_Logic
         void IDataInDataBase.FillWith(DataRow DataRow)
         {
             ticketID = DataRow.Field<int>(idColumn);
-            client = Client.GetSelect(DataRow.Field<int>("ClientID"));
+            client = Client.GetSelect(DataRow.Field<int>("ClientID")); //TODO: There is no way of telling which one this is right now (VERY IMPORTANT)
             department = DataRow.Field<string>("Department");
             status = DataRow.Field<string>("Status");
             problemDescription = DataRow.Field<string>("Description");
