@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PSS.Business_Logic
 {
-    class Employee : Person
+    public class Employee : Person
     {
         public int EmployeeID { get => IdNumber; set => IdNumber = value; }
 

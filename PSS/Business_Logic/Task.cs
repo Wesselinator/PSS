@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
@@ -69,6 +70,11 @@ namespace PSS.Business_Logic
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ProblemDescription);
             hashCode = hashCode * -1521134295 + TicketID.GetHashCode();
             return hashCode;
+        }
+
+        public static string GetProgressRapport(string ticketNo)
+        {
+            return DataEngine.GetProgressRapport(ticketNo);
         }
     }
 }
