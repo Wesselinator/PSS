@@ -145,8 +145,9 @@
   <ItemGroup>
     <None Include="Resources\Phone.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\SQL\" />
+    <Content Include="Resources\SQL\PremierServiceSolutionsDatabaseCreationQuery.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
