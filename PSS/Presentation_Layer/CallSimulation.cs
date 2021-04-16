@@ -13,6 +13,11 @@ namespace PSS.Presentation_Layer
 {
     public partial class CallSimulation : Form
     {
+        public static ClientMaintenance ClientMaintenance = new ClientMaintenance(); //Master
+        public static CallCentre CallCentre = new CallCentre(); //Master
+
+        public Client SelectedClient { get => (Client)cbClientDropDown.SelectedItem; }
+
         public CallSimulation()
         {
             InitializeComponent();
@@ -20,7 +25,8 @@ namespace PSS.Presentation_Layer
 
         private void btnLogRequest_Click(object sender, EventArgs e)
         {
-
+            CallCentre.Populate(SelectedClient);
+            CallCentre.Show();
         }
 
         private void CallSimulation_Load(object sender, EventArgs e)
