@@ -52,11 +52,34 @@ namespace PSS.Business_Logic
             //test if exist
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("UPDATE Address");
+
             sql.Append("SET ");
-            sql.AppendLine("Street = '"+ Street +"'");
-            sql.AppendLine("City = '" + City + "'");
-            sql.AppendLine("PostalCode = '" + PostalCode + "'");
+            sql.Append("Street = '"+ Street +"',");
+            sql.Append("City = '" + City + "',");
+            sql.Append("PostalCode = '" + PostalCode + "',");
             sql.AppendLine("Province = '" + Province + "'");
+
+            sql.AppendLine("WHERE AddressID = " + AddressID);
+
+            DataHandler dh = new DataHandler();
+            dh.Update(sql.ToString());
+        }
+
+        //order very important
+        public void Insert()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("INSERT INTO Address");
+
+            sql.Append("VALUES (");
+            sql.Append("'" + Street + "',");
+            sql.Append("'" + City + "',");
+            sql.Append("'" + PostalCode + "',");
+            sql.Append("'" + Province + "'");
+            sql.AppendLine(");");
+
+            DataHandler dh = new DataHandler();
+            dh.Update(sql.ToString());
         }
 
         public override string ToString()
