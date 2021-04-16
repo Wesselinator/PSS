@@ -35,10 +35,31 @@ namespace PSS.Business_Logic
 
         }
 
+
+
         public override string ToString()
         {
             //TODO: Create the string!
             return base.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Address address &&
+                   Street == address.Street &&
+                   City == address.City &&
+                   PostalCode == address.PostalCode &&
+                   Province == address.Province;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1008569148;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Street);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(City);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(PostalCode);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Province);
+            return hashCode;
         }
     }
 }

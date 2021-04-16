@@ -37,5 +37,49 @@ namespace PSS.Business_Logic
         {
             return true;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Technician technician &&
+                   base.Equals(obj) &&
+                   IdNumber == technician.IdNumber &&
+                   FirstName == technician.FirstName &&
+                   LastName == technician.LastName &&
+                   FullName == technician.FullName &&
+                   CellphoneNumber == technician.CellphoneNumber &&
+                   TelephoneNumber == technician.TelephoneNumber &&
+                   Email == technician.Email &&
+                   EmployeeID == technician.EmployeeID &&
+                   type == technician.type &&
+                   isBusy == technician.isBusy &&
+                   TechnicianID == technician.TechnicianID &&
+                   Type == technician.Type &&
+                   IsBusy == technician.IsBusy;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1042436649;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + IdNumber.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FirstName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(LastName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FullName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CellphoneNumber);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TelephoneNumber);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
+            hashCode = hashCode * -1521134295 + EmployeeID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(type);
+            hashCode = hashCode * -1521134295 + isBusy.GetHashCode();
+            hashCode = hashCode * -1521134295 + TechnicianID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
+            hashCode = hashCode * -1521134295 + IsBusy.GetHashCode();
+            return hashCode;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }
