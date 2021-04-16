@@ -11,7 +11,7 @@ namespace PSS.Business_Logic
     {
         public void RegisterClient()
         {
-            
+               //class not going to be used
         }
     }
 }
