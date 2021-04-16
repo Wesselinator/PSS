@@ -19,11 +19,11 @@ namespace PSS.Presentation_Layer
         }
 
 
-        private Ticket currentTicket = null;
+        private Business_Logic.Task currentTicket = null;
         private Client currentClient = null;
         public void Populate(Client client)
         {
-            Ticket stub = new Ticket();
+            Business_Logic.Task stub = new Business_Logic.Task();
             stub.TicketID = 1; //figure out how this will happen
             stub.ClientID = client.ClientID;
             stub.Status = "Unresolved";
@@ -31,7 +31,7 @@ namespace PSS.Presentation_Layer
 
             Populate(client, stub);
         }
-        public void Populate(Client client, Ticket existingTicket)
+        public void Populate(Client client, Business_Logic.Task existingTicket)
         {
 
             if (existingTicket.Verify(client))

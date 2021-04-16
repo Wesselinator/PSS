@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PSS.Business_Logic
 {
-    class Ticket
+    class Task
     {
         private int ticketID;
         private int clientID;
@@ -20,12 +20,12 @@ namespace PSS.Business_Logic
         public string ProblemDescription { get => problemDescription; set => problemDescription = value; }
         public int TicketID { get => ticketID; set => ticketID = value; }
 
-        public Ticket()
+        public Task()
         {
 
         }
 
-        public Ticket(int ticketID, int clientID, string department, string status, string problemDescription)
+        public Task(int ticketID, int clientID, string department, string status, string problemDescription)
         {
             this.ticketID = ticketID;
             this.clientID = clientID;
@@ -42,7 +42,7 @@ namespace PSS.Business_Logic
 
         public override bool Equals(object obj)
         {
-            return obj is Ticket ticket &&
+            return obj is Task ticket &&
                    ticketID == ticket.ticketID &&
                    clientID == ticket.clientID &&
                    department == ticket.department &&
