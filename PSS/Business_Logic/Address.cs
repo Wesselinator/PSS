@@ -4,22 +4,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
     public class Address
     {
+        public int AddressID { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string PostalCode { get; set; }
         public string Province { get; set; }
 
-        public Address(string street, string city, string postalCode, string province)
+        public Address(int addressID, string street, string city, string postalCode, string province)
         {
+            this.AddressID = addressID;
             this.Street = street;
             this.City = city;
             this.PostalCode = postalCode;
             this.Province = province;
+        }
+
+        public Address(string street, string city, string postalCode, string province)
+        {
+            new Address(DataEngine.GetNextID("Address", "AddressID"), street, city, postalCode, province);
+        }
+
+        public Address()
+        {
+
         }
 
         public Address(DataRow row)
@@ -30,9 +43,20 @@ namespace PSS.Business_Logic
             this.Province = row.Field<string>("Province");
         }
 
-        public Address()
+        //P3
+        public static Address GetID(int ID)
         {
+            return new Address(DataEngine.GetByID("Address", "AddressID", ID));
+        }
 
+        //P4
+        public void Update()
+        {
+            //test if exist
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("UPDATE Address");
+            sql       += "SET Street = '"+ Street +"'";
+            sql += "SET Street = '" + Street + "'";
         }
 
 

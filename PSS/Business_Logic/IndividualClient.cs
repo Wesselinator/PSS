@@ -10,7 +10,6 @@ namespace PSS.Business_Logic
 {
     class IndividualClient : Client
     {
-        public Address Adress { get; set; }
         public IndividualClient(int clientID, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email) : base(clientID, firstName, lastName, cellphoneNumber, telephoneNumber, email)
         {
 
