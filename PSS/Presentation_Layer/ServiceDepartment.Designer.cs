@@ -442,7 +442,7 @@ namespace PSS.Presentation_Layer
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(364, 538);
+            this.button2.Location = new System.Drawing.Point(364, 513);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(182, 38);
             this.button2.TabIndex = 9;
@@ -453,7 +453,7 @@ namespace PSS.Presentation_Layer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(976, 588);
+            this.ClientSize = new System.Drawing.Size(930, 559);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.tabControl1);
             this.Name = "ServiceDepartment";
