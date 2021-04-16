@@ -1,80 +1,142 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using PSS.Data_Access;
+using System.Data;
 
 namespace PSS.Business_Logic
 {
-    class Task
+    public class Task : IModifyable
     {
-        private int ticketID;
-        private int clientID;
-        private string department;
-        private string status;
-        private string problemDescription;
 
-        public int ClientID { get => clientID; set => clientID = value; }
-        public string Department { get => department; set => department = value; }
-        public string Status { get => status; set => status = value; }
-        public string ProblemDescription { get => problemDescription; set => problemDescription = value; }
-        public int TicketID { get => ticketID; set => ticketID = value; }
+        public int TaskID { get; private set; }
+        public string Title { get; set; }
+        public string Descripion { get; set; }
+        public string Notes { get; set; }
+        public ServiceRequest ServiceRequest { get; set; }
+        public DateTime DateProcessed { get; set; }
+        public bool IsFinished { get; set; }
+
+        public Task(int taskID, string title, string descripion, string notes, ServiceRequest serviceRequest, DateTime dateProcessed, bool isFinished)
+        {
+            this.TaskID = taskID;
+            this.Title = title;
+            this.Descripion = descripion;
+            this.Notes = notes;
+            this.ServiceRequest = serviceRequest;
+            this.DateProcessed = dateProcessed;
+            this.IsFinished = isFinished;
+        }
+
+        public Task(string title, string descripion, string notes, ServiceRequest serviceRequest, DateTime dateProcessed, bool isFinished)
+             : this(DataEngine.GetNextID(TableName, IDColumn), title, descripion, notes, serviceRequest, dateProcessed, isFinished)
+        {  }
 
         public Task()
-        {
+        {  }
 
+        #region DataBase
+
+        private static readonly string TableName = "Task";
+        private static readonly string IDColumn = "TaskID";
+
+        public Task(DataRow row)
+        {
+            this.TaskID = row.Field<int>("TicketID");
+            this.Title = row.Field<string>("Title");
+            this.Descripion = row.Field<string>("Descripion");
+            this.Notes = row.Field<string>("Notes");
+            this.ServiceRequest = ServiceRequest.GetID(row.Field<int>("ServiceRequestID"));
+            this.DateProcessed = row.Field<DateTime>("DateProcessed");
+            this.IsFinished = row.Field<bool>("IsFinished");
         }
 
-        public Task(int ticketID, int clientID, string department, string status, string problemDescription)
+        //P3
+        public static Task GetID(int ID)
         {
-            this.ticketID = ticketID;
-            this.clientID = clientID;
-            this.department = department;
-            this.status = status;
-            this.problemDescription = problemDescription;
+            return new Task(DataEngine.GetByID(TableName, IDColumn, ID));
         }
+
+        //P4
+        public void Save()
+        {
+            ServiceRequest.Save();
+            DataEngine.UpdateORInsert(this, TableName, IDColumn, TaskID);
+        }
+
+        string IUpdateable.Update()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("UPDATE " + TableName);
+            sql.Append("SET ");
+
+            sql.Append("TaskTitle = '" + Title + "',");
+            sql.Append("TaskDescripion = '" + Descripion + "',");
+            sql.Append("TaskNotes = '" + Notes + "',");
+            sql.Append("ServiceRequestID = " + ServiceRequest.ServiceRequestID + ",");
+            sql.Append("TaskDateProcessed = '" + DateProcessed.ToString("s") + "'"); //.ToUniversalTime. depending on what exactly SQL Server is smoking
+            sql.AppendLine("IsFinished = " + (IsFinished ? 1 : 0));
+
+            sql.AppendLine("WHERE " + IDColumn + " = " + TaskID);
+
+            return sql.ToString();
+        }
+
+        string IInsertable.Insert()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("INSERT INTO " + TableName);
+
+            sql.Append("VALUES (");
+            sql.Append(TaskID + ", ");
+            sql.Append("'" + Title + "', ");
+            sql.Append("'" + Descripion + "', ");
+            sql.Append("'" + Notes + "', ");
+            sql.Append(ServiceRequest.ServiceRequestID + ", ");
+            sql.Append("'" + DateProcessed.ToString("s") + "', ");
+            sql.Append( (IsFinished ? 1 : 0) );
+            sql.AppendLine(");");
+
+            return sql.ToString();
+        }
+
+        #endregion
 
         public override string ToString()
         {
-            String output = "Ticket ID:" + TicketID;
-            return output;
+            return base.ToString();
+            //TODO: update
+        }
+
+        //TODO: wtf?
+        public static string GetProgressRapport(string ticketNo)
+        {
+            return DataEngine.GetProgressRapport(ticketNo);
         }
 
         public override bool Equals(object obj)
         {
-            return obj is Task ticket &&
-                   ticketID == ticket.ticketID &&
-                   clientID == ticket.clientID &&
-                   department == ticket.department &&
-                   status == ticket.status &&
-                   problemDescription == ticket.problemDescription &&
-                   ClientID == ticket.ClientID &&
-                   Department == ticket.Department &&
-                   Status == ticket.Status &&
-                   ProblemDescription == ticket.ProblemDescription &&
-                   TicketID == ticket.TicketID;
+            return obj is Task task &&
+                   TaskID == task.TaskID &&
+                   Title == task.Title &&
+                   Descripion == task.Descripion &&
+                   Notes == task.Notes &&
+                   EqualityComparer<ServiceRequest>.Default.Equals(ServiceRequest, task.ServiceRequest) &&
+                   DateProcessed == task.DateProcessed &&
+                   IsFinished == task.IsFinished;
         }
 
         public override int GetHashCode()
         {
-            int hashCode = 1703972206;
-            hashCode = hashCode * -1521134295 + ticketID.GetHashCode();
-            hashCode = hashCode * -1521134295 + clientID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(department);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(status);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(problemDescription);
-            hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Department);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Status);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ProblemDescription);
-            hashCode = hashCode * -1521134295 + TicketID.GetHashCode();
+            int hashCode = -1945863682;
+            hashCode = hashCode * -1521134295 + TaskID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Title);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Descripion);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Notes);
+            hashCode = hashCode * -1521134295 + EqualityComparer<ServiceRequest>.Default.GetHashCode(ServiceRequest);
+            hashCode = hashCode * -1521134295 + DateProcessed.GetHashCode();
+            hashCode = hashCode * -1521134295 + IsFinished.GetHashCode();
             return hashCode;
-        }
-
-        public static string GetProgressRapport(string ticketNo)
-        {
-            return DataEngine.GetProgressRapport(ticketNo);
         }
     }
 }
