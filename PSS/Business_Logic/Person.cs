@@ -14,6 +14,7 @@ namespace PSS.Business_Logic
         public int IdNumber { get => idNumber; set => idNumber = value; }
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
+        public string FullName { get => string.Format("{0} {1}", FirstName, LastName); }
         public string CellphoneNumber { get => cellphoneNumber; set => cellphoneNumber = value; }
         public string TelephoneNumber { get => telephoneNumber; set => telephoneNumber = value; }
         public string Email { get => email; set => email = value; }

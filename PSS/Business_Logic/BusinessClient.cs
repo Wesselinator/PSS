@@ -11,7 +11,6 @@ namespace PSS.Business_Logic
     {
         private string businessName;
 
-        public int BusinessID { get => IdNumber; set => IdNumber = value; }
         public string BusinessName { get => businessName; set => businessName = value; }
         public string ContactPersoneName { get => FirstName; set => FirstName = value; }
         public string ContactPersonSurname { get => LastName; set => LastName = value; }
