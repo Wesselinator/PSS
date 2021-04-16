@@ -108,14 +108,14 @@ CREATE TABLE [Person]
 CREATE TABLE [User]
 (UserID INT PRIMARY KEY,
  UserName VARCHAR(50) NOT NULL,
- Password VARCHAR(50) NOT NULL,
- Role VARCHAR(50) NOT NULL
+ [Password] VARCHAR(50) NOT NULL,
+ [Role] VARCHAR(50) NOT NULL
 )
 
 CREATE TABLE IndividualClient
 (IndividualClientID INT REFERENCES Person(PersonID) PRIMARY KEY,
- Type VARCHAR(30) NOT NULL,
- Status VARCHAR(30) NOT NULL,
+ [Type] VARCHAR(30) NOT NULL,
+ [Status] VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
  AddressID INT NOT NULL REFERENCES Address(AddressID)
 )
@@ -123,8 +123,8 @@ CREATE TABLE IndividualClient
 CREATE TABLE BusinessClient
 (BusinessClientID INT PRIMARY KEY, --Can potentially use negative numbers for business clients or it can be determined Checking that their is not a conflict Person and BusinessClient 
  BusinessName VARCHAR(50),
- Type VARCHAR(30) NOT NULL,
- Status VARCHAR(30) NOT NULL,
+ [Type] VARCHAR(30) NOT NULL,
+ [Status] VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
  AddressID INT NOT NULL REFERENCES Address(AddressID)
 )
@@ -132,7 +132,7 @@ CREATE TABLE BusinessClient
 CREATE TABLE BusinessClientPerson
 (BusinessClientID INT REFERENCES BusinessClient(BusinessClientID),
  PersonID INT REFERENCES Person(PersonID),
- Role VARCHAR(50) NOT NULL,
+ [Role] VARCHAR(50) NOT NULL,
  IsPrimaryContact BIT NOT NULL,
  PRIMARY KEY(BusinessClientID,PersonID)
 )
@@ -232,7 +232,7 @@ CREATE TABLE TechnicianTaskFeedback
 (TechnicianTaskFeedbackID INT PRIMARY KEY,
  TimeArrived DATETIME NOT NULL,
  TimeDeparture DATETIME NOT NULL,
- Status VARCHAR(30) NOT NULL,
+ [Status] VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
  TechnicianTaskID INT NOT NULL REFERENCES TechnicianTask(TechnicianTaskID)
 )
@@ -244,7 +244,7 @@ CREATE TABLE CallInstance
 (CallInstanceID INT PRIMARY KEY,
  StartTime DATETIME NOT NULL,
  EndTime DATETIME NOT NULL,
- Description VARCHAR(120) NOT NULL
+ [Description] VARCHAR(120) NOT NULL
 )
 
 CREATE TABLE CallChangeAssociation
