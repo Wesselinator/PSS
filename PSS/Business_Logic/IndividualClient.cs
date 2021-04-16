@@ -4,17 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
     class IndividualClient : Client
     {
-        public IndividualClient(int clientID, DateTime registrationDate, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(clientID, registrationDate, firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
-        {
-
-        }
-
-        public IndividualClient(int clientID, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(clientID, firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
+        public Address Adress { get; set; }
+        public IndividualClient(int clientID, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email) : base(clientID, firstName, lastName, cellphoneNumber, telephoneNumber, email)
         {
 
         }
@@ -24,9 +21,9 @@ namespace PSS.Business_Logic
 
         }
 
-        public IndividualClient(DataRow row) : base()
+        public IndividualClient(DataRow row) : base(row)
         {
-
+            Adress = new Address(DataEngine.GetByID("Address", "AddressID", row.Field<int>("AddressID")));
         }
     }
 }

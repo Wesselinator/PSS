@@ -37,5 +37,17 @@ namespace PSS.Data_Access
 
             return ret;
         }
+
+        public static DataRow GetByID(string TableName, string IDColumn, int ID)
+        {
+            string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}");
+            DataHandler dh = new DataHandler();
+            DataTable dt = dh.getDataTable(sql);
+            if (dt.Rows.Count == 0)
+            {
+                //TODO: Throw Exception
+            }
+            return dt.Rows[0];
+        }
     }
 }
