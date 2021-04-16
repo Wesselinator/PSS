@@ -16,5 +16,10 @@ namespace PSS.Presentation_Layer
         {
             InitializeComponent();
         }
+
+        private void ServiceDepartment_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
