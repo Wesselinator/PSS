@@ -10,7 +10,8 @@ namespace PSS.Business_Logic
 {
     class IndividualClient : Client
     {
-        public IndividualClient(int clientID, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email) : base(clientID, firstName, lastName, cellphoneNumber, telephoneNumber, email)
+        public override int ClientID { get => Person.IdNumber; set => Person.IdNumber = value; }
+        public IndividualClient(string businessName, string type, string status, string notes, Address address, Person person) : base(person.IdNumber, type, status, notes, address, person)
         {
 
         }
@@ -20,9 +21,24 @@ namespace PSS.Business_Logic
 
         }
 
-        public IndividualClient(DataRow row) : base(row)
+        public IndividualClient(DataRow row) : base(row, "IndividualClient")
         {
-            Adress = new Address(DataEngine.GetByID("Address", "AddressID", row.Field<int>("AddressID")));
+            
+        }
+
+        //IMPOERTANT: This does not cascade to the People Table!
+        public void Update()
+        {
+            StringBuilder sql = new StringBuilder();
+
+            sql.AppendLine("UPDATE IndividualClient");
+            sql.Append("SET ");
+
+            base.Update(sql);
+        }
+        public void Insert()
+        {
+            //TODO: this
         }
     }
 }

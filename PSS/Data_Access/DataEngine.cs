@@ -56,6 +56,5 @@ namespace PSS.Data_Access
             DataHandler dh = new DataHandler();
             return dh.getDataTable(sql).Rows[0].Field<int>(IDColumn) + 1;
         }
-
     }
 }

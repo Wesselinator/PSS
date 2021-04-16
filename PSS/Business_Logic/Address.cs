@@ -49,7 +49,6 @@ namespace PSS.Business_Logic
         //P4
         public void Update()
         {
-            //test if exist
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("UPDATE Address");
 
@@ -72,6 +71,7 @@ namespace PSS.Business_Logic
             sql.AppendLine("INSERT INTO Address");
 
             sql.Append("VALUES (");
+            sql.Append("'" + AddressID + "',");
             sql.Append("'" + Street + "',");
             sql.Append("'" + City + "',");
             sql.Append("'" + PostalCode + "',");

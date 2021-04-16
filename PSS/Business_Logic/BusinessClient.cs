@@ -13,12 +13,11 @@ namespace PSS.Business_Logic
         public string BusinessName { get; set; }
         public Person Contact { get => Person; set => Person = value; }
         
-        public BusinessClient(int businessID, string businessName, string contactPersoneName, string contactPersonSurname, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province, Address address) : base(businessID, contactPersoneName, contactPersonSurname, cellphoneNumber, telephoneNumber, email)
+        public BusinessClient(int businessID, string businessName, string type, string status, string notes, Address address, Person person) : base(businessID, type, status, notes, address, person)
         {
             BusinessName = businessName;
-            Address = address;
         }
-        public BusinessClient()
+        public BusinessClient() : base()
         {
 
         }
@@ -28,15 +27,27 @@ namespace PSS.Business_Logic
             BusinessName = row.Field<string>("BusinessName");            
         }
 
+        //P3
         public static BusinessClient GetID(int ID)
         {
             return new BusinessClient(DataEngine.GetByID("BusinessClient", "BusinessID", ID));
         }
 
-        public override void Update()
+        //P4
+        public void Update()
         {
-            Address.Update();
-            base.Update();
+            StringBuilder sql = new StringBuilder();
+
+            sql.AppendLine("UPDATE BusinessClient");
+            sql.Append("SET ");
+
+            sql.Append("BusinessName = '" + BusinessName + "',");
+
+            base.Update(sql);
+        }
+        public void Insert()
+        {
+            //TODO: this
         }
     }
 }
