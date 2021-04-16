@@ -89,7 +89,7 @@ ALTER TABLE ContactInformation
 ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL)
 
 
-CREATE TABLE Address
+CREATE TABLE [Address]
 (AddressID INT PRIMARY KEY,
  Street VARCHAR(50) NOT NULL,
  City VARCHAR(30) NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE Address
  Province VARCHAR(20) NOT NULL
 )
 
-CREATE TABLE Person
+CREATE TABLE [Person]
 (PersonID INT PRIMARY KEY,
  FirstName VARCHAR(50) NOT NULL,
  LastName VARCHAR(50) NOT NULL,
@@ -210,7 +210,7 @@ CREATE TABLE Task
  TaskDescription VARCHAR(MAX) NOT NULL,
  TaskNotes VARCHAR(MAX),
  ServiceRequestID INT NOT NULL REFERENCES ServiceRequest(ServiceRequestID),
- AddressID INT NOT NULL REFERENCES Address(AddressID), --Add constaint to take business or indiviual client address as default
+ --AddressID INT NOT NULL REFERENCES Address(AddressID), --Add constaint to take business or indiviual client address as default
  DateProcessed DATETIME NOT NULL,
  IsFinished BIT NOT NULL DEFAULT 0
 )
