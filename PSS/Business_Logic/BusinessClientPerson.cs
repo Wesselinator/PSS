@@ -8,7 +8,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public class BusinessClientPerson : IM
+    public class BusinessClientPerson
     {
     }
 }

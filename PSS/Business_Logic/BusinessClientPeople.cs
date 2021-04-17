@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PSS.Business_Logic
 {
-    public class BusinessClientPeople : 
+    public class BusinessClientPeople
     {
     }
 }
