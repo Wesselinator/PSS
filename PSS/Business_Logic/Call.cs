@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    class Call
+    class Call : IModifyable
     {
         private DateTime startTime;
         private DateTime endTime;
@@ -27,13 +29,34 @@ namespace PSS.Business_Logic
 
         public Call(DateTime startTime, DateTime endTime, int callInstanceID, int clientID, string subject)
         {
-            this.startTime = startTime;
-            this.endTime = endTime;
-            this.callInstanceID = callInstanceID;
-            this.clientID = clientID;
-            this.subject = subject;
+
         }
 
+        #region Database
+
+        private static readonly string TableName = "Call";
+        private static readonly string IDColumn = "CallInstanceID";
+
+        public Call(DataRow row)
+        {
+            this.callInstanceID = row.Field<int>(IDColumn);
+            this.startTime = row.Field<DateTime>("StartTime");
+            this.endTime = row.Field<DateTime>("EndTime");
+            this.subject = row.Field<string>("Description");
+        }
+
+        //P3
+        public Call(int ID)
+            : this(DataEngine.GetByID(TableName, IDColumn, ID)) 
+        { }
+
+        //P4
+        public void Save()
+        {
+            DataEngine.UpdateORInsert(this, TableName, IDColumn, callInstanceID)
+        }
+
+        #endregion 
 
 
         public override string ToString()
