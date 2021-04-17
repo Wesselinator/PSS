@@ -61,7 +61,7 @@ CREATE TABLE [Contract]
  OfferStartDate DATETIME NOT NULL,
  OfferEndDate DATETIME,
  ContractDurationInMonths INT NOT NULL CHECK(ContractDurationInMonths>0),
- MontlyFee MONEY NOT NULL
+ MonthlyFee MONEY NOT NULL
 )
 
 GO

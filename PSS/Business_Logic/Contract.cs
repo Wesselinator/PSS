@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    class Contract
+    class Contract : IModifyable
     {
         public int ContractID { get; set; }
         public string ContractName { get; set; }
@@ -14,6 +16,12 @@ namespace PSS.Business_Logic
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public double MonthlyFee { get; set; }
+
+        private static readonly string TableName = "Contract";
+        private static readonly string IDColumn = "ContractID";
+
+        public Contract()// : base(TableName, IDColumn)
+        { }
 
         public Contract(int contractID, string contractName, string serviceLevel, DateTime startDate, DateTime endDate, double monthlyFee)
         {
@@ -24,6 +32,65 @@ namespace PSS.Business_Logic
             EndDate = endDate;
             MonthlyFee = monthlyFee;
         }
+
+        #region DataBase
+
+        public Contract(DataRow row) : this()
+        {
+            this.ContractID = row.Field<int>(IDColumn);
+            this.ContractName = row.Field<string>("ContractName");
+            this.ServiceLevel = row.Field<string>("ServiceLevel");
+            this.StartDate = row.Field<DateTime>("OfferStartDate");
+            this.EndDate = row.Field<DateTime>("OfferEndDate");
+            this.MonthlyFee = row.Field<double>("MonthlyFee");
+        }
+
+        //P3
+        public Contract(int ID)
+                : this(DataEngine.GetByID(TableName, IDColumn, ID))
+        { }
+
+        //P4
+        public void Save()
+        {
+            DataEngine.UpdateORInsert(this, TableName, IDColumn, ContractID);
+        }
+
+        string IUpdateable.Update()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("UPDATE " + TableName);
+
+            sql.Append("SET ");
+            sql.Append("ContractName = '" + ContractName + "', ");
+            sql.Append("ServiceLevel = '" + ServiceLevel + "', ");
+            sql.Append("OfferStartDate = '" + StartDate + "', ");
+            sql.AppendLine("OfferEndDate = '" + EndDate + "',");
+            sql.AppendLine("MonthlyFee = '" + MonthlyFee + "'");
+
+            sql.AppendLine("WHERE " + IDColumn + " = " + ContractID);
+
+            return sql.ToString();
+        }
+
+        string IInsertable.Insert()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("INSERT INTO " + TableName);
+
+            sql.Append("VALUES (");
+            sql.Append(ContractID + ", ");
+            sql.Append("'" + ContractName + "', ");
+            sql.Append("'" + ServiceLevel + "', ");
+            sql.Append("'" + StartDate + "', ");
+            sql.Append("'" + EndDate + "', ");
+            sql.Append("'" + MonthlyFee + "' ");
+            sql.AppendLine(");");
+
+            return sql.ToString();
+        }
+
+        #endregion
 
         public override bool Equals(object obj)
         {
