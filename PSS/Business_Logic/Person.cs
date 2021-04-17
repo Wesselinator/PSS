@@ -17,6 +17,7 @@ namespace PSS.Business_Logic
         public string LastName { get; set; }
         public string FullName { get => string.Format("{0} {1}", FirstName, LastName); }
         public DateTime BirthDay { get; set; }
+        public string BirthDayString { get => BirthDay.ToString(BirthDayFormat); }
         public string CellphoneNumber { get; set; }
         public string TellephoneNumber { get; set; }
         public string Email { get; set; }
@@ -70,7 +71,7 @@ namespace PSS.Business_Logic
 
             sql.Append("FirstName = '" + FirstName + "', ");
             sql.Append("LastName = '" + LastName + "', ");
-            sql.Append("BirthDay = '" + BirthDay.ToString(BirthDayFormat) + "', ");
+            sql.Append("BirthDay = '" + BirthDayString + "', ");
             sql.Append("CellphoneNumber = '" + CellphoneNumber + "', ");
             sql.Append("TellephoneNumber = '" + TellephoneNumber + "', ");
             sql.AppendLine("Email = '" + Email + "'");
@@ -90,7 +91,7 @@ namespace PSS.Business_Logic
             sql.Append(PersonID + ", ");
             sql.Append("'" + FirstName + "', ");
             sql.Append("'" + LastName + "', ");
-            sql.Append("'" + BirthDay.ToString(BirthDayFormat) + "', ");
+            sql.Append("'" + BirthDayString + "', ");
             sql.Append("'" + CellphoneNumber + "' ");
             sql.Append("'" + TellephoneNumber + "' ");
             sql.Append("'" + Email + "' ");

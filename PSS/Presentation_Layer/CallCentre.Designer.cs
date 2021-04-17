@@ -48,7 +48,7 @@ namespace PSS.Presentation_Layer
             this.lblName = new System.Windows.Forms.Label();
             this.lblNameTag = new System.Windows.Forms.Label();
             this.grbxProblem = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbxProblemType = new System.Windows.Forms.ComboBox();
             this.lblProblemTitleTag = new System.Windows.Forms.Label();
             this.txtProblemTitle = new System.Windows.Forms.TextBox();
             this.btnUpdateSR = new System.Windows.Forms.Button();
@@ -191,9 +191,9 @@ namespace PSS.Presentation_Layer
             this.lblBirthDay.AutoSize = true;
             this.lblBirthDay.Location = new System.Drawing.Point(295, 26);
             this.lblBirthDay.Name = "lblBirthDay";
-            this.lblBirthDay.Size = new System.Drawing.Size(65, 13);
+            this.lblBirthDay.Size = new System.Drawing.Size(61, 13);
             this.lblBirthDay.TabIndex = 5;
-            this.lblBirthDay.Text = "1999/01/01";
+            this.lblBirthDay.Text = "1999-01-01";
             // 
             // lblRegDateTag
             // 
@@ -248,7 +248,7 @@ namespace PSS.Presentation_Layer
             // 
             // grbxProblem
             // 
-            this.grbxProblem.Controls.Add(this.comboBox1);
+            this.grbxProblem.Controls.Add(this.cbxProblemType);
             this.grbxProblem.Controls.Add(this.lblProblemTitleTag);
             this.grbxProblem.Controls.Add(this.txtProblemTitle);
             this.grbxProblem.Controls.Add(this.btnUpdateSR);
@@ -260,20 +260,20 @@ namespace PSS.Presentation_Layer
             this.grbxProblem.TabStop = false;
             this.grbxProblem.Text = "Problem";
             // 
-            // comboBox1
+            // cbxProblemType
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cbxProblemType.FormattingEnabled = true;
+            this.cbxProblemType.Items.AddRange(new object[] {
             "Unknown Problem",
             "Business As Usual",
             "Straight Forward",
             "Irregular",
             "Strange",
             "Esoteric"});
-            this.comboBox1.Location = new System.Drawing.Point(624, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(128, 21);
-            this.comboBox1.TabIndex = 17;
+            this.cbxProblemType.Location = new System.Drawing.Point(624, 19);
+            this.cbxProblemType.Name = "cbxProblemType";
+            this.cbxProblemType.Size = new System.Drawing.Size(128, 21);
+            this.cbxProblemType.TabIndex = 17;
             // 
             // lblProblemTitleTag
             // 
@@ -421,6 +421,6 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Button btnServiceDept;
         private System.Windows.Forms.Label lblProblemTitleTag;
         private System.Windows.Forms.TextBox txtProblemTitle;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbxProblemType;
     }
 }

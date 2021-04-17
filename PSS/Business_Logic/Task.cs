@@ -8,7 +8,6 @@ namespace PSS.Business_Logic
 {
     public class Task : IModifyable
     {
-
         public int TaskID { get; private set; }
         public string Title { get; set; }
         public string Descripion { get; set; }
@@ -42,7 +41,7 @@ namespace PSS.Business_Logic
 
         public Task(DataRow row)
         {
-            this.TaskID = row.Field<int>("TicketID");
+            this.TaskID = row.Field<int>(IDColumn);
             this.Title = row.Field<string>("Title");
             this.Descripion = row.Field<string>("Descripion");
             this.Notes = row.Field<string>("Notes");
@@ -52,10 +51,9 @@ namespace PSS.Business_Logic
         }
 
         //P3
-        public static Task GetID(int ID)
-        {
-            return new Task(DataEngine.GetByID(TableName, IDColumn, ID));
-        }
+        public Task(int ID)
+                : this(DataEngine.GetByID(TableName, IDColumn, ID))
+        { }
 
         //P4
         public void Save()

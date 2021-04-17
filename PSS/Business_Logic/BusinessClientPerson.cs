@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    class RegisterFunctionality
+    public class BusinessClientPerson : IM
     {
-        public void RegisterClient()
-        {
-               //class not going to be used
-        }
     }
 }

@@ -10,7 +10,7 @@ namespace PSS.Business_Logic
 {
     public class Technician : Employee
     {
-        private string type, clientName, clientContactNum, requestDescription, clientAddress, notes;
+        private string type, clientName, clientContactNum, requestDescription, clientStreetAddress, clientCity, notes;
         private bool isBusy;
         private float payRate;
 
@@ -21,8 +21,9 @@ namespace PSS.Business_Logic
         public string ClientName { get => clientName; set => clientName = value; }
         public string ClientContactNum { get => clientContactNum; set => clientContactNum = value; }
         public string RequestDescription { get => requestDescription; set => requestDescription = value; }
-        public string ClientAddress { get => clientAddress; set => clientAddress = value; }
+        public string ClientStreetAddress { get => clientStreetAddress; set => clientStreetAddress = value; }
         public string Notes { get => notes; set => notes = value; }
+        public string ClientCity { get => clientCity; set => clientCity = value; }
 
         public Technician() : base()
         {
@@ -103,6 +104,18 @@ namespace PSS.Business_Logic
             this.LastName = row.Field<string>("LastName");
             this.Type = row.Field<string>("Speciality");
             this.payRate = row.Field<float>("PayRate");
+        }
+
+        //Constructor for technician form 
+        public Technician(int technicianID, string clientName, string clientContactNum, string requestDescription, string clientStreetAddress, string notes, string clientCity)
+        {
+            TechnicianID = technicianID;
+            ClientName = clientName;
+            ClientContactNum = clientContactNum;
+            RequestDescription = requestDescription;
+            ClientStreetAddress = clientStreetAddress;
+            Notes = notes;
+            ClientCity = clientCity;
         }
 
         public Technician getWork(int technicianID)

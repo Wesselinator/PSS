@@ -11,15 +11,11 @@ namespace PSS.Business_Logic
     class IndividualClient : Client, IModifyable
     {
         public override int ClientID { get => Person.PersonID; protected set => Person.PersonID = value; }
-        public IndividualClient(string businessName, string type, string status, string notes, Address address, Person person) : base(person.PersonID, type, status, notes, address, person)
-        {
-
-        }
+        public IndividualClient(string type, string status, string notes, Address address, Person person) : base(person.PersonID, type, status, notes, address, person)
+        {  }
 
         public IndividualClient() : base()
-        {
-
-        }
+        {  }
 
         #region DataBase
 

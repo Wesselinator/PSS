@@ -5,7 +5,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    class BusinessClient : Client, IModifyable
+    public class BusinessClient : Client, IModifyable
     {
         public string BusinessName { get; set; }
         public Person ContactPerson { get => Person; set => Person = value; }
@@ -63,7 +63,8 @@ namespace PSS.Business_Logic
             sql.Append("'" + Type + "', ");
             sql.Append("'" + Status + "', ");
             sql.Append("'" + Notes + "', ");
-            sql.Append(Address.AddressID);
+            sql.Append(Address.AddressID + ", ");
+            sql.Append(ContactPerson.PersonID);
             sql.AppendLine(");");
 
             return base.Insert(sql);
