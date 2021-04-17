@@ -70,7 +70,7 @@ namespace PSS.Presentation_Layer
 
             PopulateContracts();
 
-            //lblRegDate.Text = currentClient.RegistrationDate.ToString("yyyy/MM/dd");
+            lblBirthDay.Text = currentClient.Person.BirthDayString;
             lblCellphone.Text = currentClient.Person.CellphoneNumber;
             lblTelephone.Text = currentClient.Person.TellephoneNumber;
             lblEmail.Text = currentClient.Person.Email;
@@ -150,6 +150,7 @@ namespace PSS.Presentation_Layer
             {
                 currentRequest.Title = txtProblemTitle.Text;
                 currentRequest.Description = rtbProblem.Text;
+                currentRequest.Type = cbxProblemType.SelectedItem.ToString();
                 MessageBox.Show("Ticket Updated!", "Success!");
             }
         }
