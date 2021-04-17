@@ -14,8 +14,6 @@ namespace PSS.Business_Logic
         public string ServiceName { get; set; }
         public string ServiceDescription { get; set; }
 
-        private DataHandler dataHandler;
-
         private static readonly string TableName = "Service";
         private static readonly string IDColumn = "ServiceID";
 

@@ -6,22 +6,23 @@ using System.Data;
 namespace PSS.Data_Access
 {
     public static class DataHandler
-    {
-        private static SqlConnection conn = new SqlConnection(@"Server=.;Initial Catalog = PremierServiceSolutionsDB;Integrated Security = SSPI");
+    { 
+        private static readonly string connStr = @"Server=.;Initial Catalog=PremierServiceSolutionsDB;Integrated Security=SSPI";
 
         public static DataTable getDataTable(string Query)
         {
-            DataTable data = new DataTable(); //return
+            DataTable data = new DataTable();
 
-            using (conn)
-            {            
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
                 try
                 {
                     SqlDataAdapter adapter = new SqlDataAdapter(Query, conn);
                     adapter.Fill(data);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Console.WriteLine(e.StackTrace);
                     MessageBox.Show("Some error message");
                 }
             }
@@ -31,8 +32,7 @@ namespace PSS.Data_Access
 
         private static void executeNonQuery(string Query)//for insert, update and delete statements
         {
-
-            using(conn)
+            using(SqlConnection conn = new SqlConnection(connStr))
             {
                 SqlCommand command = new SqlCommand(Query, conn);
                 try
