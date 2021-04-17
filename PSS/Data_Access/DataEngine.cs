@@ -129,16 +129,16 @@ namespace PSS.Data_Access
 
         public static Technician GetWorkRequest(int technicianID)
         {
+            //Query is still a work in progress, currently only works for individual clients
             string query = " SELECT tt.TechnicianID, p.FirstName, c.CellNumber, sr.Description, a.Street, a.City, t.Notes" +
                            " FROM ServiceRequest sr" +
-                           " LEFT JOIN Task ts ON sr.ServiceRequestID = ts.ServiceRequestID" +
-                           " LEFT JOIN TechnicianTask tt ON ts.TaskID = tt.TaskID" +
-                           " LEFT JOIN Person p ON sr.ClientEntityID = p.PersonID" +
-                           " LEFT JOIN ContactInfo c ON p.ContactInfoID = c.ContactInfoID" +
-                           " LEFT JOIN IndividualClient ic ON p.PersonID = ic.IndividualClientID" +
-                           " LEFT JOIN Address a ON ic.AddressID = a.AddressID" +
-                           " WHERE tt.TechnicianID = " + technicianID ;
-            
+                           " JOIN Task ts ON sr.ServiceRequestID = ts.ServiceRequestID" +
+                           " JOIN TechnicianTask tt ON ts.TaskID = tt.TaskID" +
+                           " JOIN Person p ON sr.ClientEntityID = p.PersonID" +
+                           " JOIN ContactInfo c ON p.ContactInfoID = c.ContactInfoID" +
+                           " JOIN IndividualClient ic ON p.PersonID = ic.IndividualClientID" +
+                           " JOIN Address a ON ic.AddressID = a.AddressID" +
+                           " WHERE tt.TechnicianID = " + technicianID;
 
             DataHandler handler = new DataHandler();
 

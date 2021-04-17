@@ -106,7 +106,7 @@ namespace PSS.Business_Logic
             this.payRate = row.Field<float>("PayRate");
         }
 
-        //Constructor for technician form object
+        //Constructor for technician form 
         public Technician(int technicianID, string clientName, string clientContactNum, string requestDescription, string clientStreetAddress, string notes, string clientCity)
         {
             TechnicianID = technicianID;
