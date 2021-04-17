@@ -53,7 +53,38 @@ namespace PSS.Business_Logic
         //P4
         public void Save()
         {
-            DataEngine.UpdateORInsert(this, TableName, IDColumn, callInstanceID)
+            DataEngine.UpdateORInsert(this, TableName, IDColumn, callInstanceID);
+        }
+
+        string IUpdateable.Update()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("Update " + TableName);
+
+            sql.Append("SET ");
+            sql.Append("StartTIme = '" + startTime + "', ");
+            sql.Append("EndTime = '" + endTime + "', ");
+            sql.Append("Description = '" + subject + "', ");
+
+            sql.Append("WHERE " + IDColumn + " = " + callInstanceID);
+
+            return sql.ToString();
+        }
+
+        string IInsertable.Insert()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("INSERT INTO " + TableName);
+
+            sql.Append("VALUES (");
+            sql.Append(callInstanceID + ", ");
+            sql.Append("'" + startTime + ", ");
+            sql.Append("'" + endTime + ", ");
+            sql.Append("'" + subject + "' ");
+            sql.Append(");");
+
+
+            return sql.ToString();
         }
 
         #endregion 
