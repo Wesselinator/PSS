@@ -30,18 +30,61 @@ namespace PSS.Business_Logic
 
         }
 
-        public void RegisterClient(Client client)
+        public void RegisterIndividualClient(Person person, Address address, Client client)// order matters.
         {
-            string query = @"INSERT INTO ";
             Data_Access.DataHandler handler = new DataHandler();
-            handler.Insert(query);
+
+            string PersonQuery = $"INSERT INTO Person VALUES '({person.PersonID})', '({person.FirstName})', '({person.LastName})', '({person.BirthDay})', '({person.CellphoneNumber})', '({person.TellephoneNumber})', '({person.Email})'";
+            handler.Insert(PersonQuery);
+
+            string AddressQuery = $"INSERT INTO Address VALUES '({address.AddressID})', '({address.Street})', '({address.City})', '({address.PostalCode})', '({address.Province})'";
+            handler.Insert(AddressQuery);
+
+            string ClientQuery = $"INSERT INTO IndividualCLient VALUES '({person.PersonID})', '({client.Type})', '({client.Status})', '({client.Notes})', '({address.AddressID})'";
+            handler.Insert(ClientQuery);
         }
 
-        public void UpdateClient(Client client)
+        public void UpdateIndividualClient(Person person, Address address, Client client)
         {
-            string query = @"UPDATE ";
             Data_Access.DataHandler handler = new DataHandler();
-            handler.Update(query);
+
+            string PersonQuery = $"UPDATE Person SET PersonID = '({person.PersonID})', FirstName = '({person.FirstName})', LastName = '({person.LastName})', BirthDate = '({person.BirthDay})', CellPhoneNumber = '({person.CellphoneNumber})', Telephone = '({person.TellephoneNumber})', Email = '({person.Email})'";
+            handler.Update(PersonQuery);
+
+            string AddressQuery = $"UPDATE Address SET AddressID = '({address.AddressID})', Street = '({address.Street})', City = '({address.City})', PostalCode = '({address.PostalCode})', Province = '({address.Province})'";
+            handler.Update(AddressQuery);
+
+            string ClientQuery = $"UPDATE IndividualClient SET IndividualClientID = '({person.PersonID})', Type = '({client.Type})', Status = '({client.Status})', Notes = '({client.Notes})', AddressID = '({address.AddressID})'";
+            handler.Update(ClientQuery);
+        }
+
+        public void RegisterBusinessClient(Person person, Address address, BusinessClient businessclient)
+        {
+            Data_Access.DataHandler handler = new DataHandler();
+            
+            string PersonQuery = $"INSERT INTO Person VALUES '({person.PersonID})', '({person.FirstName})', '({person.LastName})', '({person.BirthDay})', '({person.CellphoneNumber})', '({person.TellephoneNumber})', '({person.Email})'";
+            handler.Insert(PersonQuery);
+
+            string AddressQuery = $"INSERT INTO Address VALUES '({address.Street})', '({address.City})', '({address.PostalCode})', '({address.Province})'";
+            handler.Insert(AddressQuery);
+
+            string ClientQuery = $"INSERT INTO BusinessCLient VALUES '({person.PersonID})', '({businessclient.BusinessName})', '({businessclient.Type})', '({businessclient.Status})', '({businessclient.Notes})', '({address.AddressID})', '({businessclient.ContactPerson})'";
+            handler.Insert(ClientQuery);
+        }
+
+        public void UpdateBusinessClient(Person person, Address address, BusinessClient businessclient)
+        {
+            Data_Access.DataHandler handler = new DataHandler();
+            
+            string PersonQuery = $"UPDATE Person SET PersonID = '({person.PersonID})', FirstName = '({person.FirstName})', LastName = '({person.LastName})', BirthDate = '({person.BirthDay})', CellPhoneNumber = '({person.CellphoneNumber})', Telephone = '({person.TellephoneNumber})', Email = '({person.Email})'";
+            handler.Update(PersonQuery);
+
+            string AddressQuery = $"UPDATE Address SET AddressID = '({address.AddressID})', Street = '({address.Street})', City = '({address.City})', PostalCode = '({address.PostalCode})', Province = '({address.Province})'";
+            handler.Update(AddressQuery);
+
+            string ClientQuery = $"UPDATE BusinessClient SET BusinessClientID = '({person.PersonID})', CompanyOrEntityName = '({businessclient.BusinessName})', Type = '({businessclient.Type})', Status = '({businessclient.Status})', Notes = '({businessclient.Notes})', AddressID = '({address.AddressID})', PrimaryContactPersonID = '({person.PersonID})'";
+            handler.Update(ClientQuery);
+
         }
 
         public bool AddClientContract(Client newClient)
