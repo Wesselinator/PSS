@@ -23,6 +23,13 @@ namespace PSS.Presentation_Layer
         {
             Technician technician = new Technician();
             technician = technician.getWork(int.Parse(txtTechnicianID.Text));
+
+            txtClientName.Text = technician.ClientName;
+            txtContactNumber.Text = technician.ClientContactNum;
+            txtRequestDetails.Text = technician.RequestDescription;
+            txtClientAddress.Text = technician.ClientStreetAddress;
+            txtClientCity.Text = technician.ClientCity;
+            redAdditionalNotes.Text = technician.Notes;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -33,11 +40,6 @@ namespace PSS.Presentation_Layer
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void btnUpdateStatus_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
