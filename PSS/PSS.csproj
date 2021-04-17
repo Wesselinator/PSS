@@ -56,12 +56,10 @@
     <Compile Include="Business_Logic\BusinessClientPeople.cs" />
     <Compile Include="Business_Logic\BusinessClientPerson.cs" />
     <Compile Include="Business_Logic\Call.cs" />
-    <Compile Include="Business_Logic\ClientPhoneSimulationFunctionality.cs" />
     <Compile Include="Business_Logic\Contract.cs" />
     <Compile Include="Business_Logic\Client.cs" />
     <Compile Include="Business_Logic\Employee.cs" />
     <Compile Include="Business_Logic\FollowUp.cs" />
-    <Compile Include="Business_Logic\JobFunctionality.cs" />
     <Compile Include="Business_Logic\IndividualClient.cs" />
     <Compile Include="Business_Logic\Person.cs" />
     <Compile Include="Business_Logic\Service.cs" />

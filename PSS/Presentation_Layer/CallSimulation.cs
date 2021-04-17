@@ -38,7 +38,7 @@ namespace PSS.Presentation_Layer
         {
             cbClientDropDown.DisplayMember = "CBXString";
 
-            cbClientDropDown.Items.AddRange(ClientPhoneSimulationFunctionality.GetClientList().ToArray());
+            //cbClientDropDown.Items.AddRange();
         }
     }
 }

@@ -264,7 +264,7 @@ GO
 INSERT INTO Service (ServiceID, ServiceName, ServiceDescription)
 	VALUES (1,'On Site Repairs','This Service involves calling out a specialized technician to fix an issue with a product on site'),
 		   (2,'Pickup Repairs','This Service involves fetching the product at the customer location and fixing it on PSS company grounds'),
-		   (3, 'Customer Phone Calls', 'This service determines the kind of calling support customers enjoy from the call centre'),
+		   (3,'Customer Phone Calls', 'This service determines the kind of calling support customers enjoy from the call centre'),
 		   (4,'Routine Phone Checkups','This service determines the frequency of routine checkups performed with customers over the phone'),
 		   (5,'Routine On Premise Checkups','This service determines the frequency of on-premise checkups performed at the product location'),
 		   (5,'Thin Clients Lease To Own','This service determines the details of leasing thin clients to own from PSS'),
@@ -274,7 +274,7 @@ INSERT INTO Service (ServiceID, ServiceName, ServiceDescription)
 		   (9,'Printers Lease To Own','This service determines the details of leasing printers to own from PSS')
 
 
-INSERT INTO Contract (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MontlyFee)
+INSERT INTO Contract (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MonthlyFee)
 	VALUES (1, 'Peasant''s Printing Necessities', 'Peasant', '2021/04/01', NULL, 36, 2500),
 		   (2, 'Commoner''s Basic Printing Needs', 'Commoner', '2021/04/01', NULL, 36, 4000),
 		   (3, 'Noble''s Premium Printing Needs','Noble','2021/04/01',NULL,36, 5500),
