@@ -11,7 +11,7 @@ namespace PSS.Business_Logic
     {
         private string department; 
         
-        public int AgentID { get => IdNumber; set => IdNumber = value; }
+        public int AgentID { get => PersonID; set => PersonID = value; }
         public string Department { get => department; set => department = value; }
 
         public Agent(int agentID, string department, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(agentID, firstName,lastName,cellphoneNumber,telephoneNumber,email,streetAddress,cityAddress,postalCode,province)
@@ -32,9 +32,16 @@ namespace PSS.Business_Logic
 
         public void RegisterClient(Client client)
         {
-            String query = @"INSERT INTO ";
+            string query = @"INSERT INTO ";
             Data_Access.DataHandler handler = new DataHandler();
             handler.Insert(query);
+        }
+
+        public void UpdateClient(Client client)
+        {
+            string query = @"UPDATE ";
+            Data_Access.DataHandler handler = new DataHandler();
+            handler.Update(query);
         }
 
         public bool AddClientContract(Client newClient)

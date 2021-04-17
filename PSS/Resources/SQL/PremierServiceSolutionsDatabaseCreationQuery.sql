@@ -89,7 +89,7 @@ ALTER TABLE ContactInformation
 ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL)
 
 
-CREATE TABLE Address
+CREATE TABLE [Address]
 (AddressID INT PRIMARY KEY,
  Street VARCHAR(50) NOT NULL,
  City VARCHAR(30) NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE Address
  Province VARCHAR(20) NOT NULL
 )
 
-CREATE TABLE Person
+CREATE TABLE [Person]
 (PersonID INT PRIMARY KEY,
  FirstName VARCHAR(50) NOT NULL,
  LastName VARCHAR(50) NOT NULL,
@@ -108,14 +108,14 @@ CREATE TABLE Person
 CREATE TABLE [User]
 (UserID INT PRIMARY KEY,
  UserName VARCHAR(50) NOT NULL,
- Password VARCHAR(50) NOT NULL,
- Role VARCHAR(50) NOT NULL
+ [Password] VARCHAR(50) NOT NULL,
+ [Role] VARCHAR(50) NOT NULL
 )
 
 CREATE TABLE IndividualClient
 (IndividualClientID INT REFERENCES Person(PersonID) PRIMARY KEY,
- Type VARCHAR(30) NOT NULL,
- Status VARCHAR(30) NOT NULL,
+ [Type] VARCHAR(30) NOT NULL,
+ [Status] VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
  AddressID INT NOT NULL REFERENCES Address(AddressID)
 )
@@ -123,8 +123,8 @@ CREATE TABLE IndividualClient
 CREATE TABLE BusinessClient
 (BusinessClientID INT PRIMARY KEY, --Can potentially use negative numbers for business clients or it can be determined Checking that their is not a conflict Person and BusinessClient 
  BusinessName VARCHAR(50),
- Type VARCHAR(30) NOT NULL,
- Status VARCHAR(30) NOT NULL,
+ [Type] VARCHAR(30) NOT NULL,
+ [Status] VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
  AddressID INT NOT NULL REFERENCES Address(AddressID)
 )
@@ -132,7 +132,7 @@ CREATE TABLE BusinessClient
 CREATE TABLE BusinessClientPerson
 (BusinessClientID INT REFERENCES BusinessClient(BusinessClientID),
  PersonID INT REFERENCES Person(PersonID),
- Role VARCHAR(50) NOT NULL,
+ [Role] VARCHAR(50) NOT NULL,
  IsPrimaryContact BIT NOT NULL,
  PRIMARY KEY(BusinessClientID,PersonID)
 )
@@ -210,7 +210,7 @@ CREATE TABLE Task
  TaskDescription VARCHAR(MAX) NOT NULL,
  TaskNotes VARCHAR(MAX),
  ServiceRequestID INT NOT NULL REFERENCES ServiceRequest(ServiceRequestID),
- AddressID INT NOT NULL REFERENCES Address(AddressID), --Add constaint to take business or indiviual client address as default
+ --AddressID INT NOT NULL REFERENCES Address(AddressID), --Add constaint to take business or indiviual client address as default
  DateProcessed DATETIME NOT NULL,
  IsFinished BIT NOT NULL DEFAULT 0
 )
@@ -232,7 +232,7 @@ CREATE TABLE TechnicianTaskFeedback
 (TechnicianTaskFeedbackID INT PRIMARY KEY,
  TimeArrived DATETIME NOT NULL,
  TimeDeparture DATETIME NOT NULL,
- Status VARCHAR(30) NOT NULL,
+ [Status] VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
  TechnicianTaskID INT NOT NULL REFERENCES TechnicianTask(TechnicianTaskID)
 )
@@ -244,7 +244,7 @@ CREATE TABLE CallInstance
 (CallInstanceID INT PRIMARY KEY,
  StartTime DATETIME NOT NULL,
  EndTime DATETIME NOT NULL,
- Description VARCHAR(120) NOT NULL
+ [Description] VARCHAR(120) NOT NULL
 )
 
 CREATE TABLE CallChangeAssociation

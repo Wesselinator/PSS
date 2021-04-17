@@ -65,6 +65,7 @@ namespace PSS.Presentation_Layer
             this.btnGetProgressReport.TabIndex = 2;
             this.btnGetProgressReport.Text = "Get progress raport";
             this.btnGetProgressReport.UseVisualStyleBackColor = true;
+            this.btnGetProgressReport.Click += new System.EventHandler(this.btnGetProgressReport_Click);
             // 
             // rtxtRaport
             // 
@@ -91,6 +92,7 @@ namespace PSS.Presentation_Layer
             this.btnExit.TabIndex = 5;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // pictureBox1
             // 
@@ -110,6 +112,7 @@ namespace PSS.Presentation_Layer
             this.btnCallClient.TabIndex = 7;
             this.btnCallClient.Text = "Call Client";
             this.btnCallClient.UseVisualStyleBackColor = true;
+            this.btnCallClient.Click += new System.EventHandler(this.btnCallClient_Click);
             // 
             // ClientFollowUp
             // 

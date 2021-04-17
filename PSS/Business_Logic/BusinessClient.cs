@@ -1,36 +1,74 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    class BusinessClient : Client
+    class BusinessClient : Client, IModifyable
     {
-        private string businessName;
-
-        public int BusinessID { get => IdNumber; set => IdNumber = value; }
-        public string BusinessName { get => businessName; set => businessName = value; }
-        public string ContactPersoneName { get => FirstName; set => FirstName = value; }
-        public string ContactPersonSurname { get => LastName; set => LastName = value; }
+        public string BusinessName { get; set; }
+        public Person ContactPerson { get => Person; set => Person = value; }
         
-        public BusinessClient(int businessID, DateTime registrationDate, string businessName, string contactPersoneName, string contactPersonSurname, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(businessID, registrationDate, contactPersoneName, contactPersonSurname, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
+        public BusinessClient(int businessID, string businessName, string type, string status, string notes, Address address, Person person) : base(businessID, type, status, notes, address, person)
         {
             BusinessName = businessName;
-            ContactPersoneName = contactPersoneName;
-            ContactPersonSurname = contactPersonSurname;
+        }
+        public BusinessClient() : base()
+        {  }
+
+        #region DataBase
+
+        private static readonly string TableName = "BusinessClient";
+        private static readonly string IDColumn = "BusinessClientID";
+
+        public BusinessClient(DataRow row) : base(row, "PrimaryContactPersonID")
+        {
+            BusinessName = row.Field<string>("BusinessName");
         }
 
-        public BusinessClient(int businessID, string businessName, string contactPersoneName, string contactPersonSurname, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(businessID, contactPersoneName, contactPersonSurname, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
+        //P3
+        public BusinessClient(int ID)
+        : this(DataEngine.GetByID(TableName, IDColumn, ID))
+        {  }
+
+        //P4
+        public override void Save()
         {
-            BusinessName = businessName;
-            ContactPersoneName = contactPersoneName;
-            ContactPersonSurname = contactPersonSurname;
+            Address.Save();
+            Person.Save();
+            DataEngine.UpdateORInsert(this, TableName, IDColumn, ClientID);
         }
 
-        public BusinessClient()
+        string IUpdateable.Update()
         {
+            StringBuilder sql = new StringBuilder();
+
+            sql.AppendLine("UPDATE " + TableName);
+            sql.Append("SET ");
+
+            sql.Append("BusinessName = '" + BusinessName + "',");
+
+            return base.Update(sql);
         }
+
+        string IInsertable.Insert()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("INSERT INTO " + TableName);
+
+            sql.Append("VALUES (");
+            sql.Append(ClientID + ", ");
+            sql.Append("'" + BusinessName + "', ");
+            sql.Append("'" + Type + "', ");
+            sql.Append("'" + Status + "', ");
+            sql.Append("'" + Notes + "', ");
+            sql.Append(Address.AddressID);
+            sql.AppendLine(");");
+
+            return base.Insert(sql);
+        }
+
+        #endregion
     }
 }

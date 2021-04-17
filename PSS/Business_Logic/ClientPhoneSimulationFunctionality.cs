@@ -8,10 +8,11 @@ using System.Data;
 
 namespace PSS.Business_Logic
 {
-    class ClientPhoneSimulationFunctionality
+    static class ClientPhoneSimulationFunctionality
     {
-        public List<Client> GetClientList()
+        public static List<Client> GetClientList()
         {
+            return DataEngine.GetAllClients();
             DataHandler handler = new DataHandler();
             List<Client> getClients = new List<Client>();
 
