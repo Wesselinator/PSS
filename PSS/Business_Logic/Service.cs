@@ -55,9 +55,8 @@ namespace PSS.Business_Logic
 
         public List<Service> GetServices()
         {
-            dataHandler = new DataHandler();
             List<Service> services = new List<Service>();
-            DataTable dt = dataHandler.getDataTable("SELECT * FROM Service");
+            DataTable dt = DataHandler.getDataTable("SELECT * FROM Service");
             foreach (DataRow service in dt.Rows)
             {
                 services.Add(new Service((int)service[0], (string)service[1], (string)service[2]));

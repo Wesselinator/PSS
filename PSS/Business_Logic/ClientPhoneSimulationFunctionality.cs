@@ -13,12 +13,11 @@ namespace PSS.Business_Logic
         public static List<Client> GetClientList()
         {
             return DataEngine.GetAllClients();
-            DataHandler handler = new DataHandler();
             List<Client> getClients = new List<Client>();
 
             string query = @"SELECT * FROM ";
 
-            DataTable dt = handler.getDataTable(query);
+            DataTable dt = DataHandler.getDataTable(query);
 
             //foreach (Client item in dt.TableName)
             //{
