@@ -41,6 +41,14 @@ namespace PSS.Presentation_Layer
             
             
             currentRequest = existingServiceRequest;
+            //if (existingTicket.Verify(client))
+            //{
+            //    return;
+            //    //throw
+            //}
+
+
+            currentTicket = existingTicket;
             currentClient = client;
 
             PopulateClientInfo();
@@ -99,10 +107,10 @@ namespace PSS.Presentation_Layer
             }
 
             rtbProblem.Clear();
-            foreach (var contract in currentClient.Contracts)
-            {
-                rtbProblem.AppendText(contract.ToFormatedString());
-            }
+            //foreach (var contract in currentClient.Contracts)
+            //{
+            //    rtbProblem.AppendText(contract.ToFormatedString());
+            //}
         }
 
         private void PopulateIndividualInfo(IndividualClient individualClient)

@@ -11,14 +11,14 @@ namespace PSS.Data_Access
 {
     public class DataHandler
     {
-        private SqlConnection conn = new SqlConnection(@"Data Source =. ;Initial Catalog = PremierServiceSolutionsDB ; Integrated Security = SSPI");
+        private SqlConnection conn;
         private SqlCommand command;
         private SqlDataAdapter adapter;
         private SqlDataReader reader;
 
         public DataHandler()
         {
-            
+            conn = new SqlConnection(@"Server=.;Initial Catalog = PremierServiceSolutionsDB;Integrated Security = SSPI");
         }
 
         //
@@ -37,19 +37,20 @@ namespace PSS.Data_Access
         {
             DataTable data = new DataTable();
 
-            using (conn)
-            {
-                command = new SqlCommand(Query, conn);
-                try
+            //using (conn)
+            // {
+            //command = new SqlCommand(Query, conn);
+            
+            try
                 {
-                    adapter = new SqlDataAdapter(command);
+                    adapter = new SqlDataAdapter(Query, conn);
                     adapter.Fill(data);
                 }
                 catch (Exception)
                 {
                     MessageBox.Show("Some error message");
                 }
-            }
+            //}
 
             return data;
         }

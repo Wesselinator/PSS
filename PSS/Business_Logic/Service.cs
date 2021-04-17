@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
@@ -11,6 +13,8 @@ namespace PSS.Business_Logic
         public int ServiceID { get; set; }
         public string ServiceName { get; set; }
         public string ServiceDescription { get; set; }
+
+        private DataHandler dataHandler; 
 
         public Service(int serviceID, string serviceName, string serviceDescription)
         {
@@ -40,5 +44,28 @@ namespace PSS.Business_Logic
         {
             return base.ToString();
         }
+
+        public Service()
+        {
+           
+        }
+
+        public List<Service> GetServices()
+        {
+            dataHandler = new DataHandler();
+            List<Service> services = new List<Service>();
+            DataTable dt = dataHandler.getDataTable("SELECT * FROM Service");
+            foreach (DataRow service in dt.Rows)
+            {
+                services.Add(new Service((int)service[0],(string)service[1],(string)service[2]));
+            }
+
+            return services;
+        }
+
+        //public override string ToString()
+        //{
+        //    return ServiceName;
+        //}
     }
 }
