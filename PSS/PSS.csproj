@@ -60,8 +60,6 @@
     <Compile Include="Business_Logic\Contract.cs" />
     <Compile Include="Business_Logic\Client.cs" />
     <Compile Include="Business_Logic\Employee.cs" />
-    <Compile Include="Business_Logic\example\AddressB.cs" />
-    <Compile Include="Business_Logic\example\AddressT.cs" />
     <Compile Include="Business_Logic\FollowUp.cs" />
     <Compile Include="Business_Logic\IndividualClient.cs" />
     <Compile Include="Business_Logic\Person.cs" />
@@ -74,7 +72,6 @@
     <Compile Include="Data_Access\IInsertable.cs" />
     <Compile Include="Data_Access\IModifyable.cs" />
     <Compile Include="Data_Access\IUpdateable.cs" />
-    <Compile Include="Data_Access\TableEngine.cs" />
     <Compile Include="Presentation_Layer\CallCentre.cs">
       <SubType>Form</SubType>
     </Compile>

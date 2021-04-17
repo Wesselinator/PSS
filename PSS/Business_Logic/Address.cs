@@ -2,10 +2,11 @@
 using System.Text;
 using System.Data;
 using PSS.Data_Access;
+using PSS.Business_Logic;
 
 namespace PSS.Business_Logic
 {
-    public class Address : IModifyable
+    public class Address : BaseSingleID
     {
         public int AddressID { get; set; }
         public string Street { get; set; }
@@ -13,10 +14,10 @@ namespace PSS.Business_Logic
         public string PostalCode { get; set; }
         public string Province { get; set; }
 
-        private static readonly string TableName = "Address";
-        private static readonly string IDColumn = "AddressID";
+        private static readonly string tableName = "Address";
+        private static readonly string idColumn = "AddressID";
 
-        public Address()// : base(TableName, IDColumn)
+        public Address() : base(tableName, idColumn)
         { }
         public Address(int addressID, string street, string city, string postalCode, string province) : this()
         {
@@ -26,13 +27,19 @@ namespace PSS.Business_Logic
             this.PostalCode = postalCode;
             this.Province = province;
         }
-        public Address(string street, string city, string postalCode, string province)
-                : this(DataEngine.GetNextID(TableName, IDColumn), street, city, postalCode, province)
-        { }
+
+        public Address(string street, string city, string postalCode, string province) : this() //no chainning  :(
+        {
+            this.AddressID = base.GetNextID();
+            this.Street = street;
+            this.City = city;
+            this.PostalCode = postalCode;
+            this.Province = province;
+        }
 
         #region DataBase
 
-        public Address(DataRow row) : this()
+        public override void FillFromRow(DataRow row)
         {
             this.AddressID = row.Field<int>(IDColumn);
             this.Street = row.Field<string>("Street");
@@ -42,23 +49,24 @@ namespace PSS.Business_Logic
         }
 
         //P3
-        public Address(int ID)
-                : this(DataEngine.GetByID(TableName, IDColumn, ID))
-        { }
+        public void FillWithID(int ID)
+        {
+            FillFromRow(GetByID(ID));
+        }
 
         //P4
         public void Save()
         {
-            DataEngine.UpdateORInsert(this, TableName, IDColumn, AddressID);
+            UpdateORInsert();
         }
 
-        string IUpdateable.Update()
+        protected override string Update()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("UPDATE " + TableName);
 
             sql.Append("SET ");
-            sql.Append("Street = '"+ Street +"', ");
+            sql.Append("Street = '" + Street + "', ");
             sql.Append("City = '" + City + "', ");
             sql.Append("PostalCode = '" + PostalCode + "', ");
             sql.AppendLine("Province = '" + Province + "'");
@@ -68,13 +76,13 @@ namespace PSS.Business_Logic
             return sql.ToString();
         }
 
-        string IInsertable.Insert()
+        protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("INSERT INTO " + TableName);
 
             sql.Append("VALUES (");
-            sql.Append(AddressID +", ");
+            sql.Append(AddressID + ", ");
             sql.Append("'" + Street + "', ");
             sql.Append("'" + City + "', ");
             sql.Append("'" + PostalCode + "', ");
