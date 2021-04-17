@@ -13,7 +13,12 @@ namespace PSS.Business_Logic
         public string PostalCode { get; set; }
         public string Province { get; set; }
 
-        public Address(int addressID, string street, string city, string postalCode, string province)
+        private static readonly string TableName = "Address";
+        private static readonly string IDColumn = "AddressID";
+
+        public Address()// : base(TableName, IDColumn)
+        { }
+        public Address(int addressID, string street, string city, string postalCode, string province) : this()
         {
             this.AddressID = addressID;
             this.Street = street;
@@ -24,15 +29,10 @@ namespace PSS.Business_Logic
         public Address(string street, string city, string postalCode, string province)
                 : this(DataEngine.GetNextID(TableName, IDColumn), street, city, postalCode, province)
         { }
-        public Address()
-        {  }
 
         #region DataBase
 
-        private static readonly string TableName = "Address";
-        private static readonly string IDColumn = "AddressID";
-
-        public Address(DataRow row)
+        public Address(DataRow row) : this()
         {
             this.AddressID = row.Field<int>(IDColumn);
             this.Street = row.Field<string>("Street");
