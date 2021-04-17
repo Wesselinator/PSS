@@ -97,6 +97,12 @@ namespace PSS.Data_Access
             string progressRapport = "";
             string iniSql = "SELECT sr.ServiceRequestID, " +
                                 " CASE " +
+                                    " WHEN t.TaskID IS NULL THEN 1 " +
+                                    " WHEN tt.TechnicianTaskID IS NULL THEN 2 " +
+                                    " WHEN ttf.TechnicianTaskFeedbackID IS NULL THEN 3" +
+                                    " WHEN ttf.TechnicianTaskFeedbackID IS NOT NULL THEN 4 "+
+                                " END 'ProgressLevel', " +
+                                " CASE " +
                                     " WHEN t.TaskID IS NULL THEN 'Service Request Received' " +
                                     " WHEN tt.TechnicianTaskID IS NULL THEN 'Service Request Processed Into Task' " +
                                     " WHEN ttf.TechnicianTaskFeedbackID IS NULL THEN 'Task Has Been Assigned To A Technian Who Is Due To Arrive At ' + tt.TimeToArrive " +
@@ -108,13 +114,15 @@ namespace PSS.Data_Access
                             " LEFT JOIN TechnicianTask tt " +
                             " ON t.TaskID = tt.TaskID " +
                             " LEFT JOIN TechnicianTaskFeedback ttf " +
-                            " ON tt.TechnicianTaskID = ttf.TechnicianTaskID ";
+                            " ON tt.TechnicianTaskID = ttf.TechnicianTaskID " +
+                            " WHERE sr.ServiceRequestID = " + ticketNo +
+                            " ORDER BY t.DateProcessed DESC, ProgressLevel DESC --lastest dateprocessed first ";
 
             DataHandler dh = new DataHandler();
 
             DataTable tbl = dh.getDataTable(iniSql);
 
-            //read string from table
+            progressRapport = (string)tbl.Rows[0][2];
 
             return progressRapport;
         }
