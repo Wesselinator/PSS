@@ -5,7 +5,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    class BusinessClient : Client, IModifyable
+    public class BusinessClient : Client, IModifyable
     {
         public string BusinessName { get; set; }
         public Person ContactPerson { get => Person; set => Person = value; }
