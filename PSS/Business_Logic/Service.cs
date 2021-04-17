@@ -8,13 +8,16 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    class Service
+    class Service : IModifyable
     {
         public int ServiceID { get; set; }
         public string ServiceName { get; set; }
         public string ServiceDescription { get; set; }
 
-        private DataHandler dataHandler; 
+        private DataHandler dataHandler;
+
+        private static readonly string TableName = "Service";
+        private static readonly string IDColumn = "ServiceID";
 
         public Service(int serviceID, string serviceName, string serviceDescription)
         {
@@ -45,10 +48,10 @@ namespace PSS.Business_Logic
             return base.ToString();
         }
 
-        public Service()
-        {
-           
-        }
+        public Service()// : base(TableName, IDColumn)
+        { }
+
+        #region DataBase
 
         public List<Service> GetServices()
         {
@@ -57,15 +60,59 @@ namespace PSS.Business_Logic
             DataTable dt = dataHandler.getDataTable("SELECT * FROM Service");
             foreach (DataRow service in dt.Rows)
             {
-                services.Add(new Service((int)service[0],(string)service[1],(string)service[2]));
+                services.Add(new Service((int)service[0], (string)service[1], (string)service[2]));
             }
 
             return services;
         }
 
-        //public override string ToString()
-        //{
-        //    return ServiceName;
-        //}
+        public Service(DataRow row) : this()
+        {
+            this.ServiceID = row.Field<int>(IDColumn);
+            this.ServiceName = row.Field<string>("ServiceName");
+            this.ServiceDescription = row.Field<string>("ServiceLevel");
+        }
+
+        //P3
+        public Service(int ID)
+                : this(DataEngine.GetByID(TableName, IDColumn, ID))
+        { }
+
+        //P4
+        public void Save()
+        {
+            DataEngine.UpdateORInsert(this, TableName, IDColumn, ServiceID);
+        }
+
+        string IUpdateable.Update()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("UPDATE " + TableName);
+
+            sql.Append("SET ");
+            sql.Append("ServiceName = '" + ServiceName + "', ");
+            sql.Append("ServiceDescription = '" + ServiceDescription + "'");
+
+            sql.AppendLine("WHERE " + IDColumn + " = " + ServiceID);
+
+            return sql.ToString();
+        }
+
+        string IInsertable.Insert()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("INSERT INTO " + TableName);
+
+            sql.Append("VALUES (");
+            sql.Append(ServiceID + ", ");
+            sql.Append("'" + ServiceName + "', ");
+            sql.Append("'" + ServiceDescription + "' ");
+            sql.AppendLine(");");
+
+            return sql.ToString();
+        }
+
+        #endregion
+
     }
 }
