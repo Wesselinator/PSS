@@ -63,9 +63,9 @@ namespace PSS.Business_Logic
             return services;
         }
 
-        public override string ToString()
-        {
-            return ServiceName;
-        }
+        //public override string ToString()
+        //{
+        //    return ServiceName;
+        //}
     }
 }
