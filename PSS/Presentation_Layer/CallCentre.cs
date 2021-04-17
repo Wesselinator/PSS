@@ -34,13 +34,13 @@ namespace PSS.Presentation_Layer
         public void Populate(Client client, Ticket existingTicket)
         {
 
-            if (existingTicket.Verify(client))
-            {
-                return;
-                //throw
-            }
-            
-            
+            //if (existingTicket.Verify(client))
+            //{
+            //    return;
+            //    //throw
+            //}
+
+
             currentTicket = existingTicket;
             currentClient = client;
 
@@ -71,13 +71,13 @@ namespace PSS.Presentation_Layer
 
             PopulateContracts();
 
-            lblRegDate.Text = currentClient.RegistrationDate.ToString("yyyy/MM/dd");
-            lblCellphone.Text = currentClient.Person.CellphoneNumber;
-            lblTelephone.Text = currentClient.Person.TellephoneNumber;
-            lblEmail.Text = currentClient.Person.Email;
+            //lblRegDate.Text = currentClient.RegistrationDate.ToString("yyyy/MM/dd");
+            //lblCellphone.Text = currentClient.Person.CellphoneNumber;
+            //lblTelephone.Text = currentClient.Person.TellephoneNumber;
+            //lblEmail.Text = currentClient.Person.Email;
 
-            lblAdress.Text = currentClient.Person.FullAddress;
-            lblPostal.Text = currentClient.Person.PostalCode;
+            //lblAdress.Text = currentClient.Person.FullAddress;
+            //lblPostal.Text = currentClient.Person.PostalCode;
 
 
             if (currentClient is IndividualClient)
@@ -100,24 +100,24 @@ namespace PSS.Presentation_Layer
             }
 
             rtbProblem.Clear();
-            foreach (var contract in currentClient.Contracts)
-            {
-                rtbProblem.AppendText(contract.ToFormatedString());
-            }
+            //foreach (var contract in currentClient.Contracts)
+            //{
+            //    rtbProblem.AppendText(contract.ToFormatedString());
+            //}
         }
 
         private void PopulateIndividualInfo(IndividualClient individualClient)
         {
             lblNameTag.Text = "Name: ";
             lblBusinessName.Text = "N/A";
-            lblName.Text = individualClient.ClientName;
+            //lblName.Text = individualClient.ClientName;
         }
 
         private void PopulateBusinessInfo(BusinessClient businessClient)
         {
             lblNameTag.Text = "Contact Person: ";
             lblBusinessName.Text = businessClient.BusinessName;
-            lblName.Text = businessClient.ContactPersonFullName;
+            //lblName.Text = businessClient.ContactPersonFullName;
         }
 
         #endregion

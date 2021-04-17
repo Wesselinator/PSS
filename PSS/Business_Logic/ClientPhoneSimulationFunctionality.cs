@@ -19,10 +19,10 @@ namespace PSS.Business_Logic
 
             DataTable dt = handler.getDataTable(query);
 
-            foreach (Client item in dt.TableName)
-            {
-                //not complete
-            }
+            //foreach (Client item in dt.TableName)
+            //{
+            //    //not complete
+            //}
 
             return getClients;
         }

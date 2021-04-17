@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>PSS.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -100,6 +103,12 @@
     <Compile Include="Presentation_Layer\Technician.Designer.cs">
       <DependentUpon>Technician.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentation_Layer\TestGetters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation_Layer\TestGetters.Designer.cs">
+      <DependentUpon>TestGetters.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Presentation_Layer\CallCentre.resx">
@@ -119,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation_Layer\Technician.resx">
       <DependentUpon>Technician.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation_Layer\TestGetters.resx">
+      <DependentUpon>TestGetters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

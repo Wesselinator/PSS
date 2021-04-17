@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PSS.Business_Logic
 {
-    class Ticket
+    public class Ticket
     {
         private int ticketID;
         private int clientID;
