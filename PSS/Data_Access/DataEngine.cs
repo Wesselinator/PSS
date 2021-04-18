@@ -154,31 +154,31 @@ namespace PSS.Data_Access
             return progressRapport;
         }
 
-        public static Technician GetWorkRequest(int technicianID)
-        {
-            //Query is still a work in progress, currently only works for individual clients
-            //string query = " SELECT tt.TechnicianID, p.FirstName, c.CellNumber, sr.Description, a.Street, a.City, t.Notes" +
-            //               " FROM ServiceRequest sr" +
-            //               " JOIN Task ts ON sr.ServiceRequestID = ts.ServiceRequestID" +
-            //               " JOIN TechnicianTask tt ON ts.TaskID = tt.TaskID" +
-            //               " JOIN Person p ON sr.ClientEntityID = p.PersonID" +
-            //               " JOIN ContactInfo c ON p.ContactInfoID = c.ContactInfoID" +
-            //               " JOIN IndividualClient ic ON p.PersonID = ic.IndividualClientID" +
-            //               " JOIN Address a ON ic.AddressID = a.AddressID" +
-            //               " WHERE tt.TechnicianID = " + technicianID;
+        //public static Technician GetWorkRequest(int technicianID)
+        //{
+        //    //Query is still a work in progress, currently only works for individual clients
+        //    string query = " SELECT tt.TechnicianID, p.FirstName, c.CellNumber, sr.Description, a.Street, a.City, t.Notes" +
+        //                   " FROM ServiceRequest sr" +
+        //                   " JOIN Task ts ON sr.ServiceRequestID = ts.ServiceRequestID" +
+        //                   " JOIN TechnicianTask tt ON ts.TaskID = tt.TaskID" +
+        //                   " JOIN Person p ON sr.ClientEntityID = p.PersonID" +
+        //                   " JOIN ContactInfo c ON p.ContactInfoID = c.ContactInfoID" +
+        //                   " JOIN IndividualClient ic ON p.PersonID = ic.IndividualClientID" +
+        //                   " JOIN Address a ON ic.AddressID = a.AddressID" +
+        //                   " WHERE tt.TechnicianID = " + technicianID;
 
-            //DataTable tbl = DataHandler.getDataTable(query);
+        //    DataTable tbl = DataHandler.getDataTable(query);
 
-            //Technician teccy = new Technician();
+        //    Technician teccy = new Technician();
 
-            //teccy.ClientName = (string)tbl.Rows[0][1];
-            //teccy.ClientContactNum = (string)tbl.Rows[0][2];
-            //teccy.RequestDescription = (string)tbl.Rows[0][3];
-            //teccy.ClientStreetAddress = (string)tbl.Rows[0][4];
-            //teccy.ClientCity = (string)tbl.Rows[0][5];
-            //teccy.Notes = (string)tbl.Rows[0][6];
+        //    teccy.ClientName = (string)tbl.Rows[0][1];
+        //    teccy.ClientContactNum = (string)tbl.Rows[0][2];
+        //    teccy.RequestDescription = (string)tbl.Rows[0][3];
+        //    teccy.ClientStreetAddress = (string)tbl.Rows[0][4];
+        //    teccy.ClientCity = (string)tbl.Rows[0][5];
+        //    teccy.Notes = (string)tbl.Rows[0][6];
 
-            //return teccy;
-        }
+        //    return teccy;
+        //}
     }
 }
