@@ -14,8 +14,6 @@ namespace PSS.Business_Logic
         public string ServiceName { get; set; }
         public string ServiceDescription { get; set; }
 
-        private DataHandler dataHandler;
-
         private static readonly string TableName = "Service";
         private static readonly string IDColumn = "ServiceID";
 
@@ -55,9 +53,8 @@ namespace PSS.Business_Logic
 
         public List<Service> GetServices()
         {
-            dataHandler = new DataHandler();
             List<Service> services = new List<Service>();
-            DataTable dt = dataHandler.getDataTable("SELECT * FROM Service");
+            DataTable dt = DataHandler.getDataTable("SELECT * FROM Service");
             foreach (DataRow service in dt.Rows)
             {
                 services.Add(new Service((int)service[0], (string)service[1], (string)service[2]));

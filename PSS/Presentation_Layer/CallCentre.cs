@@ -38,17 +38,9 @@ namespace PSS.Presentation_Layer
                 return;
                 //throw
             }
-            
-            
+
+
             currentRequest = existingServiceRequest;
-            //if (existingTicket.Verify(client))
-            //{
-            //    return;
-            //    //throw
-            //}
-
-
-            currentTicket = existingTicket;
             currentClient = client;
 
             PopulateClientInfo();

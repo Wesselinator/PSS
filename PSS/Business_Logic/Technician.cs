@@ -8,13 +8,13 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public class Technician : Employee
+    public class Technician// : Employee
     {
         private string type, clientName, clientContactNum, requestDescription, clientStreetAddress, clientCity, notes;
         private bool isBusy;
         private float payRate;
 
-        public int TechnicianID { get => PersonID; set => PersonID = value; }
+        public int TechnicianID { get; set; }
         public string Type { get => type; set => type = value; }
         public bool IsBusy { get => isBusy; set => isBusy = value; }
         public float PayRate { get => payRate; set => payRate = value; }
@@ -36,7 +36,7 @@ namespace PSS.Business_Logic
             this.IsBusy = isBusy;
         }
 
-        public Technician(int technicianID, string type, bool isBusy, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province) : base(technicianID, firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
+        public Technician(int technicianID, string type, bool isBusy, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province)// : base(technicianID, firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
         {
             this.Type = type;
             this.IsBusy = isBusy;
@@ -52,14 +52,6 @@ namespace PSS.Business_Logic
         {
             return obj is Technician technician &&
                    base.Equals(obj) &&
-                   PersonID == technician.PersonID &&
-                   FirstName == technician.FirstName &&
-                   LastName == technician.LastName &&
-                   FullName == technician.FullName &&
-                   CellphoneNumber == technician.CellphoneNumber &&
-                   TellephoneNumber == technician.TellephoneNumber &&
-                   Email == technician.Email &&
-                   EmployeeID == technician.EmployeeID &&
                    type == technician.type &&
                    isBusy == technician.isBusy &&
                    TechnicianID == technician.TechnicianID &&
@@ -71,14 +63,6 @@ namespace PSS.Business_Logic
         {
             int hashCode = 1042436649;
             hashCode = hashCode * -1521134295 + base.GetHashCode();
-            hashCode = hashCode * -1521134295 + PersonID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FirstName);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(LastName);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FullName);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CellphoneNumber);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TellephoneNumber);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
-            hashCode = hashCode * -1521134295 + EmployeeID.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(type);
             hashCode = hashCode * -1521134295 + isBusy.GetHashCode();
             hashCode = hashCode * -1521134295 + TechnicianID.GetHashCode();
@@ -100,8 +84,8 @@ namespace PSS.Business_Logic
         public Technician(DataRow row)
         {
             this.TechnicianID = row.Field<int>("TechnicianID");
-            this.FirstName = row.Field<string>("FirstName");
-            this.LastName = row.Field<string>("LastName");
+            //this.FirstName = row.Field<string>("FirstName");
+            //this.LastName = row.Field<string>("LastName");
             this.Type = row.Field<string>("Speciality");
             this.payRate = row.Field<float>("PayRate");
         }

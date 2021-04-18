@@ -1,66 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Data;
 
 namespace PSS.Data_Access
 {
-    public class DataHandler
-    {
-        private SqlConnection conn;
-        private SqlCommand command;
-        private SqlDataAdapter adapter;
-        private SqlDataReader reader;
+    public static class DataHandler
+    { 
+        private static readonly string connStr = @"Server=.;Initial Catalog=PremierServiceSolutionsDB;Integrated Security=SSPI";
 
-        public DataHandler()
-        {
-            conn = new SqlConnection(@"Server=.;Initial Catalog = PremierServiceSolutionsDB;Integrated Security = SSPI");
-        }
-
-        //
-        //=====================================
-        //
-        public SqlConnection Conn { get => conn;}
-        public SqlCommand Command { get => command;}
-        public SqlDataAdapter Adapter { get => adapter;}
-        public SqlDataReader Reader { get => reader;}
-        //
-        //=====================================
-        // 
-
-
-        public DataTable getDataTable(string Query)
+        public static DataTable getDataTable(string Query)
         {
             DataTable data = new DataTable();
 
-            //using (conn)
-            // {
-            //command = new SqlCommand(Query, conn);
-            
-            try
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                try
                 {
-                    adapter = new SqlDataAdapter(Query, conn);
+                    SqlDataAdapter adapter = new SqlDataAdapter(Query, conn);
                     adapter.Fill(data);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Console.WriteLine(e.StackTrace);
                     MessageBox.Show("Some error message");
                 }
-            //}
+            }
 
             return data;
         }
 
-        private void executeNonQuery(string Query)//for insert, update and delete statements
+        private static void executeNonQuery(string Query)//for insert, update and delete statements
         {
-
-            using(conn)
+            using(SqlConnection conn = new SqlConnection(connStr))
             {
-                command = new SqlCommand(Query, conn);
+                SqlCommand command = new SqlCommand(Query, conn);
                 try
                 {
                     command.ExecuteNonQuery();
@@ -72,17 +46,17 @@ namespace PSS.Data_Access
             }
         }
 
-        public void Insert(string Query)
+        public static void Insert(string Query)
         {
             executeNonQuery(Query);
         }
 
-        public void Update(string Query)
+        public static void Update(string Query)
         {
             executeNonQuery(Query);
         }
 
-        public void Delete(string Query)
+        public static void Delete(string Query)
         {
             executeNonQuery(Query);
         }

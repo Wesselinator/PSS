@@ -51,7 +51,8 @@
   <ItemGroup>
     <Compile Include="Business_Logic\Address.cs" />
     <Compile Include="Business_Logic\Agent.cs" />
-    <Compile Include="Business_Logic\BaseData.cs" />
+    <Compile Include="Business_Logic\BaseMultiID.cs" />
+    <Compile Include="Business_Logic\BaseSingleID.cs" />
     <Compile Include="Business_Logic\BusinessClient.cs" />
     <Compile Include="Business_Logic\BusinessClientPeople.cs" />
     <Compile Include="Business_Logic\BusinessClientPerson.cs" />

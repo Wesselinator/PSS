@@ -36,8 +36,7 @@ namespace PSS.Data_Access
         public static DataRow GetByID(string TableName, string IDColumn, int ID)
         {
             string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
-            DataHandler dh = new DataHandler();
-            DataTable dt = dh.getDataTable(sql);
+            DataTable dt = DataHandler.getDataTable(sql);
             if (dt.Rows.Count == 0)
             {
                 //TODO: Throw Exception
@@ -60,36 +59,32 @@ namespace PSS.Data_Access
             }
             */
             string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
-            DataHandler dh = new DataHandler();
-            DataTable dt = dh.getDataTable(sql);
+            DataTable dt = DataHandler.getDataTable(sql);
             return dt.Rows.Count != 0;
         }
 
         public static int GetNextID(string TableName, string IDColumn)
         {
             string sql = string.Format("SELECT * FROM {0} GROUP BY {1} DESC", TableName, IDColumn);
-            DataHandler dh = new DataHandler();
-            return dh.getDataTable(sql).Rows[0].Field<int>(IDColumn) + 1;
+            return DataHandler.getDataTable(sql).Rows[0].Field<int>(IDColumn) + 1;
         }
 
         public static void UpdateORInsert(IModifyable data, string TableName, string IDColumn, int ID)
         {
-            DataHandler dh = new DataHandler();
             if (IDExists(TableName, IDColumn, ID))
             {
-                dh.Update(data.Update());
+                DataHandler.Update(data.Update());
             }
             else
             {
-                dh.Insert(data.Insert());
+                DataHandler.Insert(data.Insert());
             }
         }
 
         public static DataTable GetAll(string TableName)
         {
-            DataHandler dh = new DataHandler();
             string sql = string.Format("SELECT * FROM {0}", TableName);
-            return dh.getDataTable(sql);
+            return DataHandler.getDataTable(sql);
         }
 
         public static string GetProgressRapport(string ticketNo)
@@ -118,9 +113,7 @@ namespace PSS.Data_Access
                             " WHERE sr.ServiceRequestID = " + ticketNo +
                             " ORDER BY t.DateProcessed DESC, ProgressLevel DESC --lastest dateprocessed first ";
 
-            DataHandler dh = new DataHandler();
-
-            DataTable tbl = dh.getDataTable(iniSql);
+            DataTable tbl = DataHandler.getDataTable(iniSql);
 
             progressRapport = (string)tbl.Rows[0][2];
 
@@ -140,9 +133,7 @@ namespace PSS.Data_Access
                            " JOIN Address a ON ic.AddressID = a.AddressID" +
                            " WHERE tt.TechnicianID = " + technicianID;
 
-            DataHandler handler = new DataHandler();
-
-            DataTable tbl = handler.getDataTable(query);
+            DataTable tbl = DataHandler.getDataTable(query);
 
             Technician teccy = new Technician();
 
