@@ -72,8 +72,8 @@ ADD CONSTRAINT CK_OfferEndDateAfterStartDate CHECK(OfferEndDate>=OfferStartDate)
 GO
 
 CREATE TABLE ServiceLevelAgreement
-(ServiceID INT NOT NULL UNIQUE,
- ContractID INT NOT NULL UNIQUE,
+(ServiceID INT NOT NULL,
+ ContractID INT NOT NULL,
  PerformanceExpectation VARCHAR(MAX) NOT NULL
 )
 
@@ -162,8 +162,8 @@ ADD CONSTRAINT FK_BusinessClient#ContactPerson FOREIGN KEY (PrimaryContactPerson
 GO
 
 CREATE TABLE BusinessClientPerson
-(BusinessClientID INT NOT NULL UNIQUE,
- PersonID INT NOT NULL UNIQUE,
+(BusinessClientID INT NOT NULL,
+ PersonID INT NOT NULL,
  [Role] VARCHAR(50) NOT NULL
 )
 
@@ -224,7 +224,7 @@ CREATE TABLE ServiceRequest
 )
 
 ALTER TABLE ServiceRequest
-ADD CONSTRAINT MFK_ServiceRequest#BusinessClients FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID),
+ADD CONSTRAINT MFK_ServiceRequest#IndividualClient FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID),
 	CONSTRAINT MFK_ServiceRequest#BusinessClients FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID)
 
 
@@ -242,7 +242,7 @@ CREATE TABLE Task
 )
 
 ALTER TABLE Task
-ADD CONSTRAINT FK_Task#ServiceRequest FOREIGN KEY (ServiceRequestID) REFERENCES ServiceRequest(ServiceRequestID)
+ADD CONSTRAINT FK_Task#ServiceRequest FOREIGN KEY (ServiceRequestID) REFERENCES ServiceRequest(ServiceRequestID);
 
 GO
 
@@ -276,11 +276,11 @@ CREATE TABLE TechnicianTaskFeedback
  TimeDeparture DATETIME NOT NULL,
  [Status] VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
- TechnicianTaskID INT NOT NULL REFERENCES TechnicianTask(TechnicianTaskID)
+ TechnicianTaskID INT NOT NULL
 )
 
 ALTER TABLE TechnicianTaskFeedback
-ADD CONSTRAINT FK_TechnicianTaskFeedback#Person FOREIGN KEY (TechnicianID) REFERENCES Technician(TechnicianID)
+ADD CONSTRAINT FK_TechnicianTaskFeedback#Person FOREIGN KEY (TechnicianTaskID) REFERENCES TechnicianTask(TechnicianTaskID);
 
 GO
 --The following portion of the script is optional at this point
@@ -302,7 +302,7 @@ CREATE TABLE CallChangeAssociation
  TableRecordID VARCHAR(MAX) NOT NULL
 )
 
-ALTER TABLE TechnicianTaskFeedback
+ALTER TABLE CallChangeAssociation
 ADD CONSTRAINT FK_CallChangeAssociation#CallInstance FOREIGN KEY (CallInstanceID) REFERENCES CallInstance(CallInstanceID)
 
 GO
