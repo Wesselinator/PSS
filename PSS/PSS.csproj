@@ -71,9 +71,6 @@
     <Compile Include="Business_Logic\Task.cs" />
     <Compile Include="Data_Access\DataEngine.cs" />
     <Compile Include="Data_Access\DataHandler.cs" />
-    <Compile Include="Data_Access\IInsertable.cs" />
-    <Compile Include="Data_Access\IModifyable.cs" />
-    <Compile Include="Data_Access\IUpdateable.cs" />
     <Compile Include="Presentation_Layer\CallCentre.cs">
       <SubType>Form</SubType>
     </Compile>
