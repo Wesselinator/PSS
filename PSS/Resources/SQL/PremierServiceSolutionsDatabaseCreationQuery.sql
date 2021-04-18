@@ -53,6 +53,7 @@ CREATE TABLE [Service]
  ServiceDescription VARCHAR(MAX) NOT NULL
 )
 
+GO
 
 CREATE TABLE [Contract]
 (ContractID INT PRIMARY KEY,
@@ -60,14 +61,15 @@ CREATE TABLE [Contract]
  ServiceLevel VARCHAR(15) NOT NULL,
  OfferStartDate DATETIME NOT NULL,
  OfferEndDate DATETIME,
- ContractDurationInMonths INT NOT NULL CHECK(ContractDurationInMonths>0),
+ ContractDurationInMonths INT NOT NULL,
  MonthlyFee MONEY NOT NULL
 )
 
-GO
-
 ALTER TABLE [Contract]
-ADD CONSTRAINT CK_OfferEndDateAfterStartDate CHECK(OfferEndDate>=OfferStartDate)
+ADD CONSTRAINT CK_OfferEndDateAfterStartDate CHECK(OfferEndDate>=OfferStartDate),
+	CONSTRAINT CK_NoNegativeDates CHECK(ContractDurationInMonths>0);
+
+GO
 
 CREATE TABLE ServiceLevelAgreement
 (ServiceID INT REFERENCES Service(ServiceID),
@@ -75,7 +77,7 @@ CREATE TABLE ServiceLevelAgreement
  PerformanceExpectation VARCHAR(MAX) NOT NULL,
  PRIMARY KEY(ServiceID,ContractID)
 )
-
+--GO
 --CREATE TABLE ContactInformation
 --(ContactInformationID INT PRIMARY KEY,
  --CellPhoneNumber VARCHAR(12),
@@ -83,11 +85,11 @@ CREATE TABLE ServiceLevelAgreement
  --Email VARCHAR(320)
 --)
 
-GO
 
 --ALTER TABLE ContactInformation
 --ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL)
 
+GO
 
 CREATE TABLE [Address]
 (AddressID INT PRIMARY KEY,
@@ -96,6 +98,8 @@ CREATE TABLE [Address]
  PostalCode CHAR(4),
  Province VARCHAR(20) NOT NULL
  )
+
+ GO
 
 CREATE TABLE [Person]
 (PersonID INT PRIMARY KEY,
@@ -110,12 +114,16 @@ CREATE TABLE [Person]
 ALTER TABLE Person
 ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL)
 
+GO
+
 CREATE TABLE [User]
 (UserID INT PRIMARY KEY,
  UserName VARCHAR(50) NOT NULL,
  [Password] VARCHAR(50) NOT NULL,
  [Role] VARCHAR(50) NOT NULL
 )
+
+GO
 
 CREATE TABLE IndividualClient
 (IndividualClientID INT REFERENCES Person(PersonID) PRIMARY KEY,
@@ -125,22 +133,28 @@ CREATE TABLE IndividualClient
  AddressID INT NOT NULL REFERENCES Address(AddressID)
 )
 
+GO
+
 CREATE TABLE BusinessClient
 (BusinessClientID INT PRIMARY KEY, --Can potentially use negative numbers for business clients or it can be determined Checking that their is not a conflict Person and BusinessClient 
  BusinessName VARCHAR(50),
  [Type] VARCHAR(30) NOT NULL,
  [Status] VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
+ PrimaryContactPersonID INT NOT NULL REFERENCES Person(PersonID),
  AddressID INT NOT NULL REFERENCES Address(AddressID)
 )
+
+GO
 
 CREATE TABLE BusinessClientPerson
 (BusinessClientID INT REFERENCES BusinessClient(BusinessClientID),
  PersonID INT REFERENCES Person(PersonID),
  [Role] VARCHAR(50) NOT NULL,
- IsPrimaryContact BIT NOT NULL,
  PRIMARY KEY(BusinessClientID,PersonID)
 )
+
+GO
 
 CREATE TABLE ClientEntityContract
 (ContractID INT REFERENCES Contract(ContractID),
@@ -149,15 +163,11 @@ CREATE TABLE ClientEntityContract
  PRIMARY KEY(ContractID,ClientEntityID,EffectiveDate)
 )
 
-GO
-
 ALTER TABLE ClientEntityContract
-ADD FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID)
+ADD CONSTRAINT MFK_CECtoIndividualClients FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID),
+    CONSTRAINT MFK_CECtoBusinessClients FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID);
 
 GO
-
-ALTER TABLE ClientEntityContract
-ADD FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID)
 
 CREATE TABLE FollowUpReport
 (FollowUpReportID INT PRIMARY KEY,
@@ -168,15 +178,9 @@ CREATE TABLE FollowUpReport
  ClientEntityID INT NOT NULL
 )
 
-GO
-
 ALTER TABLE FollowUpReport
-ADD FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID)
-
-GO
-
-ALTER TABLE FollowUpReport
-ADD FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID)
+ADD FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID),
+	FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID)
 
 GO
 
@@ -196,15 +200,9 @@ CREATE TABLE ServiceRequest
  ClientEntityID INT NOT NULL
 )
 
-GO
-
 ALTER TABLE ServiceRequest
-ADD FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID)
-
-GO
-
-ALTER TABLE ServiceRequest
-ADD FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID)
+ADD FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID),
+	FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID)
 
 GO
 
@@ -220,11 +218,15 @@ CREATE TABLE Task
  IsFinished BIT NOT NULL DEFAULT 0
 )
 
+GO
+
 CREATE TABLE Technician
 (TechnicianID INT REFERENCES Person(PersonID) PRIMARY KEY,
  Speciality VARCHAR(30) NOT NULL,
  PayRate MONEY NOT NULL
 )
+
+GO
 
 CREATE TABLE TechnicianTask
 (TechnicianTaskID INT PRIMARY KEY,
@@ -232,6 +234,8 @@ CREATE TABLE TechnicianTask
  TaskID INT NOT NULL REFERENCES Task(TaskID),
  TimeToArrive DATETIME NOT NULL
 )
+
+GO
 
 CREATE TABLE TechnicianTaskFeedback
 (TechnicianTaskFeedbackID INT PRIMARY KEY,
@@ -252,6 +256,8 @@ CREATE TABLE CallInstance
  [Description] VARCHAR(120) NOT NULL
 )
 
+GO
+
 CREATE TABLE CallChangeAssociation
 (CallChangeAssociationID INT PRIMARY KEY,
  CallInstanceID INT NOT NULL REFERENCES CallInstance(CallInstanceID),
@@ -260,6 +266,8 @@ CREATE TABLE CallChangeAssociation
 )
 
 GO
+
+--SAMPLE DATA START
 
 INSERT INTO Service (ServiceID, ServiceName, ServiceDescription)
 	VALUES (1,'On Site Repairs','This Service involves calling out a specialized technician to fix an issue with a product on the customer''s site'),
@@ -273,10 +281,10 @@ INSERT INTO Service (ServiceID, ServiceName, ServiceDescription)
 		   (9,'Desktop Computers Lease To Own','This service determines the details of leasing desktop computers to own from PSS'),
 		   (10,'Servers Lease To Own','This service determines the details of leasing server computers to own from PSS'),
 		   (11,'Printers Lease To Own','This service determines the details of leasing printers to own from PSS')
-		   
 
+GO
 
-INSERT INTO Contract (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MontlyFee)
+INSERT INTO Contract (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MonthlyFee)
 	VALUES (1, 'Printing Necessities', 'Peasant', '2021/04/01', NULL, 36, 400),
 		   (2, 'Basic Printing', 'Commoner', '2021/04/01', NULL, 36, 600),
 		   (3, 'Premium Printing','Noble','2021/04/01',NULL,36, 900),
@@ -291,6 +299,8 @@ INSERT INTO Contract (ContractID, ContractName, ServiceLevel, OfferStartDate, Of
 		   (12, 'Maxi Office Combo','Noble','2021/04/01',NULL,36,850),
 		   (13, 'Giant Office Combo','Feudal lord','2021/04/01',NULL,48,1200),
 		   (14, 'Garsfontein High School Custom','Noble','2021/04/01',NULL,48,14200)
+
+GO
 
 INSERT INTO ServiceLevelAgreement (ServiceID, ContractID, PerformanceExpectation)
 	VALUES (11, 1, '1x Heavy Duty Inkjet Printer valued at R 10 000 of availiable brands HP, CANON or PIXMA , Capable of printing 50 pages per minute'),
@@ -307,7 +317,7 @@ INSERT INTO ServiceLevelAgreement (ServiceID, ContractID, PerformanceExpectation
 		   
 		   (11, 3, '1x Heavy Duty Laser Printer valued at R 25 000 of availiable brands HP, CANON or EPSON. Inlcudes WiFi, BlueTooth and Capable of printing 150 pages per minute'),
 		   (1, 3, 'Free on site repairs on all issues not relating to water or electrical damage'),
-		   (2, 2, 'Unlimited Free pick-up repairs on all serious technical issues for the duration of the contract. Product can be expected to be fixed within 3 working days. The product to be fixed will also be temporarily replaced'),
+		   (2, 3, 'Unlimited Free pick-up repairs on all serious technical issues for the duration of the contract. Product can be expected to be fixed within 3 working days. The product to be fixed will also be temporarily replaced'),
 		   (3, 3, 'Unlimited phone calls to PSS call centre for assistance or service requests 24 hours every day of the week (Monday to Sunday). These phone calls will enjoy priority level 2, thus a waiting time of up to 5 minutes may be incurred'),
 		   (4, 3, 'PSS Phone call checkups after 3 days of all repairs'),
 		   (5, 3, 'A technician will visit customer grounds every 6 months for routine checkups on the product'),
@@ -389,6 +399,7 @@ INSERT INTO ServiceLevelAgreement (ServiceID, ContractID, PerformanceExpectation
 		   (5, 14, 'A technician will visit customer grounds every month for routine checkups on the product system'),
 		   (6, 14, 'Products will be replaced in the case of product failure resulting from a production fault.')
 
+GO
 		   --Use Odd primary keys for person
 INSERT INTO Person (PersonID, FirstName, LastName, BirthDate, CellPhoneNumber, TelephoneNumber, Email)
 	VALUES (1, 'Pieter', 'Du Toit', '1990/12/31', '+27824428419', NULL, 'Piet.toit@gmail.com'),
@@ -400,6 +411,8 @@ INSERT INTO Person (PersonID, FirstName, LastName, BirthDate, CellPhoneNumber, T
 		   (13, 'Wielfred', 'Mekoa', '1991/03/12', '+27734175449', NULL, 'wielfredmekoa.marketing@gmail.com'),
 		   (15, 'Delma', 'Tadiwa', '1995/05/22', '+27825539658', NULL, 'd.tadiwa@gmail.com'),
 		   (17, 'Blessing', 'Moyo', '1988/07/25', '+27618824356', NULL, 'blessingmoyo@gmail.com')
+
+GO
 
 INSERT INTO Address (AddressID, Street, City, PostalCode, Province)
 	VALUES (1, '961 Church St', 'Pretoria', '0155', 'Gauteng'),
@@ -423,7 +436,7 @@ INSERT INTO Address (AddressID, Street, City, PostalCode, Province)
 		   (19, '458 Marconi St', 'Eldoradopark', '1832', 'Gauteng'),
 		   (20, '853 Prospect St', 'Moreletapark', '0044', 'Gauteng')
 
-
+GO
 --Following is a list of different types of customers.
 --Need-based customers :
 --Loyal customers :
@@ -439,12 +452,15 @@ INSERT INTO IndividualClient (IndividualClientID, Type, Status, Notes, AddressID
 	       (9, 'Discount Customer', 'Active', 'The Client has been with PSS for years and is always on the lookout for a bargain', 2),
 	       (15, 'Potential Customer', 'Inactive', 'A potential client from the 2020/08/13 conference meeting', 9)
 
+GO
 		   --Use even primary keys for business client
-INSERT INTO BusinessClient (BusinessClientID, BusinessName, Type, Status, Notes, AddressID)--will add the primary contact person id after discussion
-	VALUES (2, 'Renner Accounting Services', 'Loyal Customer', 'Active', 'Renner Accounting Services has been a loyal customer since 2005', 3),
-		   (4, 'Wielfred Marketing Agency', 'Wandering Customer', 'Active', 'The Wielfred marketing agency has abruptly stopped and changed printer contracts in the past', 4),
-		   (6, 'Personal Growth Consultations', 'New Customer', 'Active', 'Personal Growth Consultations is a small 1 man business who approached PSS in 2021', 5),
-		   (8, 'Garsfontein High School', 'New Customer', 'Active', 'Garsfontein High School contacted PSS in 2021 and were reffered to by Personal Growth Consultations', 7)
+INSERT INTO BusinessClient (BusinessClientID, BusinessName, Type, Status, Notes, PrimaryContactPersonID, AddressID)
+	VALUES (2, 'Renner Accounting Services', 'Loyal Customer', 'Active', 'Renner Accounting Services has been a loyal customer since 2005', 17, 3),
+		   (4, 'Wielfred Marketing Agency', 'Wandering Customer', 'Active', 'The Wielfred marketing agency has abruptly stopped and changed printer contracts in the past', 13, 4),
+		   (6, 'Personal Growth Consultations', 'New Customer', 'Active', 'Personal Growth Consultations is a small 1 man business who approached PSS in 2021', 7, 5);
+		   --(8, 'Garsfontein High School', 'New Customer', 'Active', 'Garsfontein High School contacted PSS in 2021 and were reffered to by Personal Growth Consultations', , 7)
+
+GO
 
 INSERT INTO	BusinessClientPerson (BusinessClientID, PersonID, Role)
 	VALUES (2,3, 'Head of computer/IT department'),
@@ -454,17 +470,17 @@ INSERT INTO	BusinessClientPerson (BusinessClientID, PersonID, Role)
 		   (4,15,'Head of technical department (computers/printers)'),
 		   (4,13,'Business Owner'),
 		   (6,7,'Business Owner')
-
-INSERT INTO ClientEntityContract (ContractID, ClientEntityID, EffectiveDate)
-	VALUES (10, 1, '2021/04/13'),
-		   (5, 9, '2021/04/04'),
-		   (6, 9, '2021/04/18'),
-		   (3, 2, '2021/04/02'),
-		   (7, 2, '2021/04/02'),
-		   (13, 4, '2021/04/02'),
-		   (7, 4, '2021/04/02'),
-		   (2, 4, '2021/04/15'),
-		   (11, 6, '2021/04/02'),
-		   (14, 8, '2021/04/02');
-
+GO
+--INSERT INTO ClientEntityContract (ContractID, ClientEntityID, EffectiveDate)
+--	VALUES (10, 3, '2021/04/13');
+--		   --(5, 9, '2021/04/04'),
+--		   --(6, 9, '2021/04/18'),
+--		   --(3, 2, '2021/04/02'),
+--		   --(7, 2, '2021/04/02'),
+--		   --(13, 4, '2021/04/02'),
+--		   --(7, 4, '2021/04/02'),
+--		   --(2, 4, '2021/04/15'),
+--		   --(11, 6, '2021/04/02'),
+--		   --(14, 8, '2021/04/02');
+--GO
 --Still have to add data for Service request portion, and followup
