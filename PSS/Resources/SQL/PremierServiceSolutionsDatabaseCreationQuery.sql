@@ -72,12 +72,18 @@ ADD CONSTRAINT CK_OfferEndDateAfterStartDate CHECK(OfferEndDate>=OfferStartDate)
 GO
 
 CREATE TABLE ServiceLevelAgreement
-(ServiceID INT REFERENCES Service(ServiceID),
- ContractID INT REFERENCES Contract(ContractID),
- PerformanceExpectation VARCHAR(MAX) NOT NULL,
- PRIMARY KEY(ServiceID,ContractID)
+(ServiceID INT NOT NULL UNIQUE,
+ ContractID INT NOT NULL UNIQUE,
+ PerformanceExpectation VARCHAR(MAX) NOT NULL
 )
---GO
+
+ALTER TABLE ServiceLevelAgreement
+ADD CONSTRAINT PK_ServiceLevelAgreement PRIMARY KEY (ServiceID, ContractID),
+	CONSTRAINT FK_ServiceLevelAgreement#Service FOREIGN KEY (ServiceID) REFERENCES Service(ServiceID),
+	CONSTRAINT FK_ServiceLevelAgreement#Contract FOREIGN KEY (ContractID) REFERENCES Contract(ContractID)
+
+GO
+
 --CREATE TABLE ContactInformation
 --(ContactInformationID INT PRIMARY KEY,
  --CellPhoneNumber VARCHAR(12),
@@ -89,7 +95,7 @@ CREATE TABLE ServiceLevelAgreement
 --ALTER TABLE ContactInformation
 --ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL)
 
-GO
+--GO
 
 CREATE TABLE [Address]
 (AddressID INT PRIMARY KEY,
@@ -111,7 +117,7 @@ CREATE TABLE [Person]
  Email VARCHAR(320)
 )
 
-ALTER TABLE Person
+ALTER TABLE [Person]
 ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL)
 
 GO
@@ -126,12 +132,16 @@ CREATE TABLE [User]
 GO
 
 CREATE TABLE IndividualClient
-(IndividualClientID INT REFERENCES Person(PersonID) PRIMARY KEY,
+(IndividualClientID INT PRIMARY KEY,
  [Type] VARCHAR(30) NOT NULL,
  [Status] VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
- AddressID INT NOT NULL REFERENCES Address(AddressID)
+ AddressID INT NOT NULL
 )
+
+ALTER TABLE IndividualClient
+ADD CONSTRAINT FK_IndividualClient#Person FOREIGN KEY (IndividualClientID) REFERENCES Person(PersonID),
+	CONSTRAINT FK_IndividualClien#Address FOREIGN KEY (AddressID) REFERENCES Address(AddressID)
 
 GO
 
@@ -141,18 +151,26 @@ CREATE TABLE BusinessClient
  [Type] VARCHAR(30) NOT NULL,
  [Status] VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
- PrimaryContactPersonID INT NOT NULL REFERENCES Person(PersonID),
- AddressID INT NOT NULL REFERENCES Address(AddressID)
+ PrimaryContactPersonID INT NOT NULL,
+ AddressID INT NOT NULL
 )
+
+ALTER TABLE BusinessClient
+ADD CONSTRAINT FK_BusinessClient#ContactPerson FOREIGN KEY (PrimaryContactPersonID) REFERENCES Person(PersonID),
+	CONSTRAINT FK_BusinessClient#Address FOREIGN KEY (AddressID) REFERENCES Address(AddressID)
 
 GO
 
 CREATE TABLE BusinessClientPerson
-(BusinessClientID INT REFERENCES BusinessClient(BusinessClientID),
- PersonID INT REFERENCES Person(PersonID),
- [Role] VARCHAR(50) NOT NULL,
- PRIMARY KEY(BusinessClientID,PersonID)
+(BusinessClientID INT NOT NULL UNIQUE,
+ PersonID INT NOT NULL UNIQUE,
+ [Role] VARCHAR(50) NOT NULL
 )
+
+ALTER TABLE BusinessClientPerson
+ADD CONSTRAINT PK_BusinessClientPerson PRIMARY KEY (BusinessClientID, PersonID),
+	CONSTRAINT FK_BusinessClientPerson#BusinessClient FOREIGN KEY (BusinessClientID) REFERENCES BusinessClient(BusinessClientID),
+	CONSTRAINT FK_BusinessClientPerson#Person FOREIGN KEY (PersonID) REFERENCES Person(PersonID)
 
 GO
 
@@ -164,8 +182,8 @@ CREATE TABLE ClientEntityContract
 )
 
 ALTER TABLE ClientEntityContract
-ADD CONSTRAINT MFK_CECtoIndividualClients FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID),
-    CONSTRAINT MFK_CECtoBusinessClients FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID);
+ADD CONSTRAINT MFK_ClientEntityContract#IndividualClients FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID),
+    CONSTRAINT MFK_ClientEntityContract#BusinessClients FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID);
 
 GO
 
@@ -179,8 +197,8 @@ CREATE TABLE FollowUpReport
 )
 
 ALTER TABLE FollowUpReport
-ADD FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID),
-	FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID)
+ADD CONSTRAINT MFK_FollowUpReport#IndividualClients FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID),
+	CONSTRAINT MFK_FollowUpReport#BusinessClients FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID)
 
 GO
 
@@ -189,8 +207,13 @@ CREATE TABLE FollowUpCall
 (FollowUpCallID INT PRIMARY KEY,
  IsIssueResolved BIT NOT NULL,
  SatisfactionLevel INT NOT NULL,
- FollowUpReportID INT NOT NULL REFERENCES FollowUpReport(FollowUpReportID)
+ FollowUpReportID INT NOT NULL
 )
+
+ALTER TABLE FollowUpCall
+ADD CONSTRAINT FK_FollowUpCall#FollowUpReport FOREIGN KEY (FollowUpReportID) REFERENCES FollowUpReport(FollowUpReportID)
+
+GO
 
 CREATE TABLE ServiceRequest
 (ServiceRequestID INT PRIMARY KEY,
@@ -201,39 +224,49 @@ CREATE TABLE ServiceRequest
 )
 
 ALTER TABLE ServiceRequest
-ADD FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID),
-	FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID)
+ADD CONSTRAINT MFK_ServiceRequest#BusinessClients FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID),
+	CONSTRAINT MFK_ServiceRequest#BusinessClients FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID)
+
 
 GO
-
 
 CREATE TABLE Task
 (TaskID INT PRIMARY KEY,
  TaskTitle VARCHAR(30) NOT NULL,
  TaskDescription VARCHAR(MAX) NOT NULL,
  TaskNotes VARCHAR(MAX),
- ServiceRequestID INT NOT NULL REFERENCES ServiceRequest(ServiceRequestID),
+ ServiceRequestID INT NOT NULL,
  --AddressID INT NOT NULL REFERENCES Address(AddressID), --Add constaint to take business or indiviual client address as default
  DateProcessed DATETIME NOT NULL,
  IsFinished BIT NOT NULL DEFAULT 0
 )
 
+ALTER TABLE Task
+ADD CONSTRAINT FK_Task#ServiceRequest FOREIGN KEY (ServiceRequestID) REFERENCES ServiceRequest(ServiceRequestID)
+
 GO
 
 CREATE TABLE Technician
-(TechnicianID INT REFERENCES Person(PersonID) PRIMARY KEY,
+(TechnicianID INT PRIMARY KEY,
  Speciality VARCHAR(30) NOT NULL,
  PayRate MONEY NOT NULL
 )
+
+ALTER TABLE Technician
+ADD CONSTRAINT FK_Technician#Person FOREIGN KEY (TechnicianID) REFERENCES Person(PersonID)
 
 GO
 
 CREATE TABLE TechnicianTask
 (TechnicianTaskID INT PRIMARY KEY,
- TechnicianID INT NOT NULL REFERENCES Technician(TechnicianID),
- TaskID INT NOT NULL REFERENCES Task(TaskID),
+ TechnicianID INT NOT NULL,
+ TaskID INT NOT NULL,
  TimeToArrive DATETIME NOT NULL
 )
+
+ALTER TABLE TechnicianTask
+ADD CONSTRAINT FK_TechnicianTask#Person FOREIGN KEY (TechnicianID) REFERENCES Technician(TechnicianID),
+	CONSTRAINT FK_TechnicianTask#Task FOREIGN KEY (TaskID) REFERENCES Task(TaskID)
 
 GO
 
@@ -245,6 +278,10 @@ CREATE TABLE TechnicianTaskFeedback
  Notes VARCHAR(MAX),
  TechnicianTaskID INT NOT NULL REFERENCES TechnicianTask(TechnicianTaskID)
 )
+
+ALTER TABLE TechnicianTaskFeedback
+ADD CONSTRAINT FK_TechnicianTaskFeedback#Person FOREIGN KEY (TechnicianID) REFERENCES Technician(TechnicianID)
+
 GO
 --The following portion of the script is optional at this point
 
@@ -260,10 +297,13 @@ GO
 
 CREATE TABLE CallChangeAssociation
 (CallChangeAssociationID INT PRIMARY KEY,
- CallInstanceID INT NOT NULL REFERENCES CallInstance(CallInstanceID),
+ CallInstanceID INT NOT NULL,
  TableName VARCHAR(30) NOT NULL,
  TableRecordID VARCHAR(MAX) NOT NULL
 )
+
+ALTER TABLE TechnicianTaskFeedback
+ADD CONSTRAINT FK_CallChangeAssociation#CallInstance FOREIGN KEY (CallInstanceID) REFERENCES CallInstance(CallInstanceID)
 
 GO
 
