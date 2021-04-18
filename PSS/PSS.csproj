@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business_Logic\Address.cs" />
+    <Compile Include="Business_Logic\ServiceLevelAgreement.cs" />
     <Compile Include="Business_Logic\TechnicianTask.cs" />
     <Compile Include="Business_Logic\TechnicianTaskFeedback.cs" />
     <Compile Include="Business_Logic\Agent.cs" />
