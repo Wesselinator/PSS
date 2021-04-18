@@ -56,6 +56,8 @@ namespace PSS.Business_Logic
             sql.AppendLine("UPDATE " + TableName);
             sql.Append("SET ");
 
+            sql.AppendLine(idColumn2 + " = " + ServiceRequest.ServiceRequestID);
+
             sql.Append("WHERE ");
             sql.Append(ID1 + " = " + ClientID);
             sql.Append(" AND ");
@@ -91,6 +93,6 @@ namespace PSS.Business_Logic
     public class IndividualClientServiceRequest : ClientServiceRequest
     {
         public IndividualClientServiceRequest() : base("IndividualClientServiceRequest", IndividualClient.idColumn)
-        { }
+        {  }
     }
 }

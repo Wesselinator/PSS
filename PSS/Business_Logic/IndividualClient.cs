@@ -11,25 +11,43 @@ namespace PSS.Business_Logic
 {
     class IndividualClient : Client
     {
-        public override int ClientID { get => Person.PersonID; } //remember this is supposed to be odd
+        public override int ClientID { get => Person.PersonID; } //needed?
+
+        public MultiIDList<IndividualClientServiceRequest> ServiceRequests { get; set; }
+        public MultiIDList<IndividualClientContract> Contracts { get; set; }
+        public MultiIDList<IndividualClientFollowUp> FollowUps { get; set; }
 
         public static readonly string tableName = "IndividualClient";
         public static readonly string idColumn = "IndividualClientID";
         private static readonly string personColumn = idColumn;
 
         public IndividualClient() : base(tableName, idColumn)
-        { }
+        {
+            ServiceRequests = new MultiIDList<IndividualClientServiceRequest>();
+            Contracts = new MultiIDList<IndividualClientContract>();
+            FollowUps = new MultiIDList<IndividualClientFollowUp>();
+        }
 
         public IndividualClient(string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
-        {  }
+        {
+            FillLists(person.PersonID);
+        }
 
-        //TODO: add a constructor that creates an odd numbered person
+        //TODO: add a constructor that creates a numbered person
 
         #region DataBase
+
+        private void FillLists(int id) //TODO: move to virtual above Client.cs
+        { 
+            ServiceRequests.FillWithPivotColumn(id, idColumn);
+            Contracts.FillWithPivotColumn(id, idColumn);
+            FollowUps.FillWithPivotColumn(id, idColumn);
+        }
 
         public override void FillFromRow(DataRow row)
         {
             FillPartialRow(row, personColumn);
+            FillLists(ClientID); //TODO: call in Client.cs
         }
 
         //P4

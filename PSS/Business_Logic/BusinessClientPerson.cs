@@ -55,7 +55,8 @@ namespace PSS.Business_Logic
             sql.AppendLine("UPDATE " + TableName);
             sql.Append("SET ");
 
-            sql.AppendLine("Role = '" + Role + "'");
+            sql.Append("Role = '" + Role + "', ");
+            sql.AppendLine(idColumn2 + " = " + Person.PersonID);
 
             sql.Append("WHERE ");
             sql.Append(idColumn1 + " = " + BusinessClientID);

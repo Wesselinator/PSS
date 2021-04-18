@@ -18,10 +18,10 @@ namespace PSS.Business_Logic
             set
             {
                 s = value;
-                IDs[1] = value.ServiceID;
+                IDs[0] = value.ServiceID;
             }
         }
-        public int ContractID { get => IDs[0]; private set => IDs[0] = value; }
+        public int ContractID { get => IDs[1]; private set => IDs[1] = value; }
         public string PerformanceExpectation { get; set; }
 
         private static readonly string tableName = "ServiceLevelAgreement";
@@ -49,7 +49,7 @@ namespace PSS.Business_Logic
 
         public override void Save()
         {
-            //Service.Save();
+            Service.Save();
             base.Save();
         }
 

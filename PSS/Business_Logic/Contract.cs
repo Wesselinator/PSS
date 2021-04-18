@@ -9,7 +9,7 @@ using PSS.Data_Access;
 //CHECK
 namespace PSS.Business_Logic
 {
-    class Contract : BaseSingleID
+    public class Contract : BaseSingleID
     {
         public int ContractID { get => ID; private set => ID = value; }
         public string ContractName { get; set; }

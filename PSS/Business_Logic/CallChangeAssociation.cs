@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using PSS.Data_Access;
 
 namespace PSS.Business_Logic
@@ -13,7 +11,7 @@ namespace PSS.Business_Logic
         public int CallChangeAssociationID { get => ID; private set => ID = value; }
         public Call CallInstanceID { get; set; }
         public string fTableName { get; set; }
-        public string TableRecordID { get; set; } //Not sure about the datatype in the database
+        public string TableRecordID { get; set; }
 
         private static readonly string tableName = "CallChangeAssociation";
         private static readonly string idColumn = "CallChangeAssociationID";

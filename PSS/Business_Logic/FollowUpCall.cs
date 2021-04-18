@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 
 namespace PSS.Business_Logic
 {
+    [Obsolete("Deprecated", true)]
     class FollowUpCall : BaseSingleID
     {
         public int FollowUpCallID { get => ID; private set => ID = value; }
