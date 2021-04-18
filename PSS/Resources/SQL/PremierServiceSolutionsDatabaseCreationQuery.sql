@@ -36,7 +36,7 @@ ON
 
 LOG ON
 (NAME = PremierServiceSolutionsLogFile1,
- FILENAME = 'C:\SQLServerDatabases\PremierServiceSolutionsLogFile1.ldf',
+ FILENAME = 'C:\SQLServerDatabases\ PremierServiceSolutionsLogFile1.ldf',
  SIZE = 5MB,
  MAXSIZE = UNLIMITED,
  FILEGROWTH = 10MB
@@ -46,27 +46,25 @@ GO
 USE PremierServiceSolutionsDB
 GO
 
-
-CREATE TABLE [Service]
+CREATE TABLE Service
 (ServiceID INT PRIMARY KEY,
  ServiceName VARCHAR(30) NOT NULL,
  ServiceDescription VARCHAR(MAX) NOT NULL
 )
 
-
-CREATE TABLE [Contract]
+CREATE TABLE Contract
 (ContractID INT PRIMARY KEY,
  ContractName VARCHAR(45) NOT NULL,
  ServiceLevel VARCHAR(15) NOT NULL,
  OfferStartDate DATETIME NOT NULL,
  OfferEndDate DATETIME,
  ContractDurationInMonths INT NOT NULL CHECK(ContractDurationInMonths>0),
- MonthlyFee MONEY NOT NULL
+ MontlyFee MONEY NOT NULL
 )
 
 GO
 
-ALTER TABLE [Contract]
+ALTER TABLE Contract
 ADD CONSTRAINT CK_OfferEndDateAfterStartDate CHECK(OfferEndDate>=OfferStartDate)
 
 CREATE TABLE ServiceLevelAgreement
@@ -78,9 +76,9 @@ CREATE TABLE ServiceLevelAgreement
 
 --CREATE TABLE ContactInformation
 --(ContactInformationID INT PRIMARY KEY,
- --CellPhoneNumber VARCHAR(12),
- --TelephoneNumber VARCHAR(12),
- --Email VARCHAR(320)
+-- CellPhoneNumber VARCHAR(12),
+-- TelephoneNumber VARCHAR(12),
+-- Email VARCHAR(320)
 --)
 
 GO
@@ -88,16 +86,15 @@ GO
 --ALTER TABLE ContactInformation
 --ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL)
 
-
-CREATE TABLE [Address]
+CREATE TABLE Address
 (AddressID INT PRIMARY KEY,
  Street VARCHAR(50) NOT NULL,
  City VARCHAR(30) NOT NULL,
  PostalCode CHAR(4),
  Province VARCHAR(20) NOT NULL
- )
+)
 
-CREATE TABLE [Person]
+CREATE TABLE Person
 (PersonID INT PRIMARY KEY,
  FirstName VARCHAR(50) NOT NULL,
  LastName VARCHAR(50) NOT NULL,
@@ -106,6 +103,7 @@ CREATE TABLE [Person]
  TelephoneNumber VARCHAR(12),
  Email VARCHAR(320)
 )
+GO
 
 ALTER TABLE Person
 ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL)
@@ -113,14 +111,14 @@ ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR Telepho
 CREATE TABLE [User]
 (UserID INT PRIMARY KEY,
  UserName VARCHAR(50) NOT NULL,
- [Password] VARCHAR(50) NOT NULL,
- [Role] VARCHAR(50) NOT NULL
+ Password VARCHAR(50) NOT NULL,
+ Role VARCHAR(50) NOT NULL
 )
 
 CREATE TABLE IndividualClient
 (IndividualClientID INT REFERENCES Person(PersonID) PRIMARY KEY,
- [Type] VARCHAR(30) NOT NULL,
- [Status] VARCHAR(30) NOT NULL,
+ Type VARCHAR(30) NOT NULL,
+ Status VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
  AddressID INT NOT NULL REFERENCES Address(AddressID)
 )
@@ -128,8 +126,8 @@ CREATE TABLE IndividualClient
 CREATE TABLE BusinessClient
 (BusinessClientID INT PRIMARY KEY, --Can potentially use negative numbers for business clients or it can be determined Checking that their is not a conflict Person and BusinessClient 
  BusinessName VARCHAR(50),
- [Type] VARCHAR(30) NOT NULL,
- [Status] VARCHAR(30) NOT NULL,
+ Type VARCHAR(30) NOT NULL,
+ Status VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
  AddressID INT NOT NULL REFERENCES Address(AddressID)
 )
@@ -137,27 +135,28 @@ CREATE TABLE BusinessClient
 CREATE TABLE BusinessClientPerson
 (BusinessClientID INT REFERENCES BusinessClient(BusinessClientID),
  PersonID INT REFERENCES Person(PersonID),
- [Role] VARCHAR(50) NOT NULL,
- IsPrimaryContact BIT NOT NULL,
+ Role VARCHAR(50) NOT NULL,
+ --IsPrimaryContact BIT NOT NULL,
  PRIMARY KEY(BusinessClientID,PersonID)
 )
 
-CREATE TABLE ClientEntityContract
-(ContractID INT REFERENCES Contract(ContractID),
- ClientEntityID INT,
- EffectiveDate DATETIME,
- PRIMARY KEY(ContractID,ClientEntityID,EffectiveDate)
+CREATE TABLE BusinessClientContract
+(BusinessClientContractID INT PRIMARY KEY,
+ ContractID INT NOT NULL REFERENCES Contract(ContractID),
+ BusinessClientID INT NOT NULL REFERENCES BusinessClient(BusinessClientID),
+ EffectiveDate DATETIME NOT NULL, 
+)
+
+CREATE TABLE IndividualClientContract
+(IndividualClientContractID INT PRIMARY KEY,
+ ContractID INT NOT NULL REFERENCES Contract(ContractID),
+ IndividualClientID INT NOT NULL REFERENCES IndividualClient(IndividualClientID),
+ EffectiveDate DATETIME NOT NULL, 
 )
 
 GO
 
-ALTER TABLE ClientEntityContract
-ADD FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID)
 
-GO
-
-ALTER TABLE ClientEntityContract
-ADD FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID)
 
 CREATE TABLE FollowUpReport
 (FollowUpReportID INT PRIMARY KEY,
@@ -165,57 +164,64 @@ CREATE TABLE FollowUpReport
  FollowUpType VARCHAR(20) NOT NULL,
  FollowUpDescription VARCHAR(MAX) NOT NULL,
  FollowUpDate DATETIME NOT NULL,
- ClientEntityID INT NOT NULL
-)
-
-GO
-
-ALTER TABLE FollowUpReport
-ADD FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID)
-
-GO
-
-ALTER TABLE FollowUpReport
-ADD FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID)
-
-GO
-
-
-CREATE TABLE FollowUpCall
-(FollowUpCallID INT PRIMARY KEY,
  IsIssueResolved BIT NOT NULL,
- SatisfactionLevel INT NOT NULL,
- FollowUpReportID INT NOT NULL REFERENCES FollowUpReport(FollowUpReportID)
+ SatisfactionLevel INT,
 )
+
+GO
+
+CREATE TABLE IndividualClientFollowUp
+(IndividualClientID INT NOT NULL REFERENCES IndividualClient(IndividualClientID),
+ FollowUpReportID INT NOT NULL REFERENCES FollowUpReport(FollowUpReportID),
+ PRIMARY KEY(IndividualClientID, FollowUpReportID)
+)
+
+CREATE TABLE BusinessClientFollowUp
+(BusinessClientID INT NOT NULL REFERENCES BusinessClient(BusinessClientID),
+ FollowUpReportID INT NOT NULL REFERENCES FollowUpReport(FollowUpReportID),
+ PRIMARY KEY(BusinessClientID, FollowUpReportID)
+)
+
+GO
+
+--CREATE TABLE FollowUpCall
+--(FollowUpCallID INT PRIMARY KEY,
+-- IsIssueResolved BIT NOT NULL,
+-- SatisfactionLevel INT NOT NULL,
+-- FollowUpReportID INT NOT NULL REFERENCES FollowUpReport(FollowUpReportID)
+--)
 
 CREATE TABLE ServiceRequest
 (ServiceRequestID INT PRIMARY KEY,
  ServiceRequestTitle VARCHAR(30) NOT NULL,
  ServiceRequestType VARCHAR(20) NOT NULL,
  ServiceRequestDescription VARCHAR(MAX) NOT NULL,
- ClientEntityID INT NOT NULL
+ DateReceived DATETIME NOT NULL
 )
 
 GO
 
-ALTER TABLE ServiceRequest
-ADD FOREIGN KEY (ClientEntityID) REFERENCES IndividualClient(IndividualClientID)
-
+CREATE TABLE BusinessClientServiceRequest
+(BusinessClientID INT,
+ ServiceRequestID INT,
+ PRIMARY KEY(BusinessClientID,ServiceRequestID)
+)
 GO
 
-ALTER TABLE ServiceRequest
-ADD FOREIGN KEY (ClientEntityID) REFERENCES BusinessClient(BusinessClientID)
-
-GO
-
+CREATE TABLE IndividualClientServiceRequest
+(IndividualClientID INT,
+ ServiceRequestID INT,
+ PRIMARY KEY(IndividualClientID,ServiceRequestID)
+)
 
 CREATE TABLE Task
 (TaskID INT PRIMARY KEY,
  TaskTitle VARCHAR(30) NOT NULL,
+ TaskType VARCHAR(20) NOT NULL,
  TaskDescription VARCHAR(MAX) NOT NULL,
  TaskNotes VARCHAR(MAX),
  ServiceRequestID INT NOT NULL REFERENCES ServiceRequest(ServiceRequestID),
- --AddressID INT NOT NULL REFERENCES Address(AddressID), --Add constaint to take business or indiviual client address as default
+ AddressID INT NOT NULL REFERENCES Address(AddressID), --Add constaint to take business or indiviual client address as default
  DateProcessed DATETIME NOT NULL,
  IsFinished BIT NOT NULL DEFAULT 0
 )
@@ -237,19 +243,17 @@ CREATE TABLE TechnicianTaskFeedback
 (TechnicianTaskFeedbackID INT PRIMARY KEY,
  TimeArrived DATETIME NOT NULL,
  TimeDeparture DATETIME NOT NULL,
- [Status] VARCHAR(30) NOT NULL,
+ Status VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
  TechnicianTaskID INT NOT NULL REFERENCES TechnicianTask(TechnicianTaskID)
 )
 GO
---The following portion of the script is optional at this point
-
 
 CREATE TABLE CallInstance
 (CallInstanceID INT PRIMARY KEY,
  StartTime DATETIME NOT NULL,
  EndTime DATETIME NOT NULL,
- [Description] VARCHAR(120) NOT NULL
+ Description VARCHAR(120) NOT NULL
 )
 
 CREATE TABLE CallChangeAssociation
@@ -258,7 +262,6 @@ CREATE TABLE CallChangeAssociation
  TableName VARCHAR(30) NOT NULL,
  TableRecordID VARCHAR(MAX) NOT NULL
 )
-
 GO
 
 INSERT INTO Service (ServiceID, ServiceName, ServiceDescription)
@@ -307,7 +310,7 @@ INSERT INTO ServiceLevelAgreement (ServiceID, ContractID, PerformanceExpectation
 		   
 		   (11, 3, '1x Heavy Duty Laser Printer valued at R 25 000 of availiable brands HP, CANON or EPSON. Inlcudes WiFi, BlueTooth and Capable of printing 150 pages per minute'),
 		   (1, 3, 'Free on site repairs on all issues not relating to water or electrical damage'),
-		   (2, 2, 'Unlimited Free pick-up repairs on all serious technical issues for the duration of the contract. Product can be expected to be fixed within 3 working days. The product to be fixed will also be temporarily replaced'),
+		   (2, 3, 'Unlimited Free pick-up repairs on all serious technical issues for the duration of the contract. Product can be expected to be fixed within 3 working days. The product to be fixed will also be temporarily replaced'),
 		   (3, 3, 'Unlimited phone calls to PSS call centre for assistance or service requests 24 hours every day of the week (Monday to Sunday). These phone calls will enjoy priority level 2, thus a waiting time of up to 5 minutes may be incurred'),
 		   (4, 3, 'PSS Phone call checkups after 3 days of all repairs'),
 		   (5, 3, 'A technician will visit customer grounds every 6 months for routine checkups on the product'),
@@ -389,11 +392,15 @@ INSERT INTO ServiceLevelAgreement (ServiceID, ContractID, PerformanceExpectation
 		   (5, 14, 'A technician will visit customer grounds every month for routine checkups on the product system'),
 		   (6, 14, 'Products will be replaced in the case of product failure resulting from a production fault.')
 
+--SELECT * FROM ServiceLevelAgreement sla
 		   --Use Odd primary keys for person
 INSERT INTO Person (PersonID, FirstName, LastName, BirthDate, CellPhoneNumber, TelephoneNumber, Email)
 	VALUES (1, 'Pieter', 'Du Toit', '1990/12/31', '+27824428419', NULL, 'Piet.toit@gmail.com'),
+		   (2, 'Jean', 'Van Rensburg', '1985/07/21', '+27762931242', NULL, 'jeanvrens@gmail.com'),
 		   (3, 'Jan', 'Coetzee', '1983/06/27', '+27762931847', NULL, 'jantutoring@gmail.com'),
+		   (4, 'Blake', 'Thompson', '1990/05/13', '+27862342231', NULL, 'b.thompson@gmail.com'),
 		   (5, 'San-Marie', 'Kritzinger', '1979/05/14', '+27761214222', NULL, 'kritzinger.s@gmail.com'),
+		   (6, 'Nigel', 'Ozark', '1990/06/04', '+27720542344', NULL, 'nigel.ozark90@gmail.com'),
 		   (7, 'John', 'Smith', '1984/01/19', '+27714361997', NULL, 'john.growtoday@gmail.com'),
 		   (9, 'Sam', 'Walker', '1993/09/09', '+27842431875', NULL, 'sam.w@gmail.com'),
 		   (11, 'Kathy', 'Bellbottom', '1970/11/09', '+2714123322', NULL, 'bellb.kathy@yahoo.com'),
@@ -424,6 +431,14 @@ INSERT INTO Address (AddressID, Street, City, PostalCode, Province)
 		   (20, '853 Prospect St', 'Moreletapark', '0044', 'Gauteng')
 
 
+INSERT INTO [User] (UserID, UserName, Password, Role)
+	VALUES (11, 'KathyB', 'Admin', 'Admin');
+
+INSERT INTO Technician (TechnicianID, Speciality, PayRate)
+	VALUES (2, 'Printers', 500),
+		   (4, 'Computers', 600),
+		   (6, 'Servers', 1000);
+
 --Following is a list of different types of customers.
 --Need-based customers :
 --Loyal customers :
@@ -432,7 +447,6 @@ INSERT INTO Address (AddressID, Street, City, PostalCode, Province)
 --Potential customers :
 --New customers :
 --Wandering customers :
-
 
 INSERT INTO IndividualClient (IndividualClientID, Type, Status, Notes, AddressID)
 	VALUES (1, 'New Customer', 'Active', 'The Client has started using PSS services in 2021', 1),
@@ -455,16 +469,40 @@ INSERT INTO	BusinessClientPerson (BusinessClientID, PersonID, Role)
 		   (4,13,'Business Owner'),
 		   (6,7,'Business Owner')
 
-INSERT INTO ClientEntityContract (ContractID, ClientEntityID, EffectiveDate)
-	VALUES (10, 1, '2021/04/13'),
-		   (5, 9, '2021/04/04'),
-		   (6, 9, '2021/04/18'),
-		   (3, 2, '2021/04/02'),
-		   (7, 2, '2021/04/02'),
-		   (13, 4, '2021/04/02'),
-		   (7, 4, '2021/04/02'),
-		   (2, 4, '2021/04/15'),
-		   (11, 6, '2021/04/02'),
-		   (14, 8, '2021/04/02');
+INSERT INTO IndividualClientContract (IndividualClientContractID, ContractID, IndividualClientID, EffectiveDate)
+	VALUES (1,10, 1, '2021/04/13'),
+		   (2,5, 9, '2021/04/04'),
+		   (3,6, 9, '2021/04/18');
 
---Still have to add data for Service request portion, and followup
+INSERT INTO BusinessClientContract (BusinessClientContractID, ContractID, BusinessClientID, EffectiveDate)
+	VALUES (1,3, 2, '2021/04/02'),
+		   (2,7, 2, '2021/04/02'),
+		   (3,13, 4, '2021/04/02'),
+		   (4,7, 4, '2021/04/02'),
+		   (5,2, 4, '2021/04/15'),
+		   (6,11, 6, '2021/04/02'),
+		   (7,14, 8, '2021/04/02');
+
+--start inserting from here christopher
+INSERT INTO ServiceRequest (ServiceRequestID, ServiceRequestTitle, ServiceRequestType, ServiceRequestDescription)
+	VALUES (1, 'Fix Broken Printer', 'Client Requested', 'HP printer model 775 not printing, its displays error code 50','2021/04/04'),
+		   (2, 'Refill Printer Ink Cartridges', 'Routine Maintenance', 'EPSON model 90 heavy duty printer ink refill per contract agreement','2021/04/15'),
+		   (3, 'Routine maintenance on computer lab', 'Routine Maintenance', 'Perform maintenance tasks on computer lab computers per contract agreement.','2021/04/15'),
+		   (4, 'Fix 3x Broken Computers in computer lab', 'Client Requested', 'Serious "fan" noise comming from 3x computers in computer lab. 2x of these computers also suffer from random restarts','2021/04/16'),
+		   (5, 'Routine maintenance on computer lab', 'Routine Maintenance', 'Perform maintenance tasks on computer lab computers. Availible times for client include 2pm to 5pm Monday to Friday','2021/04/15'),
+		   (6, 'Fix or Replace Broken PC', 'Client Requested', 'Computer does not turn and cannot boot into diagnostic mode','2021/04/17')
+	
+
+
+INSERT INTO BusinessClientServiceRequest (BusinessClientID, ServiceRequestID)
+	VALUES (2, 2),
+		   (2, 3),
+		   (4, 5),
+		   (6, 1),
+		   (8, 4)
+
+INSERT INTO IndividualClientServiceRequest (IndividualClientID, ServiceRequestID)
+	VALUES (1, 6);
+
+INSERT INTO Task (TaskID, TaskTitle, TaskType, TaskDescription, TaskNotes, ServiceRequestID, AddressID, DateProcessed, IsFinished)
+	VALUES (1, 'Fix hardware issue on HP printer model 775', 'Hardware Related', 'Printer error code reports a hardware problem. Attempt or fix, if not repairible on the customer site, schedule pickup repair', '', 0, 0, GETDATE(), DEFAULT);
