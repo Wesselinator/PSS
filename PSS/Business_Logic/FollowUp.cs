@@ -77,6 +77,7 @@ namespace PSS.Business_Logic
             return sql.ToString();
         }
 
+        #endregion
         public override bool Equals(object obj)
         {
             return obj is FollowUp up &&
@@ -96,7 +97,9 @@ namespace PSS.Business_Logic
             return hashCode;
         }
 
-
-        #endregion
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }
