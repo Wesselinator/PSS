@@ -6,7 +6,7 @@ using System.Data;
 namespace PSS.Data_Access
 {
     public static class DataHandler
-    { 
+    {
         private static readonly string connStr = @"Server=.;Initial Catalog=PremierServiceSolutionsDB;Integrated Security=SSPI";
 
         public static DataTable getDataTable(string Query)
@@ -23,7 +23,7 @@ namespace PSS.Data_Access
                 catch (Exception e)
                 {
                     Console.WriteLine(e.StackTrace);
-                    MessageBox.Show("Some error message");
+                    MessageBox.Show(e.Message,"SQL ERROR");
                 }
             }
 
@@ -39,9 +39,10 @@ namespace PSS.Data_Access
                 {
                     command.ExecuteNonQuery();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    MessageBox.Show("Some error message");
+                    Console.WriteLine(e.StackTrace);
+                    MessageBox.Show(e.Message, "SQL ERROR");
                 }
             }
         }

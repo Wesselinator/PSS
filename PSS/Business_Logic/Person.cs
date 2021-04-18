@@ -8,11 +8,11 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public class Person : IModifyable
+    public class Person : BaseSingleID
     {
         private static readonly string BirthDayFormat = "yyyy-MM-dd";
 
-        public int PersonID { get; set; }
+        public int PersonID { get => ID; private set => ID = value; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get => string.Format("{0} {1}", FirstName, LastName); }
@@ -22,7 +22,12 @@ namespace PSS.Business_Logic
         public string TellephoneNumber { get; set; }
         public string Email { get; set; }
 
-        public Person(int personID, string firstName, string lastName, DateTime birthDay, string cellphoneNumber, string telephoneNumber, string email)
+        private static readonly string tableName = "Person";
+        private static readonly string idColumn = "PersonID";
+
+        public Person() : base(tableName, idColumn)
+        { }
+        public Person(int personID, string firstName, string lastName, DateTime birthDay, string cellphoneNumber, string telephoneNumber, string email) : this()
         {
             this.PersonID = personID;
             this.FirstName = firstName;
@@ -33,15 +38,20 @@ namespace PSS.Business_Logic
             this.Email = email;
         }
 
-        public Person()
-        {  }
+        public Person(string firstName, string lastName, DateTime birthDay, string cellphoneNumber, string telephoneNumber, string email) : this()
+        {
+            this.PersonID = base.GetNextID();
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.BirthDay = birthDay;
+            this.CellphoneNumber = cellphoneNumber;
+            this.TellephoneNumber = telephoneNumber;
+            this.Email = email;
+        }
 
         #region DataBase
 
-        private static readonly string TableName = "Person";
-        private static readonly string IDColumn = "PersonID";
-
-        public Person(DataRow row) 
+        public override void FillFromRow(DataRow row)
         {
             this.PersonID = row.Field<int>(IDColumn);
             this.FirstName = row.Field<string>("FirstName");
@@ -52,18 +62,7 @@ namespace PSS.Business_Logic
             this.Email = row.Field<string>("Email");
         }
 
-        //P3
-        public Person(int ID)
-        : this(DataEngine.GetByID(TableName, IDColumn, ID))
-        { }
-
-        //P4
-        public void Save()
-        {
-            DataEngine.UpdateORInsert(this, TableName, IDColumn, PersonID);
-        }
-
-        string IUpdateable.Update()
+        protected override string Update()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("UPDATE " + TableName);
@@ -81,11 +80,10 @@ namespace PSS.Business_Logic
             return sql.ToString();
         }
 
-        string IInsertable.Insert()
+        protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("INSERT INTO " + TableName);
-
             sql.Append("VALUES (");
 
             sql.Append(PersonID + ", ");
@@ -125,13 +123,13 @@ namespace PSS.Business_Logic
         {
             int hashCode = -632513257;
             hashCode = hashCode * -1521134295 + PersonID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FirstName);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(LastName);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FullName);
+            hashCode = hashCode * -1521134295 + FirstName.GetHashCode();
+            hashCode = hashCode * -1521134295 + LastName.GetHashCode();
+            hashCode = hashCode * -1521134295 + FullName.GetHashCode();
             hashCode = hashCode * -1521134295 + BirthDay.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CellphoneNumber);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TellephoneNumber);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
+            hashCode = hashCode * -1521134295 + CellphoneNumber.GetHashCode();
+            hashCode = hashCode * -1521134295 + TellephoneNumber.GetHashCode();
+            hashCode = hashCode * -1521134295 + Email.GetHashCode();
             return hashCode;
         }
     }

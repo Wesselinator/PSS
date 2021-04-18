@@ -5,19 +5,18 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public abstract class BaseMultiID
+    public abstract class BaseMultiID : BaseTable
     {
         protected int[] IDs { get; set; }
-        public string TableName { get; private set; }
         protected string[] IDColumns { get; private set; }
 
-        protected BaseMultiID(string tableName, params string[] idColumns)
+        protected BaseMultiID(string tableName, params string[] idColumns) : base(tableName)
         {
-            this.TableName = tableName;
             this.IDColumns = idColumns;
+            this.IDs = new int[idColumns.Length];
         }
 
-        public virtual DataRow GetByIDs(params int[] ids)
+        public DataRow GetByIDs(params int[] ids)
         {
             if (ids.Length != IDColumns.Length)
             {
@@ -44,27 +43,21 @@ namespace PSS.Business_Logic
             return "WHERE " + string.Join(" AND ", wheres);
         }
 
-        protected virtual bool IDExists()
+        protected override sealed bool IDExists()
         {
             string sql = string.Format("SELECT * FROM {0} {1}", TableName, WhereIDs(IDs));
             DataTable dt = DataHandler.getDataTable(sql);
             return dt.Rows.Count != 0;
         }
 
-        protected virtual void UpdateORInsert() //virtual?
+        public virtual void FillWithIDs(params int[] ids)
         {
-            if (IDExists())
+            if (ids.Length != IDs.Length)
             {
-                DataHandler.Update(Update());
+                throw new Exception();
             }
-            else
-            {
-                DataHandler.Insert(Insert());
-            }
-        }
 
-        protected abstract string Update();
-        protected abstract string Insert();
-        public abstract void FillFromRow(DataRow row);
+            FillFromRow(GetByIDs(ids));
+        }
     }
 }

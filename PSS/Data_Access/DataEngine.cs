@@ -21,28 +21,32 @@ namespace PSS.Data_Access
 
             foreach (DataRow row in IC.Rows)
             {
-                ret.Add(new IndividualClient(row));
+                IndividualClient ic = new IndividualClient();
+                ic.FillFromRow(row);
+                ret.Add(ic);
             }
 
             foreach (DataRow row in BC.Rows)
             {
-                ret.Add(new BusinessClient(row));
+                BusinessClient bc = new BusinessClient();
+                bc.FillFromRow(row);
+                ret.Add(bc);
             }
 
 
             return ret;
         }
 
-        public static DataRow GetByID(string TableName, string IDColumn, int ID)
-        {
-            string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
-            DataTable dt = DataHandler.getDataTable(sql);
-            if (dt.Rows.Count == 0)
-            {
-                //TODO: Throw Exception
-            }
-            return dt.Rows[0];
-        }
+        //public static DataRow GetByID(string TableName, string IDColumn, int ID)
+        //{
+        //    string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
+        //    DataTable dt = DataHandler.getDataTable(sql);
+        //    if (dt.Rows.Count == 0)
+        //    {
+        //        //TODO: Throw Exception
+        //    }
+        //    return dt.Rows[0];
+        //}
 
         public static bool IDExists(string TableName, string IDColumn, int ID)
         {
@@ -63,28 +67,52 @@ namespace PSS.Data_Access
             return dt.Rows.Count != 0;
         }
 
-        public static int GetNextID(string TableName, string IDColumn)
-        {
-            string sql = string.Format("SELECT * FROM {0} GROUP BY {1} DESC", TableName, IDColumn);
-            return DataHandler.getDataTable(sql).Rows[0].Field<int>(IDColumn) + 1;
-        }
+        //public static int GetNextID(string TableName, string IDColumn)
+        //{
+        //    string sql = string.Format("SELECT * FROM {0} GROUP BY {1} DESC", TableName, IDColumn);
+        //    return DataHandler.getDataTable(sql).Rows[0].Field<int>(IDColumn) + 1;
+        //}
 
-        public static void UpdateORInsert(IModifyable data, string TableName, string IDColumn, int ID)
-        {
-            if (IDExists(TableName, IDColumn, ID))
-            {
-                DataHandler.Update(data.Update());
-            }
-            else
-            {
-                DataHandler.Insert(data.Insert());
-            }
-        }
+        //public static void UpdateORInsert(IModifyable data, string TableName, string IDColumn, int ID)
+        //{
+        //    if (IDExists(TableName, IDColumn, ID))
+        //    {
+        //        DataHandler.Update(data.Update());
+        //    }
+        //    else
+        //    {
+        //        DataHandler.Insert(data.Insert());
+        //    }
+        //}
 
-        public static DataTable GetAll(string TableName)
+        public static DataTable GetAll(string TableName) //attempt to move
         {
             string sql = string.Format("SELECT * FROM {0}", TableName);
             return DataHandler.getDataTable(sql);
+        }
+
+        public static Client GetByClientID(int ID)
+        {
+            bool BC = IDExists(BusinessClient.tableName, BusinessClient.idColumn, ID);
+            bool IC = IDExists(IndividualClient.tableName, IndividualClient.idColumn, ID);
+
+            Client ret;
+
+            if (BC)
+            {
+                ret = new IndividualClient();
+            }
+            else if (IC)
+            {
+                ret = new BusinessClient();
+            }
+            else
+            {
+                throw new Exception();
+            }
+
+            ret.FillWithID(ID);
+            return ret;
         }
 
         public static string GetProgressRapport(string ticketNo)

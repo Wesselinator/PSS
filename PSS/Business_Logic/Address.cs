@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using System.Data;
-using PSS.Data_Access;
-using PSS.Business_Logic;
 
 namespace PSS.Business_Logic
 {
     public class Address : BaseSingleID
     {
-        public int AddressID { get; set; }
+        public int AddressID { get => ID; private set => ID = value; }
         public string Street { get; set; }
         public string City { get; set; }
         public string PostalCode { get; set; }
@@ -48,24 +46,12 @@ namespace PSS.Business_Logic
             this.Province = row.Field<string>("Province");
         }
 
-        //P3
-        public void FillWithID(int ID)
-        {
-            FillFromRow(GetByID(ID));
-        }
-
-        //P4
-        public void Save()
-        {
-            UpdateORInsert();
-        }
-
         protected override string Update()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("UPDATE " + TableName);
-
             sql.Append("SET ");
+
             sql.Append("Street = '" + Street + "', ");
             sql.Append("City = '" + City + "', ");
             sql.Append("PostalCode = '" + PostalCode + "', ");
@@ -80,13 +66,14 @@ namespace PSS.Business_Logic
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("INSERT INTO " + TableName);
-
             sql.Append("VALUES (");
+
             sql.Append(AddressID + ", ");
             sql.Append("'" + Street + "', ");
             sql.Append("'" + City + "', ");
             sql.Append("'" + PostalCode + "', ");
             sql.Append("'" + Province + "' ");
+
             sql.AppendLine(");");
 
             return sql.ToString();
@@ -118,10 +105,10 @@ namespace PSS.Business_Logic
         public override int GetHashCode()
         {
             int hashCode = -1008569148;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Street);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(City);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(PostalCode);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Province);
+            hashCode = hashCode * -1521134295 + Street.GetHashCode();
+            hashCode = hashCode * -1521134295 + City.GetHashCode();
+            hashCode = hashCode * -1521134295 + PostalCode.GetHashCode();
+            hashCode = hashCode * -1521134295 + Province.GetHashCode();
             return hashCode;
         }
     }

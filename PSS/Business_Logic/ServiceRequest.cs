@@ -6,15 +6,21 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public class ServiceRequest : IModifyable
+    public class ServiceRequest : BaseSingleID
     {
-        public int ServiceRequestID { get; private set; }
+        public int ServiceRequestID { get => ID; private set => ID = value; }
         public string Title { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
         public Client Client { get; set; }
 
-        public ServiceRequest(int serviceRequestID, string title, string type, string description, Client client)
+        private static readonly string tableName = "ServiceRequest";
+        private static readonly string idColumn = "ServiceRequestID";
+
+        public ServiceRequest() : base(tableName, idColumn)
+        { }
+
+        public ServiceRequest(int serviceRequestID, string title, string type, string description, Client client) : this()
         {
             this.ServiceRequestID = serviceRequestID;
             this.Title = title;
@@ -23,46 +29,38 @@ namespace PSS.Business_Logic
             this.Client = client;
         }
 
-        public ServiceRequest(string title, string type, string description, Client client)
-        : this(DataEngine.GetNextID(TableName, IDColumn), title, type, description, client)
-        {  }
-
-        public ServiceRequest()
-        {  }
+        public ServiceRequest(string title, string type, string description, Client client) : this()
+        {
+            this.ServiceRequestID = base.GetNextID();
+            this.Title = title;
+            this.Type = type;
+            this.Description = description;
+            this.Client = client;
+        }
 
         #region Database
 
-        private static readonly string TableName = "ServiceRequest";
-        private static readonly string IDColumn = "ServiceRequestID";
-
-        public ServiceRequest(DataRow row)
+        public override void FillFromRow(DataRow row)
         {
             this.ServiceRequestID = row.Field<int>(IDColumn);
             this.Title = row.Field<string>("ServiceRequestTitle");
             this.Type = row.Field<string>("ServiceRequestType");
             this.Description = row.Field<string>("ServiceRequestDescription");
-            this.Client = Client.GetByClientID(row.Field<int>("ClientEntityID"));
+            this.Client = DataEngine.GetByClientID(row.Field<int>("ClientEntityID"));
         }
 
-        //P3
-        public static ServiceRequest GetID(int ID)
+        public override void Save()
         {
-            return new ServiceRequest(DataEngine.GetByID(TableName, IDColumn, ID));
+            Client.Save();
+            base.Save();
         }
 
-        //P4
-        public void Save()
-        {
-            Client.Save(); //Excecute Update/Insert for Client first then do this one
-            DataEngine.UpdateORInsert(this, TableName, IDColumn, ServiceRequestID);
-        }
-
-        string IUpdateable.Update()
+        protected override string Update()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("UPDATE " + TableName);
-
             sql.Append("SET ");
+
             sql.Append("ServiceRequestTitle = '" + Title + "',");
             sql.Append("ServiceRequestType = '" + Type + "',");
             sql.Append("ServiceRequestDescription = '" + Description + "',");
@@ -73,21 +71,23 @@ namespace PSS.Business_Logic
             return sql.ToString();
         }
 
-        string IInsertable.Insert()
+        protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("INSERT INTO " + TableName);
-
             sql.Append("VALUES (");
+
             sql.Append(ServiceRequestID + ", ");
             sql.Append("'" + Title + "', ");
             sql.Append("'" + Type + "', ");
             sql.Append("'" + Description + "', ");
             sql.Append(Client.ClientID);
+
             sql.AppendLine(");");
 
             return sql.ToString();
         }
+
         #endregion
 
         public bool Verify(Client client)
@@ -102,17 +102,17 @@ namespace PSS.Business_Logic
                    Title == request.Title &&
                    Type == request.Type &&
                    Description == request.Description &&
-                   EqualityComparer<Client>.Default.Equals(Client, request.Client); //TODO: Update this when Equals is in Client
+                   Client.Equals(request.Client);
         }
 
         public override int GetHashCode()
         {
             int hashCode = -1848433835;
             hashCode = hashCode * -1521134295 + ServiceRequestID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Title);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Client>.Default.GetHashCode(Client);
+            hashCode = hashCode * -1521134295 + Title.GetHashCode();
+            hashCode = hashCode * -1521134295 + Type.GetHashCode();
+            hashCode = hashCode * -1521134295 + Description.GetHashCode();
+            hashCode = hashCode * -1521134295 + Client.GetHashCode();
             return hashCode;
         }
 

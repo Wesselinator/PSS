@@ -6,9 +6,9 @@ using System.Data;
 
 namespace PSS.Business_Logic
 {
-    public class Task : IModifyable
+    public class Task : BaseSingleID
     {
-        public int TaskID { get; private set; }
+        public int TaskID { get => ID; private set => ID = value; }
         public string Title { get; set; }
         public string Descripion { get; set; }
         public string Notes { get; set; }
@@ -16,7 +16,13 @@ namespace PSS.Business_Logic
         public DateTime DateProcessed { get; set; }
         public bool IsFinished { get; set; }
 
-        public Task(int taskID, string title, string descripion, string notes, ServiceRequest serviceRequest, DateTime dateProcessed, bool isFinished)
+        private static readonly string tableName = "Task";
+        private static readonly string idColumn = "TaskID";
+
+        public Task() : base(tableName, idColumn)
+        { }
+
+        public Task(int taskID, string title, string descripion, string notes, ServiceRequest serviceRequest, DateTime dateProcessed, bool isFinished) : this()
         {
             this.TaskID = taskID;
             this.Title = title;
@@ -27,42 +33,41 @@ namespace PSS.Business_Logic
             this.IsFinished = isFinished;
         }
 
-        public Task(string title, string descripion, string notes, ServiceRequest serviceRequest, DateTime dateProcessed, bool isFinished)
-             : this(DataEngine.GetNextID(TableName, IDColumn), title, descripion, notes, serviceRequest, dateProcessed, isFinished)
-        {  }
-
-        public Task()
-        {  }
+        public Task(string title, string descripion, string notes, ServiceRequest serviceRequest, DateTime dateProcessed, bool isFinished) : this()
+        {
+            this.TaskID = base.GetNextID();
+            this.Title = title;
+            this.Descripion = descripion;
+            this.Notes = notes;
+            this.ServiceRequest = serviceRequest;
+            this.DateProcessed = dateProcessed;
+            this.IsFinished = isFinished;
+        }
 
         #region DataBase
 
-        private static readonly string TableName = "Task";
-        private static readonly string IDColumn = "TaskID";
-
-        public Task(DataRow row)
+        public override void FillFromRow(DataRow row)
         {
             this.TaskID = row.Field<int>(IDColumn);
             this.Title = row.Field<string>("Title");
             this.Descripion = row.Field<string>("Descripion");
             this.Notes = row.Field<string>("Notes");
-            this.ServiceRequest = ServiceRequest.GetID(row.Field<int>("ServiceRequestID"));
+
+            this.ServiceRequest = new ServiceRequest(); //is this needed?
+            this.ServiceRequest.FillWithID(row.Field<int>("ServiceRequestID"));
+
             this.DateProcessed = row.Field<DateTime>("DateProcessed");
             this.IsFinished = row.Field<bool>("IsFinished");
         }
 
-        //P3
-        public Task(int ID)
-                : this(DataEngine.GetByID(TableName, IDColumn, ID))
-        { }
-
         //P4
-        public void Save()
+        public override void Save()
         {
             ServiceRequest.Save();
-            DataEngine.UpdateORInsert(this, TableName, IDColumn, TaskID);
+            base.Save();
         }
 
-        string IUpdateable.Update()
+        protected override string Update()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("UPDATE " + TableName);
@@ -80,7 +85,7 @@ namespace PSS.Business_Logic
             return sql.ToString();
         }
 
-        string IInsertable.Insert()
+        protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("INSERT INTO " + TableName);
@@ -119,7 +124,7 @@ namespace PSS.Business_Logic
                    Title == task.Title &&
                    Descripion == task.Descripion &&
                    Notes == task.Notes &&
-                   EqualityComparer<ServiceRequest>.Default.Equals(ServiceRequest, task.ServiceRequest) &&
+                   ServiceRequest.Equals(task.ServiceRequest) &&
                    DateProcessed == task.DateProcessed &&
                    IsFinished == task.IsFinished;
         }
@@ -128,10 +133,10 @@ namespace PSS.Business_Logic
         {
             int hashCode = -1945863682;
             hashCode = hashCode * -1521134295 + TaskID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Title);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Descripion);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Notes);
-            hashCode = hashCode * -1521134295 + EqualityComparer<ServiceRequest>.Default.GetHashCode(ServiceRequest);
+            hashCode = hashCode * -1521134295 + Title.GetHashCode();
+            hashCode = hashCode * -1521134295 + Descripion.GetHashCode();
+            hashCode = hashCode * -1521134295 + Notes.GetHashCode();
+            hashCode = hashCode * -1521134295 + ServiceRequest.GetHashCode();
             hashCode = hashCode * -1521134295 + DateProcessed.GetHashCode();
             hashCode = hashCode * -1521134295 + IsFinished.GetHashCode();
             return hashCode;

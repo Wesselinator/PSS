@@ -5,42 +5,47 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public class BusinessClient : Client, IModifyable
+    public class BusinessClient : Client
     {
+        public override int ClientID { get; protected set; } //needed?
         public string BusinessName { get; set; }
         public Person ContactPerson { get => Person; set => Person = value; }
-        
-        public BusinessClient(int businessID, string businessName, string type, string status, string notes, Address address, Person person) : base(businessID, type, status, notes, address, person)
+
+        public static readonly string tableName = "BusinessClient";
+        public static readonly string idColumn = "BusinessClientID";
+        private static readonly string personColumn = "PrimaryContactPersonID";
+
+        public BusinessClient() : base(tableName, idColumn)
+        {  }
+
+        public BusinessClient(int businessID, string businessName, string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
         {
+            ClientID = businessID;
             BusinessName = businessName;
         }
-        public BusinessClient() : base()
-        {  }
+
+        public BusinessClient(string businessName, string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
+        {
+            //ClientID = GetClientID
+            BusinessName = businessName;
+        }
 
         #region DataBase
 
-        private static readonly string TableName = "BusinessClient";
-        private static readonly string IDColumn = "BusinessClientID";
-
-        public BusinessClient(DataRow row) : base(row, "PrimaryContactPersonID")
+        public override void FillFromRow(DataRow row)
         {
             BusinessName = row.Field<string>("BusinessName");
+            FillPartialRow(row, personColumn);
         }
 
-        //P3
-        public BusinessClient(int ID)
-        : this(DataEngine.GetByID(TableName, IDColumn, ID))
-        {  }
-
-        //P4
         public override void Save()
         {
             Address.Save();
             Person.Save();
-            DataEngine.UpdateORInsert(this, TableName, IDColumn, ClientID);
+            base.Save();
         }
 
-        string IUpdateable.Update()
+        protected override string Update()
         {
             StringBuilder sql = new StringBuilder();
 
@@ -49,10 +54,10 @@ namespace PSS.Business_Logic
 
             sql.Append("BusinessName = '" + BusinessName + "',");
 
-            return base.Update(sql);
+            return base.UpdatePartial(sql);
         }
 
-        string IInsertable.Insert()
+        protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("INSERT INTO " + TableName);
@@ -67,7 +72,7 @@ namespace PSS.Business_Logic
             sql.Append(ContactPerson.PersonID);
             sql.AppendLine(");");
 
-            return base.Insert(sql);
+            return base.InsertPartial(sql);
         }
 
         #endregion

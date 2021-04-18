@@ -4,15 +4,17 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public abstract class BaseSingleID : BaseMultiID
+    public abstract class BaseSingleID : BaseTable
     {
-        protected int ID { get => IDs[0]; set => IDs = new int[1] { value }; }
-        protected string IDColumn { get => IDColumns[0]; }
+        protected int ID { get; set; }
+        protected string IDColumn { get; private set; }
 
-        protected BaseSingleID(string tableName, string idColumn) : base(tableName, idColumn)
-        {  }
+        protected BaseSingleID(string tableName, string idColumn) : base(tableName)
+        {
+            IDColumn = idColumn;
+        }
 
-        protected int GetNextID()
+        protected virtual int GetNextID()
         {
             //VERBOSE: Becuase I want to see everything that happens
             string sql = string.Format("SELECT * FROM {0} ORDER BY {1} DESC;", TableName, IDColumn);
@@ -29,16 +31,19 @@ namespace PSS.Business_Logic
             }
         }
 
-        public override DataRow GetByIDs(params int[] ids) //you should not use this one
+        //its 2am figure this out better tommorow
+        public virtual T GetByID<T>(int id) where T : BaseSingleID, new()
         {
-            return GetByID(ids[0]);
+            T ass = new T(); //this right here is the issue
+            ass.FillFromRow(GetByID(id));
+            return ass;
         }
 
-        public DataRow GetByID(int id)
+        public virtual DataRow GetByID(int id)
         {
             string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, id);
-
             DataTable dt = DataHandler.getDataTable(sql);
+
             if (dt.Rows.Count == 0)
             {
                 throw new Exception(); //TODO: Throw Exception
@@ -46,17 +51,20 @@ namespace PSS.Business_Logic
             return dt.Rows[0];
         }
 
-        protected override bool IDExists()
+        public override DataTable GetAll()
         {
             string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
-            DataTable dt = DataHandler.getDataTable(sql);
-            return dt.Rows.Count != 0;
+            return DataHandler.getDataTable(sql);
         }
 
-        protected override void UpdateORInsert() //it just looks nicer and you can follow the logic closer
+        protected override sealed bool IDExists()
         {
-            base.UpdateORInsert();
+            return GetAll().Rows.Count != 0;
         }
 
+        public void FillWithID(int ID)
+        {
+            FillFromRow(GetByID(ID));
+        }
     }
 }
