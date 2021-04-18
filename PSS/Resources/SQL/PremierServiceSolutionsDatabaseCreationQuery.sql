@@ -59,7 +59,7 @@ CREATE TABLE Contract
  OfferStartDate DATETIME NOT NULL,
  OfferEndDate DATETIME,
  ContractDurationInMonths INT NOT NULL CHECK(ContractDurationInMonths>0),
- MontlyFee MONEY NOT NULL
+ MonthlyFee MONEY NOT NULL
 )
 
 GO
@@ -152,7 +152,7 @@ CREATE TABLE BusinessClient
 
 ALTER TABLE BusinessClient
 ADD CONSTRAINT FK_BusinessClient#ContactPerson FOREIGN KEY (PrimaryContactPersonID) REFERENCES Person(PersonID),
-	CONSTRAINT FK_BusinessClient#Address FOREIGN KEY (AddressID) REFERENCES Address(AddressID)
+	CONSTRAINT FK_BusinessClient#Address FOREIGN KEY (AddressID) REFERENCES Address(AddressID);
 
 GO
 
@@ -198,6 +198,8 @@ CREATE TABLE IndividualClientFollowUp
  PRIMARY KEY(IndividualClientID, FollowUpReportID)
 )
 
+GO
+
 CREATE TABLE BusinessClientFollowUp
 (BusinessClientID INT NOT NULL REFERENCES BusinessClient(BusinessClientID),
  FollowUpReportID INT NOT NULL REFERENCES FollowUpReport(FollowUpReportID),
@@ -213,14 +215,14 @@ GO
 -- FollowUpReportID INT NOT NULL REFERENCES FollowUpReport(FollowUpReportID)
 --)
 
-ALTER TABLE FollowUpCall
-ADD CONSTRAINT FK_FollowUpCall#FollowUpReport FOREIGN KEY (FollowUpReportID) REFERENCES FollowUpReport(FollowUpReportID)
+--ALTER TABLE FollowUpCall
+--ADD CONSTRAINT FK_FollowUpCall#FollowUpReport FOREIGN KEY (FollowUpReportID) REFERENCES FollowUpReport(FollowUpReportID)
 
 GO
 
 CREATE TABLE ServiceRequest
 (ServiceRequestID INT PRIMARY KEY,
- ServiceRequestTitle VARCHAR(30) NOT NULL,
+ ServiceRequestTitle VARCHAR(40) NOT NULL,
  ServiceRequestType VARCHAR(20) NOT NULL,
  ServiceRequestDescription VARCHAR(MAX) NOT NULL,
  DateReceived DATETIME NOT NULL
@@ -243,7 +245,7 @@ CREATE TABLE IndividualClientServiceRequest
 
 CREATE TABLE Task
 (TaskID INT PRIMARY KEY,
- TaskTitle VARCHAR(30) NOT NULL,
+ TaskTitle VARCHAR(50) NOT NULL,
  TaskType VARCHAR(20) NOT NULL,
  TaskDescription VARCHAR(MAX) NOT NULL,
  TaskNotes VARCHAR(MAX),
@@ -514,7 +516,7 @@ INSERT INTO BusinessClient (BusinessClientID, BusinessName, Type, Status, Notes,
 	VALUES (2, 'Renner Accounting Services', 'Loyal Customer', 'Active', 'Renner Accounting Services has been a loyal customer since 2005', 17, 3),
 		   (4, 'Wielfred Marketing Agency', 'Wandering Customer', 'Active', 'The Wielfred marketing agency has abruptly stopped and changed printer contracts in the past', 13, 4),
 		   (6, 'Personal Growth Consultations', 'New Customer', 'Active', 'Personal Growth Consultations is a small 1 man business who approached PSS in 2021', 7, 5);
-		   --(8, 'Garsfontein High School', 'New Customer', 'Active', 'Garsfontein High School contacted PSS in 2021 and were reffered to by Personal Growth Consultations', , 7)
+		   --(8, 'Garsfontein High School', 'New Customer', 'Active', 'Garsfontein High School contacted PSS in 2021 and were reffered to by Personal Growth Consultations', , 7);
 
 GO
 
@@ -527,10 +529,14 @@ INSERT INTO	BusinessClientPerson (BusinessClientID, PersonID, Role)
 		   (4,13,'Business Owner'),
 		   (6,7,'Business Owner')
 
+GO
+
 INSERT INTO IndividualClientContract (IndividualClientContractID, ContractID, IndividualClientID, EffectiveDate)
 	VALUES (1,10, 1, '2021/04/13'),
 		   (2,5, 9, '2021/04/04'),
 		   (3,6, 9, '2021/04/18');
+
+GO
 
 INSERT INTO BusinessClientContract (BusinessClientContractID, ContractID, BusinessClientID, EffectiveDate)
 	VALUES (1,3, 2, '2021/04/02'),
@@ -538,11 +544,13 @@ INSERT INTO BusinessClientContract (BusinessClientContractID, ContractID, Busine
 		   (3,13, 4, '2021/04/02'),
 		   (4,7, 4, '2021/04/02'),
 		   (5,2, 4, '2021/04/15'),
-		   (6,11, 6, '2021/04/02'),
-		   (7,14, 8, '2021/04/02');
+		   (6,11, 6, '2021/04/02');
+		   --(7,14, 8, '2021/04/02');
+
+GO
 
 --start inserting from here christopher
-INSERT INTO ServiceRequest (ServiceRequestID, ServiceRequestTitle, ServiceRequestType, ServiceRequestDescription)
+INSERT INTO ServiceRequest (ServiceRequestID, ServiceRequestTitle, ServiceRequestType, ServiceRequestDescription, DateReceived)
 	VALUES (1, 'Fix Broken Printer', 'Client Requested', 'HP printer model 775 not printing, its displays error code 50','2021/04/04'),
 		   (2, 'Refill Printer Ink Cartridges', 'Routine Maintenance', 'EPSON model 90 heavy duty printer ink refill per contract agreement','2021/04/15'),
 		   (3, 'Routine maintenance on computer lab', 'Routine Maintenance', 'Perform maintenance tasks on computer lab computers per contract agreement.','2021/04/15'),
@@ -550,7 +558,7 @@ INSERT INTO ServiceRequest (ServiceRequestID, ServiceRequestTitle, ServiceReques
 		   (5, 'Routine maintenance on computer lab', 'Routine Maintenance', 'Perform maintenance tasks on computer lab computers. Availible times for client include 2pm to 5pm Monday to Friday','2021/04/15'),
 		   (6, 'Fix or Replace Broken PC', 'Client Requested', 'Computer does not turn and cannot boot into diagnostic mode','2021/04/17')
 	
-
+GO
 
 INSERT INTO BusinessClientServiceRequest (BusinessClientID, ServiceRequestID)
 	VALUES (2, 2),
@@ -559,8 +567,14 @@ INSERT INTO BusinessClientServiceRequest (BusinessClientID, ServiceRequestID)
 		   (6, 1),
 		   (8, 4)
 
+GO
+
 INSERT INTO IndividualClientServiceRequest (IndividualClientID, ServiceRequestID)
 	VALUES (1, 6);
 
+GO
+
 INSERT INTO Task (TaskID, TaskTitle, TaskType, TaskDescription, TaskNotes, ServiceRequestID, AddressID, DateProcessed, IsFinished)
-	VALUES (1, 'Fix hardware issue on HP printer model 775', 'Hardware Related', 'Printer error code reports a hardware problem. Attempt or fix, if not repairible on the customer site, schedule pickup repair', '', 0, 0, GETDATE(), DEFAULT);
+	VALUES (1, 'Fix hardware issue on HP printer model 775', 'Hardware Related', 'Printer error code reports a hardware problem. Attempt or fix, if not repairible on the customer site, schedule pickup repair', '', 1, 1, GETDATE(), DEFAULT);
+
+GO
