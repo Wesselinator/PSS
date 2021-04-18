@@ -93,7 +93,7 @@ GO
 --ALTER TABLE ContactInformation
 --ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL)
 
-CREATE TABLE Address
+CREATE TABLE [Address]
 (AddressID INT PRIMARY KEY,
  Street VARCHAR(50) NOT NULL,
  City VARCHAR(30) NOT NULL,
@@ -179,8 +179,6 @@ CREATE TABLE IndividualClientContract
 )
 
 GO
-
-
 
 CREATE TABLE FollowUpReport
 (FollowUpReportID INT PRIMARY KEY,
