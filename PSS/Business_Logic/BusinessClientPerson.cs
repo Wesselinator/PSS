@@ -21,7 +21,7 @@ namespace PSS.Business_Logic
         public string Role { get; set; }
 
         private static readonly string tableName = "BusinessClientPerson";
-        public static readonly string idColumn1 = "BusinessClientID";
+        public static readonly string idColumn1 = BusinessClient.idColumn;
         private static readonly string idColumn2 = "PersonID";
 
         public BusinessClientPerson() : base(tableName, idColumn1, idColumn2)

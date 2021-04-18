@@ -13,19 +13,25 @@ namespace PSS.Business_Logic
         public string BusinessName { get; set; }
         public Person ContactPerson { get => Person; set => Person = value; }
         public MultiIDList<BusinessClientPerson> BusinessClientPeople { get; set; }
+        public MultiIDList<BusinessClientServiceRequest> ServiceRequests { get; set; }
 
         public static readonly string tableName = "BusinessClient";
         public static readonly string idColumn = "BusinessClientID";
         private static readonly string personColumn = "PrimaryContactPersonID";
 
         public BusinessClient() : base(tableName, idColumn)
-        {  }
+        {
+            BusinessClientPeople = new MultiIDList<BusinessClientPerson>();
+            ServiceRequests = new MultiIDList<BusinessClientServiceRequest>();
+        }
 
         public BusinessClient(int businessID, string businessName, string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
         {
             ClientID = businessID;
             BusinessName = businessName;
-            BusinessClientPeople.FillWithPivotColumn(businessID, BusinessClientPerson.idColumn1);
+
+            BusinessClientPeople.FillWithPivotColumn(businessID, idColumn);
+            ServiceRequests.FillWithPivotColumn(businessID, idColumn);
         }
 
         public BusinessClient(string businessName, string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
@@ -45,8 +51,10 @@ namespace PSS.Business_Logic
         public override void Save()
         {
             Address.Save();
+            BusinessClientPeople.SaveAll();
             Person.Save();
             base.Save();
+            ServiceRequests.SaveAll(); //Create Businsess client first before services
         }
 
         protected override string Update()

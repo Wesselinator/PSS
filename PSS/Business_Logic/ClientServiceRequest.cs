@@ -22,7 +22,7 @@ namespace PSS.Business_Logic
             }
         }
 
-        private static readonly string idColumn2 = "ServiceRequestID";
+        public static readonly string idColumn2 = "ServiceRequestID";
         private readonly string ID1;
 
         public ClientServiceRequest(string tableName, string idColumn1) : base(tableName, idColumn1, idColumn2)
@@ -41,7 +41,7 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             this.ClientID = row.Field<int>(ID1);
-            this.ServiceRequest
+            this.ServiceRequest = DataEngine.GetDataObject<ServiceRequest>(row.Field<int>(idColumn2));
         }
 
         public override void Save()
@@ -56,12 +56,10 @@ namespace PSS.Business_Logic
             sql.AppendLine("UPDATE " + TableName);
             sql.Append("SET ");
 
-            sql.AppendLine("Role = '" + Role + "'");
-
             sql.Append("WHERE ");
-            sql.Append(idColumn1 + " = " + BusinessClientID);
+            sql.Append(ID1 + " = " + ClientID);
             sql.Append(" AND ");
-            sql.AppendLine(idColumn2 + " = " + Person.PersonID);
+            sql.AppendLine(idColumn2 + " = " + ServiceRequest.ServiceRequestID);
 
             return sql.ToString();
         }
@@ -72,9 +70,8 @@ namespace PSS.Business_Logic
             sql.AppendLine("INSERT INTO " + TableName);
             sql.Append("VALUES (");
 
-            sql.Append(BusinessClientID + ", ");
-            sql.Append(Person.PersonID + ", ");
-            sql.AppendLine("'" + Role + "'");
+            sql.Append(ClientID + ", ");
+            sql.AppendLine(ServiceRequest.ServiceRequestID.ToString());
 
             sql.AppendLine(");");
 
@@ -83,5 +80,17 @@ namespace PSS.Business_Logic
 
 
         #endregion
+    }
+
+    public class BusinessClientServiceRequest : ClientServiceRequest
+    {
+        public BusinessClientServiceRequest() : base("BusinessClientServiceRequest", BusinessClient.idColumn)
+        {  }
+    }
+
+    public class IndividualClientServiceRequest : ClientServiceRequest
+    {
+        public IndividualClientServiceRequest() : base("IndividualClientServiceRequest", IndividualClient.idColumn)
+        { }
     }
 }
