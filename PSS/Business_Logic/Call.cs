@@ -6,7 +6,7 @@ using System.Data;
 //REWORK
 namespace PSS.Business_Logic
 {
-    class Call : BaseSingleID
+    public class Call : BaseSingleID
     {
         private DateTime startTime;
         private DateTime endTime;
