@@ -5,19 +5,18 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public abstract class BaseMultiID
+    public abstract class BaseMultiID : BaseTable
     {
         protected int[] IDs { get; set; }
-        public string TableName { get; private set; }
         protected string[] IDColumns { get; private set; }
 
-        protected BaseMultiID(string tableName, params string[] idColumns)
+        protected BaseMultiID(string tableName, params string[] idColumns) : base(tableName)
         {
-            this.TableName = tableName;
             this.IDColumns = idColumns;
+            this.IDs = new int[idColumns.Length];
         }
 
-        public virtual DataRow GetByIDs(params int[] ids)
+        public DataRow GetByIDs(params int[] ids)
         {
             if (ids.Length != IDColumns.Length)
             {
@@ -44,27 +43,50 @@ namespace PSS.Business_Logic
             return "WHERE " + string.Join(" AND ", wheres);
         }
 
-        protected virtual bool IDExists()
+        protected override sealed bool IDExists()
         {
             string sql = string.Format("SELECT * FROM {0} {1}", TableName, WhereIDs(IDs));
             DataTable dt = DataHandler.getDataTable(sql);
             return dt.Rows.Count != 0;
         }
 
-        protected virtual void UpdateORInsert() //virtual?
+        public virtual void FillWithIDs(params int[] ids)
         {
-            if (IDExists())
+            if (ids.Length != IDs.Length)
             {
-                DataHandler.Update(Update());
+                throw new Exception();
             }
-            else
-            {
-                DataHandler.Insert(Insert());
-            }
+
+            FillFromRow(GetByIDs(ids));
         }
 
-        protected abstract string Update();
-        protected abstract string Insert();
-        public abstract void FillFromRow(DataRow row);
+        public virtual DataTable GetAllOnPivot(int id, string column)
+        {
+            if (Array.Exists(IDColumns, s => s == column))
+            {
+                string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, column, id);
+                return DataHandler.getDataTable(sql);
+            }
+
+            throw new Exception();
+        }
+
+        //TODO: Move this up for OOP
+        protected int GetNextIDOn(int column)
+        {
+            //VERBOSE: Becuase I want to see everything that happens
+            string sql = string.Format("SELECT * FROM {0} ORDER BY {1} DESC;", TableName, IDColumns[column]);
+            DataTable dt = DataHandler.getDataTable(sql);
+            try
+            {
+                DataRow dr = dt.Rows[0];
+                int nextID = dr.Field<int>(column) + 1;
+                return nextID;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return 0; //empty 
+            }
+        }
     }
 }

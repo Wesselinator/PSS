@@ -1,27 +1,92 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using PSS.Data_Access;
 
+//CHECK
 namespace PSS.Business_Logic
 {
-    class Service : IModifyable
+    class Service : BaseSingleID
     {
-        public int ServiceID { get; set; }
+        public int ServiceID { get => ID; private set => ID = value; }
         public string ServiceName { get; set; }
         public string ServiceDescription { get; set; }
 
-        private static readonly string TableName = "Service";
-        private static readonly string IDColumn = "ServiceID";
+        private static readonly string tableName = "Service";
+        private static readonly string idColumn = "ServiceID";
 
-        public Service(int serviceID, string serviceName, string serviceDescription)
+        public Service() : base(tableName, idColumn)
+        { }
+
+        public Service(int serviceID, string serviceName, string serviceDescription) : this()
         {
             ServiceID = serviceID;
             ServiceName = serviceName;
             ServiceDescription = serviceDescription;
+        }
+
+        public Service(string serviceName, string serviceDescription) : this()
+        {
+            ServiceID = base.GetNextID();
+            ServiceName = serviceName;
+            ServiceDescription = serviceDescription;
+        }
+
+
+        #region DataBase
+
+
+        public override void FillFromRow(DataRow row)
+        {
+            this.ServiceID = row.Field<int>(IDColumn);
+            this.ServiceName = row.Field<string>("ServiceName");
+            this.ServiceDescription = row.Field<string>("ServiceLevel");
+        }
+
+        protected override string Update()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("UPDATE " + TableName);
+            sql.Append("SET ");
+
+            sql.Append("ServiceName = '" + ServiceName + "', ");
+            sql.Append("ServiceDescription = '" + ServiceDescription + "'");
+
+            sql.AppendLine("WHERE " + IDColumn + " = " + ServiceID);
+
+            return sql.ToString();
+        }
+
+        protected override string Insert()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("INSERT INTO " + TableName);
+            sql.Append("VALUES (");
+
+            sql.Append(ServiceID + ", ");
+            sql.Append("'" + ServiceName + "', ");
+            sql.Append("'" + ServiceDescription + "' ");
+
+            sql.AppendLine(");");
+
+            return sql.ToString();
+        }
+
+
+        #endregion
+
+
+        public List<Service> GetServices()
+        {
+            List<Service> services = new List<Service>();
+            DataTable dt = DataHandler.getDataTable("SELECT * FROM Service");
+            foreach (DataRow service in dt.Rows)
+            {
+                services.Add(new Service((int)service[0], (string)service[1], (string)service[2]));
+            }
+
+            return services;
         }
 
         public override bool Equals(object obj)
@@ -36,8 +101,8 @@ namespace PSS.Business_Logic
         {
             int hashCode = 723082494;
             hashCode = hashCode * -1521134295 + ServiceID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ServiceName);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ServiceDescription);
+            hashCode = hashCode * -1521134295 + ServiceName.GetHashCode();
+            hashCode = hashCode * -1521134295 + ServiceDescription.GetHashCode();
             return hashCode;
         }
 
@@ -45,71 +110,5 @@ namespace PSS.Business_Logic
         {
             return base.ToString();
         }
-
-        public Service()// : base(TableName, IDColumn)
-        { }
-
-        #region DataBase
-
-        public List<Service> GetServices()
-        {
-            List<Service> services = new List<Service>();
-            DataTable dt = DataHandler.getDataTable("SELECT * FROM Service");
-            foreach (DataRow service in dt.Rows)
-            {
-                services.Add(new Service((int)service[0], (string)service[1], (string)service[2]));
-            }
-
-            return services;
-        }
-
-        public Service(DataRow row) : this()
-        {
-            this.ServiceID = row.Field<int>(IDColumn);
-            this.ServiceName = row.Field<string>("ServiceName");
-            this.ServiceDescription = row.Field<string>("ServiceLevel");
-        }
-
-        //P3
-        public Service(int ID)
-                : this(DataEngine.GetByID(TableName, IDColumn, ID))
-        { }
-
-        //P4
-        public void Save()
-        {
-            DataEngine.UpdateORInsert(this, TableName, IDColumn, ServiceID);
-        }
-
-        string IUpdateable.Update()
-        {
-            StringBuilder sql = new StringBuilder();
-            sql.AppendLine("UPDATE " + TableName);
-
-            sql.Append("SET ");
-            sql.Append("ServiceName = '" + ServiceName + "', ");
-            sql.Append("ServiceDescription = '" + ServiceDescription + "'");
-
-            sql.AppendLine("WHERE " + IDColumn + " = " + ServiceID);
-
-            return sql.ToString();
-        }
-
-        string IInsertable.Insert()
-        {
-            StringBuilder sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO " + TableName);
-
-            sql.Append("VALUES (");
-            sql.Append(ServiceID + ", ");
-            sql.Append("'" + ServiceName + "', ");
-            sql.Append("'" + ServiceDescription + "' ");
-            sql.AppendLine(");");
-
-            return sql.ToString();
-        }
-
-        #endregion
-
     }
 }

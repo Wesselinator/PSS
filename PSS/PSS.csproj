@@ -50,18 +50,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business_Logic\Address.cs" />
+    <Compile Include="Business_Logic\CallChangeAssociation.cs" />
+    <Compile Include="Business_Logic\ClientContract.cs" />
+    <Compile Include="Business_Logic\ClientFollowUp.cs" />
+    <Compile Include="Business_Logic\ClientServiceRequest.cs" />
+    <Compile Include="Business_Logic\FollowUpCall.cs" />
+    <Compile Include="Business_Logic\ServiceLevelAgreement.cs" />
+    <Compile Include="Business_Logic\TechnicianTask.cs" />
+    <Compile Include="Business_Logic\TechnicianTaskFeedback.cs" />
     <Compile Include="Business_Logic\Agent.cs" />
     <Compile Include="Business_Logic\BaseMultiID.cs" />
     <Compile Include="Business_Logic\BaseSingleID.cs" />
+    <Compile Include="Business_Logic\BaseTable.cs" />
     <Compile Include="Business_Logic\BusinessClient.cs" />
-    <Compile Include="Business_Logic\BusinessClientPeople.cs" />
+    <Compile Include="Business_Logic\BaseList.cs" />
     <Compile Include="Business_Logic\BusinessClientPerson.cs" />
     <Compile Include="Business_Logic\Call.cs" />
     <Compile Include="Business_Logic\Contract.cs" />
     <Compile Include="Business_Logic\Client.cs" />
-    <Compile Include="Business_Logic\Employee.cs" />
     <Compile Include="Business_Logic\FollowUp.cs" />
     <Compile Include="Business_Logic\IndividualClient.cs" />
+    <Compile Include="Business_Logic\MultiIDList.cs" />
     <Compile Include="Business_Logic\Person.cs" />
     <Compile Include="Business_Logic\Service.cs" />
     <Compile Include="Business_Logic\ServiceRequest.cs" />
@@ -69,9 +78,6 @@
     <Compile Include="Business_Logic\Task.cs" />
     <Compile Include="Data_Access\DataEngine.cs" />
     <Compile Include="Data_Access\DataHandler.cs" />
-    <Compile Include="Data_Access\IInsertable.cs" />
-    <Compile Include="Data_Access\IModifyable.cs" />
-    <Compile Include="Data_Access\IUpdateable.cs" />
     <Compile Include="Presentation_Layer\CallCentre.cs">
       <SubType>Form</SubType>
     </Compile>

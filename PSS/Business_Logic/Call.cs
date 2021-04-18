@@ -1,62 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Data;
-using PSS.Data_Access;
 
+//REWORK
 namespace PSS.Business_Logic
 {
-    class Call : IModifyable
+    public class Call : BaseSingleID
     {
         private DateTime startTime;
         private DateTime endTime;
-        private int callInstanceID;
-        private int clientID;
-        private string subject;
+        private string descrition;
 
+        public int CallInstanceID { get => ID; private set => ID = value; }
         public DateTime StartTime { get => startTime; set => startTime = value; }
         public DateTime EndTime { get => endTime; set => endTime = value; }
-        public int CallInstanceID { get => callInstanceID; set => callInstanceID = value; }
-        public int ClientID { get => clientID; set => clientID = value; }
-        public string Subject { get => subject; set => subject = value; }
+        public string Description { get => descrition; set => descrition = value; }
 
-        public Call()
+        private static readonly string tableName = "Call";
+        private static readonly string idColumn = "CallInstanceID";
+
+        public Call() : base(tableName, idColumn)
+        {  }
+
+        public Call(int callInstanceID, DateTime startTime, DateTime endTime, string description) : this()
         {
-
+            this.CallInstanceID = callInstanceID;
+            this.StartTime = startTime;
+            this.EndTime = endTime;
+            this.Description = description;
         }
 
-        public Call(DateTime startTime, DateTime endTime, int callInstanceID, int clientID, string subject)
+        public Call(DateTime startTime, DateTime endTime, string description) : this()
         {
-
+            this.CallInstanceID = base.GetNextID();
+            this.StartTime = startTime;
+            this.EndTime = endTime;
+            this.Description = description;
         }
 
         #region Database
 
-        private static readonly string TableName = "Call";
-        private static readonly string IDColumn = "CallInstanceID";
-
-        public Call(DataRow row)
+        public override void FillFromRow(DataRow row)
         {
-            this.callInstanceID = row.Field<int>(IDColumn);
+            this.CallInstanceID = row.Field<int>(IDColumn);
             this.startTime = row.Field<DateTime>("StartTime");
             this.endTime = row.Field<DateTime>("EndTime");
-            this.subject = row.Field<string>("Description");
+            this.descrition = row.Field<string>("Description");
         }
 
-        //P3
-        public Call(int ID)
-            : this(DataEngine.GetByID(TableName, IDColumn, ID)) 
-        { }
-
-        //P4
-        public void Save()
-        {
-            DataEngine.UpdateORInsert(this, TableName, IDColumn, callInstanceID);
-        }
-
-        string IUpdateable.Update()
+        protected override string Update()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("Update " + TableName);
@@ -64,23 +57,23 @@ namespace PSS.Business_Logic
             sql.Append("SET ");
             sql.Append("StartTIme = '" + startTime + "', ");
             sql.Append("EndTime = '" + endTime + "', ");
-            sql.Append("Description = '" + subject + "', ");
+            sql.Append("Description = '" + descrition + "', ");
 
-            sql.Append("WHERE " + IDColumn + " = " + callInstanceID);
+            sql.Append("WHERE " + IDColumn + " = " + CallInstanceID);
 
             return sql.ToString();
         }
 
-        string IInsertable.Insert()
+        protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("INSERT INTO " + TableName);
 
             sql.Append("VALUES (");
-            sql.Append(callInstanceID + ", ");
+            sql.Append(CallInstanceID + ", ");
             sql.Append("'" + startTime + ", ");
             sql.Append("'" + endTime + ", ");
-            sql.Append("'" + subject + "' ");
+            sql.Append("'" + descrition + "' ");
             sql.Append(");");
 
 
@@ -98,31 +91,19 @@ namespace PSS.Business_Logic
         public override bool Equals(object obj)
         {
             return obj is Call call &&
-                   startTime == call.startTime &&
-                   endTime == call.endTime &&
-                   callInstanceID == call.callInstanceID &&
-                   clientID == call.clientID &&
-                   subject == call.subject &&
+                   CallInstanceID == call.CallInstanceID &&
                    StartTime == call.StartTime &&
                    EndTime == call.EndTime &&
-                   CallInstanceID == call.CallInstanceID &&
-                   ClientID == call.ClientID &&
-                   Subject == call.Subject;
+                   Description == call.Description;
         }
 
         public override int GetHashCode()
         {
-            int hashCode = -13129892;
-            hashCode = hashCode * -1521134295 + startTime.GetHashCode();
-            hashCode = hashCode * -1521134295 + endTime.GetHashCode();
-            hashCode = hashCode * -1521134295 + callInstanceID.GetHashCode();
-            hashCode = hashCode * -1521134295 + clientID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(subject);
+            int hashCode = 1863301325;
+            hashCode = hashCode * -1521134295 + CallInstanceID.GetHashCode();
             hashCode = hashCode * -1521134295 + StartTime.GetHashCode();
             hashCode = hashCode * -1521134295 + EndTime.GetHashCode();
-            hashCode = hashCode * -1521134295 + CallInstanceID.GetHashCode();
-            hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Subject);
+            hashCode = hashCode * -1521134295 + Description.GetHashCode();
             return hashCode;
         }
     }

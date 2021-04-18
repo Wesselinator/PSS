@@ -10,7 +10,7 @@ namespace PSS.Data_Access
 {
     public static class DataEngine
     {
-        public static List<Client> GetAllClients()
+        public static List<Client> GetAllClients() //move to Client.cs
         {
             DataTable IC = GetAll("IndividualClient");
             DataTable BC = GetAll("BusinessClient");
@@ -21,70 +21,104 @@ namespace PSS.Data_Access
 
             foreach (DataRow row in IC.Rows)
             {
-                ret.Add(new IndividualClient(row));
+                IndividualClient ic = new IndividualClient();
+                ic.FillFromRow(row);
+                ret.Add(ic);
             }
 
             foreach (DataRow row in BC.Rows)
             {
-                ret.Add(new BusinessClient(row));
+                BusinessClient bc = new BusinessClient();
+                bc.FillFromRow(row);
+                ret.Add(bc);
             }
 
 
             return ret;
         }
 
-        public static DataRow GetByID(string TableName, string IDColumn, int ID)
-        {
-            string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
-            DataTable dt = DataHandler.getDataTable(sql);
-            if (dt.Rows.Count == 0)
-            {
-                //TODO: Throw Exception
-            }
-            return dt.Rows[0];
-        }
+        //public static DataRow GetByID(string TableName, string IDColumn, int ID)
+        //{
+        //    string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
+        //    DataTable dt = DataHandler.getDataTable(sql);
+        //    if (dt.Rows.Count == 0)
+        //    {
+        //        //TODO: Throw Exception
+        //    }
+        //    return dt.Rows[0];
+        //}
 
-        public static bool IDExists(string TableName, string IDColumn, int ID)
-        {
-            //TODO: Implement Exception
-            /*
-            try
-            {
-                DataRow row = GetByID(TableName, IDColumn, ID);
-                return true;
-            }
-            catch (EmptyListException)
-            {
-                return false;
-            }
-            */
-            string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
-            DataTable dt = DataHandler.getDataTable(sql);
-            return dt.Rows.Count != 0;
-        }
+        //public static bool IDExists(string TableName, string IDColumn, int ID)
+        //{
+        //    //TODO: Implement Exception
+        //    /*
+        //    try
+        //    {
+        //        DataRow row = GetByID(TableName, IDColumn, ID);
+        //        return true;
+        //    }
+        //    catch (EmptyListException)
+        //    {
+        //        return false;
+        //    }
+        //    */
+        //    string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
+        //    DataTable dt = DataHandler.getDataTable(sql);
+        //    return dt.Rows.Count != 0;
+        //}
 
-        public static int GetNextID(string TableName, string IDColumn)
-        {
-            string sql = string.Format("SELECT * FROM {0} GROUP BY {1} DESC", TableName, IDColumn);
-            return DataHandler.getDataTable(sql).Rows[0].Field<int>(IDColumn) + 1;
-        }
+        //public static int GetNextID(string TableName, string IDColumn)
+        //{
+        //    string sql = string.Format("SELECT * FROM {0} GROUP BY {1} DESC", TableName, IDColumn);
+        //    return DataHandler.getDataTable(sql).Rows[0].Field<int>(IDColumn) + 1;
+        //}
 
-        public static void UpdateORInsert(IModifyable data, string TableName, string IDColumn, int ID)
-        {
-            if (IDExists(TableName, IDColumn, ID))
-            {
-                DataHandler.Update(data.Update());
-            }
-            else
-            {
-                DataHandler.Insert(data.Insert());
-            }
-        }
+        //public static void UpdateORInsert(IModifyable data, string TableName, string IDColumn, int ID)
+        //{
+        //    if (IDExists(TableName, IDColumn, ID))
+        //    {
+        //        DataHandler.Update(data.Update());
+        //    }
+        //    else
+        //    {
+        //        DataHandler.Insert(data.Insert());
+        //    }
+        //}
 
-        public static DataTable GetAll(string TableName)
+        public static DataTable GetAll(string TableName) //remove after GetAllClients are re/moved
         {
             string sql = string.Format("SELECT * FROM {0}", TableName);
             return DataHandler.getDataTable(sql);
+        }
+
+        public static Client GetByClientID(int id)
+        {
+            Client ret;
+            if (id % 2 == 0)
+            {
+                ret = new IndividualClient(); //even
+            }
+            else
+            {
+                ret = new BusinessClient(); //odd
+            }
+
+            ret.FillWithID(id);
+            return ret;
+        }
+
+        public static T GetDataObject<T>(int id) where T : BaseSingleID, new()
+        {
+            T ret = new T();
+            ret.FillWithID(id);
+            return ret;
+        }
+
+        public static T GetDataObject<T>(params int[] ids) where T : BaseMultiID, new()
+        {
+            T ret = new T();
+            ret.FillWithIDs(ids);
+            return ret;
         }
 
         public static string GetProgressRapport(string ticketNo)
@@ -120,31 +154,31 @@ namespace PSS.Data_Access
             return progressRapport;
         }
 
-        public static Technician GetWorkRequest(int technicianID)
-        {
-            //Query is still a work in progress, currently only works for individual clients
-            string query = " SELECT tt.TechnicianID, p.FirstName, c.CellNumber, sr.Description, a.Street, a.City, t.Notes" +
-                           " FROM ServiceRequest sr" +
-                           " JOIN Task ts ON sr.ServiceRequestID = ts.ServiceRequestID" +
-                           " JOIN TechnicianTask tt ON ts.TaskID = tt.TaskID" +
-                           " JOIN Person p ON sr.ClientEntityID = p.PersonID" +
-                           " JOIN ContactInfo c ON p.ContactInfoID = c.ContactInfoID" +
-                           " JOIN IndividualClient ic ON p.PersonID = ic.IndividualClientID" +
-                           " JOIN Address a ON ic.AddressID = a.AddressID" +
-                           " WHERE tt.TechnicianID = " + technicianID;
+        //public static Technician GetWorkRequest(int technicianID)
+        //{
+        //    //Query is still a work in progress, currently only works for individual clients
+        //    string query = " SELECT tt.TechnicianID, p.FirstName, c.CellNumber, sr.Description, a.Street, a.City, t.Notes" +
+        //                   " FROM ServiceRequest sr" +
+        //                   " JOIN Task ts ON sr.ServiceRequestID = ts.ServiceRequestID" +
+        //                   " JOIN TechnicianTask tt ON ts.TaskID = tt.TaskID" +
+        //                   " JOIN Person p ON sr.ClientEntityID = p.PersonID" +
+        //                   " JOIN ContactInfo c ON p.ContactInfoID = c.ContactInfoID" +
+        //                   " JOIN IndividualClient ic ON p.PersonID = ic.IndividualClientID" +
+        //                   " JOIN Address a ON ic.AddressID = a.AddressID" +
+        //                   " WHERE tt.TechnicianID = " + technicianID;
 
-            DataTable tbl = DataHandler.getDataTable(query);
+        //    DataTable tbl = DataHandler.getDataTable(query);
 
-            Technician teccy = new Technician();
+        //    Technician teccy = new Technician();
 
-            teccy.ClientName = (string)tbl.Rows[0][1];
-            teccy.ClientContactNum = (string)tbl.Rows[0][2];
-            teccy.RequestDescription = (string)tbl.Rows[0][3];
-            teccy.ClientStreetAddress = (string)tbl.Rows[0][4];
-            teccy.ClientCity = (string)tbl.Rows[0][5];
-            teccy.Notes = (string)tbl.Rows[0][6];
+        //    teccy.ClientName = (string)tbl.Rows[0][1];
+        //    teccy.ClientContactNum = (string)tbl.Rows[0][2];
+        //    teccy.RequestDescription = (string)tbl.Rows[0][3];
+        //    teccy.ClientStreetAddress = (string)tbl.Rows[0][4];
+        //    teccy.ClientCity = (string)tbl.Rows[0][5];
+        //    teccy.Notes = (string)tbl.Rows[0][6];
 
-            return teccy;
-        }
+        //    return teccy;
+        //}
     }
 }

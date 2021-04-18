@@ -1,110 +1,97 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
+using System.Text;
 using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public class Technician// : Employee
+    public class Technician : BaseSingleID
     {
-        private string type, clientName, clientContactNum, requestDescription, clientStreetAddress, clientCity, notes;
-        private bool isBusy;
-        private float payRate;
+        public int TechnicianID { get => ID; private set => ID = value; }
+        public string Specialty { get; set; }
+        public string PayRate { get; set; }
 
-        public int TechnicianID { get; set; }
-        public string Type { get => type; set => type = value; }
-        public bool IsBusy { get => isBusy; set => isBusy = value; }
-        public float PayRate { get => payRate; set => payRate = value; }
-        public string ClientName { get => clientName; set => clientName = value; }
-        public string ClientContactNum { get => clientContactNum; set => clientContactNum = value; }
-        public string RequestDescription { get => requestDescription; set => requestDescription = value; }
-        public string ClientStreetAddress { get => clientStreetAddress; set => clientStreetAddress = value; }
-        public string Notes { get => notes; set => notes = value; }
-        public string ClientCity { get => clientCity; set => clientCity = value; }
+        private static readonly string tableName = "Technician";
+        private static readonly string idColumn = "TechnicianID";
 
-        public Technician() : base()
+        public Technician() : base(tableName, idColumn) 
+        { }
+
+        public Technician(int technicianID, string specialty, string payRate) : this()
         {
+            TechnicianID = technicianID;
+            Specialty = specialty;
+            PayRate = payRate;
         }
 
-        public Technician(int technicianID, string type, bool isBusy) : base()
+        public Technician(string specialty, string payRate) : this()
         {
-            this.TechnicianID = technicianID;
-            this.Type = type;
-            this.IsBusy = isBusy;
+            TechnicianID = base.GetNextID();
+            Specialty = specialty;
+            PayRate = payRate;
         }
 
-        public Technician(int technicianID, string type, bool isBusy, string firstName, string lastName, string cellphoneNumber, string telephoneNumber, string email, string streetAddress, string cityAddress, string postalCode, string province)// : base(technicianID, firstName, lastName, cellphoneNumber, telephoneNumber, email, streetAddress, cityAddress, postalCode, province)
+        #region DataBase
+
+        public override void FillFromRow(DataRow row)
         {
-            this.Type = type;
-            this.IsBusy = isBusy;
+            this.TechnicianID = row.Field<int>(idColumn);
+            this.Specialty = row.Field<string>("Speciality");
+            this.PayRate = row.Field<string>("PayRate");
         }
 
-
-        public bool ServiceClient()
+        protected override string Update()
         {
-            return true;
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("UPDATE " + tableName);
+            sql.Append("SET ");
+
+            sql.Append("Specialty = '" + Specialty + "', ");
+            sql.Append("PayRate = '" + PayRate + "'");
+
+            sql.Append("WHERE " + idColumn + " = " + TechnicianID);
+
+            return sql.ToString();
         }
+
+        protected override string Insert()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.Append("INSERT INTO " + tableName);
+            sql.Append("VALUES (");
+
+            sql.Append(TechnicianID + ", ");
+            sql.Append("'" + Specialty + "', ");
+            sql.Append("'" + PayRate + "' ");
+
+            sql.Append(");");
+
+            return sql.ToString();
+        }
+
+        #endregion
 
         public override bool Equals(object obj)
         {
             return obj is Technician technician &&
-                   base.Equals(obj) &&
-                   type == technician.type &&
-                   isBusy == technician.isBusy &&
                    TechnicianID == technician.TechnicianID &&
-                   Type == technician.Type &&
-                   IsBusy == technician.IsBusy;
+                   Specialty == technician.Specialty &&
+                   PayRate == technician.PayRate;
         }
 
         public override int GetHashCode()
         {
-            int hashCode = 1042436649;
-            hashCode = hashCode * -1521134295 + base.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(type);
-            hashCode = hashCode * -1521134295 + isBusy.GetHashCode();
+            int hashCode = 226706189;
             hashCode = hashCode * -1521134295 + TechnicianID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
-            hashCode = hashCode * -1521134295 + IsBusy.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Specialty);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(PayRate);
             return hashCode;
         }
 
         public override string ToString()
         {
             return base.ToString();
-        }
-
-        public static Technician getByID()
-        {
-            return new Technician();
-        }
-
-        public Technician(DataRow row)
-        {
-            this.TechnicianID = row.Field<int>("TechnicianID");
-            //this.FirstName = row.Field<string>("FirstName");
-            //this.LastName = row.Field<string>("LastName");
-            this.Type = row.Field<string>("Speciality");
-            this.payRate = row.Field<float>("PayRate");
-        }
-
-        //Constructor for technician form 
-        public Technician(int technicianID, string clientName, string clientContactNum, string requestDescription, string clientStreetAddress, string notes, string clientCity)
-        {
-            TechnicianID = technicianID;
-            ClientName = clientName;
-            ClientContactNum = clientContactNum;
-            RequestDescription = requestDescription;
-            ClientStreetAddress = clientStreetAddress;
-            Notes = notes;
-            ClientCity = clientCity;
-        }
-
-        public Technician getWork(int technicianID)
-        {
-            return DataEngine.GetWorkRequest(technicianID);
         }
     }
 }

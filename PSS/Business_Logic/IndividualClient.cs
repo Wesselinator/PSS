@@ -6,48 +6,68 @@ using System.Threading.Tasks;
 using System.Data;
 using PSS.Data_Access;
 
+//CHECK
 namespace PSS.Business_Logic
 {
-    class IndividualClient : Client, IModifyable
+    class IndividualClient : Client
     {
-        public override int ClientID { get => Person.PersonID; protected set => Person.PersonID = value; }
-        public IndividualClient(string type, string status, string notes, Address address, Person person) : base(person.PersonID, type, status, notes, address, person)
-        {  }
+        public override int ClientID { get => Person.PersonID; } //needed?
 
-        public IndividualClient() : base()
-        {  }
+        public MultiIDList<IndividualClientServiceRequest> ServiceRequests { get; set; }
+        public MultiIDList<IndividualClientContract> Contracts { get; set; }
+        public MultiIDList<IndividualClientFollowUp> FollowUps { get; set; }
+
+        public static readonly string tableName = "IndividualClient";
+        public static readonly string idColumn = "IndividualClientID";
+        private static readonly string personColumn = idColumn;
+
+        public IndividualClient() : base(tableName, idColumn)
+        {
+            ServiceRequests = new MultiIDList<IndividualClientServiceRequest>();
+            Contracts = new MultiIDList<IndividualClientContract>();
+            FollowUps = new MultiIDList<IndividualClientFollowUp>();
+        }
+
+        public IndividualClient(string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
+        {
+            FillLists(person.PersonID);
+        }
+
+        //TODO: add a constructor that creates a numbered person
 
         #region DataBase
 
-        private static readonly string TableName = "IndividualClient";
-        private static readonly string IDColumn = "IndividualClientID";
+        private void FillLists(int id) //TODO: move to virtual above Client.cs
+        { 
+            ServiceRequests.FillWithPivotColumn(id, idColumn);
+            Contracts.FillWithPivotColumn(id, idColumn);
+            FollowUps.FillWithPivotColumn(id, idColumn);
+        }
 
-        public IndividualClient(DataRow row) : base(row, IDColumn)
-        {  }
-        
-        //P3
-        public IndividualClient(int ID)
-        : this(DataEngine.GetByID(TableName, IDColumn, ID))
-        {  }
+        public override void FillFromRow(DataRow row)
+        {
+            FillPartialRow(row, personColumn);
+            FillLists(ClientID); //TODO: call in Client.cs
+        }
 
         //P4
         public override void Save()
         {
             Address.Save();
-            Person.Save(); //I have no Idea what this will do...
-            DataEngine.UpdateORInsert(this, TableName, IDColumn, ClientID);
+            Person.Save(); //what will this do?
+            base.Save();
         }
 
-        string IUpdateable.Update()
+        protected override string Update()
         {
             StringBuilder sql = new StringBuilder();
 
             sql.AppendLine("UPDATE "+ TableName);
             sql.Append("SET ");
 
-            return base.Update(sql);
+            return base.UpdatePartial(sql);
         }
-        string IInsertable.Insert()
+        protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("INSERT INTO " + TableName);
@@ -56,7 +76,7 @@ namespace PSS.Business_Logic
             sql.Append(ClientID + ", ");
             
 
-            return base.Insert(sql);
+            return base.InsertPartial(sql);
         }
 
         #endregion

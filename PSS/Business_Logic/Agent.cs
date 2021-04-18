@@ -7,6 +7,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
+    [Obsolete("Should use User instead", false)]
     class Agent
     {
         private string department; 

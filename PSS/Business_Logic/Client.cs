@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using System.Data;
 using PSS.Data_Access;
 
+//CHECK
 namespace PSS.Business_Logic
 {
-    public class Client
+    public abstract class Client : BaseSingleID
     {
-        public virtual int ClientID { get; protected set; }
+        public virtual int ClientID { get => ID; protected set => ID = value; }
         public string Type { get; set; }
         public string Status { get; set; }
         public string Notes { get; set; }
@@ -18,9 +19,13 @@ namespace PSS.Business_Logic
         public Address Address { get; set; }
         public Person Person { get; set; }
 
-        protected Client(int clientID, string type, string status, string notes, Address address, Person person) //should not be able to create half a client
+        public Client(string tableName, string idColumn) : base(tableName, idColumn)
+        { 
+            
+        }
+
+        protected Client(string tableName, string idColumn, string type, string status, string notes, Address address, Person person) : this(tableName, idColumn) //Protected Becuase you should not be able to create half a client
         {
-            this.ClientID = clientID;
             this.Type = type;
             this.Status = status;
             this.Notes = notes;
@@ -28,71 +33,60 @@ namespace PSS.Business_Logic
             this.Person = person;
         }
 
-        public Client() //usefull
-        {
-            
-        }
-
         #region DataBase
 
-        public Client(DataRow row, string ClientID)
+        protected void FillPartialRow(DataRow row, string personColumn)
         {
             Type = row.Field<string>("Type");
             Status = row.Field<string>("Status");
             Notes = row.Field<string>("Notes");
-            Address = new Address(row.Field<int>("AddressID"));
-            Person = new Person(row.Field<int>(ClientID));
+            Address = DataEngine.GetDataObject<Address>(row.Field<int>("AddressID"));
+            Person = DataEngine.GetDataObject<Person>(row.Field<int>(personColumn));
         }
 
         //P3
-        public static Client GetByClientID(int ID)
-        {
-            Client ret;
-            try
-            {
-                ret = new BusinessClient(ID);
-                return ret; //ID was a Business Client
-            }
-            catch (Exception)
-            {
-                try
-                {
-                    ret = new IndividualClient(ID);
-                    return ret; //ID was an Individual Client
-                }
-                catch (Exception e)
-                {
-                    throw e; //ID did not exist in client tables
-                }
-            }
-        }
-        //P3
-        public virtual void Save()
-        {
-            throw new NotImplementedException(); //This is Correct. It should never hit this.
-        }
+        //public override void Save()
+        //{
+        //    throw new NotImplementedException(); //This is Correct. It should never hit this.
+        //}
 
-        protected string Update(StringBuilder sql)
+        protected string UpdatePartial(StringBuilder sql)
         {
             sql.Append("Type = '" + Type + "', ");
             sql.Append("Status = '" + Status + "', ");
             sql.Append("Notes = '" + Notes + "', ");
             sql.AppendLine("AddressID = " + Address.AddressID);
 
-            sql.AppendLine("WHERE ClientID = " + ClientID); //Tested: Will access correctly.
+            sql.AppendLine("WHERE ClientID = " + ClientID);
 
             return sql.ToString();
         }
 
-        protected string Insert(StringBuilder sql)
+        protected string InsertPartial(StringBuilder sql)
         {
             sql.Append("'" + Type + "', ");
             sql.Append("'" + Status + "', ");
             sql.Append("'" + Notes + "', ");
             sql.Append(Address.AddressID);
+
             sql.AppendLine(");");
 
             return sql.ToString();
+        }
+
+        protected override int GetNextID()
+        {
+            int ret = base.GetNextID();
+
+            if (TableName == BusinessClient.tableName)
+            {
+                if (ret == 0) //Individual Client is empty
+                {
+                    ret++; // will become 2
+                }
+            }
+
+            return ret + 1; //always even or odd
         }
 
         #endregion
@@ -111,9 +105,9 @@ namespace PSS.Business_Logic
         {
             int hashCode = -33787204;
             hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Status);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Notes);
+            hashCode = hashCode * -1521134295 + Type.GetHashCode();
+            hashCode = hashCode * -1521134295 + Status.GetHashCode();
+            hashCode = hashCode * -1521134295 + Notes.GetHashCode();
             return hashCode;
         }
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PSS.Business_Logic;
+using PSS.Data_Access;
 
 namespace PSS.Presentation_Layer
 {
@@ -20,12 +21,8 @@ namespace PSS.Presentation_Layer
 
         private void btnDisplayAll_Click(object sender, EventArgs e)
         {
-            Service serviceObj = new Service();
-            BindingSource serviceSource = new BindingSource();
-            List<Service> services = serviceObj.GetServices();
-            serviceSource.DataSource = services;
-            dataGridView1.DataSource = serviceSource;
-            MessageBox.Show(serviceObj.GetServices()[0].ToString());
+            IndividualClient ass = DataEngine.GetDataObject<IndividualClient>(1);
+            Console.WriteLine(ass.Person.FullName);
         }
     }
 }

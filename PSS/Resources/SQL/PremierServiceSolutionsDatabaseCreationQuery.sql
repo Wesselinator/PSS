@@ -67,12 +67,20 @@ GO
 ALTER TABLE Contract
 ADD CONSTRAINT CK_OfferEndDateAfterStartDate CHECK(OfferEndDate>=OfferStartDate)
 
+GO
+
 CREATE TABLE ServiceLevelAgreement
-(ServiceID INT REFERENCES Service(ServiceID),
- ContractID INT REFERENCES Contract(ContractID),
- PerformanceExpectation VARCHAR(MAX) NOT NULL,
- PRIMARY KEY(ServiceID,ContractID)
+(ServiceID INT NOT NULL,
+ ContractID INT NOT NULL,
+ PerformanceExpectation VARCHAR(MAX) NOT NULL
 )
+
+ALTER TABLE ServiceLevelAgreement
+ADD CONSTRAINT PK_ServiceLevelAgreement PRIMARY KEY (ServiceID, ContractID),
+	CONSTRAINT FK_ServiceLevelAgreement#Service FOREIGN KEY (ServiceID) REFERENCES Service(ServiceID),
+	CONSTRAINT FK_ServiceLevelAgreement#Contract FOREIGN KEY (ContractID) REFERENCES Contract(ContractID)
+
+GO
 
 --CREATE TABLE ContactInformation
 --(ContactInformationID INT PRIMARY KEY,
@@ -81,7 +89,6 @@ CREATE TABLE ServiceLevelAgreement
 -- Email VARCHAR(320)
 --)
 
-GO
 
 --ALTER TABLE ContactInformation
 --ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL)
@@ -105,8 +112,10 @@ CREATE TABLE Person
 )
 GO
 
-ALTER TABLE Person
+ALTER TABLE [Person]
 ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL)
+
+GO
 
 CREATE TABLE [User]
 (UserID INT PRIMARY KEY,
@@ -115,13 +124,21 @@ CREATE TABLE [User]
  Role VARCHAR(50) NOT NULL
 )
 
+GO
+
 CREATE TABLE IndividualClient
 (IndividualClientID INT REFERENCES Person(PersonID) PRIMARY KEY,
  Type VARCHAR(30) NOT NULL,
  Status VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
- AddressID INT NOT NULL REFERENCES Address(AddressID)
+ AddressID INT NOT NULL
 )
+
+ALTER TABLE IndividualClient
+ADD CONSTRAINT FK_IndividualClient#Person FOREIGN KEY (IndividualClientID) REFERENCES Person(PersonID),
+	CONSTRAINT FK_IndividualClien#Address FOREIGN KEY (AddressID) REFERENCES Address(AddressID)
+
+GO
 
 CREATE TABLE BusinessClient
 (BusinessClientID INT PRIMARY KEY, --Can potentially use negative numbers for business clients or it can be determined Checking that their is not a conflict Person and BusinessClient 
@@ -129,8 +146,15 @@ CREATE TABLE BusinessClient
  Type VARCHAR(30) NOT NULL,
  Status VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
- AddressID INT NOT NULL REFERENCES Address(AddressID)
+ PrimaryContactPersonID INT NOT NULL,
+ AddressID INT NOT NULL
 )
+
+ALTER TABLE BusinessClient
+ADD CONSTRAINT FK_BusinessClient#ContactPerson FOREIGN KEY (PrimaryContactPersonID) REFERENCES Person(PersonID),
+	CONSTRAINT FK_BusinessClient#Address FOREIGN KEY (AddressID) REFERENCES Address(AddressID)
+
+GO
 
 CREATE TABLE BusinessClientPerson
 (BusinessClientID INT REFERENCES BusinessClient(BusinessClientID),
@@ -191,6 +215,11 @@ GO
 -- FollowUpReportID INT NOT NULL REFERENCES FollowUpReport(FollowUpReportID)
 --)
 
+ALTER TABLE FollowUpCall
+ADD CONSTRAINT FK_FollowUpCall#FollowUpReport FOREIGN KEY (FollowUpReportID) REFERENCES FollowUpReport(FollowUpReportID)
+
+GO
+
 CREATE TABLE ServiceRequest
 (ServiceRequestID INT PRIMARY KEY,
  ServiceRequestTitle VARCHAR(30) NOT NULL,
@@ -226,18 +255,34 @@ CREATE TABLE Task
  IsFinished BIT NOT NULL DEFAULT 0
 )
 
+ALTER TABLE Task
+ADD CONSTRAINT FK_Task#ServiceRequest FOREIGN KEY (ServiceRequestID) REFERENCES ServiceRequest(ServiceRequestID);
+
+GO
+
 CREATE TABLE Technician
-(TechnicianID INT REFERENCES Person(PersonID) PRIMARY KEY,
+(TechnicianID INT PRIMARY KEY,
  Speciality VARCHAR(30) NOT NULL,
  PayRate MONEY NOT NULL
 )
 
+ALTER TABLE Technician
+ADD CONSTRAINT FK_Technician#Person FOREIGN KEY (TechnicianID) REFERENCES Person(PersonID)
+
+GO
+
 CREATE TABLE TechnicianTask
 (TechnicianTaskID INT PRIMARY KEY,
- TechnicianID INT NOT NULL REFERENCES Technician(TechnicianID),
- TaskID INT NOT NULL REFERENCES Task(TaskID),
+ TechnicianID INT NOT NULL,
+ TaskID INT NOT NULL,
  TimeToArrive DATETIME NOT NULL
 )
+
+ALTER TABLE TechnicianTask
+ADD CONSTRAINT FK_TechnicianTask#Person FOREIGN KEY (TechnicianID) REFERENCES Technician(TechnicianID),
+	CONSTRAINT FK_TechnicianTask#Task FOREIGN KEY (TaskID) REFERENCES Task(TaskID)
+
+GO
 
 CREATE TABLE TechnicianTaskFeedback
 (TechnicianTaskFeedbackID INT PRIMARY KEY,
@@ -245,8 +290,12 @@ CREATE TABLE TechnicianTaskFeedback
  TimeDeparture DATETIME NOT NULL,
  Status VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
- TechnicianTaskID INT NOT NULL REFERENCES TechnicianTask(TechnicianTaskID)
+ TechnicianTaskID INT NOT NULL
 )
+
+ALTER TABLE TechnicianTaskFeedback
+ADD CONSTRAINT FK_TechnicianTaskFeedback#Person FOREIGN KEY (TechnicianTaskID) REFERENCES TechnicianTask(TechnicianTaskID);
+
 GO
 
 CREATE TABLE CallInstance
@@ -256,13 +305,17 @@ CREATE TABLE CallInstance
  Description VARCHAR(120) NOT NULL
 )
 
+GO
+
 CREATE TABLE CallChangeAssociation
 (CallChangeAssociationID INT PRIMARY KEY,
- CallInstanceID INT NOT NULL REFERENCES CallInstance(CallInstanceID),
+ CallInstanceID INT NOT NULL,
  TableName VARCHAR(30) NOT NULL,
  TableRecordID VARCHAR(MAX) NOT NULL
 )
 GO
+
+--SAMPLE DATA START
 
 INSERT INTO Service (ServiceID, ServiceName, ServiceDescription)
 	VALUES (1,'On Site Repairs','This Service involves calling out a specialized technician to fix an issue with a product on the customer''s site'),
@@ -276,10 +329,10 @@ INSERT INTO Service (ServiceID, ServiceName, ServiceDescription)
 		   (9,'Desktop Computers Lease To Own','This service determines the details of leasing desktop computers to own from PSS'),
 		   (10,'Servers Lease To Own','This service determines the details of leasing server computers to own from PSS'),
 		   (11,'Printers Lease To Own','This service determines the details of leasing printers to own from PSS')
-		   
 
+GO
 
-INSERT INTO Contract (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MontlyFee)
+INSERT INTO Contract (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MonthlyFee)
 	VALUES (1, 'Printing Necessities', 'Peasant', '2021/04/01', NULL, 36, 400),
 		   (2, 'Basic Printing', 'Commoner', '2021/04/01', NULL, 36, 600),
 		   (3, 'Premium Printing','Noble','2021/04/01',NULL,36, 900),
@@ -294,6 +347,8 @@ INSERT INTO Contract (ContractID, ContractName, ServiceLevel, OfferStartDate, Of
 		   (12, 'Maxi Office Combo','Noble','2021/04/01',NULL,36,850),
 		   (13, 'Giant Office Combo','Feudal lord','2021/04/01',NULL,48,1200),
 		   (14, 'Garsfontein High School Custom','Noble','2021/04/01',NULL,48,14200)
+
+GO
 
 INSERT INTO ServiceLevelAgreement (ServiceID, ContractID, PerformanceExpectation)
 	VALUES (11, 1, '1x Heavy Duty Inkjet Printer valued at R 10 000 of availiable brands HP, CANON or PIXMA , Capable of printing 50 pages per minute'),
@@ -408,6 +463,8 @@ INSERT INTO Person (PersonID, FirstName, LastName, BirthDate, CellPhoneNumber, T
 		   (15, 'Delma', 'Tadiwa', '1995/05/22', '+27825539658', NULL, 'd.tadiwa@gmail.com'),
 		   (17, 'Blessing', 'Moyo', '1988/07/25', '+27618824356', NULL, 'blessingmoyo@gmail.com')
 
+GO
+
 INSERT INTO Address (AddressID, Street, City, PostalCode, Province)
 	VALUES (1, '961 Church St', 'Pretoria', '0155', 'Gauteng'),
 		   (2, '127 Willowmore Street', 'Pretoria', '0182', 'Gauteng'),
@@ -453,12 +510,15 @@ INSERT INTO IndividualClient (IndividualClientID, Type, Status, Notes, AddressID
 	       (9, 'Discount Customer', 'Active', 'The Client has been with PSS for years and is always on the lookout for a bargain', 2),
 	       (15, 'Potential Customer', 'Inactive', 'A potential client from the 2020/08/13 conference meeting', 9)
 
+GO
 		   --Use even primary keys for business client
-INSERT INTO BusinessClient (BusinessClientID, BusinessName, Type, Status, Notes, AddressID)--will add the primary contact person id after discussion
-	VALUES (2, 'Renner Accounting Services', 'Loyal Customer', 'Active', 'Renner Accounting Services has been a loyal customer since 2005', 3),
-		   (4, 'Wielfred Marketing Agency', 'Wandering Customer', 'Active', 'The Wielfred marketing agency has abruptly stopped and changed printer contracts in the past', 4),
-		   (6, 'Personal Growth Consultations', 'New Customer', 'Active', 'Personal Growth Consultations is a small 1 man business who approached PSS in 2021', 5),
-		   (8, 'Garsfontein High School', 'New Customer', 'Active', 'Garsfontein High School contacted PSS in 2021 and were reffered to by Personal Growth Consultations', 7)
+INSERT INTO BusinessClient (BusinessClientID, BusinessName, Type, Status, Notes, PrimaryContactPersonID, AddressID)
+	VALUES (2, 'Renner Accounting Services', 'Loyal Customer', 'Active', 'Renner Accounting Services has been a loyal customer since 2005', 17, 3),
+		   (4, 'Wielfred Marketing Agency', 'Wandering Customer', 'Active', 'The Wielfred marketing agency has abruptly stopped and changed printer contracts in the past', 13, 4),
+		   (6, 'Personal Growth Consultations', 'New Customer', 'Active', 'Personal Growth Consultations is a small 1 man business who approached PSS in 2021', 7, 5);
+		   --(8, 'Garsfontein High School', 'New Customer', 'Active', 'Garsfontein High School contacted PSS in 2021 and were reffered to by Personal Growth Consultations', , 7)
+
+GO
 
 INSERT INTO	BusinessClientPerson (BusinessClientID, PersonID, Role)
 	VALUES (2,3, 'Head of computer/IT department'),

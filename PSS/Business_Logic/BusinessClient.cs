@@ -2,45 +2,77 @@
 using System.Text;
 using System.Data;
 using PSS.Data_Access;
+using System.Collections.Generic;
 
+//CHECK
 namespace PSS.Business_Logic
 {
-    public class BusinessClient : Client, IModifyable
+    public class BusinessClient : Client
     {
+        public override int ClientID { get; protected set; } //remember this is supposed to be even
         public string BusinessName { get; set; }
         public Person ContactPerson { get => Person; set => Person = value; }
-        
-        public BusinessClient(int businessID, string businessName, string type, string status, string notes, Address address, Person person) : base(businessID, type, status, notes, address, person)
+        public MultiIDList<BusinessClientPerson> BusinessClientPeople { get; set; }
+        public MultiIDList<BusinessClientServiceRequest> ServiceRequests { get; set; }
+        public MultiIDList<BusinessClientContract> Contracts { get; set; }
+        public MultiIDList<BusinessClientFollowUp> FollowUps { get; set; }
+
+        public static readonly string tableName = "BusinessClient";
+        public static readonly string idColumn = "BusinessClientID";
+        private static readonly string personColumn = "PrimaryContactPersonID";
+
+        public BusinessClient() : base(tableName, idColumn)
         {
+            BusinessClientPeople = new MultiIDList<BusinessClientPerson>();
+            ServiceRequests = new MultiIDList<BusinessClientServiceRequest>();
+            Contracts = new MultiIDList<BusinessClientContract>();
+            FollowUps = new MultiIDList<BusinessClientFollowUp>();
+        }
+
+        public BusinessClient(int businessID, string businessName, string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
+        {
+            ClientID = businessID;
+            BusinessName = businessName;
+
+            FillLists(businessID);
+        }
+
+        public BusinessClient(string businessName, string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
+        {
+            ClientID = GetNextID();
             BusinessName = businessName;
         }
-        public BusinessClient() : base()
-        {  }
 
         #region DataBase
 
-        private static readonly string TableName = "BusinessClient";
-        private static readonly string IDColumn = "BusinessClientID";
-
-        public BusinessClient(DataRow row) : base(row, "PrimaryContactPersonID")
+        private void FillLists(int id)
         {
-            BusinessName = row.Field<string>("BusinessName");
+            BusinessClientPeople.FillWithPivotColumn(id, idColumn);
+            ServiceRequests.FillWithPivotColumn(id, idColumn);
+            Contracts.FillWithPivotColumn(id, idColumn);
+            FollowUps.FillWithPivotColumn(id, idColumn);
         }
 
-        //P3
-        public BusinessClient(int ID)
-        : this(DataEngine.GetByID(TableName, IDColumn, ID))
-        {  }
+        public override void FillFromRow(DataRow row)
+        {
+            ClientID = row.Field<int>(idColumn);
+            BusinessName = row.Field<string>("BusinessName");
+            FillPartialRow(row, personColumn);
+            FillLists(ClientID);
+        }
 
-        //P4
         public override void Save()
         {
             Address.Save();
+            BusinessClientPeople.SaveAll();
             Person.Save();
-            DataEngine.UpdateORInsert(this, TableName, IDColumn, ClientID);
+            base.Save();
+            ServiceRequests.SaveAll(); //Create Businsess client first before services
+            Contracts.SaveAll();
+            FollowUps.SaveAll();
         }
 
-        string IUpdateable.Update()
+        protected override string Update()
         {
             StringBuilder sql = new StringBuilder();
 
@@ -49,15 +81,15 @@ namespace PSS.Business_Logic
 
             sql.Append("BusinessName = '" + BusinessName + "',");
 
-            return base.Update(sql);
+            return base.UpdatePartial(sql);
         }
 
-        string IInsertable.Insert()
+        protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("INSERT INTO " + TableName);
-
             sql.Append("VALUES (");
+
             sql.Append(ClientID + ", ");
             sql.Append("'" + BusinessName + "', ");
             sql.Append("'" + Type + "', ");
@@ -65,11 +97,17 @@ namespace PSS.Business_Logic
             sql.Append("'" + Notes + "', ");
             sql.Append(Address.AddressID + ", ");
             sql.Append(ContactPerson.PersonID);
+
             sql.AppendLine(");");
 
-            return base.Insert(sql);
+            return base.InsertPartial(sql);
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }
