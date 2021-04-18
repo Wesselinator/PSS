@@ -10,19 +10,18 @@ namespace PSS.Business_Logic
 {
     class ServiceLevelAgreement : BaseMultiID
     {
-        public int ServiceID { get => IDs[0]; private set => IDs[0] = value; }
-
-        private Contract c;
-        public Contract Contract
+        private Service s;
+        public Service Service
         {
-            get => c;
+            get => s;
 
             set
             {
-                c = value;
-                IDs[1] = value.ContractID;
+                s = value;
+                IDs[1] = value.ServiceID;
             }
         }
+        public int ContractID { get => IDs[0]; private set => IDs[0] = value; }
         public string PerformanceExpectation { get; set; }
 
         private static readonly string tableName = "ServiceLevelAgreement";
@@ -32,10 +31,10 @@ namespace PSS.Business_Logic
         public ServiceLevelAgreement() : base(tableName, idColumn1, idColumn2)
         { }
 
-        public ServiceLevelAgreement(int serviceID,Contract contract, string performanceExpectation) : this()
+        public ServiceLevelAgreement(Service service, int contractID, string performanceExpectation) : this()
         {
-            this.ServiceID = serviceID;
-            this.Contract = contract;
+            this.Service = service;
+            this.ContractID = contractID;          
             this.PerformanceExpectation = performanceExpectation;
         }
 
@@ -43,14 +42,14 @@ namespace PSS.Business_Logic
 
         public override void FillFromRow(DataRow row)
         {
-            this.ServiceID = row.Field<int>(idColumn1);
-            this.Contract = DataEngine.GetDataObject<Contract>(row.Field<int>("ContractID"));
+            this.Service = DataEngine.GetDataObject<Service>(row.Field<int>("ServiceID"));
+            this.ContractID = row.Field<int>(idColumn2);           
             this.PerformanceExpectation = row.Field<string>("PerformanceExpectation");
         }
 
         public override void Save()
         {
-            Contract.Save();
+            //Service.Save();
             base.Save();
         }
 
@@ -60,8 +59,8 @@ namespace PSS.Business_Logic
             sql.AppendLine("INSERT INTO " + TableName);
             sql.Append("VALUES (");
 
-            sql.Append(ServiceID + ", ");
-            sql.Append(Contract.ContractID + ", ");
+            sql.Append(Service.ServiceID + ", ");
+            sql.Append(ContractID + ", ");
             sql.AppendLine("'" + PerformanceExpectation + "'");
 
             sql.AppendLine(");");
@@ -78,9 +77,9 @@ namespace PSS.Business_Logic
             sql.AppendLine("PerformanceExpectation = '" + PerformanceExpectation + "'");
 
             sql.Append("WHERE ");
-            sql.Append(idColumn1 + " = " + ServiceID);
+            sql.Append(idColumn1 + " = " + Service.ServiceID);
             sql.Append(" AND ");
-            sql.AppendLine(idColumn2 + " = " + Contract.ContractID);
+            sql.AppendLine(idColumn2 + " = " + ContractID);
 
             return sql.ToString();
         }
