@@ -1,29 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public class Technician// : Employee
+    public class Technician : BaseSingleID
     {
         private string type, clientName, clientContactNum, requestDescription, clientStreetAddress, clientCity, notes;
         private bool isBusy;
         private float payRate;
 
-        public int TechnicianID { get; set; }
-        public string Type { get => type; set => type = value; }
-        public bool IsBusy { get => isBusy; set => isBusy = value; }
+        public int TechnicianID { get; set; } //wacky person
+        public string Speciality { get => type; set => type = value; }
         public float PayRate { get => payRate; set => payRate = value; }
-        public string ClientName { get => clientName; set => clientName = value; }
-        public string ClientContactNum { get => clientContactNum; set => clientContactNum = value; }
-        public string RequestDescription { get => requestDescription; set => requestDescription = value; }
-        public string ClientStreetAddress { get => clientStreetAddress; set => clientStreetAddress = value; }
-        public string Notes { get => notes; set => notes = value; }
-        public string ClientCity { get => clientCity; set => clientCity = value; }
 
         public Technician() : base()
         {
@@ -84,8 +74,6 @@ namespace PSS.Business_Logic
         public Technician(DataRow row)
         {
             this.TechnicianID = row.Field<int>("TechnicianID");
-            //this.FirstName = row.Field<string>("FirstName");
-            //this.LastName = row.Field<string>("LastName");
             this.Type = row.Field<string>("Speciality");
             this.payRate = row.Field<float>("PayRate");
         }

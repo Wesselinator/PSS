@@ -3,9 +3,9 @@ using System.Text;
 using System.Data;
 using PSS.Data_Access;
 
+//CHECK
 namespace PSS.Business_Logic
 {
-    //TODO: Add updateability!
     public class BusinessClientPerson : BaseMultiID
     {
         private Person p;

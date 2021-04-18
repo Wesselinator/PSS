@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business_Logic\Address.cs" />
+    <Compile Include="Business_Logic\TechnicianTask.cs" />
+    <Compile Include="Business_Logic\TechnicianTaskFeedback.cs" />
     <Compile Include="Business_Logic\Agent.cs" />
     <Compile Include="Business_Logic\BaseMultiID.cs" />
     <Compile Include="Business_Logic\BaseSingleID.cs" />
@@ -60,7 +62,6 @@
     <Compile Include="Business_Logic\Call.cs" />
     <Compile Include="Business_Logic\Contract.cs" />
     <Compile Include="Business_Logic\Client.cs" />
-    <Compile Include="Business_Logic\Employee.cs" />
     <Compile Include="Business_Logic\FollowUp.cs" />
     <Compile Include="Business_Logic\IndividualClient.cs" />
     <Compile Include="Business_Logic\MultiIDList.cs" />

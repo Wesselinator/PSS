@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using PSS.Data_Access;
 
+//CHECK
 namespace PSS.Business_Logic
 {
     class IndividualClient : Client

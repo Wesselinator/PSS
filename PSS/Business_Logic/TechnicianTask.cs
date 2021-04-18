@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace PSS.Business_Logic
 {
-    class FollowUp : BaseSingleID
+    class TechnicianTask : BaseSingleID
     {
-
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 
-//oi wierd shit
+//REWORK
 namespace PSS.Business_Logic
 {
     class Call : BaseSingleID
