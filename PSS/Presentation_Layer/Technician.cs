@@ -21,15 +21,15 @@ namespace PSS.Presentation_Layer
 
         private void btnGetWorkRequest_Click(object sender, EventArgs e)
         {
-            Technician technician = new Technician();
-            technician = technician.getWork(int.Parse(txtTechnicianID.Text));
+            //Technician technician = new Technician();
+            //technician = technician.getWork(int.Parse(txtTechnicianID.Text));
 
-            txtClientName.Text = technician.ClientName;
-            txtContactNumber.Text = technician.ClientContactNum;
-            txtRequestDetails.Text = technician.RequestDescription;
-            txtClientAddress.Text = technician.ClientStreetAddress;
-            txtClientCity.Text = technician.ClientCity;
-            redAdditionalNotes.Text = technician.Notes;
+            //txtClientName.Text = technician.ClientName;
+            //txtContactNumber.Text = technician.ClientContactNum;
+            //txtRequestDetails.Text = technician.RequestDescription;
+            //txtClientAddress.Text = technician.ClientStreetAddress;
+            //txtClientCity.Text = technician.ClientCity;
+            //redAdditionalNotes.Text = technician.Notes;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
