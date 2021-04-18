@@ -22,7 +22,7 @@ namespace PSS.Business_Logic
         public TechnicianTaskFeedback() : base(tableName, idColumn)
         { }
 
-        public TechnicianTaskFeedback(int technicianTaskFeedID, DateTime timeArived, DateTime timeDuration, string notes, string status, string technicianTask) : this()
+        public TechnicianTaskFeedback(int technicianTaskFeedID, DateTime timeArived, DateTime timeDuration, string notes, string status, TechnicianTask technicianTask) : this()
         {
             TechnicianTaskFeedID = technicianTaskFeedID;
             TimeArived = timeArived;
@@ -32,7 +32,7 @@ namespace PSS.Business_Logic
             TechnicianTask = technicianTask;
         }
 
-        public TechnicianTaskFeedback(DateTime timeArived, DateTime timeDuration, string notes, string status, string technicianTask) : this()
+        public TechnicianTaskFeedback(DateTime timeArived, DateTime timeDuration, string notes, string status, TechnicianTask technicianTask) : this()
         {
             TechnicianTaskFeedID = base.GetNextID(); 
             TimeArived = timeArived;

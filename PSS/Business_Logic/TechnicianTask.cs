@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
@@ -10,9 +11,9 @@ namespace PSS.Business_Logic
     {
         public int TechnicianTaskID { get => ID; private set => ID = value; }
 
-        public int TaskID { get; set; }
+        public Task Task { get; set; }
 
-        public int TechnicianID { get; set; }
+        public Technician Technician { get; set; }
 
         public DateTime TimeToArrive { get; set; }
 
@@ -23,19 +24,19 @@ namespace PSS.Business_Logic
         {
         }
 
-        public TechnicianTask(int technicianTaskID, int taskID, int technicianID, DateTime timeToArrive) : this()
+        public TechnicianTask(int technicianTaskID, Task task, Technician technician, DateTime timeToArrive) : this()
         {
             this.TechnicianTaskID = technicianTaskID;
-            this.TaskID = taskID;
-            this.TechnicianID = technicianID;
+            this.Task = task;
+            this.Technician = technician;
             this.TimeToArrive = timeToArrive;
         }
 
-        public TechnicianTask(int taskID, int technicianID, DateTime timeToArrive)
+        public TechnicianTask(Task task, Technician technician, DateTime timeToArrive) : this()
         {
             this.TechnicianTaskID = base.GetNextID();
-            this.TaskID = taskID;
-            this.TechnicianID = technicianID;
+            this.Task = task;
+            this.Technician = technician;
             this.TimeToArrive = timeToArrive;
         }
 
@@ -44,8 +45,8 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             this.TechnicianTaskID = row.Field<int>(IDColumn);
-            this.TaskID = row.Field<int>("TaskID");
-            this.TechnicianID = row.Field<int>("TechnicianID");
+            this.Task = DataEngine.GetDataObject<Task>(row.Field<int>("TaskID"));
+            this.Technician = DataEngine.GetDataObject<Technician>(row.Field<int>("TechnicianID"));
             this.TimeToArrive = row.Field<DateTime>("TimeToArrive");
         }
 
@@ -55,9 +56,9 @@ namespace PSS.Business_Logic
             sql.AppendLine("UPDATE " + TableName);
             sql.Append("SET ");
 
-            sql.Append("TaskID = '" + TaskID + "', ");
-            sql.Append("TechnicianID = '" + TechnicianID + "', ");
-            sql.Append("TimeToArrive = '" + TimeToArrive.ToString("s") + "', ");
+            sql.Append("TechnicianID = " + TechnicianTaskID + ", ");
+            sql.Append("TaskID = " + Task.TaskID + ", ");
+            sql.Append("TimeToArrive = '" + TimeToArrive.ToString("s") + "'");
 
             sql.AppendLine("WHERE " + IDColumn + " = " + TechnicianTaskID);
 
@@ -71,9 +72,9 @@ namespace PSS.Business_Logic
             sql.Append("VALUES (");
 
             sql.Append(TechnicianTaskID.ToString() + ", ");
-            sql.Append("'" + TaskID.ToString() + "', ");
-            sql.Append("'" + TechnicianID.ToString() + "', ");
-            sql.Append("'" + TimeToArrive.ToString("s") + "', ");
+            sql.Append(Task.TaskID + ", ");
+            sql.Append(Technician.TechnicianID + ", ");
+            sql.Append("'" + TimeToArrive.ToString("s") + "'");
 
             sql.AppendLine(");");
 
@@ -90,28 +91,20 @@ namespace PSS.Business_Logic
         public override bool Equals(object obj)
         {
             return obj is TechnicianTask task &&
-                   TableName == task.TableName &&
-                   ID == task.ID &&
-                   IDColumn == task.IDColumn &&
                    TechnicianTaskID == task.TechnicianTaskID &&
-                   TaskID == task.TaskID &&
-                   TechnicianID == task.TechnicianID &&
+                   EqualityComparer<Task>.Default.Equals(Task, task.Task) &&
+                   EqualityComparer<Technician>.Default.Equals(Technician, task.Technician) &&
                    TimeToArrive == task.TimeToArrive;
         }
 
         public override int GetHashCode()
         {
-            int hashCode = 1654516578;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TableName);
-            hashCode = hashCode * -1521134295 + ID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(IDColumn);
+            int hashCode = 201898852;
             hashCode = hashCode * -1521134295 + TechnicianTaskID.GetHashCode();
-            hashCode = hashCode * -1521134295 + TaskID.GetHashCode();
-            hashCode = hashCode * -1521134295 + TechnicianID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<Task>.Default.GetHashCode(Task);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Technician>.Default.GetHashCode(Technician);
             hashCode = hashCode * -1521134295 + TimeToArrive.GetHashCode();
             return hashCode;
         }
-
-
     }
 }
