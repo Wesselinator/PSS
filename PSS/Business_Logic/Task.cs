@@ -52,10 +52,7 @@ namespace PSS.Business_Logic
             this.Title = row.Field<string>("Title");
             this.Descripion = row.Field<string>("Descripion");
             this.Notes = row.Field<string>("Notes");
-
-            this.ServiceRequest = new ServiceRequest(); //is this needed?
-            this.ServiceRequest.FillWithID(row.Field<int>("ServiceRequestID"));
-
+            this.ServiceRequest = DataEngine.GetDataObject<ServiceRequest>(row.Field<int>("ServiceRequestID"));
             this.DateProcessed = row.Field<DateTime>("DateProcessed");
             this.IsFinished = row.Field<bool>("IsFinished");
         }

@@ -59,5 +59,16 @@ namespace PSS.Business_Logic
 
             FillFromRow(GetByIDs(ids));
         }
+
+        public virtual DataTable GetAllOnPivot(int id, string column)
+        {
+            if (Array.Exists(IDColumns, s => s == column))
+            {
+                string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, column, id);
+                return DataHandler.getDataTable(sql);
+            }
+
+            throw new Exception();
+        }
     }
 }

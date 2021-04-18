@@ -21,7 +21,7 @@ namespace PSS.Business_Logic
         public string Role { get; set; }
 
         private static readonly string tableName = "BusinessClientPerson";
-        private static readonly string idColumn1 = "BusinessClientID";
+        public static readonly string idColumn1 = "BusinessClientID";
         private static readonly string idColumn2 = "PersonID";
 
         public BusinessClientPerson() : base(tableName, idColumn1, idColumn2)
@@ -39,10 +39,7 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             this.BusinessClientID = row.Field<int>(idColumn1);
-
-            this.Person = new Person();
-            this.Person.FillWithID(row.Field<int>("PersonID"));
-
+            this.Person = DataEngine.GetDataObject<Person>(row.Field<int>("PersonID"));
             this.Role = row.Field<string>("Role");
         }
 

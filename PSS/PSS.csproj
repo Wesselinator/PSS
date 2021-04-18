@@ -63,6 +63,7 @@
     <Compile Include="Business_Logic\Employee.cs" />
     <Compile Include="Business_Logic\FollowUp.cs" />
     <Compile Include="Business_Logic\IndividualClient.cs" />
+    <Compile Include="Business_Logic\MultiIDList.cs" />
     <Compile Include="Business_Logic\Person.cs" />
     <Compile Include="Business_Logic\Service.cs" />
     <Compile Include="Business_Logic\ServiceRequest.cs" />

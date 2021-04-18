@@ -7,10 +7,10 @@ namespace PSS.Business_Logic
 {
     public class BusinessClient : Client
     {
-        public override int ClientID { get; protected set; } //needed?
+        public override int ClientID { get; protected set; } //remember this is supposed to be even
         public string BusinessName { get; set; }
         public Person ContactPerson { get => Person; set => Person = value; }
-        public BaseList<BusinessClientPerson> BusinessClientPeople { get; set; }
+        public MultiIDList<BusinessClientPerson> BusinessClientPeople { get; set; }
 
         public static readonly string tableName = "BusinessClient";
         public static readonly string idColumn = "BusinessClientID";
@@ -23,12 +23,12 @@ namespace PSS.Business_Logic
         {
             ClientID = businessID;
             BusinessName = businessName;
-            BusinessClientPeople.FillAll(businessID);
+            BusinessClientPeople.FillWithPivotColumn(businessID, BusinessClientPerson.idColumn1);
         }
 
         public BusinessClient(string businessName, string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
         {
-            //ClientID = GetClientID
+            ClientID = GetNextID();
             BusinessName = businessName;
         }
 
@@ -63,8 +63,8 @@ namespace PSS.Business_Logic
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine("INSERT INTO " + TableName);
-
             sql.Append("VALUES (");
+
             sql.Append(ClientID + ", ");
             sql.Append("'" + BusinessName + "', ");
             sql.Append("'" + Type + "', ");
@@ -72,6 +72,7 @@ namespace PSS.Business_Logic
             sql.Append("'" + Notes + "', ");
             sql.Append(Address.AddressID + ", ");
             sql.Append(ContactPerson.PersonID);
+
             sql.AppendLine(");");
 
             return base.InsertPartial(sql);

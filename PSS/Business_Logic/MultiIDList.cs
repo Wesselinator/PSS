@@ -2,25 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Data;
-using PSS.Data_Access;
-
 
 namespace PSS.Business_Logic
 {
-    public class BaseList<T> : List<T> where T : BaseTable, new()
+    public class MultiIDList<T> : BaseList<T> where T : BaseMultiID, new()
     {
-
         private T DataInstance = new T();
 
-        public void SaveAll()
+        public void FillWithPivotColumn(int id, string column)
         {
-            this.ForEach(bcp => bcp.Save());
-        }
-
-        public void FillAll()
-        {
-            DataTable dt = DataInstance.GetAll();
+            DataTable dt =  DataInstance.GetAllOnPivot(id, column);
 
             foreach (DataRow row in dt.Rows)
             {

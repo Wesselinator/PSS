@@ -39,12 +39,8 @@ namespace PSS.Business_Logic
             Type = row.Field<string>("Type");
             Status = row.Field<string>("Status");
             Notes = row.Field<string>("Notes");
-
-            Address = new Address();
-            Address.FillWithID(row.Field<int>("AddressID"));
-
-            Person = new Person();
-            Person.FillWithID(row.Field<int>(personColumn));
+            Address = DataEngine.GetDataObject<Address>(row.Field<int>("AddressID"));
+            Person = DataEngine.GetDataObject<Person>(row.Field<int>(personColumn));
         }
 
         //P3
@@ -79,14 +75,18 @@ namespace PSS.Business_Logic
 
         protected override int GetNextID()
         {
-            return 0; //TODO: figure this out
-        }
+            int ret = base.GetNextID();
 
-        //IDK if I want this...
-        //public override DataRow GetByID(int id)
-        //{
-        //    return ;
-        //}
+            if (TableName == BusinessClient.tableName)
+            {
+                if (ret == 0) //Individual Client is empty
+                {
+                    ret++; // will become 2
+                }
+            }
+
+            return ret + 1; //always even or odd
+        }
 
         #endregion
 

@@ -31,18 +31,9 @@ namespace PSS.Business_Logic
             }
         }
 
-        //its 2am figure this out better tommorow
-        public virtual T GetByID<T>(int id) where T : BaseSingleID, new()
+        protected DataRow GetRowByID(int id)
         {
-            T ass = new T(); //this right here is the issue
-            ass.FillFromRow(GetByID(id));
-            return ass;
-        }
-
-        public virtual DataRow GetByID(int id)
-        {
-            string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, id);
-            DataTable dt = DataHandler.getDataTable(sql);
+            DataTable dt = GetAllWhere(id);
 
             if (dt.Rows.Count == 0)
             {
@@ -52,6 +43,11 @@ namespace PSS.Business_Logic
         }
 
         public override DataTable GetAll()
+        {
+            return GetAllWhere(ID);
+        }
+
+        private DataTable GetAllWhere(int ID)
         {
             string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
             return DataHandler.getDataTable(sql);
@@ -64,7 +60,7 @@ namespace PSS.Business_Logic
 
         public void FillWithID(int ID)
         {
-            FillFromRow(GetByID(ID));
+            FillFromRow(GetRowByID(ID));
         }
     }
 }

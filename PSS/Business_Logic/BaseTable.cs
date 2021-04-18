@@ -30,15 +30,15 @@ namespace PSS.Business_Logic
             }
         }
 
+        protected abstract bool IDExists();
+        protected abstract string Update();
+        protected abstract string Insert();
+
         public virtual DataTable GetAll()
         {
             string sql = "SELECT * FROM " + TableName;
             return DataHandler.getDataTable(sql);
         }
-
-        protected abstract bool IDExists();
-        protected abstract string Update();
-        protected abstract string Insert();
 
         public abstract void FillFromRow(DataRow row);
     }

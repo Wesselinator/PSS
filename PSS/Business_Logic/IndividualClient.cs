@@ -10,7 +10,7 @@ namespace PSS.Business_Logic
 {
     class IndividualClient : Client
     {
-        public override int ClientID { get => Person.PersonID; }
+        public override int ClientID { get => Person.PersonID; } //remember this is supposed to be odd
 
         public static readonly string tableName = "IndividualClient";
         public static readonly string idColumn = "IndividualClientID";
@@ -21,6 +21,8 @@ namespace PSS.Business_Logic
 
         public IndividualClient(string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
         {  }
+
+        //TODO: add a constructor that creates an odd numbered person
 
         #region DataBase
 

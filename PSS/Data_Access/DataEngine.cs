@@ -10,7 +10,7 @@ namespace PSS.Data_Access
 {
     public static class DataEngine
     {
-        public static List<Client> GetAllClients()
+        public static List<Client> GetAllClients() //move to Client.cs
         {
             DataTable IC = GetAll("IndividualClient");
             DataTable BC = GetAll("BusinessClient");
@@ -48,24 +48,24 @@ namespace PSS.Data_Access
         //    return dt.Rows[0];
         //}
 
-        public static bool IDExists(string TableName, string IDColumn, int ID)
-        {
-            //TODO: Implement Exception
-            /*
-            try
-            {
-                DataRow row = GetByID(TableName, IDColumn, ID);
-                return true;
-            }
-            catch (EmptyListException)
-            {
-                return false;
-            }
-            */
-            string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
-            DataTable dt = DataHandler.getDataTable(sql);
-            return dt.Rows.Count != 0;
-        }
+        //public static bool IDExists(string TableName, string IDColumn, int ID)
+        //{
+        //    //TODO: Implement Exception
+        //    /*
+        //    try
+        //    {
+        //        DataRow row = GetByID(TableName, IDColumn, ID);
+        //        return true;
+        //    }
+        //    catch (EmptyListException)
+        //    {
+        //        return false;
+        //    }
+        //    */
+        //    string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
+        //    DataTable dt = DataHandler.getDataTable(sql);
+        //    return dt.Rows.Count != 0;
+        //}
 
         //public static int GetNextID(string TableName, string IDColumn)
         //{
@@ -85,33 +85,39 @@ namespace PSS.Data_Access
         //    }
         //}
 
-        public static DataTable GetAll(string TableName) //attempt to move
+        public static DataTable GetAll(string TableName) //remove after GetAllClients are re/moved
         {
             string sql = string.Format("SELECT * FROM {0}", TableName);
             return DataHandler.getDataTable(sql);
         }
 
-        public static Client GetByClientID(int ID)
+        public static Client GetByClientID(int id)
         {
-            bool BC = IDExists(BusinessClient.tableName, BusinessClient.idColumn, ID);
-            bool IC = IDExists(IndividualClient.tableName, IndividualClient.idColumn, ID);
-
             Client ret;
-
-            if (BC)
+            if (id % 2 == 0)
             {
-                ret = new IndividualClient();
-            }
-            else if (IC)
-            {
-                ret = new BusinessClient();
+                ret = new IndividualClient(); //even
             }
             else
             {
-                throw new Exception();
+                ret = new BusinessClient(); //odd
             }
 
-            ret.FillWithID(ID);
+            ret.FillWithID(id);
+            return ret;
+        }
+
+        public static T GetDataObject<T>(int id) where T : BaseSingleID, new()
+        {
+            T ret = new T();
+            ret.FillWithID(id);
+            return ret;
+        }
+
+        public static T GetDataObject<T>(params int[] ids) where T : BaseMultiID, new()
+        {
+            T ret = new T();
+            ret.FillWithIDs(ids);
             return ret;
         }
 

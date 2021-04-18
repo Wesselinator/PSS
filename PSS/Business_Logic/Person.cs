@@ -56,7 +56,7 @@ namespace PSS.Business_Logic
             this.PersonID = row.Field<int>(IDColumn);
             this.FirstName = row.Field<string>("FirstName");
             this.LastName = row.Field<string>("LastName");
-            this.BirthDay = row.Field<DateTime>("BirthDay");
+            this.BirthDay = row.Field<DateTime>("BirthDate");
             this.CellphoneNumber = row.Field<string>("CellphoneNumber");
             this.TellephoneNumber = row.Field<string>("TelephoneNumber");
             this.Email = row.Field<string>("Email");
@@ -70,7 +70,7 @@ namespace PSS.Business_Logic
 
             sql.Append("FirstName = '" + FirstName + "', ");
             sql.Append("LastName = '" + LastName + "', ");
-            sql.Append("BirthDay = '" + BirthDayString + "', ");
+            sql.Append("BirthDate = '" + BirthDayString + "', ");
             sql.Append("CellphoneNumber = '" + CellphoneNumber + "', ");
             sql.Append("TellephoneNumber = '" + TellephoneNumber + "', ");
             sql.AppendLine("Email = '" + Email + "'");
