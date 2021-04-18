@@ -13,6 +13,11 @@ namespace PSS.Business_Logic
         public string Title { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
+        public DateTime FollowUpDate { get; set; }
+        public bool IsIssueResolved { get; set; }
+        public int SatisfactionLevel { get; set; }
+
+
 
         private static readonly string tableName = "FollowUp";
         private static readonly string idColumn = "FollowupReportID";
@@ -20,20 +25,15 @@ namespace PSS.Business_Logic
         public FollowUp() : base(tableName, idColumn) 
         { }
 
-        public FollowUp(int followupReportID, string title, string type, string description) : this()
+        public FollowUp(int followupReportID, string title, string type, string description, DateTime followUpDate, bool isIssueResolved, int satisfactionLevel) : this()
         {
-            FollowupReportID = followupReportID;
-            Title = title;
-            Type = type;
-            Description = description;
-        }
-
-        public FollowUp(string title, string type, string description) : this()
-        {
-            FollowupReportID = base.GetNextID();
-            Title = title;
-            Type = type;
-            Description = description;
+            this.FollowupReportID = followupReportID;
+            this.Title = title;
+            this.Type = type;
+            this.Description = description;
+            this.FollowUpDate = followUpDate;
+            this.IsIssueResolved = isIssueResolved;
+            this.SatisfactionLevel = satisfactionLevel;
         }
 
         #region DataBase
@@ -44,6 +44,9 @@ namespace PSS.Business_Logic
             this.Title = row.Field<string>("Title");
             this.Type = row.Field<string>("Type");
             this.Description = row.Field<string>("Description");
+            this.FollowUpDate = row.Field<DateTime>("FollowUpCallDate");
+            this.IsIssueResolved = row.Field<bool>("IsIssueResolved");
+            this.SatisfactionLevel = row.Field<int>("SatisfactionLevel");           
         }
 
         protected override string Update()
@@ -54,7 +57,11 @@ namespace PSS.Business_Logic
 
             sql.Append("Title = '" + Title + "', ");
             sql.Append("Type = '" + Type + "', ");
-            sql.Append("Description = '" + Description + "'");
+            sql.Append("Description = '" + Description + "', ");
+            sql.Append("FollowUpCallDate = '" + FollowUpDate + "', ");
+            sql.Append("IsIssueResolved = " + (IsIssueResolved ? 1 : 0) + ", ");
+            sql.Append("SatisfactionLevel = " + SatisfactionLevel + " ");
+
 
             sql.Append("WHERE " + idColumn + " = " + FollowupReportID);
 
@@ -71,6 +78,9 @@ namespace PSS.Business_Logic
             sql.Append("'" + Title + "'");
             sql.Append("'" + Type + "'");
             sql.Append("'" + Description + "'");
+            sql.Append("'" + FollowUpDate + "', ");
+            sql.Append("'" + IsIssueResolved + "', ");
+            sql.Append("" + SatisfactionLevel.ToString() + " ");          
 
             sql.Append(");");
 
@@ -78,28 +88,36 @@ namespace PSS.Business_Logic
         }
 
         #endregion
+        
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
         public override bool Equals(object obj)
         {
             return obj is FollowUp up &&
                    FollowupReportID == up.FollowupReportID &&
                    Title == up.Title &&
                    Type == up.Type &&
-                   Description == up.Description;
+                   Description == up.Description &&
+                   FollowUpDate == up.FollowUpDate &&
+                   IsIssueResolved == up.IsIssueResolved &&
+                   SatisfactionLevel == up.SatisfactionLevel;
         }
 
         public override int GetHashCode()
         {
-            int hashCode = 905264677;
+            int hashCode = 208219931;
             hashCode = hashCode * -1521134295 + FollowupReportID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Title);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
+            hashCode = hashCode * -1521134295 + Title.GetHashCode();
+            hashCode = hashCode * -1521134295 + Type.GetHashCode();
+            hashCode = hashCode * -1521134295 + Description.GetHashCode();
+            hashCode = hashCode * -1521134295 + FollowUpDate.GetHashCode();
+            hashCode = hashCode * -1521134295 + IsIssueResolved.GetHashCode();
+            hashCode = hashCode * -1521134295 + SatisfactionLevel.GetHashCode();
             return hashCode;
-        }
-
-        public override string ToString()
-        {
-            return base.ToString();
         }
     }
 }
