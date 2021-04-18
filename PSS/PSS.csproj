@@ -53,8 +53,9 @@
     <Compile Include="Business_Logic\Agent.cs" />
     <Compile Include="Business_Logic\BaseMultiID.cs" />
     <Compile Include="Business_Logic\BaseSingleID.cs" />
+    <Compile Include="Business_Logic\BaseTable.cs" />
     <Compile Include="Business_Logic\BusinessClient.cs" />
-    <Compile Include="Business_Logic\BusinessClientPeople.cs" />
+    <Compile Include="Business_Logic\BaseList.cs" />
     <Compile Include="Business_Logic\BusinessClientPerson.cs" />
     <Compile Include="Business_Logic\Call.cs" />
     <Compile Include="Business_Logic\Contract.cs" />

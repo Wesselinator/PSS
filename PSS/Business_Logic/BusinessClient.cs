@@ -10,6 +10,7 @@ namespace PSS.Business_Logic
         public override int ClientID { get; protected set; } //needed?
         public string BusinessName { get; set; }
         public Person ContactPerson { get => Person; set => Person = value; }
+        public BaseList<BusinessClientPerson> BusinessClientPeople { get; set; }
 
         public static readonly string tableName = "BusinessClient";
         public static readonly string idColumn = "BusinessClientID";
@@ -22,6 +23,7 @@ namespace PSS.Business_Logic
         {
             ClientID = businessID;
             BusinessName = businessName;
+            BusinessClientPeople.FillAll(businessID);
         }
 
         public BusinessClient(string businessName, string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
