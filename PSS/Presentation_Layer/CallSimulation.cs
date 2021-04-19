@@ -8,11 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PSS.Business_Logic;
+using Microsoft.VisualBasic;
 
 namespace PSS.Presentation_Layer
 {
     public partial class CallSimulation : Form
     {
+        DateTime startTime;
+        DateTime endTime;
+        string description = string.Empty;
+
         public static ClientMaintenance ClientMaintenance = new ClientMaintenance(); //Master
         public static CallCentre CallCentre = new CallCentre(); //Master
 
@@ -32,6 +37,9 @@ namespace PSS.Presentation_Layer
         private void CallSimulation_Load(object sender, EventArgs e)
         {
             LoadDropDown();
+            btnLogRequest.Hide();
+            btnRegister.Hide();
+            btnFollowUp.Hide();
         }
 
         private void LoadDropDown()
@@ -40,5 +48,20 @@ namespace PSS.Presentation_Layer
 
             //cbClientDropDown.Items.AddRange();
         }
+
+        private void btnMakeCall_Click(object sender, EventArgs e)
+        {
+            startTime = DateTime.Now;
+        }
+
+        private void btnEndCall_Click(object sender, EventArgs e)
+        {
+            endTime = DateTime.Now;
+
+            description = Interaction.InputBox("Please enter a description","Description","Please enter a description", -1, -1);
+            //Call(startTime, endTime, description);
+        }
+
+        
     }
 }

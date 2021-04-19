@@ -106,6 +106,7 @@ namespace PSS.Presentation_Layer
             this.btnEndCall.TabIndex = 13;
             this.btnEndCall.Text = "End Call";
             this.btnEndCall.UseVisualStyleBackColor = true;
+            this.btnEndCall.Click += new System.EventHandler(this.btnEndCall_Click);
             // 
             // btnMakeCall
             // 
@@ -115,6 +116,7 @@ namespace PSS.Presentation_Layer
             this.btnMakeCall.TabIndex = 12;
             this.btnMakeCall.Text = "Call PSS";
             this.btnMakeCall.UseVisualStyleBackColor = true;
+            this.btnMakeCall.Click += new System.EventHandler(this.btnMakeCall_Click);
             // 
             // CallSimulation
             // 
