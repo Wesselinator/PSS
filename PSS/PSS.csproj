@@ -78,6 +78,7 @@
     <Compile Include="Business_Logic\ServiceRequest.cs" />
     <Compile Include="Business_Logic\Technician.cs" />
     <Compile Include="Business_Logic\Task.cs" />
+    <Compile Include="Business_Logic\User.cs" />
     <Compile Include="Data_Access\DataEngine.cs" />
     <Compile Include="Data_Access\DataHandler.cs" />
     <Compile Include="Presentation_Layer\CallCentre.cs">

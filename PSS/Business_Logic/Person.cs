@@ -72,8 +72,8 @@ namespace PSS.Business_Logic
             sql.Append("FirstName = '" + FirstName + "', ");
             sql.Append("LastName = '" + LastName + "', ");
             sql.Append("BirthDate = '" + BirthDayString + "', ");
-            sql.Append("CellphoneNumber = '" + CellphoneNumber + "', ");
-            sql.Append("TellephoneNumber = '" + TellephoneNumber + "', ");
+            sql.Append("CellPhoneNumber = '" + CellphoneNumber + "', ");
+            sql.Append("TelephoneNumber = '" + TellephoneNumber + "', ");
             sql.AppendLine("Email = '" + Email + "'");
 
             sql.AppendLine("WHERE " + IDColumn + " = " + PersonID);
@@ -84,7 +84,7 @@ namespace PSS.Business_Logic
         protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO " + TableName);
+            sql.AppendLine("INSERT INTO " + TableName + "(PersonID, FirstName, LastName, BirthDate, CellPhoneNumber, TelephoneNumber, Email)");
             sql.Append("VALUES (");
 
             sql.Append(PersonID + ", ");
