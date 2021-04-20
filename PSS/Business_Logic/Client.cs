@@ -19,10 +19,17 @@ namespace PSS.Business_Logic
         public Address Address { get; set; }
         public Person Person { get; set; }
 
+        private static readonly string IdentifierLetter = "ABCDE"; //char[] is a string!
+        private int ClientIdentifierLetter { get { 
+                int x = (int)ClientID.ToString()[0];
+                if (x > 4 || x < 0) { throw new Exception(); } //bad data is in the database!!!
+                return IdentifierLetter[x];
+            } }
+        private string ClientID7Digits { get { return ClientID.ToString("D8").Remove(0, 1); } } //remove first digit no matter what it is
+        public string BusinessIdentifier { get => ClientIdentifierLetter + ClientID7Digits; }
+
         public Client(string tableName, string idColumn) : base(tableName, idColumn)
-        { 
-            
-        }
+        {  }
 
         protected Client(string tableName, string idColumn, string type, string status, string notes, Address address, Person person) : this(tableName, idColumn) //Protected Becuase you should not be able to create half a client
         {
