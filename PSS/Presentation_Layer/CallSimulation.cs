@@ -36,6 +36,7 @@ namespace PSS.Presentation_Layer
         {
             CallCentre.Populate(SelectedClient);
             CallCentre.Show();
+            description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
         }
 
         private void CallSimulation_Load(object sender, EventArgs e)
@@ -83,8 +84,6 @@ namespace PSS.Presentation_Layer
         {
             endTime = DateTime.Now;
 
-            description = Interaction.InputBox("Please enter a description","Description","Please enter a description", -1, -1);
-
             Call calll = new Call(startTime, endTime, description);
             calll.Save();
 
@@ -95,11 +94,13 @@ namespace PSS.Presentation_Layer
         private void btnRegister_Click(object sender, EventArgs e)
         {
             ClientMaintenance.Show();
+            description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
         }
 
         private void btnFollowUp_Click(object sender, EventArgs e)
         {
             //ServiceDepartment.Show(); this is giving some error and idk why :(:::::
+            description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
         }
     }
 }
