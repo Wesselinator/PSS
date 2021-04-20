@@ -33,7 +33,11 @@ namespace PSS.Business_Logic
             FillLists(person.PersonID);
         }
 
-        //TODO: add a constructor that creates a numbered person
+        public IndividualClient(string type, string status, string notes, Address address) : base(tableName, idColumn, type, status, notes, address)
+        {
+            FillLists(ClientID); // this has a value now
+        }
+
 
         #region DataBase
 

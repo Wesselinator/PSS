@@ -40,6 +40,17 @@ namespace PSS.Business_Logic
             this.Person = person;
         }
 
+        //Special for Individual Client
+        protected Client(string tableName, string idColumn, string type, string status, string notes, Address address) : this(tableName, idColumn) //Protected Becuase you should not be able to create half a client
+        {
+            int newID = GetNextID(); //TODO: THIS is WRONG grab from Person
+            this.Type = type;
+            this.Status = status;
+            this.Notes = notes;
+            this.Address = address;
+            this.Person = new Person(newID);
+        }
+
         #region DataBase
 
         protected void FillPartialRow(DataRow row, string personColumn)

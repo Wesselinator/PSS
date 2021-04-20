@@ -105,7 +105,6 @@ namespace PSS.Business_Logic
         public override string ToString()
         {
             return base.ToString();
-            //TODO: update
         }
 
         //TODO: wtf?

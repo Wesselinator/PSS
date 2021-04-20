@@ -8,9 +8,10 @@ namespace PSS.Business_Logic
 {
     public class Technician : SingleIntID
     {
-        public int TechnicianID { get => ID; private set => ID = value; }
+        public int TechnicianID { get => Person.PersonID; private set { ID = value; } }
         public string Specialty { get; set; }
         public string PayRate { get; set; }
+        public Person Person { get; set; }
 
         private static readonly string tableName = "Technician";
         private static readonly string idColumn = "TechnicianID";
@@ -18,18 +19,21 @@ namespace PSS.Business_Logic
         public Technician() : base(tableName, idColumn) 
         { }
 
-        public Technician(int technicianID, string specialty, string payRate) : this()
+        public Technician(string specialty, string payRate, Person person) : this()
         {
-            TechnicianID = technicianID;
+            TechnicianID = person.PersonID;
             Specialty = specialty;
             PayRate = payRate;
+            Person = person;
         }
 
         public Technician(string specialty, string payRate) : this()
         {
-            TechnicianID = base.GetNextID();
+            int nextID = GetNextID(); //TODO: This is wrong, get from Person
+            TechnicianID = nextID;
             Specialty = specialty;
             PayRate = payRate;
+            Person = new Person(nextID);
         }
 
         #region DataBase
@@ -39,6 +43,7 @@ namespace PSS.Business_Logic
             this.TechnicianID = row.Field<int>(idColumn);
             this.Specialty = row.Field<string>("Speciality");
             this.PayRate = row.Field<string>("PayRate");
+            this.Person = DataEngine.GetDataObject<Person>(row.Field<int>(idColumn));
         }
 
         protected override string Update()
@@ -77,7 +82,8 @@ namespace PSS.Business_Logic
             return obj is Technician technician &&
                    TechnicianID == technician.TechnicianID &&
                    Specialty == technician.Specialty &&
-                   PayRate == technician.PayRate;
+                   PayRate == technician.PayRate &&
+                   Person.Equals(technician);
         }
 
         public override int GetHashCode()

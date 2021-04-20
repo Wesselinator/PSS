@@ -28,6 +28,10 @@ namespace PSS.Business_Logic
 
         public Person() : base(tableName, idColumn)
         { }
+        public Person(int ID) : this() //This Table is used in compistion
+        {
+            PersonID = ID;
+        }
         public Person(int personID, string firstName, string lastName, DateTime birthDay, string cellphoneNumber, string telephoneNumber, string email) : this()
         {
             this.PersonID = personID;
