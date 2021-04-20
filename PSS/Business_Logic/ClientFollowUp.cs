@@ -8,7 +8,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    class ClientFollowUp : BaseMultiID
+    class ClientFollowUp : MultiIntID
     {
         private FollowUp fu;
         public int ClientID { get => IDs[0]; private set => IDs[0] = value; }

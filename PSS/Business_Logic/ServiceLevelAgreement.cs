@@ -8,7 +8,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    class ServiceLevelAgreement : BaseMultiID
+    class ServiceLevelAgreement : MultiIntID
     {
         private Service s;
         public Service Service

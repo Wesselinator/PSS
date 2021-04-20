@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace PSS.Business_Logic
 {
-    public class TechnicianTaskFeedback : BaseSingleID
+    public class TechnicianTaskFeedback : SingleIntID
     {
         public int TechnicianTaskFeedID { get => ID; private set => ID = value; }
         public DateTime TimeArived { get; set; }

@@ -7,7 +7,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public class ClientServiceRequest : BaseMultiID
+    public class ClientServiceRequest : MultiIntID
     {
         private ServiceRequest sr;
         public int ClientID { get => IDs[0]; private set => IDs[0] = value; }

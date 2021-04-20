@@ -59,7 +59,9 @@ namespace PSS.Presentation_Layer
             endTime = DateTime.Now;
 
             description = Interaction.InputBox("Please enter a description","Description","Please enter a description", -1, -1);
-            //Call(startTime, endTime, description);
+
+            Call calll = new Call(startTime, endTime, description);
+            calll.Save();
         }
 
         

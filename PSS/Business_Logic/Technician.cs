@@ -6,7 +6,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public class Technician : BaseSingleID
+    public class Technician : SingleIntID
     {
         public int TechnicianID { get => ID; private set => ID = value; }
         public string Specialty { get; set; }

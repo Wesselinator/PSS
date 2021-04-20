@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public abstract class BaseMultiID : BaseTable
+    public abstract class MultiIntID : BaseTable
     {
         protected int[] IDs { get; set; }
         protected string[] IDColumns { get; private set; }
 
-        protected BaseMultiID(string tableName, params string[] idColumns) : base(tableName)
+        protected MultiIntID(string tableName, params string[] idColumns) : base(tableName)
         {
             this.IDColumns = idColumns;
             this.IDs = new int[idColumns.Length];

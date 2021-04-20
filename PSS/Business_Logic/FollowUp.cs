@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PSS.Business_Logic
 {
-    public class FollowUp : BaseSingleID
+    public class FollowUp : SingleIntID
     {
         public int FollowupReportID { get => ID; private set => ID = value; }
         public string Title { get; set; }

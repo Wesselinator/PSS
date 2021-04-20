@@ -9,7 +9,7 @@ using PSS.Data_Access;
 //PERSON
 namespace PSS.Business_Logic
 {
-    public class Person : BaseSingleID
+    public class Person : SingleIntID
     {
         private static readonly string BirthDayFormat = "yyyy-MM-dd";
 

@@ -8,7 +8,7 @@ using PSS.Data_Access;
 namespace PSS.Business_Logic
 {
     //This isn't 100% what hapens in the DB but it simplifies the code a LOT
-    public class ClientContract : BaseMultiID
+    public class ClientContract : MultiIntID
     {
         private Contract c;
         public int ClientContractID { get => IDs[0]; private set => IDs[0] = value; }

@@ -6,7 +6,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public class CallChangeAssociation : BaseSingleID
+    public class CallChangeAssociation : SingleIntID
     {
         public int CallChangeAssociationID { get => ID; private set => ID = value; }
         public Call CallInstanceID { get; set; }

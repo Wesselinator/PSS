@@ -9,7 +9,7 @@ using PSS.Data_Access;
 //CHECK
 namespace PSS.Business_Logic
 {
-    public abstract class Client : BaseSingleID
+    public abstract class Client : SingleIntID
     {
         public virtual int ClientID { get => ID; protected set => ID = value; }
         public string Type { get; set; }

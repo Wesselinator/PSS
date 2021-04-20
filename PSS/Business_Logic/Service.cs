@@ -7,7 +7,7 @@ using PSS.Data_Access;
 //CHECK
 namespace PSS.Business_Logic
 {
-    class Service : BaseSingleID
+    class Service : SingleIntID
     {
         public int ServiceID { get => ID; private set => ID = value; }
         public string ServiceName { get; set; }

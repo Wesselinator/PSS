@@ -4,9 +4,9 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public abstract class BaseSingleID : BaseTable
+    public abstract class BaseSingleID<T> : BaseTable where T : struct
     {
-        protected int ID { get; set; }
+        protected T ID { get; set; }
         protected string IDColumn { get; private set; }
 
         protected BaseSingleID(string tableName, string idColumn) : base(tableName)
@@ -14,24 +14,9 @@ namespace PSS.Business_Logic
             IDColumn = idColumn;
         }
 
-        protected virtual int GetNextID()
-        {
-            //VERBOSE: Becuase I want to see everything that happens
-            string sql = string.Format("SELECT * FROM {0} ORDER BY {1} DESC;", TableName, IDColumn);
-            DataTable dt = DataHandler.getDataTable(sql);
-            try
-            {
-                DataRow dr = dt.Rows[0];
-                int nextID = dr.Field<int>(IDColumn) + 1;
-                return nextID;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                return 0; //empty 
-            }
-        }
+        protected abstract T GetNextID();
 
-        protected DataRow GetRowByID(int id)
+        protected DataRow GetRowByID(T id)
         {
             DataTable dt = GetAllWhere(id);
 
@@ -47,7 +32,7 @@ namespace PSS.Business_Logic
             return GetAllWhere(ID);
         }
 
-        private DataTable GetAllWhere(int ID)
+        private DataTable GetAllWhere(T ID)
         {
             string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
             return DataHandler.getDataTable(sql);
@@ -58,7 +43,7 @@ namespace PSS.Business_Logic
             return GetAll().Rows.Count != 0;
         }
 
-        public void FillWithID(int ID)
+        public void FillWithID(T ID)
         {
             FillFromRow(GetRowByID(ID));
         }

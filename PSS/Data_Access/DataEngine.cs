@@ -114,7 +114,7 @@ namespace PSS.Data_Access
             return ret;
         }
 
-        public static T GetDataObject<T>(params int[] ids) where T : BaseMultiID, new()
+        public static T GetDataObject<T>(params int[] ids) where T : MultiIntID, new()
         {
             T ret = new T();
             ret.FillWithIDs(ids);

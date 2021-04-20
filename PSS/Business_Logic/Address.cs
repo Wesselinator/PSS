@@ -4,7 +4,7 @@ using System.Data;
 //CHECK
 namespace PSS.Business_Logic
 {
-    public class Address : BaseSingleID
+    public class Address : BaseSingleID<int>
     {
         public int AddressID { get => ID; private set => ID = value; }
         public string Street { get; set; }
@@ -28,7 +28,7 @@ namespace PSS.Business_Logic
 
         public Address(string street, string city, string postalCode, string province) : this() //no chainning  :(
         {
-            this.AddressID = base.GetNextID();
+            this.AddressID = GetNextID();
             this.Street = street;
             this.City = city;
             this.PostalCode = postalCode;
@@ -36,6 +36,11 @@ namespace PSS.Business_Logic
         }
 
         #region DataBase
+
+        protected override int GetNextID()
+        {
+            return DefaultNextInt();
+        }
 
         public override void FillFromRow(DataRow row)
         {

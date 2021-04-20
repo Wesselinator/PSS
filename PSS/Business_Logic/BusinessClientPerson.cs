@@ -6,7 +6,7 @@ using PSS.Data_Access;
 //CHECK
 namespace PSS.Business_Logic
 {
-    public class BusinessClientPerson : BaseMultiID
+    public class BusinessClientPerson : MultiIntID
     {
         private Person p;
         public int BusinessClientID { get => IDs[0]; private set => IDs[0] = value; }

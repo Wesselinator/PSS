@@ -7,7 +7,7 @@ using System.Data;
 
 namespace PSS.Business_Logic
 {
-    public class MultiIDList<T> : BaseList<T> where T : BaseMultiID, new()
+    public class MultiIDList<T> : BaseList<T> where T : MultiIntID, new()
     {
         private T DataInstance = new T();
 

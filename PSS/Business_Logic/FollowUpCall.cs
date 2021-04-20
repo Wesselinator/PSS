@@ -5,7 +5,7 @@ using System.Data;
 namespace PSS.Business_Logic
 {
     [Obsolete("Deprecated", true)]
-    class FollowUpCall : BaseSingleID
+    class FollowUpCall : SingleIntID
     {
         public int FollowUpCallID { get => ID; private set => ID = value; }
 
