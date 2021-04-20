@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using PSS.Data_Access;
 
-//CHECK
+//CHECK // equals and hashcode and toStringOverride needed
 namespace PSS.Business_Logic
 {
     class IndividualClient : Client
@@ -80,5 +80,7 @@ namespace PSS.Business_Logic
         }
 
         #endregion
+
+
     }
 }

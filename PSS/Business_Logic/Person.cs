@@ -104,7 +104,8 @@ namespace PSS.Business_Logic
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("PersonID: {0} | FirstName: {1} | LastName: {2} | BirthDay: {3} | CellphoneNumber: {4} | TellePhoneNumber: {5}" +
+                " | Email: {6}", PersonID, FirstName, LastName, BirthDay, CellphoneNumber, TellephoneNumber, Email);
         }
 
         public override bool Equals(object obj)
