@@ -13,7 +13,6 @@ namespace PSS.Business_Logic
         public string Title { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
-        public Client Client { get; set; }
 
         private static readonly string tableName = "ServiceRequest";
         private static readonly string idColumn = "ServiceRequestID";
@@ -27,7 +26,6 @@ namespace PSS.Business_Logic
             this.Title = title;
             this.Type = type;
             this.Description = description;
-            this.Client = client;
         }
 
         public ServiceRequest(string title, string type, string description, Client client) : this()
@@ -36,7 +34,6 @@ namespace PSS.Business_Logic
             this.Title = title;
             this.Type = type;
             this.Description = description;
-            this.Client = client;
         }
 
         #region Database
@@ -47,12 +44,10 @@ namespace PSS.Business_Logic
             this.Title = row.Field<string>("ServiceRequestTitle");
             this.Type = row.Field<string>("ServiceRequestType");
             this.Description = row.Field<string>("ServiceRequestDescription");
-            this.Client = DataEngine.GetByClientID(row.Field<int>("ClientEntityID"));
         }
 
         public override void Save()
         {
-            Client.Save();
             base.Save();
         }
 
@@ -64,8 +59,7 @@ namespace PSS.Business_Logic
 
             sql.Append("ServiceRequestTitle = '" + Title + "',");
             sql.Append("ServiceRequestType = '" + Type + "',");
-            sql.Append("ServiceRequestDescription = '" + Description + "',");
-            sql.AppendLine("ClientEntityID = " + Client.ClientID);
+            sql.AppendLine("ServiceRequestDescription = '" + Description + "'");
 
             sql.AppendLine("WHERE " + IDColumn + " = " + ServiceRequestID);
 
@@ -82,7 +76,6 @@ namespace PSS.Business_Logic
             sql.Append("'" + Title + "', ");
             sql.Append("'" + Type + "', ");
             sql.Append("'" + Description + "', ");
-            sql.Append(Client.ClientID);
 
             sql.AppendLine(");");
 
@@ -91,19 +84,13 @@ namespace PSS.Business_Logic
 
         #endregion
 
-        public bool Verify(Client client)
-        {
-            return client.ClientID == this.Client.ClientID;
-        }
-
         public override bool Equals(object obj)
         {
             return obj is ServiceRequest request &&
                    ServiceRequestID == request.ServiceRequestID &&
                    Title == request.Title &&
                    Type == request.Type &&
-                   Description == request.Description &&
-                   Client.Equals(request.Client);
+                   Description == request.Description;
         }
 
         public override int GetHashCode()
@@ -113,7 +100,6 @@ namespace PSS.Business_Logic
             hashCode = hashCode * -1521134295 + Title.GetHashCode();
             hashCode = hashCode * -1521134295 + Type.GetHashCode();
             hashCode = hashCode * -1521134295 + Description.GetHashCode();
-            hashCode = hashCode * -1521134295 + Client.GetHashCode();
             return hashCode;
         }
 

@@ -32,12 +32,7 @@ namespace PSS.Presentation_Layer
         }
         public void Populate(Client client, ServiceRequest existingServiceRequest)
         {
-
-            if (!existingServiceRequest.Verify(client))
-            {
-                return;
-                //throw
-            }
+            //TODO: Verify if existing requests exists in client list
 
 
             currentRequest = existingServiceRequest;
