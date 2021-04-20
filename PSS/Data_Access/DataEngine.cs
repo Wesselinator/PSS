@@ -107,12 +107,7 @@ namespace PSS.Data_Access
             return ret;
         }
 
-        public static T GetDataObject<T>(int id) where T : BaseSingleID, new()
-        {
-            T ret = new T();
-            ret.FillWithID(id);
-            return ret;
-        }
+        #region DataObjects
 
         public static T GetDataObject<T>(params int[] ids) where T : MultiIntID, new()
         {
@@ -120,6 +115,24 @@ namespace PSS.Data_Access
             ret.FillWithIDs(ids);
             return ret;
         }
+
+        public static T GetDataObject<T>(int id) where T : SingleIntID, new()
+        {
+            T ret = new T();
+            ret.FillWithID(id);
+            return ret;
+        }
+
+        public static TObject GetDataObject<TObject, TID>(TID id) 
+            where TObject : BaseSingleID<TID>, new()
+            where TID : struct
+        {
+            TObject ret = new TObject();
+            ret.FillWithID(id);
+            return ret;
+        }
+
+        #endregion
 
         public static string GetProgressRapport(string ticketNo)
         {

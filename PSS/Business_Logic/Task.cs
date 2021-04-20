@@ -6,7 +6,7 @@ using System.Data;
 //CHECK
 namespace PSS.Business_Logic
 {
-    public class Task : BaseSingleID
+    public class Task : SingleIntID
     {
         public int TaskID { get => ID; private set => ID = value; }
         public string Title { get; set; }
