@@ -47,7 +47,7 @@ namespace PSS.Business_Logic
             sql.AppendLine("UPDATE " + tableName);
             sql.Append("SET ");
 
-            sql.Append("Specialty = '" + Specialty + "', ");
+            sql.Append("Speciality = '" + Specialty + "', ");
             sql.Append("PayRate = '" + PayRate + "'");
 
             sql.Append("WHERE " + idColumn + " = " + TechnicianID);
@@ -58,7 +58,7 @@ namespace PSS.Business_Logic
         protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
-            sql.Append("INSERT INTO " + tableName);
+            sql.Append("INSERT INTO " + tableName + "(TechnicianID, Speciality, PayRate)");
             sql.Append("VALUES (");
 
             sql.Append(TechnicianID + ", ");
