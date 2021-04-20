@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PSS.Business_Logic;
 using Microsoft.VisualBasic;
+using System.Diagnostics;
 
 namespace PSS.Presentation_Layer
 {
@@ -17,6 +18,9 @@ namespace PSS.Presentation_Layer
         DateTime startTime;
         DateTime endTime;
         string description = string.Empty;
+
+        Timer timer;
+        Stopwatch sw;
 
         public static ClientMaintenance ClientMaintenance = new ClientMaintenance(); //Master
         public static CallCentre CallCentre = new CallCentre(); //Master
@@ -52,6 +56,27 @@ namespace PSS.Presentation_Layer
         private void btnMakeCall_Click(object sender, EventArgs e)
         {
             startTime = DateTime.Now;
+
+            timer = new Timer();
+            timer.Interval = (1000);
+            timer.Tick += new EventHandler(timer_Tick);
+
+            sw = new Stopwatch();
+            timer.Start();
+            sw.Start();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            string TimerInString;
+            int sec = sw.Elapsed.Seconds;
+            int min = 0;
+
+            TimerInString = ((min < 10) ? "0" + min.ToString() : min.ToString());
+            TimerInString += ":" + ((sec < 10) ? "0" + sec.ToString() : sec.ToString());
+
+            lblTimer.Text = TimerInString;
+            Application.DoEvents();
         }
 
         private void btnEndCall_Click(object sender, EventArgs e)
@@ -62,6 +87,9 @@ namespace PSS.Presentation_Layer
 
             Call calll = new Call(startTime, endTime, description);
             calll.Save();
+
+
+            Application.Exit();
         }
 
         

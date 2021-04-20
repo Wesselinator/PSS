@@ -17,7 +17,7 @@ namespace PSS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TestGetters());
+            Application.Run(new CallSimulation());
         }
     }
 }
