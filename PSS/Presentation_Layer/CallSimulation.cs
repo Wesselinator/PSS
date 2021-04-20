@@ -64,18 +64,18 @@ namespace PSS.Presentation_Layer
             sw = new Stopwatch();
             timer.Start();
             sw.Start();
+
+            btnLogRequest.Show();
+            btnRegister.Show();
+            btnFollowUp.Show();
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            string TimerInString;
             int sec = sw.Elapsed.Seconds;
-            int min = 0;
+            int min = sw.Elapsed.Minutes;
 
-            TimerInString = ((min < 10) ? "0" + min.ToString() : min.ToString());
-            TimerInString += ":" + ((sec < 10) ? "0" + sec.ToString() : sec.ToString());
-
-            lblTimer.Text = TimerInString;
+            lblTimer.Text = string.Format("{0:00}:{1:00}", min, sec);
             Application.DoEvents();
         }
 
@@ -92,6 +92,14 @@ namespace PSS.Presentation_Layer
             Application.Exit();
         }
 
-        
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            ClientMaintenance.Show();
+        }
+
+        private void btnFollowUp_Click(object sender, EventArgs e)
+        {
+            //ServiceDepartment.Show(); this is giving some error and idk why :(:::::
+        }
     }
 }

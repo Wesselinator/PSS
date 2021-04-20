@@ -57,6 +57,7 @@ namespace PSS.Presentation_Layer
             this.btnFollowUp.TabIndex = 9;
             this.btnFollowUp.Text = "3. Client Follow up";
             this.btnFollowUp.UseVisualStyleBackColor = true;
+            this.btnFollowUp.Click += new System.EventHandler(this.btnFollowUp_Click);
             // 
             // btnLogRequest
             // 
@@ -76,6 +77,7 @@ namespace PSS.Presentation_Layer
             this.btnRegister.TabIndex = 7;
             this.btnRegister.Text = "1. Register as new client";
             this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // cbClientDropDown
             // 
