@@ -82,7 +82,7 @@ namespace PSS.Business_Logic
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("FollowUpCallID: {0} | IsIssueResolved: {1} | SatisfactionLevel: {2} | FollowUpCallDate: {3}", FollowUpCallID, IsIssueResolved, SatisfactionLevel, FollowUpCallDate);
         }
 
         public override bool Equals(object obj)

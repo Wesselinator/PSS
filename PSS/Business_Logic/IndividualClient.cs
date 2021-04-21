@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using PSS.Data_Access;
 
-//CHECK
+//CHECK // equals and hashcode and toStringOverride needed
 namespace PSS.Business_Logic
 {
     class IndividualClient : Client
@@ -74,7 +74,7 @@ namespace PSS.Business_Logic
         protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO " + TableName + "(IndividualClientID, Type, Status, Notes, AddressID)");
+            sql.AppendLine("INSERT INTO " + TableName + " (IndividualClientID, Type, Status, Notes, AddressID)");
 
             sql.Append("VALUES (");
             sql.Append(ClientID + ", ");
@@ -84,5 +84,7 @@ namespace PSS.Business_Logic
         }
 
         #endregion
+
+
     }
 }

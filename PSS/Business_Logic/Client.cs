@@ -131,7 +131,7 @@ namespace PSS.Business_Logic
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("ClientID: {0} | Type: {1} | Status: {2} | Notes: {3} | Address: [{4}] | Person: [{5}]", ClientID, Type, Status, Notes, Address, Person);
         }
     }
 }

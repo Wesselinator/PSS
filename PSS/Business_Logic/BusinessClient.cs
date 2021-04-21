@@ -107,7 +107,8 @@ namespace PSS.Business_Logic
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("ClientID: {0} | BusinessName: {1} | ContactPerson: [{2}] | BusinessClientPeople: [{3}] | " +
+                "ServiceRequest: [{4}] | Contracts: [{5}] | FollowUps: [{6}]", ClientID, BusinessName, ContactPerson, BusinessClientPeople, ServiceRequests, Contracts, FollowUps);
         }
     }
 }

@@ -82,12 +82,6 @@ namespace PSS.Business_Logic
 
         #endregion 
 
-
-        public override string ToString()
-        {
-            return "Call started on " + StartTime ;
-        }
-
         public override bool Equals(object obj)
         {
             return obj is Call call &&
@@ -105,6 +99,12 @@ namespace PSS.Business_Logic
             hashCode = hashCode * -1521134295 + EndTime.GetHashCode();
             hashCode = hashCode * -1521134295 + Description.GetHashCode();
             return hashCode;
+        }
+        
+        public override string ToString()
+        {
+            return string.Format("CallInstanceID: {0} | StartTime: {1} | EndTime: {2} | Description: {3}", CallInstanceID, StartTime, EndTime, Description);
+
         }
     }
 }

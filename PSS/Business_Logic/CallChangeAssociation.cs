@@ -99,7 +99,7 @@ namespace PSS.Business_Logic
         }
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("CallAssociationID: {0} | CallInstanceID: {1} | TabelName: {2} | TableRecordID: {3}", CallChangeAssociationID, CallInstanceID, fTableName, TableRecordID);
         }
     }
 }

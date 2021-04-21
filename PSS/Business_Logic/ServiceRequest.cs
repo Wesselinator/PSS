@@ -103,5 +103,9 @@ namespace PSS.Business_Logic
             return hashCode;
         }
 
+        public override string ToString()
+        {
+            return base.ToString();//continue
+        }
     }
 }
