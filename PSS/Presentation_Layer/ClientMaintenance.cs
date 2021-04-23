@@ -20,6 +20,11 @@ namespace PSS.Presentation_Layer
             InitializeComponent();
         }
 
+        public ClientMaintenance(Client client) : this() //added this check if correct
+        {
+            this.client = client;
+        }
+
         public void ReceiveClient(Client clientToUpdate)
         {
             //update form to register components/name
