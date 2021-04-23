@@ -27,7 +27,7 @@ namespace PSS.Business_Logic
             DataTable dt = DataHandler.getDataTable(sql);
             if (dt.Rows.Count == 0)
             {
-                throw new Exception(); //TODO: Throw Exception
+                throw new CustomException("Error: entity not found"); //TODO: Throw Exception
             }
             return dt.Rows[0];
         }

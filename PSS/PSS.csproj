@@ -55,6 +55,7 @@
     <Compile Include="Business_Logic\ClientContract.cs" />
     <Compile Include="Business_Logic\ClientFollowUp.cs" />
     <Compile Include="Business_Logic\ClientServiceRequest.cs" />
+    <Compile Include="Business_Logic\CustomException.cs" />
     <Compile Include="Business_Logic\FollowUpCall.cs" />
     <Compile Include="Business_Logic\ServiceLevelAgreement.cs" />
     <Compile Include="Business_Logic\Base Classes\SingleIntID.cs" />

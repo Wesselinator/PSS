@@ -22,7 +22,7 @@ namespace PSS.Business_Logic
 
             if (dt.Rows.Count == 0)
             {
-                throw new Exception(); //TODO: Throw Exception
+                throw new CustomException("Error: Unable to find what you are looking for"); //TODO: Throw Exception
             }
             return dt.Rows[0];
         }
