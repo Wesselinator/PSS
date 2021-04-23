@@ -42,7 +42,7 @@ namespace PSS.Data_Access
                 catch (Exception e)
                 {
                     //Console.WriteLine(e.StackTrace);
-                    MessageBox.Show(string.Format("Error: {0}\n\rSQL: {1}", e.Message, Query), "SQL ERROR")
+                    MessageBox.Show(string.Format("Error: {0}\n\rSQL: {1}", e.Message, Query), "SQL ERROR");
                 }
             }
         }
