@@ -22,9 +22,6 @@ namespace PSS.Presentation_Layer
         Timer timer;
         Stopwatch sw;
 
-        public static ClientMaintenance ClientMaintenance = new ClientMaintenance(); //Master
-        public static CallCentre CallCentre = new CallCentre(); //Master
-
         public Client SelectedClient { get => (Client)cbClientDropDown.SelectedItem; }
 
         public CallSimulation()
@@ -34,8 +31,9 @@ namespace PSS.Presentation_Layer
 
         private void btnLogRequest_Click(object sender, EventArgs e)
         {
-            CallCentre.Populate(SelectedClient);
-            CallCentre.Show();
+            CallCentre callCentreForm = new CallCentre();
+            callCentreForm.Populate(SelectedClient);
+            callCentreForm.Show();
             description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
         }
 
@@ -93,13 +91,15 @@ namespace PSS.Presentation_Layer
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            ClientMaintenance.Show();
+            ClientMaintenance clientMaintenanceForm = new ClientMaintenance();
+            clientMaintenanceForm.Show();
             description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
         }
 
         private void btnFollowUp_Click(object sender, EventArgs e)
         {
-            //ServiceDepartment.Show(); this is giving some error and idk why :(:::::
+            ServiceDepartment serviceDepartmentForm = new ServiceDepartment();
+            serviceDepartmentForm.Show();
             description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
         }
     }
