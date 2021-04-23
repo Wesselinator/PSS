@@ -7,23 +7,23 @@ namespace PSS.Data_Access
 {
     public static class DataHandler
     {
-        private static readonly string connStr = @"Server=.;Initial Catalog=PremierServiceSolutionsDB;Integrated Security=SSPI";
+        private static readonly string connStr = @"Server=.;Initial Catalog=PremierServiceSolutionsDB;Database=PremierServiceSolutionsDB;Integrated Security=SSPI";
 
         public static DataTable getDataTable(string Query)
         {
-            DataTable data = new DataTable();
+            DataTable data = new DataTable(); ;
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 try
                 {
-                    SqlDataAdapter adapter = new SqlDataAdapter(Query, conn);
+                    SqlDataAdapter adapter = new SqlDataAdapter(Query, conn); 
                     adapter.Fill(data);
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.StackTrace);
-                    MessageBox.Show(e.Message,"SQL ERROR");
+                    //Console.WriteLine(e.StackTrace);
+                    MessageBox.Show(string.Format("Error: {0}\n\rSQL: {1}", e.Message, Query),"SQL ERROR");
                 }
             }
 
@@ -41,8 +41,8 @@ namespace PSS.Data_Access
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.StackTrace);
-                    MessageBox.Show(e.Message, "SQL ERROR");
+                    //Console.WriteLine(e.StackTrace);
+                    MessageBox.Show(string.Format("Error: {0}\n\rSQL: {1}", e.Message, Query), "SQL ERROR")
                 }
             }
         }

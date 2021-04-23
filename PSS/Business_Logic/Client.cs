@@ -109,6 +109,11 @@ namespace PSS.Business_Logic
 
         #endregion
 
+        public static List<Client> GetAllClients()
+        {
+            return DataEngine.GetAllClients();//move code here
+        }
+
         public override bool Equals(object obj)
         {
             //add if branch for businsess/individual testing?
@@ -133,5 +138,6 @@ namespace PSS.Business_Logic
         {
             return string.Format("ClientID: {0} | Type: {1} | Status: {2} | Notes: {3} | Address: [{4}] | Person: [{5}]", ClientID, Type, Status, Notes, Address, Person);
         }
+
     }
 }

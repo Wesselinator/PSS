@@ -15,8 +15,8 @@ namespace PSS.Business_Logic
         public string ContractName { get; set; }
         public string ServiceLevel { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public double MonthlyFee { get; set; }
+        public DateTime? EndDate { get; set; } //nullable in DataBase (look into [default] for C#)
+        public decimal MonthlyFee { get; set; }
 
         private static readonly string tableName = "Contract";
         private static readonly string idColumn = "ContractID";
@@ -24,7 +24,7 @@ namespace PSS.Business_Logic
         public Contract() : base(tableName, idColumn)
         { }
 
-        public Contract(int contractID, string contractName, string serviceLevel, DateTime startDate, DateTime endDate, double monthlyFee) : this()
+        public Contract(int contractID, string contractName, string serviceLevel, DateTime startDate, DateTime endDate, decimal monthlyFee) : this()
         {
             ContractID = contractID;
             ContractName = contractName;
@@ -34,7 +34,7 @@ namespace PSS.Business_Logic
             MonthlyFee = monthlyFee;
         }
 
-        public Contract(string contractName, string serviceLevel, DateTime startDate, DateTime endDate, double monthlyFee) : this() 
+        public Contract(string contractName, string serviceLevel, DateTime startDate, DateTime endDate, decimal monthlyFee) : this() 
         {
             ContractID = base.GetNextID();
             ContractName = contractName;
@@ -52,8 +52,8 @@ namespace PSS.Business_Logic
             this.ContractName = row.Field<string>("ContractName");
             this.ServiceLevel = row.Field<string>("ServiceLevel");
             this.StartDate = row.Field<DateTime>("OfferStartDate");
-            this.EndDate = row.Field<DateTime>("OfferEndDate");
-            this.MonthlyFee = row.Field<double>("MonthlyFee");
+            this.EndDate = row.Field<DateTime?>("OfferEndDate");
+            this.MonthlyFee = row.Field<decimal>("MonthlyFee");
         }
 
         protected override string Update()
@@ -65,7 +65,7 @@ namespace PSS.Business_Logic
             sql.Append("ContractName = '" + ContractName + "', ");
             sql.Append("ServiceLevel = '" + ServiceLevel + "', ");
             sql.Append("OfferStartDate = '" + StartDate.ToString("s") + "', ");
-            sql.AppendLine("OfferEndDate = '" + EndDate.ToString("s") + "', ");
+            sql.AppendLine("OfferEndDate = '" + EndDate?.ToString("s") + "', ");
             sql.AppendLine("MonthlyFee = " + MonthlyFee.ToString("0.00"));
 
             sql.AppendLine("WHERE " + IDColumn + " = " + ContractID);
@@ -83,7 +83,7 @@ namespace PSS.Business_Logic
             sql.Append("'" + ContractName + "', ");
             sql.Append("'" + ServiceLevel + "', ");
             sql.Append("'" + StartDate.ToString("s") + "', ");
-            sql.Append("'" + EndDate.ToString("s") + "', ");
+            sql.Append("'" + EndDate?.ToString("s") + "', ");
             sql.Append(MonthlyFee.ToString("0.00"));
 
             sql.AppendLine(");");

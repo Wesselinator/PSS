@@ -31,8 +31,7 @@ namespace PSS.Presentation_Layer
 
         private void btnLogRequest_Click(object sender, EventArgs e)
         {
-            CallCentre callCentreForm = new CallCentre();
-            callCentreForm.Populate(SelectedClient);
+            CallCentre callCentreForm = new CallCentre(SelectedClient);
             callCentreForm.Show();
             description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
         }
@@ -49,7 +48,7 @@ namespace PSS.Presentation_Layer
         {
             cbClientDropDown.DisplayMember = "CBXString";
 
-            //cbClientDropDown.Items.AddRange();
+            cbClientDropDown.Items.AddRange(Client.GetAllClients().ToArray());
         }
 
         private void btnMakeCall_Click(object sender, EventArgs e)

@@ -117,7 +117,7 @@ namespace PSS.Business_Logic
 
     public class IndividualClientContract : ClientContract
     {
-        public IndividualClientContract() : base("BusinessClientContract", "BusinessClientContractID", IndividualClient.idColumn)
+        public IndividualClientContract() : base("IndividualClientContract", "IndividualClientContractID", IndividualClient.idColumn)
         {  }
     }
 }
