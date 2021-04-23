@@ -15,6 +15,7 @@ namespace PSS.Presentation_Layer
 {
     public partial class CallSimulation : Form
     {
+        bool loop = true;
         DateTime startTime;
         DateTime endTime;
         string description = string.Empty;
@@ -31,10 +32,21 @@ namespace PSS.Presentation_Layer
 
         private void btnLogRequest_Click(object sender, EventArgs e)
         {
+            while (loop)
+            {
+                if (description == string.Empty)
+                {
+                    description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
+                }
+                else
+                {
+                    loop = false;
+                }
+            }
+
             CallCentre callCentreForm = new CallCentre();
-            callCentreForm.Populate(SelectedClient);
+            //callCentreForm.Populate(SelectedClient);
             callCentreForm.Show();
-            description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
         }
 
         private void CallSimulation_Load(object sender, EventArgs e)
@@ -91,16 +103,38 @@ namespace PSS.Presentation_Layer
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
+            while (loop)
+            {
+                if (description == string.Empty)
+                {
+                    description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
+                }
+                else
+                {
+                    loop = false;
+                }
+            }
             ClientMaintenance clientMaintenanceForm = new ClientMaintenance();
             clientMaintenanceForm.Show();
-            description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
         }
 
         private void btnFollowUp_Click(object sender, EventArgs e)
         {
+            while (loop)
+            {
+                if (description == string.Empty)
+                {
+                    description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
+                }
+                else
+                {
+                    loop = false;
+                }
+            }
+
             ServiceDepartment serviceDepartmentForm = new ServiceDepartment();
             serviceDepartmentForm.Show();
-            description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
+
         }
     }
 }
