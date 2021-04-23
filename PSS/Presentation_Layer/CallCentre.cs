@@ -27,12 +27,6 @@ namespace PSS.Presentation_Layer
 
         private ServiceRequest currentRequest = null;
         private Client currentClient = null;
-        public void Populate(Client client)
-        {
-            ServiceRequest sr = new ServiceRequest("Unknown", "Unkown Type", "Unknown Problem", client);
-
-            Populate(client, sr);
-        }
 
 
         private void btnClientMaintence_Click(object sender, EventArgs e)
@@ -57,7 +51,7 @@ namespace PSS.Presentation_Layer
         {
             if (currentRequest is null)
             {
-                MessageBox.Show("Service Request Not Updated! No Active Service Request", "Failure!");
+                currentRequest = new ServiceRequest("Unknown", "Unkown Type", "Unknown Problem", currentClient);
             }
             else
             {
