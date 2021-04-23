@@ -13,21 +13,21 @@ namespace PSS.Presentation_Layer
 {
     public partial class ServiceDepartment : Form
     {
-        Client client;//added this check if correct
+        Client focusedClient;
 
         public ServiceDepartment()
         {
             InitializeComponent();
         }
 
-        public ServiceDepartment(Client client)//added this check if correct
+        public ServiceDepartment(Client client) : this()
         {
-            this.client = client;
+            this.focusedClient = client;
         }
 
         private void ServiceDepartment_Load(object sender, EventArgs e)
         {
-
+            //TODO: load client details into form.
         }
     }
 }

@@ -4,10 +4,14 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
+    /// <summary>
+    /// Defines a BaseTable that has multiple INT IDs
+    /// </summary>
     public abstract class MultiIntID : BaseTable
     {
         protected int[] IDs { get; set; }
         protected string[] IDColumns { get; private set; }
+        private int CLength{ get => IDColumns.Length; } //Use this a bunch here
 
         protected MultiIntID(string tableName, params string[] idColumns) : base(tableName)
         {
@@ -17,9 +21,9 @@ namespace PSS.Business_Logic
 
         public DataRow GetByIDs(params int[] ids)
         {
-            if (ids.Length != IDColumns.Length)
+            if (ids.Length != CLength)
             {
-                throw new Exception();
+                throw new IDsSizeDiscrepancy(CLength, ids.Length);
             }
 
             string sql = string.Format("SELECT * FROM {0} {1}", TableName, WhereIDs(ids));
@@ -27,15 +31,15 @@ namespace PSS.Business_Logic
             DataTable dt = DataHandler.getDataTable(sql);
             if (dt.Rows.Count == 0)
             {
-                throw new CustomException("Error: entity not found"); //TODO: Throw Exception
+                throw new IDDoesNotExist(TableName, ids);
             }
             return dt.Rows[0];
         }
 
         private string WhereIDs(int[] ids)
         {
-            string[] wheres = new string[IDColumns.Length];
-            for (int i = 0; i < IDColumns.Length; i++)
+            string[] wheres = new string[CLength];
+            for (int i = 0; i < CLength; i++)
             {
                 wheres[i] = string.Format("{0} = {1}", IDColumns[i], ids[i]);
             }
@@ -53,7 +57,7 @@ namespace PSS.Business_Logic
         {
             if (ids.Length != IDs.Length)
             {
-                throw new Exception();
+                throw new IDsSizeDiscrepancy(CLength, ids.Length);
             }
 
             FillFromRow(GetByIDs(ids));
@@ -61,13 +65,18 @@ namespace PSS.Business_Logic
 
         public virtual DataTable GetAllOnPivot(int id, string column)
         {
-            if (Array.Exists(IDColumns, s => s == column))
+            if (IDColumnExists(column))
             {
                 string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, column, id);
                 return DataHandler.getDataTable(sql);
             }
 
-            throw new Exception();
+            throw new IDColumnDoesNotExist(column);
+        }
+
+        private bool IDColumnExists(string column)
+        {
+            return Array.Exists(IDColumns, s => s == column);
         }
 
         //TODO: Move this up for OOP

@@ -20,9 +20,10 @@ namespace PSS.Presentation_Layer
             InitializeComponent();
         }
 
-        public ClientMaintenance(Client client) : this() //added this check if correct
+        public ClientMaintenance(Client client) : this()
         {
             this.client = client;
+            //TODO: figure out when Recive Client Needs to be called
         }
 
         public void ReceiveClient(Client clientToUpdate)

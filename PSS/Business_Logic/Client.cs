@@ -22,7 +22,7 @@ namespace PSS.Business_Logic
         private static readonly string IdentifierLetter = "ABCDE"; //char[] is a string!
         private int ClientIdentifierLetter { get { 
                 int x = (int)ClientID.ToString()[0];
-                if (x > 4 || x < 0) { throw new Exception(); } //bad data is in the database!!!
+                if (x > 4 || x < 0) { throw new BadDataBaseData("ClientIdentifier is Wrong!"); } //bad data is in the database!!!
                 return IdentifierLetter[x];
             } }
         private string ClientID7Digits { get { return ClientID.ToString("D8").Remove(0, 1); } } //remove first digit no matter what it is

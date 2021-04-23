@@ -34,18 +34,13 @@ namespace PSS.Presentation_Layer
             InitializeComponent();
         }
 
-        public ClientInfoWidgit(Client client) : this()
-        { 
-            this.Client = client;
-        }
-
         #region Populate
 
-        public void Populate() //I have to do it with this parameter
+        public void Populate() 
         {
             if (Client is null)
             {
-                throw new Exception(); //TODO: nice exception
+                throw new PSSObjectIsNull("Can't populate a null client");
             }
 
             if (Client is IndividualClient)
@@ -58,7 +53,7 @@ namespace PSS.Presentation_Layer
             }
             else
             {
-                throw new Exception(); //htf did you get here?
+                throw new SpacetimeException("Client Info Widget : Populate");
             }
 
             lblBirthDate.Text = Client.Person.BirthDay.ToString("MM-dd");
