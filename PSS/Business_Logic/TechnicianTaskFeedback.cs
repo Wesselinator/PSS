@@ -90,6 +90,8 @@ namespace PSS.Business_Logic
             return sql.ToString();
         }
 
+        #endregion
+
         public override bool Equals(object obj)
         {
             return obj is TechnicianTaskFeedback feedback &&
@@ -113,8 +115,9 @@ namespace PSS.Business_Logic
             return hashCode;
         }
 
-        #endregion
-
-
+        public override string ToString()
+        {
+            return string.Format("TechnicianTaskFeedID: {0} | TimeArived: {1} | TimeDuration: {2} | Notes: {3} | Status: {4} | TechnicianTask: [{5}]", TechnicianTaskFeedID, TimeArived, TimeDuration, Notes, Status, TechnicianTask);
+        }
     }
 }

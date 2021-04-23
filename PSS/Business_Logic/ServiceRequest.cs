@@ -105,7 +105,7 @@ namespace PSS.Business_Logic
 
         public override string ToString()
         {
-            return base.ToString();//continue
+            return string.Format("ServiceRequestID: {0} | Title: {1} | Type: {2} | Description: {3} ", ServiceRequestID, Title, Type, Description);
         }
     }
 }

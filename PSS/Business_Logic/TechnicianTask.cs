@@ -85,7 +85,7 @@ namespace PSS.Business_Logic
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("TechnicianTaskID: {0} | Task: [{1}] | Technician: [{2}] | TimeToArrive: {3}", TechnicianTaskID, Task, Technician, TimeToArrive);
         }
 
         public override bool Equals(object obj)

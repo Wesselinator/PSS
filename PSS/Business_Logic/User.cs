@@ -110,7 +110,7 @@ namespace PSS.Business_Logic
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("UserID: {0} | UserName: {1} | Password: {2} | Role: {3} | Person: [{4}]", UserID, UserName, Password, Role, Person);
         }
     }
 }

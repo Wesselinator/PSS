@@ -97,7 +97,7 @@ namespace PSS.Business_Logic
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("TechnicianID: {0} | Specialty: {1} | PayRate: {2} | Person: [{3}] ", TechnicianID, Specialty, PayRate, Person);
         }
     }
 }
