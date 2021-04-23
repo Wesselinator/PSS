@@ -93,6 +93,12 @@
     <Compile Include="Presentation_Layer\CallSimulation.Designer.cs">
       <DependentUpon>CallSimulation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentation_Layer\ClientInfoWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presentation_Layer\ClientInfoWidget.Designer.cs">
+      <DependentUpon>ClientInfoWidget.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentation_Layer\ClientMaintenance.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,9 @@
     <EmbeddedResource Include="Presentation_Layer\ClientFollowUp.resx">
       <DependentUpon>ClientFollowUp.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentation_Layer\ClientInfoWidget.resx">
+      <DependentUpon>ClientInfoWidget.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentation_Layer\ClientMaintenance.resx">
       <DependentUpon>ClientMaintenance.cs</DependentUpon>
     </EmbeddedResource>
@@ -183,6 +192,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Resources\PhoneIcon.png" />
     <Content Include="Resources\SQL\PremierServiceSolutionsDatabaseCreationQuery.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PSS.Business_Logic;
 
@@ -13,12 +6,22 @@ namespace PSS.Presentation_Layer
 {
     public partial class CallCentre : Form
     {
-        private static ClientMaintenance ClientMaintenance = CallSimulation.ClientMaintenance; //bemby!
-
         public CallCentre()
         {
             InitializeComponent();
-            Hide(); // I hope this can work in the constructor
+
+        }
+
+        public CallCentre(Client client) : this()
+        {
+            currentClient = client;
+            ciwMain = new ClientInfoWidgit(client);
+        }
+
+        public CallCentre(Client client, ServiceRequest existingRequest) : this(client)
+        {
+            //TODO: existing request exists or add if doesn't
+            currentRequest = existingRequest;
         }
 
 
@@ -30,97 +33,12 @@ namespace PSS.Presentation_Layer
 
             Populate(client, sr);
         }
-        public void Populate(Client client, ServiceRequest existingServiceRequest)
-        {
-            //TODO: Verify if existing requests exists in client list
-
-
-            currentRequest = existingServiceRequest;
-            currentClient = client;
-
-            PopulateClientInfo();
-            PopulateTicket();
-        }
-
-        #region PopulateSpesific
-
-        private void PopulateTicket()
-        {
-            if (currentRequest is null)
-            {
-                return;
-                //trow
-            }
-
-            rtbProblem.Text = currentRequest.Description;
-        }
-
-        private void PopulateClientInfo()
-        {
-            if (currentClient is null)
-            {
-                return;
-                //throw
-            }
-
-            PopulateContracts();
-
-            lblBirthDay.Text = currentClient.Person.BirthDayString;
-            lblCellphone.Text = currentClient.Person.CellphoneNumber;
-            lblTelephone.Text = currentClient.Person.TellephoneNumber;
-            lblEmail.Text = currentClient.Person.Email;
-
-            lblAdress.Text = currentClient.Address.AdressString();
-            lblPostal.Text = currentClient.Address.PostalCode;
-
-
-            if (currentClient is IndividualClient)
-            {
-                PopulateIndividualInfo((IndividualClient)currentClient);
-            }
-            else if (currentClient is BusinessClient)
-            {
-                PopulateBusinessInfo((BusinessClient)currentClient);
-            }
-            //else throw
-        }
-
-        private void PopulateContracts()
-        {
-            if (currentClient is null)
-            {
-                return;
-                //throw
-            }
-
-            rtbProblem.Clear();
-            //foreach (var contract in currentClient.Contracts)
-            //{
-            //    rtbProblem.AppendText(contract.ToFormatedString());
-            //}
-        }
-
-        private void PopulateIndividualInfo(IndividualClient individualClient)
-        {
-            lblNameTag.Text = "Name: ";
-            lblBusinessName.Text = "N/A";
-            lblName.Text = individualClient.Person.FullName;
-        }
-
-        private void PopulateBusinessInfo(BusinessClient businessClient)
-        {
-            lblNameTag.Text = "Contact Person: ";
-            lblBusinessName.Text = businessClient.BusinessName;
-            lblName.Text = businessClient.ContactPerson.FullName;
-        }
-
-        #endregion
 
 
         private void btnClientMaintence_Click(object sender, EventArgs e)
         {
-            ClientMaintenance.ReceiveClient(currentClient); //I think this is the method?
-            ClientMaintenance.Show();
+            //ClientMaintenance.ReceiveClient(currentClient); //I think this is the method?
+            //ClientMaintenance.Show();
             Hide();
         }
 
