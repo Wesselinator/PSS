@@ -15,7 +15,7 @@ namespace PSS.Presentation_Layer
         public CallCentre(Client client) : this()
         {
             currentClient = client;
-            ciwMain = new ClientInfoWidgit(client);
+            ciwMain.Client = client;
         }
 
         public CallCentre(Client client, ServiceRequest existingRequest) : this(client)

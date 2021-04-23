@@ -11,6 +11,7 @@ using PSS.Business_Logic;
 
 namespace PSS.Presentation_Layer
 {
+    //FIX THIS!
     public partial class ClientInfoWidgit : UserControl
     {
         private const string HouseBuilding = "🏠";
@@ -22,7 +23,10 @@ namespace PSS.Presentation_Layer
 
             set {
                 client = value;
-                Populate();
+                if (!(client is null)) //use null colalece?
+                {
+                    Populate();
+                };
             }
         }
         public ClientInfoWidgit()
@@ -32,23 +36,23 @@ namespace PSS.Presentation_Layer
 
         public ClientInfoWidgit(Client client) : this()
         { 
-            Client = client;
+            this.Client = client;
         }
 
         #region Populate
 
-        public void Populate()
+        public void Populate() //I have to do it with this parameter
         {
             if (Client is null)
             {
                 throw new Exception(); //TODO: nice exception
             }
 
-            if (client is IndividualClient)
+            if (Client is IndividualClient)
             {
                 PopulateIndividual((IndividualClient)Client);
             }
-            else if (client is BusinessClient)
+            else if (Client is BusinessClient)
             {
                 PopulateBusiness((BusinessClient)Client);
             }
