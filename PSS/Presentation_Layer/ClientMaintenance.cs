@@ -21,9 +21,11 @@ namespace PSS.Presentation_Layer
             RegisterMode();
         }      
 
-        public ClientMaintenance(Client client) : this()
+        public ClientMaintenance(Client client) 
         {
+            InitializeComponent();
             currentClient = client;
+            ciwMain.Client = client;
             UpdateMode();
         }
 
@@ -54,12 +56,15 @@ namespace PSS.Presentation_Layer
             cbxCurrentContracts.Items.Clear();
             cbxCurrentContracts.Text = "None at the moment";
 
-            //Add all Contracts?
+            //Add all Contracts
             cbxContracts.Items.Clear();
-            //cbxContracts.Items.AddRange()
+            BaseList<Contract> contracts = new BaseList<Contract>();
+            contracts.FillAll();
+            cbxContracts.Items.AddRange(contracts.ToArray());
             rtbContractDetails.Clear();
 
             //Service level items won't change?
+            cbxServiceLevel.Text = "Choose a service level";
             rtbServiceLevelDetails.Clear();
             
 
@@ -70,7 +75,8 @@ namespace PSS.Presentation_Layer
             //update components to register functionality
             lblTask.Text = "Register Client";
             btnConfirm.Text = "Register Client";
-            ClearFields();                      
+            ClearFields();
+            
         }
 
         private void UpdateMode()
@@ -81,6 +87,7 @@ namespace PSS.Presentation_Layer
             ClearFields();
 
             //populate copmonents with current client info
+            rbtnIndvidual.Enabled = false;
             if (currentClient is IndividualClient)
             {
                 lblBusinessName.Hide();
@@ -90,13 +97,14 @@ namespace PSS.Presentation_Layer
             {
                 lblBusinessName.Show();
                 txtBusinessName.Show();
-                //txtBusinessName.Text = currentClient.BusinessIdentifier;//Need CBusinessClient's business name
+                txtBusinessName.Text = ((BusinessClient)currentClient).BusinessName;
             }
         }
 
         private void ReadFields()
         {
-            //TODO: Here fields are read into variable to register a new client, or maybe update it?
+            //TODO: Populate all Peron and Adress fields
+            currentClient.Person.FirstName = txtName.Text;
         }
 
         #endregion
@@ -109,7 +117,35 @@ namespace PSS.Presentation_Layer
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             ReadFields();
+            if (rbtnIndvidual.Checked)
+            {
+                IndividualClient aClient = (IndividualClient)currentClient;
+                // TODO: Add Contract and Service shit
+                aClient.Save();
+            }
+            else 
+            {
+                BusinessClient bClient = (BusinessClient)currentClient;
+                bClient.BusinessName = txtBusinessName.Text;
+                // TODO: Add Contract and Service shit
+                bClient.Save();
+            }
         }
 
+        private void cbxContracts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rtbContractDetails.Text = cbxContracts.SelectedItem.ToString();
+        }
+
+        private void cbxServiceLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // TODO: Change rtbServiceLevelDetails to relevant service level details
+            
+        }
+
+        private void btnAddContract_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -43,7 +43,7 @@ namespace PSS.Presentation_Layer
             this.btnAddContract = new System.Windows.Forms.Button();
             this.rtbServiceLevelDetails = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cbxServiceLevel = new System.Windows.Forms.ComboBox();
             this.rtbContractDetails = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbxContracts = new System.Windows.Forms.ComboBox();
@@ -80,6 +80,7 @@ namespace PSS.Presentation_Layer
             this.btnBack = new System.Windows.Forms.Button();
             this.lblDepartment = new System.Windows.Forms.Label();
             this.lblClientMaintenance = new System.Windows.Forms.Label();
+            this.ciwMain = new PSS.Presentation_Layer.ClientInfoWidgit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -172,7 +173,7 @@ namespace PSS.Presentation_Layer
             this.groupBox2.Controls.Add(this.btnAddContract);
             this.groupBox2.Controls.Add(this.rtbServiceLevelDetails);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.comboBox3);
+            this.groupBox2.Controls.Add(this.cbxServiceLevel);
             this.groupBox2.Controls.Add(this.rtbContractDetails);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.cbxContracts);
@@ -224,6 +225,7 @@ namespace PSS.Presentation_Layer
             this.btnAddContract.TabIndex = 34;
             this.btnAddContract.Text = "Add Contract";
             this.btnAddContract.UseVisualStyleBackColor = true;
+            this.btnAddContract.Click += new System.EventHandler(this.btnAddContract_Click);
             // 
             // rtbServiceLevelDetails
             // 
@@ -244,15 +246,21 @@ namespace PSS.Presentation_Layer
             this.label5.TabIndex = 22;
             this.label5.Text = "Service Level";
             // 
-            // comboBox3
+            // cbxServiceLevel
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(118, 202);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(137, 21);
-            this.comboBox3.TabIndex = 21;
-            this.comboBox3.Text = "Choose a service level...";
+            this.cbxServiceLevel.FormattingEnabled = true;
+            this.cbxServiceLevel.Items.AddRange(new object[] {
+            "1- Peasant",
+            "2- Commoner",
+            "3- Noble",
+            "4- Feudal lord"});
+            this.cbxServiceLevel.Location = new System.Drawing.Point(118, 202);
+            this.cbxServiceLevel.Margin = new System.Windows.Forms.Padding(2);
+            this.cbxServiceLevel.Name = "cbxServiceLevel";
+            this.cbxServiceLevel.Size = new System.Drawing.Size(137, 21);
+            this.cbxServiceLevel.TabIndex = 21;
+            this.cbxServiceLevel.Text = "Choose a service level...";
+            this.cbxServiceLevel.SelectedIndexChanged += new System.EventHandler(this.cbxServiceLevel_SelectedIndexChanged);
             // 
             // rtbContractDetails
             // 
@@ -282,6 +290,7 @@ namespace PSS.Presentation_Layer
             this.cbxContracts.Size = new System.Drawing.Size(123, 21);
             this.cbxContracts.TabIndex = 13;
             this.cbxContracts.Text = "Choose a contract...";
+            this.cbxContracts.SelectedIndexChanged += new System.EventHandler(this.cbxContracts_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -594,7 +603,7 @@ namespace PSS.Presentation_Layer
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(796, 450);
+            this.btnConfirm.Location = new System.Drawing.Point(713, 450);
             this.btnConfirm.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(118, 33);
@@ -605,7 +614,7 @@ namespace PSS.Presentation_Layer
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(796, 512);
+            this.btnBack.Location = new System.Drawing.Point(713, 514);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(118, 33);
@@ -634,11 +643,22 @@ namespace PSS.Presentation_Layer
             this.lblClientMaintenance.TabIndex = 34;
             this.lblClientMaintenance.Text = "Client Maintenance";
             // 
+            // ciwMain
+            // 
+            this.ciwMain.AutoSize = true;
+            this.ciwMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ciwMain.Client = null;
+            this.ciwMain.Location = new System.Drawing.Point(871, 450);
+            this.ciwMain.Name = "ciwMain";
+            this.ciwMain.Size = new System.Drawing.Size(247, 207);
+            this.ciwMain.TabIndex = 49;
+            // 
             // ClientMaintenance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1056, 577);
+            this.ClientSize = new System.Drawing.Size(1139, 696);
+            this.Controls.Add(this.ciwMain);
             this.Controls.Add(this.txtBusinessName);
             this.Controls.Add(this.lblBusinessName);
             this.Controls.Add(this.groupBox3);
@@ -686,7 +706,7 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Button btnAddContract;
         private System.Windows.Forms.RichTextBox rtbServiceLevelDetails;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cbxServiceLevel;
         private System.Windows.Forms.RichTextBox rtbContractDetails;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbxContracts;
@@ -723,5 +743,6 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Label lblDepartment;
         private System.Windows.Forms.Label lblClientMaintenance;
+        private ClientInfoWidgit ciwMain;
     }
 }
