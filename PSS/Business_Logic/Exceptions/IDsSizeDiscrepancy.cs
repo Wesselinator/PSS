@@ -13,7 +13,7 @@ namespace PSS.Business_Logic
     public class IDsSizeDiscrepancy : PSSException
     {
         public IDsSizeDiscrepancy() { }
-        public IDsSizeDiscrepancy(int expected, int recieved) : base(FormattedMessage(expected, recieved) { }
+        public IDsSizeDiscrepancy(int expected, int recieved) : base(FormattedMessage(expected, recieved)) { }
         public IDsSizeDiscrepancy(int expected, int recieved, Exception inner) : base(FormattedMessage(expected, recieved), inner) { }
         protected IDsSizeDiscrepancy(
           System.Runtime.Serialization.SerializationInfo info,
