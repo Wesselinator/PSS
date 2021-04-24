@@ -18,7 +18,7 @@ namespace PSS.Business_Logic
         {
             //VERBOSE: Becuase I want to see everything that happens
             string sql = string.Format("SELECT * FROM {0} ORDER BY {1} DESC;", TableName, IDColumn);
-            DataTable dt = DataHandler.getDataTable(sql);
+            DataTable dt = DataHandler.GetDataTable(sql);
             try
             {
                 DataRow dr = dt.Rows[0];

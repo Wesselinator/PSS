@@ -28,7 +28,7 @@ namespace PSS.Business_Logic
 
             string sql = string.Format("SELECT * FROM {0} {1}", TableName, WhereIDs(ids));
 
-            DataTable dt = DataHandler.getDataTable(sql);
+            DataTable dt = DataHandler.GetDataTable(sql);
             if (dt.Rows.Count == 0)
             {
                 throw new IDDoesNotExist(TableName, ids);
@@ -49,7 +49,7 @@ namespace PSS.Business_Logic
         protected override sealed bool IDExists()
         {
             string sql = string.Format("SELECT * FROM {0} {1}", TableName, WhereIDs(IDs));
-            DataTable dt = DataHandler.getDataTable(sql);
+            DataTable dt = DataHandler.GetDataTable(sql);
             return dt.Rows.Count != 0;
         }
 
@@ -68,7 +68,7 @@ namespace PSS.Business_Logic
             if (IDColumnExists(column))
             {
                 string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, column, id);
-                return DataHandler.getDataTable(sql);
+                return DataHandler.GetDataTable(sql);
             }
 
             throw new IDColumnDoesNotExist(column);
@@ -84,7 +84,7 @@ namespace PSS.Business_Logic
         {
             //VERBOSE: Becuase I want to see everything that happens
             string sql = string.Format("SELECT * FROM {0} ORDER BY {1} DESC;", TableName, IDColumns[column]);
-            DataTable dt = DataHandler.getDataTable(sql);
+            DataTable dt = DataHandler.GetDataTable(sql);
             try
             {
                 DataRow dr = dt.Rows[0];

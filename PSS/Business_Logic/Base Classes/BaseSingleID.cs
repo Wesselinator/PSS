@@ -35,7 +35,7 @@ namespace PSS.Business_Logic
         private DataTable GetAllWhere(T ID)
         {
             string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
-            return DataHandler.getDataTable(sql);
+            return DataHandler.GetDataTable(sql);
         }
 
         protected override sealed bool IDExists()

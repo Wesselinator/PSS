@@ -37,7 +37,7 @@ namespace PSS.Business_Logic
         public virtual DataTable GetAll()
         {
             string sql = "SELECT * FROM " + TableName;
-            return DataHandler.getDataTable(sql);
+            return DataHandler.GetDataTable(sql);
         }
 
         public abstract void FillFromRow(DataRow row);
