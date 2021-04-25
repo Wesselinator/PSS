@@ -195,6 +195,7 @@ namespace PSS.Presentation_Layer
             this.btnModifyContract.TabIndex = 37;
             this.btnModifyContract.Text = "Modify Contract";
             this.btnModifyContract.UseVisualStyleBackColor = true;
+            this.btnModifyContract.Click += new System.EventHandler(this.btnModifyContract_Click);
             // 
             // label7
             // 
@@ -621,6 +622,7 @@ namespace PSS.Presentation_Layer
             this.btnBack.TabIndex = 36;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // lblDepartment
             // 
