@@ -13,7 +13,7 @@ namespace PSS.Presentation_Layer
 {
     public partial class ServiceDepartment : Form
     {
-        Client focusedClient;
+        Client focusedClient; //readonly?
 
         public ServiceDepartment()
         {

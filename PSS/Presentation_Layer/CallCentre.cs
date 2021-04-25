@@ -26,7 +26,7 @@ namespace PSS.Presentation_Layer
 
 
         private ServiceRequest currentRequest = null;
-        private Client currentClient = null;
+        private readonly Client currentClient = null; //readonly becuase i never change anything on this client
 
 
         private void btnClientMaintence_Click(object sender, EventArgs e)

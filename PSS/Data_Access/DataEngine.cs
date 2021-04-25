@@ -87,7 +87,7 @@ namespace PSS.Data_Access
         public static DataTable GetAll(string TableName) //remove after GetAllClients are re/moved
         {
             string sql = string.Format("SELECT * FROM {0}", TableName);
-            return DataHandler.getDataTable(sql);
+            return DataHandler.GetDataTable(sql);
         }
 
         public static Client GetByClientID(int id)
@@ -159,7 +159,7 @@ namespace PSS.Data_Access
                             " WHERE sr.ServiceRequestID = " + ticketNo +
                             " ORDER BY t.DateProcessed DESC, ProgressLevel DESC --lastest dateprocessed first ";
 
-            DataTable tbl = DataHandler.getDataTable(iniSql);
+            DataTable tbl = DataHandler.GetDataTable(iniSql);
 
             progressRapport = (string)tbl.Rows[0][2];
 

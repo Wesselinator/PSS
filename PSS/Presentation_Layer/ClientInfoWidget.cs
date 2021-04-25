@@ -43,13 +43,13 @@ namespace PSS.Presentation_Layer
                 throw new PSSObjectIsNull("Can't populate a null client");
             }
 
-            if (Client is IndividualClient)
+            if (Client is IndividualClient idC)
             {
-                PopulateIndividual((IndividualClient)Client);
+                PopulateIndividual(idC);
             }
-            else if (Client is BusinessClient)
+            else if (Client is BusinessClient bC)
             {
-                PopulateBusiness((BusinessClient)Client);
+                PopulateBusiness(bC);
             }
             else
             {

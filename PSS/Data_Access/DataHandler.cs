@@ -9,7 +9,7 @@ namespace PSS.Data_Access
     {
         private static readonly string connStr = @"Server=.;Initial Catalog=PremierServiceSolutionsDB;Database=PremierServiceSolutionsDB;Integrated Security=SSPI";
 
-        public static DataTable getDataTable(string Query)
+        public static DataTable GetDataTable(string Query)
         {
             DataTable data = new DataTable(); ;
 
@@ -30,7 +30,7 @@ namespace PSS.Data_Access
             return data;
         }
 
-        private static void executeNonQuery(string Query)//for insert, update and delete statements
+        private static void ExecuteNonQuery(string Query)//for insert, update and delete statements
         {
             using(SqlConnection conn = new SqlConnection(connStr))
             {
@@ -49,17 +49,17 @@ namespace PSS.Data_Access
 
         public static void Insert(string Query)
         {
-            executeNonQuery(Query);
+            ExecuteNonQuery(Query);
         }
 
         public static void Update(string Query)
         {
-            executeNonQuery(Query);
+            ExecuteNonQuery(Query);
         }
 
         public static void Delete(string Query)
         {
-            executeNonQuery(Query);
+            ExecuteNonQuery(Query);
         }
     }
 }

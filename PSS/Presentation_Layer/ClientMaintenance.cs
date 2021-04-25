@@ -154,6 +154,7 @@ namespace PSS.Presentation_Layer
 
         #endregion
 
+        []
         private void btnClear_Click(object sender, EventArgs e)
         {
             if (lblTask.Text == "Register Client")

@@ -18,6 +18,9 @@ namespace PSS.Business_Logic
         public DateTime? EndDate { get; set; } //nullable in DataBase (look into [default] for C#)
         public decimal MonthlyFee { get; set; }
 
+        public string BusinessIdentifier { get => StartDate.ToString("yyyy") + "A" + "00000"; } //TODO: Finnish Business Identifier
+
+
         private static readonly string tableName = "Contract";
         private static readonly string idColumn = "ContractID";
 
