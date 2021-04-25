@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Data;
+using System.Linq;
 using PSS.Data_Access;
 using System.Collections.Generic;
 
@@ -9,13 +10,14 @@ namespace PSS.Business_Logic
 {
     public class BusinessClient : Client
     {
-        public override int ClientID { get; protected set; } //remember this is supposed to be even
+        public override int ClientID { get; protected set; }
         public string BusinessName { get; set; }
         public Person ContactPerson { get => Person; set => Person = value; }
-        public MultiIDList<BusinessClientPerson> BusinessClientPeople { get; set; }
-        public MultiIDList<BusinessClientServiceRequest> ServiceRequests { get; set; }
-        public MultiIDList<BusinessClientContract> Contracts { get; set; }
-        public MultiIDList<BusinessClientFollowUp> FollowUps { get; set; }
+        private MultiIDList<BusinessClientPerson> BusinessClientPeople { get; set; } //TODO: These extentions
+
+        private MultiIDList<BusinessClientServiceRequest> BusinessClientServiceRequests { get; set; }
+        private MultiIDList<BusinessClientContract> BusinessClientContracts { get; set; }
+        private MultiIDList<BusinessClientFollowUp> BusinessClientFollowUps { get; set; }
 
         public static readonly string tableName = "BusinessClient";
         public static readonly string idColumn = "BusinessClientID";
@@ -24,9 +26,9 @@ namespace PSS.Business_Logic
         public BusinessClient() : base(tableName, idColumn)
         {
             BusinessClientPeople = new MultiIDList<BusinessClientPerson>();
-            ServiceRequests = new MultiIDList<BusinessClientServiceRequest>();
-            Contracts = new MultiIDList<BusinessClientContract>();
-            FollowUps = new MultiIDList<BusinessClientFollowUp>();
+            BusinessClientServiceRequests = new MultiIDList<BusinessClientServiceRequest>();
+            BusinessClientContracts = new MultiIDList<BusinessClientContract>();
+            BusinessClientFollowUps = new MultiIDList<BusinessClientFollowUp>();
         }
 
         public BusinessClient(int businessID, string businessName, string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
@@ -48,9 +50,9 @@ namespace PSS.Business_Logic
         private void FillLists(int id)
         {
             BusinessClientPeople.FillWithPivotColumn(id, idColumn);
-            ServiceRequests.FillWithPivotColumn(id, idColumn);
-            Contracts.FillWithPivotColumn(id, idColumn);
-            FollowUps.FillWithPivotColumn(id, idColumn);
+            BusinessClientServiceRequests.FillWithPivotColumn(id, idColumn);
+            BusinessClientContracts.FillWithPivotColumn(id, idColumn);
+            BusinessClientFollowUps.FillWithPivotColumn(id, idColumn);
         }
 
         public override void FillFromRow(DataRow row)
@@ -105,10 +107,46 @@ namespace PSS.Business_Logic
 
         #endregion
 
+        #region List Getters/Setters
+        //Because of how Lists work and becuase we are in C#7.3 this is sadly the best way to do it     :(
+
+        public BaseList<ServiceRequest> GetServiceRequests()
+        {
+            return BusinessClientServiceRequests.GetServiceRequests();
+        }
+
+        public void AddServiceRequest(ServiceRequest serviceRequest)
+        {
+            BusinessClientServiceRequests.Add(new BusinessClientServiceRequest(ID, serviceRequest));
+        }
+
+        public BaseList<Contract> GetContracts()
+        {
+            return BusinessClientContracts.GetContracts();
+        }
+
+        public void AddContract(Contract contract, DateTime effectiveDate)
+        {
+            BusinessClientContracts.Add(new BusinessClientContract(ID, contract, effectiveDate));
+        }
+
+        public BaseList<FollowUp> GetFolowups()
+        {
+            return BusinessClientFollowUps.GetFollowUps();
+        }
+
+        public void AddFolowup(FollowUp followUp)
+        {
+            BusinessClientFollowUps.Add(new BusinessClientFollowUp(ID, followUp));
+        }
+
+        #endregion
+
         public override string ToString()
         {
             return string.Format("ClientID: {0} | BusinessName: {1} | ContactPerson: [{2}] | BusinessClientPeople: [{3}] | " +
-                "ServiceRequest: [{4}] | Contracts: [{5}] | FollowUps: [{6}]", ClientID, BusinessName, ContactPerson, BusinessClientPeople, ServiceRequests, Contracts, FollowUps);
+                "ServiceRequest: [{4}] | Contracts: [{5}] | FollowUps: [{6}]", 
+                ClientID, BusinessName, ContactPerson, BusinessClientPeople, BusinessClientServiceRequests, BusinessClientContracts, BusinessClientFollowUps);
         }
     }
 }

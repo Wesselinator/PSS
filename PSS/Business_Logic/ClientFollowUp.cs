@@ -8,7 +8,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    class ClientFollowUp : MultiIntID
+    public class ClientFollowUp : MultiIntID
     {
         private FollowUp fu;
         public int ClientID { get => IDs[0]; private set => IDs[0] = value; }
@@ -84,15 +84,21 @@ namespace PSS.Business_Logic
 
     }
 
-    public class BusinessClientFollowUp : ClientServiceRequest
+    public class BusinessClientFollowUp : ClientFollowUp
     {
-        public BusinessClientFollowUp() : base("BusinessClientFollowUp", BusinessClient.idColumn)
+        private static readonly string tableName = "BusinessClientFollowUp";
+        public BusinessClientFollowUp() : base(tableName, BusinessClient.idColumn)
+        {  }
+        public BusinessClientFollowUp(int ID, FollowUp followUp) : base(tableName, BusinessClient.idColumn, ID, followUp)
         { }
     }
 
-    public class IndividualClientFollowUp : ClientServiceRequest
+    public class IndividualClientFollowUp : ClientFollowUp
     {
-        public IndividualClientFollowUp() : base("IndividualClientFollowUp", IndividualClient.idColumn)
+        private static readonly string tableName = "IndividualClientFollowUp";
+        public IndividualClientFollowUp() : base(tableName, IndividualClient.idColumn)
+        {  }
+        public IndividualClientFollowUp(int ID, FollowUp followUp) : base(tableName, BusinessClient.idColumn, ID, followUp)
         { }
     }
 }

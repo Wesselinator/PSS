@@ -13,6 +13,7 @@ using System.Diagnostics;
 
 namespace PSS.Presentation_Layer
 {
+    //TODO: add call interaction
     public partial class CallSimulation : Form
     {
         DateTime startTime;
@@ -33,8 +34,10 @@ namespace PSS.Presentation_Layer
 
         private void EnterDescription()
         {
-            for (description = ""; description == string.Empty; description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1))
+            while (description.Equals(string.Empty))
             {
+                description = Interaction.InputBox("Please enter a description", "Description", "Please enter a description", -1, -1);
+                if (!description.Equals(string.Empty)) break;
                 MessageBox.Show("Please enter something!");
             }
         }
@@ -51,7 +54,7 @@ namespace PSS.Presentation_Layer
         {
             cbClientDropDown.DisplayMember = "CBXString";
 
-            cbClientDropDown.Items.AddRange(Client.GetAllClients().ToArray());
+            //cbClientDropDown.Items.AddRange(Client.GetAllClients().ToArray());
         }
 
         private void btnMakeCall_Click(object sender, EventArgs e)

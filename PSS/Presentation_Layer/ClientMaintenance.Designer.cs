@@ -230,6 +230,7 @@ namespace PSS.Presentation_Layer
             // 
             // rtbServiceLevelDetails
             // 
+            this.rtbServiceLevelDetails.Enabled = false;
             this.rtbServiceLevelDetails.Location = new System.Drawing.Point(18, 230);
             this.rtbServiceLevelDetails.Margin = new System.Windows.Forms.Padding(2);
             this.rtbServiceLevelDetails.Name = "rtbServiceLevelDetails";
@@ -265,6 +266,7 @@ namespace PSS.Presentation_Layer
             // 
             // rtbContractDetails
             // 
+            this.rtbContractDetails.Enabled = false;
             this.rtbContractDetails.Location = new System.Drawing.Point(18, 85);
             this.rtbContractDetails.Margin = new System.Windows.Forms.Padding(2);
             this.rtbContractDetails.Name = "rtbContractDetails";
@@ -609,7 +611,7 @@ namespace PSS.Presentation_Layer
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(118, 33);
             this.btnConfirm.TabIndex = 37;
-            this.btnConfirm.Text = "Update client";
+            this.btnConfirm.Text = "Confirm Form";
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 

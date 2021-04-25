@@ -18,7 +18,12 @@ namespace PSS.Business_Logic
         public string CBXString { get => Person.CellphoneNumber + " | " + Person.FirstName; }
         public Address Address { get; set; }
         public Person Person { get; set; }
+        //public abstract BaseList<Contract> Contracts { get; }
+        //public abstract BaseList<ServiceRequest> ServiceRequests { get; }
+        //public abstract BaseList<FollowUp> FollowUps { get; }
 
+
+        #region Business Identifier
         private static readonly string IdentifierLetter = "ABCDE"; //char[] is a string!
         private int ClientIdentifierLetter { get { 
                 int x = (int)ClientID.ToString()[0];
@@ -26,6 +31,7 @@ namespace PSS.Business_Logic
                 return IdentifierLetter[x];
             } }
         private string ClientID7Digits { get { return ClientID.ToString("D8").Remove(0, 1); } } //remove first digit no matter what it is
+        #endregion
         public string BusinessIdentifier { get => ClientIdentifierLetter + ClientID7Digits; }
 
         public Client(string tableName, string idColumn) : base(tableName, idColumn)

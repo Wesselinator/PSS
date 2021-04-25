@@ -13,9 +13,9 @@ namespace PSS.Business_Logic
     {
         public override int ClientID { get => Person.PersonID; } //needed?
 
-        public MultiIDList<IndividualClientServiceRequest> ServiceRequests { get; set; }
-        public MultiIDList<IndividualClientContract> Contracts { get; set; }
-        public MultiIDList<IndividualClientFollowUp> FollowUps { get; set; }
+        public MultiIDList<IndividualClientServiceRequest> IndividualClientServiceRequests { get; set; }
+        public MultiIDList<IndividualClientContract> IndividualClientContracts { get; set; }
+        public MultiIDList<IndividualClientFollowUp> IndividualClientFollowUps { get; set; }
 
         public static readonly string tableName = "IndividualClient";
         public static readonly string idColumn = "IndividualClientID";
@@ -85,6 +85,40 @@ namespace PSS.Business_Logic
 
         #endregion
 
+        #region List Getters/Setters
+        //Because of how Lists work and becuase we are in C#7.3 this is sadly the best way to do it     :(
 
+        public BaseList<ServiceRequest> GetServiceRequests()
+        {
+            return IndividualClientServiceRequests.GetServiceRequests();
+        }
+
+        public void AddServiceRequest(ServiceRequest serviceRequest)
+        {
+            IndividualClientServiceRequests.Add(new IndividualClientServiceRequest(ID, serviceRequest));
+        }
+
+
+        public BaseList<Contract> GetContracts()
+        {
+            return IndividualClientContracts.GetContracts();
+        }
+
+        public void AddContract(Contract contract, DateTime effectiveDate)
+        {
+            IndividualClientContracts.Add(new IndividualClientContract(ID, contract, effectiveDate));
+        }
+
+
+        public BaseList<FollowUp> GetFolowups()
+        {
+            return IndividualClientFollowUps.GetFollowUps();
+        }
+
+        public void AddFolowup(FollowUp followUp)
+        {
+            IndividualClientFollowUps.Add(new IndividualClientFollowUp(ID, followUp));
+        }
+        #endregion
     }
 }

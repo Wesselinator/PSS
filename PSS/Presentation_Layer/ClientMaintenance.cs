@@ -14,14 +14,13 @@ namespace PSS.Presentation_Layer
     public partial class ClientMaintenance : Form
     {
         private Client currentClient = null;
-        private Contract selectedContract = null;
-        //private MultiIDList<ClientContract> currentContracts;// TODO: does not work so using 2 seperate lists for now...
-        private MultiIDList<IndividualClientContract> iContracts;
-        private MultiIDList<BusinessClientContract> bContracts;
+        private Contract selectedClientContract => (Contract)cbxCurrentContracts.SelectedItem;
+        private Contract selectedContract => (Contract)cbxContracts.SelectedItem;
 
         public ClientMaintenance()
         {
             InitializeComponent();
+            ciwMain.Hide();
             RegisterMode();
         }      
 
@@ -33,9 +32,10 @@ namespace PSS.Presentation_Layer
             UpdateMode();
         }
 
-        #region Methods
-
-        private void ClearFields()
+        /// <summary>
+        /// Reset and reload form controls
+        /// </summary>
+        private void ResetControls()
         {
             rbtnIndvidual.Enabled = true;
             rbtnBusiness.Enabled = true;
@@ -44,51 +44,58 @@ namespace PSS.Presentation_Layer
             txtBusinessName.Clear();
             txtName.Clear();
             txtSurname.Clear();
-            dtpDOB.Value = new DateTime();//check if needed
+            dtpDOB.Value = default;
             txtCellphone.Clear();
             txtTelephone.Clear();
             txtEmail.Clear();
             txtStreet.Clear();
             txtCity.Clear();
             txtPostalCode.Clear();
+
             cbxProvince.SelectedIndex = -1;
             cbxProvince.Text = "Choose...";
             cbxStatus.SelectedIndex = -1;
             cbxStatus.Text = "Choose...";
 
+
             //Add all Contracts
             cbxCurrentContracts.Items.Clear();
             cbxCurrentContracts.Text = "None at the moment";
+
             cbxContracts.Items.Clear();
-            BaseList<Contract> contracts = new BaseList<Contract>();
-            contracts.FillAll();
-            cbxContracts.Items.AddRange(contracts.ToArray());
+            cbxCurrentContracts.Text = "";
+            //BaseList<Contract> contracts = new BaseList<Contract>();
+            //contracts.FillAll();
+            //cbxContracts.Items.AddRange(contracts.ToArray());
             rtbContractDetails.Clear();
             rtbContractDetails.Text = "Contract details:\n";
 
+
             //Service level items won't change?
             cbxServiceLevel.Text = "Choose a service level";
+
             rtbServiceLevelDetails.Clear();
             rtbServiceLevelDetails.Text = "Service level details:\n";
-            
-
         }
 
+        /// <summary>
+        /// Switch Controls into register mode for a new client.
+        /// </summary>
         private void RegisterMode()
         {
-            //update components to register functionality
             lblTask.Text = "Register Client";
-            btnConfirm.Text = "Register Client";            
-            ClearFields();
-            
+            btnConfirm.Text = "Finalize Registration";
+            ResetControls();
         }
 
+        /// <summary>
+        /// Switch controls into update mode for a preexisting client.
+        /// </summary>
         private void UpdateMode()
         {
-            //update components to register functionality
             lblTask.Text = "Update Client";
             btnConfirm.Text = "Update Client";
-            ClearFields();
+            ResetControls();
 
             //populate components with current client info
             rbtnIndvidual.Enabled = false;
@@ -98,10 +105,6 @@ namespace PSS.Presentation_Layer
                 lblBusinessName.Hide();
                 txtBusinessName.Hide();
                 rbtnIndvidual.Checked = true;
-
-                //populate client current contracts
-                iContracts = iCl.Contracts;
-                cbxCurrentContracts.Items.Add(iContracts.ToArray());
             }
             else if (currentClient is BusinessClient bCl)
             {
@@ -109,10 +112,21 @@ namespace PSS.Presentation_Layer
                 txtBusinessName.Show();
                 txtBusinessName.Text = bCl.BusinessName;
                 rbtnBusiness.Checked = true;
+            }
 
-                //populate client current contracts
-                bContracts = bCl.Contracts;
-                cbxCurrentContracts.Items.Add(bContracts.ToArray());
+            Populate();
+            
+        }
+
+        #region Populate
+        /// <summary>
+        /// Populate currentClient into form
+        /// </summary>
+        private void Populate()
+        {
+            if (currentClient is null)
+            {
+                throw new PSSObjectIsNull("Client not initialized");
             }
 
             txtName.Text = currentClient.Person.FirstName;
@@ -128,14 +142,77 @@ namespace PSS.Presentation_Layer
             cbxProvince.SelectedItem = currentClient.Address.Province;
 
             cbxStatus.SelectedItem = currentClient.Status;
+
             rtbNotes.Text = currentClient.Notes;
-            
+
+
+            BaseList<Contract> contracts = new BaseList<Contract>(); //move to local?
+
+            if (currentClient is IndividualClient iC)
+            {
+                contracts = iC.GetContracts();
+            }
+
+            if (currentClient is BusinessClient bC)
+            {
+                contracts = bC.GetContracts();
+            }
+
+            cbxCurrentContracts.DisplayMember = "ContractName";
+            cbxCurrentContracts.Items.AddRange(contracts.ToArray());
         }
 
-        private void ReadFields()
-        {
-            // TODO: 2. do we need validation and verification?
+        #endregion
 
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            if (lblTask.Text == "Register Client")
+            {
+                RegisterMode();
+            }
+            else
+            {
+                UpdateMode();
+            }
+        }
+
+        #region Confirm
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+            if (true)//TODO: mode
+            {
+                ConfirmModify();
+            }
+            else
+            {
+                ConfirmRegister();
+            }            
+
+            Close();
+        }
+
+        private void ConfirmRegister()
+        {
+            //TODO: get type
+            Person newPerson = new Person(txtName.Text, txtSurname.Text, dtpDOB.Value, txtCellphone.Text, txtTelephone.Text, txtEmail.Text); //Creates a new person
+            Address newAddress = new Address(txtStreet.Text, txtCity.Text, txtPostalCode.Text, cbxProvince.Text); //Creates new address
+            if (rbtnIndvidual.Checked)
+            {
+                IndividualClient individualClient = new IndividualClient("", cbxStatus.Text, rtbNotes.Text, newAddress, newPerson);
+                currentClient = individualClient;
+            }
+            else
+            {
+                BusinessClient businessClient = new BusinessClient(txtBusinessName.Text, "", cbxStatus.Text, rtbNotes.Text, newAddress, newPerson);
+                currentClient = businessClient;
+            }
+
+            currentClient.Save();
+        }
+
+        private void ConfirmModify()
+        {
             currentClient.Person.FirstName = txtName.Text;
             currentClient.Person.LastName = txtSurname.Text;
             currentClient.Person.BirthDay = dtpDOB.Value;//check formatting
@@ -150,44 +227,20 @@ namespace PSS.Presentation_Layer
 
             currentClient.Status = cbxStatus.SelectedItem.ToString();
             currentClient.Notes = rtbNotes.Text;//Text vs rtf?
-        }
 
-        #endregion
-
-        []
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            if (lblTask.Text == "Register Client")
-            {
-                RegisterMode();
-            }
-            else
-            {
-                UpdateMode();
-            }
-        }
-
-        private void btnConfirm_Click(object sender, EventArgs e)
-        {
-            ReadFields();
             if (rbtnIndvidual.Checked)
             {
                 IndividualClient aClient = (IndividualClient)currentClient;
-                // TODO: Add Contract and Service shit
-                /*iContracts.SaveAll();
-                aClient.Contracts = iContracts;*/
                 aClient.Save();
             }
-            else 
+            else
             {
                 BusinessClient bClient = (BusinessClient)currentClient;
                 bClient.BusinessName = txtBusinessName.Text;
-                // TODO: Add Contract and Service shit
-                /*bContracts.SaveAll();
-                bClient.Contracts = bContracts;*/
                 bClient.Save();
             }
         }
+        #endregion
 
         private void cbxContracts_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -231,47 +284,37 @@ namespace PSS.Presentation_Layer
 
         private void btnAddContract_Click(object sender, EventArgs e)
         {
-            // TODO: Add Contract to ClientContract (Indvidual or business), global class list?
-
-            //selectedContract = cbxContracts.SelectedItem;//Convert selected contract to contract object
-
-            // TODO: Calculate contract effecitive date, probably after latest contracts end date
-            //DateTime effectiveDate = ;
-
-            if (rbtnIndvidual.Checked)
+            //TODO: What does effective date mean again?
+            if (currentClient is IndividualClient iC)
             {
-                //add Contract to ClientContract List              
-                /*IndividualClientContract iClientContract = new IndividualClientContract(currentClient.ClientID, contract, effectiveDate);
-                
-                //add ClientContract to ClientContract global list
-                iContracts.Add(iClientContract);*/
-
+                iC.AddContract(selectedContract, DateTime.Now);
             }
-            else
+            if (currentClient is BusinessClient bC)
             {
-
-                //add Contract to ClientContract List
-                /*BusinessClientContract bClientContract = new BusinessClientContract(currentClient.ClientID, contract, effectiveDate);
-                
-                //add ClientContract to ClientContract global list
-                bContracts.Add(bClientContract);*/
-
+                bC.AddContract(selectedContract, DateTime.Now);
             }
-
         }
 
         private void btnModifyContract_Click(object sender, EventArgs e)
         {
-            // TODO: Change selected contract's service level
-            //selectedContract = cbxContracts.SelectedItem;//Convert selected contract to contract object
-            selectedContract.ServiceLevel = cbxServiceLevel.SelectedItem.ToString();
-            selectedContract.Save();
+            selectedClientContract = selectedContract; //TODO: Figure out this set
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            // TODO: Prompt if user wants to save or disregard changes
-            //if a client is being registered we need to check if all fields are completed otherwise the client cannot be saved.
+            switch (MessageBox.Show("Are you sure? Changes will NOT be saved!", "Discard and Go Back", MessageBoxButtons.YesNo))
+            {
+                case DialogResult.None:
+                case DialogResult.No:
+                    goto default; //fall-through goto default incase we want to add additional functionality.
+
+                case DialogResult.Yes:
+                    this.Close();
+                    break;
+
+                default:
+                    return;
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ using PSS.Business_Logic;
 
 namespace PSS.Presentation_Layer
 {
-    //FIX THIS!
+    //TODO: Add an empty mode
     public partial class ClientInfoWidgit : UserControl
     {
         private const string HouseBuilding = "🏠";

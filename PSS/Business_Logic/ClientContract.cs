@@ -8,7 +8,7 @@ using PSS.Data_Access;
 namespace PSS.Business_Logic
 {
     //This isn't 100% what hapens in the DB but it simplifies the code a LOT
-    public class ClientContract : MultiIntID
+    public abstract class ClientContract : MultiIntID
     {
         private Contract c;
         public int ClientContractID { get => IDs[0]; private set => IDs[0] = value; }
@@ -35,18 +35,18 @@ namespace PSS.Business_Logic
             ID3 = idColumn3;
         }
 
-        public ClientContract(string tableName, string idColumn1, string idColumn3, int clientContractID, int businessID, Contract contract, DateTime effectiveDate) : this(tableName, idColumn1, idColumn3)
+        public ClientContract(string tableName, string idColumn1, string idColumn3, int clientContractID, int clientID, Contract contract, DateTime effectiveDate) : this(tableName, idColumn1, idColumn3)
         {
             this.ClientContractID = clientContractID;
-            this.ClientID = businessID;
+            this.ClientID = clientID;
             this.Contract = contract;
             this.EffectiveDate = effectiveDate;
         }
 
-        public ClientContract(string tableName, string idColumn1, string idColumn3, int businessID, Contract contract, DateTime effectiveDate) : this(tableName, idColumn1, idColumn3)
+        public ClientContract(string tableName, string idColumn1, string idColumn3, int ClientID, Contract contract, DateTime effectiveDate) : this(tableName, idColumn1, idColumn3)
         {
             this.ClientContractID = GetNextIDOn(1);
-            this.ClientID = businessID;
+            this.ClientID = ClientID;
             this.Contract = contract;
             this.EffectiveDate = effectiveDate;
         }
@@ -111,13 +111,22 @@ namespace PSS.Business_Logic
 
     public class BusinessClientContract : ClientContract
     {
-        public BusinessClientContract() : base("BusinessClientContract", "BusinessClientContractID", BusinessClient.idColumn)
+        private static readonly string tableName = "BusinessClientContract";
+        private static readonly string idColumn = "BusinessClientContractID";
+        public BusinessClientContract() : base(tableName, idColumn, BusinessClient.idColumn)
+        {  }
+
+        public BusinessClientContract(int ID, Contract contract, DateTime effectiveDate) : base(tableName, idColumn, BusinessClient.idColumn, ID, contract, effectiveDate)
         {  }
     }
 
     public class IndividualClientContract : ClientContract
     {
-        public IndividualClientContract() : base("IndividualClientContract", "IndividualClientContractID", IndividualClient.idColumn)
+        private static readonly string tableName = "IndividualClientContract";
+        private static readonly string idColumn = "IndividualClientContractID";
+        public IndividualClientContract() : base(tableName, idColumn, IndividualClient.idColumn)
         {  }
+        public IndividualClientContract(int ID, Contract contract, DateTime effectiveDate) : base(tableName, idColumn, BusinessClient.idColumn, ID, contract, effectiveDate)
+        { }
     }
 }

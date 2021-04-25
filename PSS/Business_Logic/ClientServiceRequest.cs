@@ -7,7 +7,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    public class ClientServiceRequest : MultiIntID
+    public abstract class ClientServiceRequest : MultiIntID
     {
         private ServiceRequest sr;
         public int ClientID { get => IDs[0]; private set => IDs[0] = value; }
@@ -80,19 +80,25 @@ namespace PSS.Business_Logic
             return sql.ToString();
         }
 
-
         #endregion
+
     }
 
-    public class BusinessClientServiceRequest : ClientServiceRequest
+    public sealed class BusinessClientServiceRequest : ClientServiceRequest
     {
-        public BusinessClientServiceRequest() : base("BusinessClientServiceRequest", BusinessClient.idColumn)
+        private static readonly string tableName = "BusinessClientServiceRequest";
+        public BusinessClientServiceRequest() : base(tableName, BusinessClient.idColumn)
+        {  }
+        public BusinessClientServiceRequest(int ID, ServiceRequest serviceRequest) : base(tableName, BusinessClient.idColumn, ID, serviceRequest)
         {  }
     }
 
-    public class IndividualClientServiceRequest : ClientServiceRequest
+    public sealed class IndividualClientServiceRequest : ClientServiceRequest
     {
-        public IndividualClientServiceRequest() : base("IndividualClientServiceRequest", IndividualClient.idColumn)
+        private static readonly string tableName = "IndividualClientServiceRequest";
+        public IndividualClientServiceRequest() : base(tableName, IndividualClient.idColumn)
+        {  }
+        public IndividualClientServiceRequest(int ID, ServiceRequest serviceRequest) : base(tableName, BusinessClient.idColumn, ID, serviceRequest)
         {  }
     }
 }
