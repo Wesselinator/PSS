@@ -13,7 +13,7 @@ namespace PSS.Business_Logic
         public override int ClientID { get; protected set; }
         public string BusinessName { get; set; }
         public Person ContactPerson { get => Person; set => Person = value; }
-        private MultiIDList<BusinessClientPerson> BusinessClientPeople { get; set; } //TODO: These extentions
+        private MultiIDList<BusinessClientPerson> BusinessClientPeople { get; set; }
 
         private MultiIDList<BusinessClientServiceRequest> BusinessClientServiceRequests { get; set; }
         private MultiIDList<BusinessClientContract> BusinessClientContracts { get; set; }
