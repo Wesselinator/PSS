@@ -46,7 +46,7 @@ namespace PSS.Presentation_Layer
             txtBusinessName.Clear();
             txtName.Clear();
             txtSurname.Clear();
-            dtpDOB.Value = default;
+            dtpDOB.Value = DateTime.Now;
             txtCellphone.Clear();
             txtTelephone.Clear();
             txtEmail.Clear();
@@ -184,7 +184,7 @@ namespace PSS.Presentation_Layer
         #region Confirm
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (registerMode == false)//TODO: mode //added registerMode boolean property to form
+            if (registerMode == false)
             {
                 ConfirmModify();
             }
@@ -198,7 +198,6 @@ namespace PSS.Presentation_Layer
 
         private void ConfirmRegister()
         {
-            //TODO: get type
             Person newPerson = new Person(txtName.Text, txtSurname.Text, dtpDOB.Value, txtCellphone.Text, txtTelephone.Text, txtEmail.Text); //Creates a new person
             Address newAddress = new Address(txtStreet.Text, txtCity.Text, txtPostalCode.Text, cbxProvince.Text); //Creates new address
             if (rbtnIndvidual.Checked)
@@ -219,7 +218,7 @@ namespace PSS.Presentation_Layer
         {
             currentClient.Person.FirstName = txtName.Text;
             currentClient.Person.LastName = txtSurname.Text;
-            currentClient.Person.BirthDay = dtpDOB.Value;//check formatting
+            currentClient.Person.BirthDay = dtpDOB.Value;
             currentClient.Person.CellphoneNumber = txtCellphone.Text;
             currentClient.Person.TellephoneNumber = txtTelephone.Text;
             currentClient.Person.Email = txtEmail.Text;
@@ -229,7 +228,7 @@ namespace PSS.Presentation_Layer
             currentClient.Address.PostalCode = txtPostalCode.Text;
             currentClient.Address.Province = cbxProvince.SelectedItem.ToString();
 
-            currentClient.Status = cbxStatus.SelectedItem.ToString();
+            currentClient.Status = cbxStatus.SelectedItem.ToString(); //TODO: Add no-choice functionality
             currentClient.Notes = rtbNotes.Text;//Text vs rtf?
 
             if (rbtnIndvidual.Checked)

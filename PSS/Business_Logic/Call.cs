@@ -17,7 +17,7 @@ namespace PSS.Business_Logic
         public DateTime EndTime { get => endTime; set => endTime = value; }
         public string Description { get => descrition; set => descrition = value; }
 
-        private static readonly string tableName = "Call";
+        private static readonly string tableName = "CallInstance";
         private static readonly string idColumn = "CallInstanceID";
 
         public Call() : base(tableName, idColumn)
@@ -71,8 +71,8 @@ namespace PSS.Business_Logic
 
             sql.Append("VALUES (");
             sql.Append(CallInstanceID + ", ");
-            sql.Append("'" + startTime + ", ");
-            sql.Append("'" + endTime + ", ");
+            sql.Append("'" + startTime.ToString("s") + "', ");
+            sql.Append("'" + endTime.ToString("s") + "', ");
             sql.Append("'" + descrition + "' ");
             sql.Append(");");
 

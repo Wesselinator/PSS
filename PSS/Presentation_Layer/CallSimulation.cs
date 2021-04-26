@@ -97,21 +97,18 @@ namespace PSS.Presentation_Layer
 
         private void btnLogRequest_Click(object sender, EventArgs e)
         {
-            EnterDescription();
             CallCentre callCentreForm = new CallCentre(SelectedClient);
             callCentreForm.Show();
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            EnterDescription();
             ClientMaintenance clientMaintenanceForm = new ClientMaintenance();
             clientMaintenanceForm.Show();
         }
 
         private void btnFollowUp_Click(object sender, EventArgs e)
         {
-            EnterDescription();
             ServiceDepartment serviceDepartmentForm = new ServiceDepartment();
             serviceDepartmentForm.Show();
 

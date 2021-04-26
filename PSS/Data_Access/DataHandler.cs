@@ -15,6 +15,7 @@ namespace PSS.Data_Access
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
+                conn.Open();
                 try
                 {
                     SqlDataAdapter adapter = new SqlDataAdapter(Query, conn); 
@@ -34,6 +35,7 @@ namespace PSS.Data_Access
         {
             using(SqlConnection conn = new SqlConnection(connStr))
             {
+                conn.Open();
                 SqlCommand command = new SqlCommand(Query, conn);
                 try
                 {

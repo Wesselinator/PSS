@@ -137,14 +137,14 @@ namespace PSS.Presentation_Layer
             this.grbxTransfer.Controls.Add(this.btnClientMaintence);
             this.grbxTransfer.Location = new System.Drawing.Point(794, 228);
             this.grbxTransfer.Name = "grbxTransfer";
-            this.grbxTransfer.Size = new System.Drawing.Size(241, 195);
+            this.grbxTransfer.Size = new System.Drawing.Size(332, 195);
             this.grbxTransfer.TabIndex = 2;
             this.grbxTransfer.TabStop = false;
             this.grbxTransfer.Text = "Transfer";
             // 
             // btnClientSatisfaction
             // 
-            this.btnClientSatisfaction.Location = new System.Drawing.Point(55, 148);
+            this.btnClientSatisfaction.Location = new System.Drawing.Point(109, 148);
             this.btnClientSatisfaction.Name = "btnClientSatisfaction";
             this.btnClientSatisfaction.Size = new System.Drawing.Size(142, 31);
             this.btnClientSatisfaction.TabIndex = 5;
@@ -154,7 +154,7 @@ namespace PSS.Presentation_Layer
             // 
             // btnServiceDept
             // 
-            this.btnServiceDept.Location = new System.Drawing.Point(55, 87);
+            this.btnServiceDept.Location = new System.Drawing.Point(109, 87);
             this.btnServiceDept.Name = "btnServiceDept";
             this.btnServiceDept.Size = new System.Drawing.Size(142, 31);
             this.btnServiceDept.TabIndex = 4;
@@ -164,7 +164,7 @@ namespace PSS.Presentation_Layer
             // 
             // btnClientMaintence
             // 
-            this.btnClientMaintence.Location = new System.Drawing.Point(55, 19);
+            this.btnClientMaintence.Location = new System.Drawing.Point(109, 19);
             this.btnClientMaintence.Name = "btnClientMaintence";
             this.btnClientMaintence.Size = new System.Drawing.Size(142, 31);
             this.btnClientMaintence.TabIndex = 3;
@@ -174,19 +174,18 @@ namespace PSS.Presentation_Layer
             // 
             // ciwMain
             // 
-            this.ciwMain.AutoSize = true;
             this.ciwMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ciwMain.Client = null;
             this.ciwMain.Location = new System.Drawing.Point(794, 12);
             this.ciwMain.Name = "ciwMain";
-            this.ciwMain.Size = new System.Drawing.Size(225, 207);
+            this.ciwMain.Size = new System.Drawing.Size(332, 207);
             this.ciwMain.TabIndex = 3;
             // 
             // CallCentre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1047, 429);
+            this.ClientSize = new System.Drawing.Size(1129, 429);
             this.Controls.Add(this.ciwMain);
             this.Controls.Add(this.grbxTransfer);
             this.Controls.Add(this.grbxContractInfo);
@@ -198,7 +197,6 @@ namespace PSS.Presentation_Layer
             this.grbxContractInfo.ResumeLayout(false);
             this.grbxTransfer.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

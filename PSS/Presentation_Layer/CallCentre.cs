@@ -32,7 +32,7 @@ namespace PSS.Presentation_Layer
         private void btnClientMaintence_Click(object sender, EventArgs e)
         {
             ClientMaintenance cm = new ClientMaintenance(currentClient);
-            Hide(); //TODO: this works?
+            Hide();
             cm.ShowDialog(); 
             Show();
         }
