@@ -297,7 +297,7 @@ namespace PSS.Presentation_Layer
 
         private void btnModifyContract_Click(object sender, EventArgs e)
         {
-            selectedClientContract = selectedContract; //TODO: Figure out this set
+            //selectedClientContract = selectedContract; //TODO: Figure out this set
         }
 
         private void btnBack_Click(object sender, EventArgs e)
