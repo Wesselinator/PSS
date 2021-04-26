@@ -29,59 +29,61 @@ namespace PSS.Presentation_Layer
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lstvServiceRequests = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.lstvAvailableTechs = new System.Windows.Forms.ListView();
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.txtNewTitle = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.dtpNewJobDate = new System.Windows.Forms.DateTimePicker();
             this.label23 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.txtNewDescription = new System.Windows.Forms.TextBox();
+            this.rtbNewNotes = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCreateJob = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rtbTechDetails = new System.Windows.Forms.RichTextBox();
+            this.rtbSALdetails = new System.Windows.Forms.RichTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnReAssignJob = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.listView4 = new System.Windows.Forms.ListView();
+            this.btnReAssignTech = new System.Windows.Forms.Button();
+            this.txtCurrentTech = new System.Windows.Forms.TextBox();
+            this.lblCurrentTech = new System.Windows.Forms.Label();
+            this.lstvChangeTech = new System.Windows.Forms.ListView();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.richTextBox5 = new System.Windows.Forms.RichTextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.rtbNewTechDetails = new System.Windows.Forms.RichTextBox();
+            this.dtpChangeJobDate = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
+            this.txtChangeDesc = new System.Windows.Forms.TextBox();
+            this.rtbChangeNotes = new System.Windows.Forms.RichTextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.lstvChangeTitle = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.listView3 = new System.Windows.Forms.ListView();
-            this.button2 = new System.Windows.Forms.Button();
+            this.lstvJobs = new System.Windows.Forms.ListView();
+            this.btnReturn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listView1
+            // lstvServiceRequests
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(22, 54);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(290, 109);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.List;
+            this.lstvServiceRequests.HideSelection = false;
+            this.lstvServiceRequests.Location = new System.Drawing.Point(22, 54);
+            this.lstvServiceRequests.Name = "lstvServiceRequests";
+            this.lstvServiceRequests.Size = new System.Drawing.Size(290, 109);
+            this.lstvServiceRequests.TabIndex = 0;
+            this.lstvServiceRequests.UseCompatibleStateImageBehavior = false;
+            this.lstvServiceRequests.View = System.Windows.Forms.View.List;
             // 
             // label1
             // 
@@ -92,15 +94,15 @@ namespace PSS.Presentation_Layer
             this.label1.TabIndex = 1;
             this.label1.Text = "Active Service Requests";
             // 
-            // listView2
+            // lstvAvailableTechs
             // 
-            this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(22, 204);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(290, 93);
-            this.listView2.TabIndex = 2;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            this.listView2.View = System.Windows.Forms.View.List;
+            this.lstvAvailableTechs.HideSelection = false;
+            this.lstvAvailableTechs.Location = new System.Drawing.Point(22, 204);
+            this.lstvAvailableTechs.Name = "lstvAvailableTechs";
+            this.lstvAvailableTechs.Size = new System.Drawing.Size(290, 93);
+            this.lstvAvailableTechs.TabIndex = 2;
+            this.lstvAvailableTechs.UseCompatibleStateImageBehavior = false;
+            this.lstvAvailableTechs.View = System.Windows.Forms.View.List;
             // 
             // label2
             // 
@@ -118,47 +120,67 @@ namespace PSS.Presentation_Layer
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(914, 499);
+            this.tabControl1.Size = new System.Drawing.Size(914, 530);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.dateTimePicker2);
+            this.tabPage1.Controls.Add(this.txtNewTitle);
+            this.tabPage1.Controls.Add(this.label14);
+            this.tabPage1.Controls.Add(this.dtpNewJobDate);
             this.tabPage1.Controls.Add(this.label23);
             this.tabPage1.Controls.Add(this.label7);
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.richTextBox3);
+            this.tabPage1.Controls.Add(this.txtNewDescription);
+            this.tabPage1.Controls.Add(this.rtbNewNotes);
             this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.btnCreateJob);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.richTextBox2);
-            this.tabPage1.Controls.Add(this.richTextBox1);
+            this.tabPage1.Controls.Add(this.rtbTechDetails);
+            this.tabPage1.Controls.Add(this.rtbSALdetails);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.listView2);
-            this.tabPage1.Controls.Add(this.listView1);
+            this.tabPage1.Controls.Add(this.lstvAvailableTechs);
+            this.tabPage1.Controls.Add(this.lstvServiceRequests);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(906, 473);
+            this.tabPage1.Size = new System.Drawing.Size(906, 504);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Create Job";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // dateTimePicker2
+            // txtNewTitle
             // 
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker2.Location = new System.Drawing.Point(462, 324);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(151, 20);
-            this.dateTimePicker2.TabIndex = 27;
+            this.txtNewTitle.Location = new System.Drawing.Point(98, 321);
+            this.txtNewTitle.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNewTitle.Name = "txtNewTitle";
+            this.txtNewTitle.Size = new System.Drawing.Size(190, 20);
+            this.txtNewTitle.TabIndex = 29;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(19, 324);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(54, 13);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "Task Title";
+            // 
+            // dtpNewJobDate
+            // 
+            this.dtpNewJobDate.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpNewJobDate.Location = new System.Drawing.Point(557, 353);
+            this.dtpNewJobDate.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpNewJobDate.Name = "dtpNewJobDate";
+            this.dtpNewJobDate.Size = new System.Drawing.Size(151, 20);
+            this.dtpNewJobDate.TabIndex = 27;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(345, 327);
+            this.label23.Location = new System.Drawing.Point(443, 359);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(98, 13);
@@ -168,44 +190,44 @@ namespace PSS.Presentation_Layer
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(19, 327);
+            this.label7.Location = new System.Drawing.Point(19, 359);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 12;
             this.label7.Text = "Description";
             // 
-            // textBox1
+            // txtNewDescription
             // 
-            this.textBox1.Location = new System.Drawing.Point(91, 324);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(190, 20);
-            this.textBox1.TabIndex = 11;
+            this.txtNewDescription.Location = new System.Drawing.Point(98, 356);
+            this.txtNewDescription.Name = "txtNewDescription";
+            this.txtNewDescription.Size = new System.Drawing.Size(252, 20);
+            this.txtNewDescription.TabIndex = 11;
             // 
-            // richTextBox3
+            // rtbNewNotes
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(22, 383);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(591, 58);
-            this.richTextBox3.TabIndex = 10;
-            this.richTextBox3.Text = "";
+            this.rtbNewNotes.Location = new System.Drawing.Point(22, 415);
+            this.rtbNewNotes.Name = "rtbNewNotes";
+            this.rtbNewNotes.Size = new System.Drawing.Size(591, 58);
+            this.rtbNewNotes.TabIndex = 10;
+            this.rtbNewNotes.Text = "";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 359);
+            this.label6.Location = new System.Drawing.Point(19, 390);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 13);
             this.label6.TabIndex = 9;
             this.label6.Text = "Notes";
             // 
-            // button1
+            // btnCreateJob
             // 
-            this.button1.Location = new System.Drawing.Point(652, 383);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(182, 36);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Assign Job to selected Technician";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnCreateJob.Location = new System.Drawing.Point(660, 424);
+            this.btnCreateJob.Name = "btnCreateJob";
+            this.btnCreateJob.Size = new System.Drawing.Size(182, 36);
+            this.btnCreateJob.TabIndex = 8;
+            this.btnCreateJob.Text = "Assign Job to selected Technician";
+            this.btnCreateJob.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -225,62 +247,62 @@ namespace PSS.Presentation_Layer
             this.label3.TabIndex = 6;
             this.label3.Text = "Service level agreement details";
             // 
-            // richTextBox2
+            // rtbTechDetails
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(348, 226);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(430, 71);
-            this.richTextBox2.TabIndex = 5;
-            this.richTextBox2.Text = "";
+            this.rtbTechDetails.Location = new System.Drawing.Point(348, 226);
+            this.rtbTechDetails.Name = "rtbTechDetails";
+            this.rtbTechDetails.Size = new System.Drawing.Size(430, 71);
+            this.rtbTechDetails.TabIndex = 5;
+            this.rtbTechDetails.Text = "";
             // 
-            // richTextBox1
+            // rtbSALdetails
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(348, 82);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(430, 81);
-            this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.Text = "";
+            this.rtbSALdetails.Location = new System.Drawing.Point(348, 82);
+            this.rtbSALdetails.Name = "rtbSALdetails";
+            this.rtbSALdetails.Size = new System.Drawing.Size(430, 81);
+            this.rtbSALdetails.TabIndex = 4;
+            this.rtbSALdetails.Text = "";
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button4);
+            this.tabPage2.Controls.Add(this.btnReAssignJob);
             this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Controls.Add(this.dateTimePicker1);
+            this.tabPage2.Controls.Add(this.dtpChangeJobDate);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.textBox2);
-            this.tabPage2.Controls.Add(this.richTextBox4);
+            this.tabPage2.Controls.Add(this.txtChangeDesc);
+            this.tabPage2.Controls.Add(this.rtbChangeNotes);
             this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.textBox16);
+            this.tabPage2.Controls.Add(this.lstvChangeTitle);
             this.tabPage2.Controls.Add(this.label25);
             this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.listView3);
+            this.tabPage2.Controls.Add(this.lstvJobs);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(906, 473);
+            this.tabPage2.Size = new System.Drawing.Size(906, 504);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Track Job";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnReAssignJob
             // 
-            this.button4.Location = new System.Drawing.Point(638, 374);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(182, 38);
-            this.button4.TabIndex = 39;
-            this.button4.Text = "Re-assign Job";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnReAssignJob.Location = new System.Drawing.Point(638, 374);
+            this.btnReAssignJob.Name = "btnReAssignJob";
+            this.btnReAssignJob.Size = new System.Drawing.Size(182, 38);
+            this.btnReAssignJob.TabIndex = 39;
+            this.btnReAssignJob.Text = "Re-assign Job";
+            this.btnReAssignJob.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.listView4);
+            this.groupBox1.Controls.Add(this.btnReAssignTech);
+            this.groupBox1.Controls.Add(this.txtCurrentTech);
+            this.groupBox1.Controls.Add(this.lblCurrentTech);
+            this.groupBox1.Controls.Add(this.lstvChangeTech);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.richTextBox5);
+            this.groupBox1.Controls.Add(this.rtbNewTechDetails);
             this.groupBox1.Location = new System.Drawing.Point(402, 19);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(484, 309);
@@ -288,42 +310,43 @@ namespace PSS.Presentation_Layer
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Maintenance Technician";
             // 
-            // button3
+            // btnReAssignTech
             // 
-            this.button3.Location = new System.Drawing.Point(147, 251);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(182, 38);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Assign Technician";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnReAssignTech.Location = new System.Drawing.Point(147, 251);
+            this.btnReAssignTech.Name = "btnReAssignTech";
+            this.btnReAssignTech.Size = new System.Drawing.Size(182, 38);
+            this.btnReAssignTech.TabIndex = 10;
+            this.btnReAssignTech.Text = "Assign Technician";
+            this.btnReAssignTech.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // txtCurrentTech
             // 
-            this.textBox3.Location = new System.Drawing.Point(147, 18);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(140, 20);
-            this.textBox3.TabIndex = 39;
+            this.txtCurrentTech.Enabled = false;
+            this.txtCurrentTech.Location = new System.Drawing.Point(147, 22);
+            this.txtCurrentTech.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCurrentTech.Name = "txtCurrentTech";
+            this.txtCurrentTech.Size = new System.Drawing.Size(168, 20);
+            this.txtCurrentTech.TabIndex = 39;
             // 
-            // label13
+            // lblCurrentTech
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(22, 25);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(105, 13);
-            this.label13.TabIndex = 38;
-            this.label13.Text = "Selected Technician";
+            this.lblCurrentTech.AutoSize = true;
+            this.lblCurrentTech.Location = new System.Drawing.Point(22, 25);
+            this.lblCurrentTech.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCurrentTech.Name = "lblCurrentTech";
+            this.lblCurrentTech.Size = new System.Drawing.Size(97, 13);
+            this.lblCurrentTech.TabIndex = 38;
+            this.lblCurrentTech.Text = "Current Technician";
             // 
-            // listView4
+            // lstvChangeTech
             // 
-            this.listView4.HideSelection = false;
-            this.listView4.Location = new System.Drawing.Point(25, 73);
-            this.listView4.Name = "listView4";
-            this.listView4.Size = new System.Drawing.Size(290, 72);
-            this.listView4.TabIndex = 34;
-            this.listView4.UseCompatibleStateImageBehavior = false;
-            this.listView4.View = System.Windows.Forms.View.List;
+            this.lstvChangeTech.HideSelection = false;
+            this.lstvChangeTech.Location = new System.Drawing.Point(25, 73);
+            this.lstvChangeTech.Name = "lstvChangeTech";
+            this.lstvChangeTech.Size = new System.Drawing.Size(290, 72);
+            this.lstvChangeTech.TabIndex = 34;
+            this.lstvChangeTech.UseCompatibleStateImageBehavior = false;
+            this.lstvChangeTech.View = System.Windows.Forms.View.List;
             // 
             // label11
             // 
@@ -343,22 +366,22 @@ namespace PSS.Presentation_Layer
             this.label12.TabIndex = 35;
             this.label12.Text = "Change Technician";
             // 
-            // richTextBox5
+            // rtbNewTechDetails
             // 
-            this.richTextBox5.Location = new System.Drawing.Point(25, 172);
-            this.richTextBox5.Name = "richTextBox5";
-            this.richTextBox5.Size = new System.Drawing.Size(430, 71);
-            this.richTextBox5.TabIndex = 36;
-            this.richTextBox5.Text = "";
+            this.rtbNewTechDetails.Location = new System.Drawing.Point(25, 172);
+            this.rtbNewTechDetails.Name = "rtbNewTechDetails";
+            this.rtbNewTechDetails.Size = new System.Drawing.Size(430, 71);
+            this.rtbNewTechDetails.TabIndex = 36;
+            this.rtbNewTechDetails.Text = "";
             // 
-            // dateTimePicker1
+            // dtpChangeJobDate
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker1.Location = new System.Drawing.Point(132, 277);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(151, 20);
-            this.dateTimePicker1.TabIndex = 33;
+            this.dtpChangeJobDate.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpChangeJobDate.Location = new System.Drawing.Point(132, 277);
+            this.dtpChangeJobDate.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpChangeJobDate.Name = "dtpChangeJobDate";
+            this.dtpChangeJobDate.Size = new System.Drawing.Size(151, 20);
+            this.dtpChangeJobDate.TabIndex = 33;
             // 
             // label8
             // 
@@ -379,20 +402,20 @@ namespace PSS.Presentation_Layer
             this.label9.TabIndex = 31;
             this.label9.Text = "Description";
             // 
-            // textBox2
+            // txtChangeDesc
             // 
-            this.textBox2.Location = new System.Drawing.Point(132, 242);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(254, 20);
-            this.textBox2.TabIndex = 30;
+            this.txtChangeDesc.Location = new System.Drawing.Point(132, 242);
+            this.txtChangeDesc.Name = "txtChangeDesc";
+            this.txtChangeDesc.Size = new System.Drawing.Size(254, 20);
+            this.txtChangeDesc.TabIndex = 30;
             // 
-            // richTextBox4
+            // rtbChangeNotes
             // 
-            this.richTextBox4.Location = new System.Drawing.Point(19, 341);
-            this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.Size = new System.Drawing.Size(591, 94);
-            this.richTextBox4.TabIndex = 29;
-            this.richTextBox4.Text = "";
+            this.rtbChangeNotes.Location = new System.Drawing.Point(19, 341);
+            this.rtbChangeNotes.Name = "rtbChangeNotes";
+            this.rtbChangeNotes.Size = new System.Drawing.Size(591, 94);
+            this.rtbChangeNotes.TabIndex = 29;
+            this.rtbChangeNotes.Text = "";
             // 
             // label10
             // 
@@ -403,13 +426,13 @@ namespace PSS.Presentation_Layer
             this.label10.TabIndex = 28;
             this.label10.Text = "Notes";
             // 
-            // textBox16
+            // lstvChangeTitle
             // 
-            this.textBox16.Location = new System.Drawing.Point(132, 207);
-            this.textBox16.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(177, 20);
-            this.textBox16.TabIndex = 22;
+            this.lstvChangeTitle.Location = new System.Drawing.Point(132, 207);
+            this.lstvChangeTitle.Margin = new System.Windows.Forms.Padding(2);
+            this.lstvChangeTitle.Name = "lstvChangeTitle";
+            this.lstvChangeTitle.Size = new System.Drawing.Size(177, 20);
+            this.lstvChangeTitle.TabIndex = 22;
             // 
             // label25
             // 
@@ -430,31 +453,31 @@ namespace PSS.Presentation_Layer
             this.label5.TabIndex = 3;
             this.label5.Text = "Active Jobs";
             // 
-            // listView3
+            // lstvJobs
             // 
-            this.listView3.HideSelection = false;
-            this.listView3.Location = new System.Drawing.Point(19, 44);
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(290, 141);
-            this.listView3.TabIndex = 2;
-            this.listView3.UseCompatibleStateImageBehavior = false;
-            this.listView3.View = System.Windows.Forms.View.List;
+            this.lstvJobs.HideSelection = false;
+            this.lstvJobs.Location = new System.Drawing.Point(19, 44);
+            this.lstvJobs.Name = "lstvJobs";
+            this.lstvJobs.Size = new System.Drawing.Size(290, 141);
+            this.lstvJobs.TabIndex = 2;
+            this.lstvJobs.UseCompatibleStateImageBehavior = false;
+            this.lstvJobs.View = System.Windows.Forms.View.List;
             // 
-            // button2
+            // btnReturn
             // 
-            this.button2.Location = new System.Drawing.Point(364, 513);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(182, 38);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Return to Call Centre";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnReturn.Location = new System.Drawing.Point(364, 548);
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Size = new System.Drawing.Size(182, 38);
+            this.btnReturn.TabIndex = 9;
+            this.btnReturn.Text = "Return to Call Centre";
+            this.btnReturn.UseVisualStyleBackColor = true;
             // 
             // ServiceDepartment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 559);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(930, 598);
+            this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.tabControl1);
             this.Name = "ServiceDepartment";
             this.Text = "ServiceDepartment";
@@ -472,42 +495,44 @@ namespace PSS.Presentation_Layer
 
         #endregion
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ListView lstvAvailableTechs;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lstvServiceRequests;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox rtbTechDetails;
+        private System.Windows.Forms.RichTextBox rtbSALdetails;
+        private System.Windows.Forms.Button btnCreateJob;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ListView listView3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ListView lstvJobs;
+        private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.RichTextBox richTextBox3;
+        private System.Windows.Forms.TextBox txtNewDescription;
+        private System.Windows.Forms.RichTextBox rtbNewNotes;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.TextBox lstvChangeTitle;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtpNewJobDate;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpChangeJobDate;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.RichTextBox richTextBox4;
+        private System.Windows.Forms.TextBox txtChangeDesc;
+        private System.Windows.Forms.RichTextBox rtbChangeNotes;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ListView listView4;
+        private System.Windows.Forms.Button btnReAssignTech;
+        private System.Windows.Forms.TextBox txtCurrentTech;
+        private System.Windows.Forms.Label lblCurrentTech;
+        private System.Windows.Forms.ListView lstvChangeTech;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.RichTextBox richTextBox5;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.RichTextBox rtbNewTechDetails;
+        private System.Windows.Forms.Button btnReAssignJob;
+        private System.Windows.Forms.TextBox txtNewTitle;
+        private System.Windows.Forms.Label label14;
     }
 }

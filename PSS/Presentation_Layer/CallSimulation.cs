@@ -87,6 +87,7 @@ namespace PSS.Presentation_Layer
         {
             endTime = DateTime.Now;
 
+            EnterDescription();
             Call calll = new Call(startTime, endTime, description);
             calll.Save();
 
