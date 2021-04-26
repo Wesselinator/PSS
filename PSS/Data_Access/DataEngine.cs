@@ -21,9 +21,9 @@ namespace PSS.Data_Access
 
             foreach (DataRow row in IC.Rows)
             {
-                IndividualClient ic = new IndividualClient();
-                ic.FillFromRow(row);
-                ret.Add(ic);
+                //IndividualClient ic = new IndividualClient();
+                //ic.FillFromRow(row);
+                //ret.Add(ic);
             }
 
             foreach (DataRow row in BC.Rows)
@@ -93,14 +93,14 @@ namespace PSS.Data_Access
         public static Client GetByClientID(int id)
         {
             Client ret;
-            if (id % 2 == 0)
-            {
-                ret = new IndividualClient(); //even
-            }
-            else
-            {
+            //if (id % 2 == 0)
+            //{
+            //    ret = new IndividualClient(); //even
+            //}
+            //else
+            //{
                 ret = new BusinessClient(); //odd
-            }
+            //}
 
             ret.FillWithID(id);
             return ret;
