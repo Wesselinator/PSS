@@ -31,9 +31,10 @@ namespace PSS.Presentation_Layer
 
         private void btnClientMaintence_Click(object sender, EventArgs e)
         {
-            //ClientMaintenance.ReceiveClient(currentClient); //I think this is the method?
-            //ClientMaintenance.Show();
-            Hide();
+            ClientMaintenance cm = new ClientMaintenance(currentClient);
+            Hide(); //TODO: this works?
+            cm.ShowDialog(); 
+            Show();
         }
 
         private void btnServiceDept_Click(object sender, EventArgs e)

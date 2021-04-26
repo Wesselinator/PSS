@@ -47,7 +47,7 @@ namespace PSS.Business_Logic
 
         #region DataBase
 
-        private void FillLists(int id)
+        protected override void FillLists(int id)
         {
             BusinessClientPeople.FillWithPivotColumn(id, idColumn);
             BusinessClientServiceRequests.FillWithPivotColumn(id, idColumn);

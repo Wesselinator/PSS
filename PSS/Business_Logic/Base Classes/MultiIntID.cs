@@ -79,22 +79,9 @@ namespace PSS.Business_Logic
             return Array.Exists(IDColumns, s => s == column);
         }
 
-        //TODO: Move this up for OOP
         protected int GetNextIDOn(int column)
         {
-            //VERBOSE: Becuase I want to see everything that happens
-            string sql = string.Format("SELECT * FROM {0} ORDER BY {1} DESC;", TableName, IDColumns[column]);
-            DataTable dt = DataHandler.GetDataTable(sql);
-            try
-            {
-                DataRow dr = dt.Rows[0];
-                int nextID = dr.Field<int>(column) + 1;
-                return nextID;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                return 0; //empty 
-            }
+            return base.GetNextIDFor(IDColumns[column]);
         }
     }
 }

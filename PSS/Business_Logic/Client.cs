@@ -18,15 +18,12 @@ namespace PSS.Business_Logic
         public string CBXString { get => Person.CellphoneNumber + " | " + Person.FirstName; }
         public Address Address { get; set; }
         public Person Person { get; set; }
-        //public abstract BaseList<Contract> Contracts { get; }
-        //public abstract BaseList<ServiceRequest> ServiceRequests { get; }
-        //public abstract BaseList<FollowUp> FollowUps { get; }
 
 
         #region Business Identifier
         private static readonly string IdentifierLetter = "ABCDE"; //char[] is a string!
         private int ClientIdentifierLetter { get { 
-                int x = (int)ClientID.ToString()[0];
+                int x = (int)ClientID.ToString("D8")[0]; //pad for zeros
                 if (x > 4 || x < 0) { throw new BadDataBaseData("ClientIdentifier is Wrong!"); } //bad data is in the database!!!
                 return IdentifierLetter[x];
             } }
@@ -66,9 +63,14 @@ namespace PSS.Business_Logic
             Notes = row.Field<string>("Notes");
             Address = DataEngine.GetDataObject<Address>(row.Field<int>("AddressID"));
             Person = DataEngine.GetDataObject<Person>(row.Field<int>(personColumn));
+
+            FillLists(ClientID);
         }
 
-        //P3
+        protected abstract void FillLists(int id);
+
+
+        //TODO: test to see if below hits becuase base.
         //public override void Save()
         //{
         //    throw new NotImplementedException(); //This is Correct. It should never hit this.

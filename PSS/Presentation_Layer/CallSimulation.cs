@@ -54,7 +54,7 @@ namespace PSS.Presentation_Layer
         {
             cbClientDropDown.DisplayMember = "CBXString";
 
-            //cbClientDropDown.Items.AddRange(Client.GetAllClients().ToArray());
+            cbClientDropDown.Items.AddRange(Client.GetAllClients().ToArray());
         }
 
         private void btnMakeCall_Click(object sender, EventArgs e)

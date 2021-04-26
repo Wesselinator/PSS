@@ -16,19 +16,7 @@ namespace PSS.Business_Logic
 
         private int DefaultNextInt()
         {
-            //VERBOSE: Becuase I want to see everything that happens
-            string sql = string.Format("SELECT * FROM {0} ORDER BY {1} DESC;", TableName, IDColumn);
-            DataTable dt = DataHandler.GetDataTable(sql);
-            try
-            {
-                DataRow dr = dt.Rows[0];
-                int nextID = dr.Field<int>(IDColumn) + 1;
-                return nextID;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                return 0; //empty 
-            }
+            return base.GetNextIDFor(IDColumn);
         }
     }
 }

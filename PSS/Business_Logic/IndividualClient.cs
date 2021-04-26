@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using PSS.Data_Access;
 
-//CHECK // equals and hashcode and toStringOverride needed
+//TODO: equals and hashcode and toStringOverride needed
 namespace PSS.Business_Logic
 {
     class IndividualClient : Client
@@ -41,7 +41,7 @@ namespace PSS.Business_Logic
 
         #region DataBase
 
-        private void FillLists(int id) //TODO: move to virtual above Client.cs
+        protected override void FillLists(int id)
         {
             IndividualClientServiceRequests.FillWithPivotColumn(id, idColumn);
             IndividualClientContracts.FillWithPivotColumn(id, idColumn);
@@ -51,10 +51,8 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             FillPartialRow(row, personColumn);
-            FillLists(ClientID); //TODO: call in Client.cs
         }
 
-        //P4
         public override void Save()
         {
             Address.Save();
