@@ -35,6 +35,8 @@ namespace PSS.Presentation_Layer
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtNewTitle = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.dtpNewJobDate = new System.Windows.Forms.DateTimePicker();
             this.label23 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -67,8 +69,6 @@ namespace PSS.Presentation_Layer
             this.label5 = new System.Windows.Forms.Label();
             this.lstvJobs = new System.Windows.Forms.ListView();
             this.btnReturn = new System.Windows.Forms.Button();
-            this.txtNewTitle = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -149,6 +149,24 @@ namespace PSS.Presentation_Layer
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Create Job";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txtNewTitle
+            // 
+            this.txtNewTitle.Location = new System.Drawing.Point(98, 321);
+            this.txtNewTitle.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNewTitle.Name = "txtNewTitle";
+            this.txtNewTitle.Size = new System.Drawing.Size(190, 20);
+            this.txtNewTitle.TabIndex = 29;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(19, 324);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(54, 13);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "Task Title";
             // 
             // dtpNewJobDate
             // 
@@ -453,24 +471,6 @@ namespace PSS.Presentation_Layer
             this.btnReturn.TabIndex = 9;
             this.btnReturn.Text = "Return to Call Centre";
             this.btnReturn.UseVisualStyleBackColor = true;
-            // 
-            // txtNewTitle
-            // 
-            this.txtNewTitle.Location = new System.Drawing.Point(98, 321);
-            this.txtNewTitle.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNewTitle.Name = "txtNewTitle";
-            this.txtNewTitle.Size = new System.Drawing.Size(190, 20);
-            this.txtNewTitle.TabIndex = 29;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(19, 324);
-            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(54, 13);
-            this.label14.TabIndex = 28;
-            this.label14.Text = "Task Title";
             // 
             // ServiceDepartment
             // 

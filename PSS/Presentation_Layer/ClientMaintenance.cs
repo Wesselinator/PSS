@@ -184,7 +184,7 @@ namespace PSS.Presentation_Layer
         #region Confirm
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (registerMode == true)//TODO: mode //added registerMode boolean property to form
+            if (registerMode == false)//TODO: mode //added registerMode boolean property to form
             {
                 ConfirmModify();
             }
