@@ -110,35 +110,34 @@ namespace PSS.Business_Logic
         #region List Getters/Setters
         //Because of how Lists work and becuase we are in C#7.3 this is sadly the best way to do it     :(
 
-        public BaseList<ServiceRequest> GetServiceRequests()
+        public override BaseList<ServiceRequest> GetServiceRequests()
         {
             return BusinessClientServiceRequests.GetServiceRequests();
         }
-
-        public void AddServiceRequest(ServiceRequest serviceRequest)
+        public override void AddServiceRequest(ServiceRequest serviceRequest)
         {
             BusinessClientServiceRequests.Add(new BusinessClientServiceRequest(ID, serviceRequest));
         }
 
-        public BaseList<Contract> GetContracts()
+        public override BaseList<Contract> GetContracts()
         {
             return BusinessClientContracts.GetContracts();
         }
-
-        public void AddContract(Contract contract, DateTime effectiveDate)
+        public override void AddContract(Contract contract, DateTime effectiveDate)
         {
             BusinessClientContracts.Add(new BusinessClientContract(ID, contract, effectiveDate));
         }
 
-        public BaseList<FollowUp> GetFolowups()
+        public override BaseList<FollowUp> GetFolowups()
         {
             return BusinessClientFollowUps.GetFollowUps();
         }
-
-        public void AddFolowup(FollowUp followUp)
+        public override void AddFolowup(FollowUp followUp)
         {
             BusinessClientFollowUps.Add(new BusinessClientFollowUp(ID, followUp));
         }
+
+        //TODO: add Business Person Getters/Setters
 
         #endregion
 

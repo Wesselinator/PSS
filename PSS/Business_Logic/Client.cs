@@ -117,6 +117,22 @@ namespace PSS.Business_Logic
 
         #endregion
 
+
+        #region List Getters/Setters
+        //Because of how Lists work and becuase we are in C#7.3 this is sadly the best way to do it     :(
+
+        public abstract BaseList<ServiceRequest> GetServiceRequests();
+        public abstract void AddServiceRequest(ServiceRequest serviceRequest);
+
+        public abstract BaseList<Contract> GetContracts();
+        public abstract void AddContract(Contract contract, DateTime effectiveDate);
+
+        public abstract BaseList<FollowUp> GetFolowups();
+        public abstract void AddFolowup(FollowUp followUp);
+
+        #endregion
+
+
         public static List<Client> GetAllClients()
         {
             return DataEngine.GetAllClients();//move code here

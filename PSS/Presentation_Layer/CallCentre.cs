@@ -9,7 +9,7 @@ namespace PSS.Presentation_Layer
         public CallCentre()
         {
             InitializeComponent();
-
+            DisableTransfer();
         }
 
         public CallCentre(Client client) : this()
@@ -18,15 +18,27 @@ namespace PSS.Presentation_Layer
             ciwMain.Client = client;
         }
 
+        //TODO: Consider removal
         public CallCentre(Client client, ServiceRequest existingRequest) : this(client)
         {
-            //TODO: existing request exists or add if doesn't
-            currentRequest = existingRequest;
+            currentRequest = existingRequest; //assumes existing requesst reffers to an object in client
         }
+
+        #region Transfer
+        private void DisableTransfer()
+        {
+            grbxTransfer.Enabled = false;
+        }
+
+        private void EnableTransfer()
+        {
+            grbxTransfer.Enabled = true;
+        }
+        #endregion
 
 
         private ServiceRequest currentRequest = null;
-        private readonly Client currentClient = null; //readonly becuase i never change anything on this client
+        private readonly Client currentClient = null; //I shouldn't set client
 
 
         private void btnClientMaintence_Click(object sender, EventArgs e)
@@ -39,12 +51,15 @@ namespace PSS.Presentation_Layer
 
         private void btnServiceDept_Click(object sender, EventArgs e)
         {
+            ServiceDepartment sd = new ServiceDepartment(currentClient);
             Hide();
+            sd.ShowDialog();
+            Show();
         }
 
         private void btnClientSatisfaction_Click(object sender, EventArgs e)
         {
-            Hide();
+            Hide(); //TODO: Add Client Satisfaction
         }
 
 
@@ -52,15 +67,18 @@ namespace PSS.Presentation_Layer
         {
             if (currentRequest is null)
             {
-                currentRequest = new ServiceRequest("Unknown", "Unkown Type", "Unknown Problem", currentClient);
+                currentRequest = new ServiceRequest(txtProblemTitle.Text, cbxProblemType.Text, rtbProblem.Text, currentClient); //creates a new one
+                currentClient.AddServiceRequest(currentRequest);
             }
             else
             {
                 currentRequest.Title = txtProblemTitle.Text;
                 currentRequest.Description = rtbProblem.Text;
-                currentRequest.Type = cbxProblemType.SelectedItem.ToString();
-                MessageBox.Show("Ticket Updated!", "Success!");
+                currentRequest.Type = cbxProblemType.Text;
             }
+            currentRequest.Save(); //specifically only save the request (I shouldn't have change antying in the client)
+            MessageBox.Show("Ticket Updated!", "Success!");
+            EnableTransfer();
         }
     }
 }

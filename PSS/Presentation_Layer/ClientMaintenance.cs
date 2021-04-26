@@ -151,17 +151,7 @@ namespace PSS.Presentation_Layer
 
 
             BaseList<Contract> contracts = new BaseList<Contract>(); //move to local?
-
-            if (currentClient is IndividualClient iC)
-            {
-                contracts = iC.GetContracts();
-            }
-
-            if (currentClient is BusinessClient bC)
-            {
-                contracts = bC.GetContracts();
-            }
-
+            contracts = currentClient.GetContracts();
             cbxCurrentContracts.DisplayMember = "ContractName";
             cbxCurrentContracts.Items.AddRange(contracts.ToArray());
         }
@@ -200,6 +190,7 @@ namespace PSS.Presentation_Layer
         {
             Person newPerson = new Person(txtName.Text, txtSurname.Text, dtpDOB.Value, txtCellphone.Text, txtTelephone.Text, txtEmail.Text); //Creates a new person
             Address newAddress = new Address(txtStreet.Text, txtCity.Text, txtPostalCode.Text, cbxProvince.Text); //Creates new address
+            //TODO: get client type
             if (rbtnIndvidual.Checked)
             {
                 IndividualClient individualClient = new IndividualClient("", cbxStatus.Text, rtbNotes.Text, newAddress, newPerson);
@@ -288,14 +279,7 @@ namespace PSS.Presentation_Layer
         private void btnAddContract_Click(object sender, EventArgs e)
         {
             //TODO: What does effective date mean again?
-            if (currentClient is IndividualClient iC)
-            {
-                iC.AddContract(selectedContract, DateTime.Now);
-            }
-            if (currentClient is BusinessClient bC)
-            {
-                bC.AddContract(selectedContract, DateTime.Now);
-            }
+            currentClient.AddContract(selectedContract, DateTime.Now);
         }
 
         private void btnModifyContract_Click(object sender, EventArgs e)

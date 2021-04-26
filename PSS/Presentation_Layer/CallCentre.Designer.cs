@@ -76,6 +76,7 @@ namespace PSS.Presentation_Layer
             this.cbxProblemType.Name = "cbxProblemType";
             this.cbxProblemType.Size = new System.Drawing.Size(128, 21);
             this.cbxProblemType.TabIndex = 17;
+            this.cbxProblemType.Text = "Type...";
             // 
             // lblProblemTitleTag
             // 
@@ -93,6 +94,7 @@ namespace PSS.Presentation_Layer
             this.txtProblemTitle.Name = "txtProblemTitle";
             this.txtProblemTitle.Size = new System.Drawing.Size(510, 20);
             this.txtProblemTitle.TabIndex = 3;
+            this.txtProblemTitle.Text = "Problem Title";
             // 
             // btnUpdateSR
             // 
@@ -110,7 +112,7 @@ namespace PSS.Presentation_Layer
             this.rtbProblem.Name = "rtbProblem";
             this.rtbProblem.Size = new System.Drawing.Size(746, 142);
             this.rtbProblem.TabIndex = 1;
-            this.rtbProblem.Text = "";
+            this.rtbProblem.Text = "Problem Description...";
             // 
             // grbxContractInfo
             // 
