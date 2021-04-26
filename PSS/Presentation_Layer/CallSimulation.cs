@@ -48,6 +48,7 @@ namespace PSS.Presentation_Layer
             btnLogRequest.Hide();
             btnRegister.Hide();
             btnFollowUp.Hide();
+            btnEndCall.Enabled = false;
         }
 
         private void LoadDropDown()
@@ -59,19 +60,48 @@ namespace PSS.Presentation_Layer
 
         private void btnMakeCall_Click(object sender, EventArgs e)
         {
-            startTime = DateTime.Now;
+            if (cbClientDropDown.SelectedIndex == -1)
+            {
+                startTime = DateTime.Now;
 
-            timer = new Timer();
-            timer.Interval = (1000);
-            timer.Tick += new EventHandler(timer_Tick);
+                timer = new Timer();
+                timer.Interval = (1000);
+                timer.Tick += new EventHandler(timer_Tick);
 
-            sw = new Stopwatch();
-            timer.Start();
-            sw.Start();
+                sw = new Stopwatch();
+                timer.Start();
+                sw.Start();
 
-            btnLogRequest.Show();
-            btnRegister.Show();
-            btnFollowUp.Show();
+                btnLogRequest.Show();
+                btnLogRequest.Enabled = false;
+                btnFollowUp.Show();
+                btnFollowUp.Enabled = false;
+                btnRegister.Show();
+                btnRegister.Enabled = true;
+
+                btnEndCall.Enabled = true;
+            }
+            else
+            {
+                startTime = DateTime.Now;
+
+                timer = new Timer();
+                timer.Interval = (1000);
+                timer.Tick += new EventHandler(timer_Tick);
+
+                sw = new Stopwatch();
+                timer.Start();
+                sw.Start();
+
+                btnLogRequest.Show();
+                btnEndCall.Enabled = true;
+                btnFollowUp.Show();
+                btnFollowUp.Enabled = true;
+                btnRegister.Show();
+                btnRegister.Enabled = false;
+                
+                btnEndCall.Enabled = true;
+            }
         }
 
         private void timer_Tick(object sender, EventArgs e)
