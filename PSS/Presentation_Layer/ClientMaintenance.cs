@@ -17,6 +17,8 @@ namespace PSS.Presentation_Layer
         private Contract selectedClientContract => (Contract)cbxCurrentContracts.SelectedItem;
         private Contract selectedContract => (Contract)cbxContracts.SelectedItem;
 
+        public bool registerMode { get; set; } //bool for logic if form is in registration mode or update mode
+
         public ClientMaintenance()
         {
             InitializeComponent();
@@ -86,6 +88,7 @@ namespace PSS.Presentation_Layer
             lblTask.Text = "Register Client";
             btnConfirm.Text = "Finalize Registration";
             ResetControls();
+            registerMode = true; //sets form to registration mode
         }
 
         /// <summary>
@@ -115,7 +118,8 @@ namespace PSS.Presentation_Layer
             }
 
             Populate();
-            
+
+            registerMode = false; //sets form to update mode
         }
 
         #region Populate
@@ -180,7 +184,7 @@ namespace PSS.Presentation_Layer
         #region Confirm
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (true)//TODO: mode
+            if (registerMode == true)//TODO: mode //added registerMode boolean property to form
             {
                 ConfirmModify();
             }
