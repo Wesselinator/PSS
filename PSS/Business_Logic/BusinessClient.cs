@@ -69,9 +69,9 @@ namespace PSS.Business_Logic
             BusinessClientPeople.SaveAll();
             Person.Save();
             base.Save();
-            ServiceRequests.SaveAll(); //Create Businsess client first before services
-            Contracts.SaveAll();
-            FollowUps.SaveAll();
+           // ServiceRequests.SaveAll(); //Create Businsess client first before services
+           // Contracts.SaveAll();
+           // FollowUps.SaveAll();
         }
 
         protected override string Update()
