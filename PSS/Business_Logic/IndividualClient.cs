@@ -21,12 +21,12 @@ namespace PSS.Business_Logic
         public static readonly string idColumn = "IndividualClientID";
         private static readonly string personColumn = idColumn;
 
-        //public IndividualClient() : base(tableName, idColumn)
-        //{
-        //    ServiceRequests = new MultiIDList<IndividualClientServiceRequest>();
-        //    Contracts = new MultiIDList<IndividualClientContract>();
-        //    FollowUps = new MultiIDList<IndividualClientFollowUp>();
-        //}
+        public IndividualClient() : base(tableName, idColumn)
+        {
+            ServiceRequests = new MultiIDList<IndividualClientServiceRequest>();
+            Contracts = new MultiIDList<IndividualClientContract>();
+            FollowUps = new MultiIDList<IndividualClientFollowUp>();
+        }
 
         public IndividualClient(string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
         {
@@ -43,9 +43,9 @@ namespace PSS.Business_Logic
 
         private void FillLists(int id) //TODO: move to virtual above Client.cs
         { 
-            //ServiceRequests.FillWithPivotColumn(id, idColumn);
-            //Contracts.FillWithPivotColumn(id, idColumn);
-            //FollowUps.FillWithPivotColumn(id, idColumn);
+            ServiceRequests.FillWithPivotColumn(id, idColumn);
+            Contracts.FillWithPivotColumn(id, idColumn);
+            FollowUps.FillWithPivotColumn(id, idColumn);
         }
 
         public override void FillFromRow(DataRow row)
