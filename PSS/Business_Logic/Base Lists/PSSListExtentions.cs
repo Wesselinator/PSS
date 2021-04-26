@@ -49,5 +49,10 @@ namespace PSS.Business_Logic
         {
             return ICFUs.Select(icfu => icfu.FollowUp).ToBaseList();
         }
+
+        public static BaseList<Person> GetBusinessClientPeople(this MultiIDList<BusinessClientPerson> BCPs)
+        {
+            return BCPs.Select(bcp => bcp.Person).ToBaseList();
+        }
     }
 }

@@ -82,10 +82,6 @@ namespace PSS.Presentation_Layer
             // cbClientDropDown
             // 
             this.cbClientDropDown.FormattingEnabled = true;
-            this.cbClientDropDown.Items.AddRange(new object[] {
-            "Name - number",
-            "Name - number",
-            "Name - number"});
             this.cbClientDropDown.Location = new System.Drawing.Point(25, 105);
             this.cbClientDropDown.Name = "cbClientDropDown";
             this.cbClientDropDown.Size = new System.Drawing.Size(244, 21);
