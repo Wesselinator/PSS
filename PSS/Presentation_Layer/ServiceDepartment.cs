@@ -101,5 +101,22 @@ namespace PSS.Presentation_Layer
             //Available Techs can change
             FilterTechnicians();
         }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            switch (MessageBox.Show("No changes will be saved! Are you sure you want to go back?", "Discard and Go Back", MessageBoxButtons.YesNo))
+            {
+                case DialogResult.None:
+                case DialogResult.No:
+                    goto default; //fall-through goto default incase we want to add additional functionality.
+
+                case DialogResult.Yes:
+                    this.Close();
+                    break;
+
+                default:
+                    return;
+            }
+        }
     }
 }

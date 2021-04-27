@@ -67,11 +67,11 @@ namespace PSS.Presentation_Layer
             this.cbxProblemType.FormattingEnabled = true;
             this.cbxProblemType.Items.AddRange(new object[] {
             "Unknown Problem",
-            "Business As Usual",
-            "Straight Forward",
-            "Irregular",
-            "Strange",
-            "Esoteric"});
+            "Maintainance",
+            "Printers",
+            "Computers",
+            "Servers",
+            "Cellphone"});
             this.cbxProblemType.Location = new System.Drawing.Point(624, 19);
             this.cbxProblemType.Name = "cbxProblemType";
             this.cbxProblemType.Size = new System.Drawing.Size(128, 21);
@@ -176,6 +176,7 @@ namespace PSS.Presentation_Layer
             // 
             // ciwMain
             // 
+            this.ciwMain.AutoSize = true;
             this.ciwMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ciwMain.Client = null;
             this.ciwMain.Location = new System.Drawing.Point(794, 12);
@@ -199,6 +200,7 @@ namespace PSS.Presentation_Layer
             this.grbxContractInfo.ResumeLayout(false);
             this.grbxTransfer.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
