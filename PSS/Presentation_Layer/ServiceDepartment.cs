@@ -55,7 +55,7 @@ namespace PSS.Presentation_Layer
             //TODO Filter only Requests that don't have a task yet, maybe currentClient.GetActiveServiceRequest instead of above
 
             //TODO: Fill lstvServiceRequests with above
-
+            lstvServiceRequests.Items.Add(clientSerivceRequests.ToString()); //change in future if needed
 
         }
 
