@@ -119,9 +119,6 @@ namespace PSS.Presentation_Layer
             }
         }
 
-        private void btnCreateJob_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
