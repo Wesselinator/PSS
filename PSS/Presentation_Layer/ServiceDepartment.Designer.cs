@@ -471,6 +471,7 @@ namespace PSS.Presentation_Layer
             this.btnReturn.TabIndex = 9;
             this.btnReturn.Text = "Return to Call Centre";
             this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // ServiceDepartment
             // 
