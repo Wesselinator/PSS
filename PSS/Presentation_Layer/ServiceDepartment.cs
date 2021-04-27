@@ -74,6 +74,7 @@ namespace PSS.Presentation_Layer
 
         private void lstvServiceRequests_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // TODO: Change request type
             FilterTechnicians();           
         }        
 
@@ -81,6 +82,8 @@ namespace PSS.Presentation_Layer
         {
             // TODO: Change currentTech
             // TODO: Change rtbTechDetails to selected technician
+            currentTech.ToString();
+
         }
 
         private void btnReAssignTech_Click(object sender, EventArgs e)
