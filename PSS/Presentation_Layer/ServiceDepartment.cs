@@ -29,6 +29,8 @@ namespace PSS.Presentation_Layer
             PopulateSAL();          
         }
 
+        #region Methods
+
         private void PopulateSAL()
         {
             // TODO: Fill Client SAL
@@ -45,7 +47,7 @@ namespace PSS.Presentation_Layer
             ServiceLevelAgreement clientSAL = new ServiceLevelAgreement();
             rtbSALdetails.Text = clientSAL.ToString();
         }
-
+       
         private void PopulateServiceRequests()
         {
             //Get current Client's service requests
@@ -57,6 +59,14 @@ namespace PSS.Presentation_Layer
 
         }
 
+        private void FilterTechnicians()
+        {
+            // TODO: populate lstvAvailableTechs with relevant Technician specialities 
+            //BaseList<Technician> availableTechs = Technician.GetFilteredTechnicians(requestType);
+        }
+
+        #endregion
+
         private void ServiceDepartment_Load(object sender, EventArgs e)
         {
             
@@ -65,13 +75,7 @@ namespace PSS.Presentation_Layer
         private void lstvServiceRequests_SelectedIndexChanged(object sender, EventArgs e)
         {
             FilterTechnicians();           
-        }
-
-        private void FilterTechnicians()
-        {
-            // TODO: populate lstvAvailableTechs with relevant Technician specialities 
-            //BaseList<Technician> availableTechs = Technician.GetFilteredTechnicians(requestType);
-        }
+        }        
 
         private void lstvAvailableTechs_SelectedIndexChanged(object sender, EventArgs e)
         {
