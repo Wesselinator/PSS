@@ -15,6 +15,7 @@ namespace PSS.Presentation_Layer
     {
         private readonly Client currentClient = null;
         private Technician currentTech = null;
+        private ServiceRequest currentRequest = null;
         private string requestType = null;
 
         public ServiceDepartment()
@@ -28,6 +29,8 @@ namespace PSS.Presentation_Layer
             PopulateServiceRequests();
             PopulateSAL();          
         }
+
+        #region Methods
 
         private void PopulateSAL()
         {
@@ -45,7 +48,7 @@ namespace PSS.Presentation_Layer
             ServiceLevelAgreement clientSAL = new ServiceLevelAgreement();
             rtbSALdetails.Text = clientSAL.ToString();
         }
-
+       
         private void PopulateServiceRequests()
         {
             //Get current Client's service requests
@@ -53,18 +56,8 @@ namespace PSS.Presentation_Layer
             //TODO Filter only Requests that don't have a task yet, maybe currentClient.GetActiveServiceRequest instead of above
 
             //TODO: Fill lstvServiceRequests with above
+            lstvServiceRequests.Items.Add(clientSerivceRequests.ToString()); //change in future if needed
 
-
-        }
-
-        private void ServiceDepartment_Load(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void lstvServiceRequests_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FilterTechnicians();           
         }
 
         private void FilterTechnicians()
@@ -73,10 +66,25 @@ namespace PSS.Presentation_Layer
             //BaseList<Technician> availableTechs = Technician.GetFilteredTechnicians(requestType);
         }
 
+        #endregion
+
+        private void ServiceDepartment_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void lstvServiceRequests_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // TODO: Change request type
+            FilterTechnicians();           
+        }        
+
         private void lstvAvailableTechs_SelectedIndexChanged(object sender, EventArgs e)
         {
             // TODO: Change currentTech
             // TODO: Change rtbTechDetails to selected technician
+            currentTech.ToString();
+
         }
 
         private void btnReAssignTech_Click(object sender, EventArgs e)
@@ -91,10 +99,10 @@ namespace PSS.Presentation_Layer
         {
 
             // TODO: Create Task
-            Business_Logic.Task aTask = new Business_Logic.Task();
+            Business_Logic.Task aTask = new Business_Logic.Task(txtNewTitle.Text, txtNewDescription.Text, rtbChangeNotes.Text, currentRequest, dtpNewJobDate.Value, false);
 
             // TODO: Create Technician task
-            TechnicianTask techTask = new TechnicianTask();
+            TechnicianTask techTask = new TechnicianTask(aTask, currentTech, dtpNewJobDate.Value);
 
             //save
 
@@ -118,5 +126,7 @@ namespace PSS.Presentation_Layer
                     return;
             }
         }
+
+        
     }
 }
