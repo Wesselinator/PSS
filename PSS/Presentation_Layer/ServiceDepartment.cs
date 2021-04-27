@@ -15,6 +15,7 @@ namespace PSS.Presentation_Layer
     {
         private readonly Client currentClient = null;
         private Technician currentTech = null;
+        private ServiceRequest currentRequest = null;
         private string requestType = null;
 
         public ServiceDepartment()
@@ -98,10 +99,10 @@ namespace PSS.Presentation_Layer
         {
 
             // TODO: Create Task
-            Business_Logic.Task aTask = new Business_Logic.Task();
+            Business_Logic.Task aTask = new Business_Logic.Task(txtNewTitle.Text, txtNewDescription.Text, rtbChangeNotes.Text, currentRequest, dtpNewJobDate.Value, false);
 
             // TODO: Create Technician task
-            TechnicianTask techTask = new TechnicianTask();
+            TechnicianTask techTask = new TechnicianTask(aTask, currentTech, dtpNewJobDate.Value);
 
             //save
 
