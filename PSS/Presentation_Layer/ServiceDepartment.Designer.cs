@@ -228,6 +228,7 @@ namespace PSS.Presentation_Layer
             this.btnCreateJob.TabIndex = 8;
             this.btnCreateJob.Text = "Assign Job to selected Technician";
             this.btnCreateJob.UseVisualStyleBackColor = true;
+            this.btnCreateJob.Click += new System.EventHandler(this.btnCreateJob_Click);
             // 
             // label4
             // 

@@ -46,5 +46,10 @@ namespace PSS.Presentation_Layer
                     return;
             }
         }
+
+        private void btnCreateJob_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
