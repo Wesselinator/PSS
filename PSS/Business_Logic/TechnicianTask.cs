@@ -42,6 +42,13 @@ namespace PSS.Business_Logic
 
         #region DataBase
 
+        public override void Save()
+        {
+            Task.Save();
+            Technician.Save();
+            base.Save();
+        }
+
         public override void FillFromRow(DataRow row)
         {
             this.TechnicianTaskID = row.Field<int>(IDColumn);

@@ -37,73 +37,10 @@ namespace PSS.Data_Access
             return ret;
         }
 
-        //public static DataRow GetByID(string TableName, string IDColumn, int ID)
-        //{
-        //    string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
-        //    DataTable dt = DataHandler.getDataTable(sql);
-        //    if (dt.Rows.Count == 0)
-        //    {
-        //        //TODO: Throw Exception
-        //    }
-        //    return dt.Rows[0];
-        //}
-
-        //public static bool IDExists(string TableName, string IDColumn, int ID)
-        //{
-        //    /*
-        //    try
-        //    {
-        //        DataRow row = GetByID(TableName, IDColumn, ID);
-        //        return true;
-        //    }
-        //    catch (EmptyListException)
-        //    {
-        //        return false;
-        //    }
-        //    */
-        //    string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
-        //    DataTable dt = DataHandler.getDataTable(sql);
-        //    return dt.Rows.Count != 0;
-        //}
-
-        //public static int GetNextID(string TableName, string IDColumn)
-        //{
-        //    string sql = string.Format("SELECT * FROM {0} GROUP BY {1} DESC", TableName, IDColumn);
-        //    return DataHandler.getDataTable(sql).Rows[0].Field<int>(IDColumn) + 1;
-        //}
-
-        //public static void UpdateORInsert(IModifyable data, string TableName, string IDColumn, int ID)
-        //{
-        //    if (IDExists(TableName, IDColumn, ID))
-        //    {
-        //        DataHandler.Update(data.Update());
-        //    }
-        //    else
-        //    {
-        //        DataHandler.Insert(data.Insert());
-        //    }
-        //}
-
         public static DataTable GetAll(string TableName) //remove after GetAllClients are re/moved
         {
             string sql = string.Format("SELECT * FROM {0}", TableName);
             return DataHandler.GetDataTable(sql);
-        }
-
-        public static Client GetByClientID(int id)
-        {
-            Client ret;
-            //if (id % 2 == 0)
-            //{
-            //    ret = new IndividualClient(); //even
-            //}
-            //else
-            //{
-                ret = new BusinessClient(); //odd
-            //}
-
-            ret.FillWithID(id);
-            return ret;
         }
 
         #region DataObjects
@@ -132,6 +69,8 @@ namespace PSS.Data_Access
         }
 
         #endregion
+
+        
 
         public static string GetProgressRapport(string ticketNo)
         {

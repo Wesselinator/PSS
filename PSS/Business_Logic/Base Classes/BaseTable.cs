@@ -45,7 +45,7 @@ namespace PSS.Business_Logic
         protected int GetNextIDFor(string columnName)
         {
             //VERBOSE: Becuase I want to see everything that happens
-            string sql = string.Format("SELECT * FROM {0} ORDER BY {1} DESC;", TableName, columnName);
+            string sql = string.Format("SELECT * FROM {0} ORDER BY {1} DESC", TableName, columnName);
             DataTable dt = DataHandler.GetDataTable(sql);
             try
             {

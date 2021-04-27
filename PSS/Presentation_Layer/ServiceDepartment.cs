@@ -5,109 +5,157 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PSS.Business_Logic;
 
 namespace PSS.Presentation_Layer
 {
+    //TODO: refresh
     public partial class ServiceDepartment : Form
     {
-        private readonly Client currentClient = null;
-        private Technician currentTech = null;
         private ServiceRequest currentRequest = null;
-        private string requestType = null;
+        //private string requestType = null;
 
-        public ServiceDepartment()
+        //TODO: Should Service Dept. ever be accesed without a client?
+        private ServiceDepartment()
         {
             InitializeComponent();
+            LoadViews();
+            //TODO: Enable cbx
         }
 
         public ServiceDepartment(Client client) : this()
-        {
+        { 
             this.currentClient = client;
-            PopulateServiceRequests();
-            PopulateSAL();          
+            lblCurentClient.Text = client.Person.FullName;
+            PopulateClients();
+            PopulateUnclaimedClientServiceRequests();
         }
 
-        #region Methods
-
-        private void PopulateSAL()
+        private void LoadViews()
         {
-            // TODO: Fill Client SAL
-            //need some kind of method like this currentClient.ActiveContract()
-            if (currentClient is IndividualClient iCl)
-            {
-                //IndividualClientContract iClientContract = ;
-            }
-            else if (currentClient is BusinessClient bCl)
-            {
-                //BusinessClientContract bClientContract;
-            }
-
-            ServiceLevelAgreement clientSAL = new ServiceLevelAgreement();
-            rtbSALdetails.Text = clientSAL.ToString();
-        }
-       
-        private void PopulateServiceRequests()
-        {
-            //Get current Client's service requests
-            BaseList<ServiceRequest> clientSerivceRequests = currentClient.GetServiceRequests();
-            //TODO Filter only Requests that don't have a task yet, maybe currentClient.GetActiveServiceRequest instead of above
-
-            //TODO: Fill lstvServiceRequests with above
-            lstvServiceRequests.Items.Add(clientSerivceRequests.ToString()); //change in future if needed
-
+            PopulateAvailableTechnicians();
+            PopulateTasks();
         }
 
-        private void FilterTechnicians()
+        #region Data
+
+        //wont update with database
+        //change '=' to '=>' if update is prefered
+        private readonly List<Client> AllClients = Client.GetAllClients(); 
+
+        private readonly BaseList<Technician> AllTechnicians = BaseList<Technician>.GrabAll(); //we do need all technicians becuase we want all. If you have a problem write a DataEngine for this
+        private readonly BaseList<TechnicianTask> AllTechnicianTasks = BaseList<TechnicianTask>.GrabAll(); //TODO: why does this return zero?
+        private readonly BaseList<Task> AllUnfinishedTasks = Task.GetAllUnFinishedTasks();
+
+        #endregion
+
+        #region Populate
+
+        private BaseList<ServiceRequest> ClientServiceRequests => currentClient.GetServiceRequests();
+        private BaseList<ServiceRequest> UnClaimedClientServiceRequests => ClientServiceRequests.Except(AllUnfinishedTasks.Select(task => task.ServiceRequest)).ToBaseList();
+        private void PopulateUnclaimedClientServiceRequests()
         {
-            // TODO: populate lstvAvailableTechs with relevant Technician specialities 
-            //BaseList<Technician> availableTechs = Technician.GetFilteredTechnicians(requestType);
+            //TODO: apparntly this is supposed to be the client's unclaimed service request? That'll always be one right?
+
+            lsbxUnclaimedServiceRequests.DisplayMember = "DisplayMember";
+            lsbxUnclaimedServiceRequests.DataSource = UnClaimedClientServiceRequests;
+            //lsbxUnclaimedServiceRequests.Items.AddRange(UnClaimedServiceRequests.ToArray());
+        }
+
+
+        private BaseList<Technician> AvailableTechnicians => AllTechnicians.Except(AllTechnicianTasks.Select(tt => tt.Technician)).ToBaseList(); //TODO: IDK how Technician Task will work, maybe do a DataEngine here?
+
+        private void PopulateAvailableTechnicians()
+        {
+            lsbxAvailableTechnicians.DisplayMember = "DisplayMember";
+            lsbxAvailableTechnicians.DataSource = AvailableTechnicians;
+            //lsbxAvailableTechnicians.Items.AddRange(AvailableTechnicians.ToArray());
+        }
+
+        private void PopulateClients()
+        {
+            cbxClient.DisplayMember = "DisplayMember";
+            cbxClient.Items.AddRange(AllClients.ToArray());
+            //cbxClient.SelectedItem = currentClient; // yikes?
+        }
+
+        private void PopulateTasks()
+        {
+            lsbxActiveTasks.DataSource = AllUnfinishedTasks;
         }
 
         #endregion
 
-        private void ServiceDepartment_Load(object sender, EventArgs e)
+        #region Things Change
+
+        private Technician currentTech = null;
+        private void lsbxAvailableTechnicians_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            currentTech = (Technician)lsbxAvailableTechnicians.SelectedItem;
+            rtbTechDetails.Text = currentTech.ToString(); //TODO: Create a Nice Technician Format String
         }
 
-        private void lstvServiceRequests_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // TODO: Change request type
-            FilterTechnicians();           
-        }        
 
-        private void lstvAvailableTechs_SelectedIndexChanged(object sender, EventArgs e)
+        private void lsbxUnclaimedServiceRequests_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // TODO: Change currentTech
-            // TODO: Change rtbTechDetails to selected technician
-            currentTech.ToString();
+            currentRequest = (ServiceRequest)lsbxUnclaimedServiceRequests.SelectedItem;
+        }
 
+
+        private Client currentClient = null;
+        private void cbxClient_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            currentClient = (Client)cbxClient.SelectedItem;
+            PopulateUnclaimedClientServiceRequests();
+        }
+
+        private TechnicianTask techTaskToModify = null;
+        private void lsbxTasks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Task taskToModify = (Task)lsbxActiveTasks.SelectedItem;
+            techTaskToModify = AllTechnicianTasks.Find(tt => tt.Task.TaskID == taskToModify.TaskID); //might not find it?
+            //Console.WriteLine(string.Format("{0} was found in {1}", taskToModify.Title, techTaskToModify?.ToString()));
+            if (!(techTaskToModify is null))
+            {
+                txtCurrentTech.Text = techTaskToModify.Technician.Person.FullName;
+            }
+
+            btnReAssignTech.Enabled = true;
+            //TODO: populate task
+        }
+
+        #endregion
+
+        #region Buttons
+        private void btnReAssignTask_Click(object sender, EventArgs e)
+        {
+            techTaskToModify.Task.Title = txtTaskTitle.Text;
+            techTaskToModify.Task.Descripion = txtTaskDescription.Text;
+            techTaskToModify.Task.DateProcessed = dtpTaskDate.Value;
+            techTaskToModify.Task.Notes = rtbNotes.Text;
+
+            //the technician SHOULD have been changed
+            AllTechnicians.Remove(techTaskToModify.Technician); //reduce database accesses
+
+            techTaskToModify.Save();
         }
 
         private void btnReAssignTech_Click(object sender, EventArgs e)
         {
-            // TODO: Change currentTech
-
-            //Available Techs can change
-            FilterTechnicians();
+            techTaskToModify.Technician = (Technician)lsbxAvailableTechnicians.SelectedItem;
+            txtCurrentTech.Text = techTaskToModify.Technician.Person.FullName; //can I do this with a datasource?
         }
 
         private void btnCreateJob_Click(object sender, EventArgs e)
         {
+            Task aTask = new Task(txtTaskTitle.Text, txtTaskDescription.Text, rtbNotes.Text, currentRequest, dtpTaskDate.Value, false); //New task created
+            TechnicianTask techTask = new TechnicianTask(aTask, currentTech, dtpTaskDate.Value); //New Tech Task
 
-            // TODO: Create Task
-            Business_Logic.Task aTask = new Business_Logic.Task(txtNewTitle.Text, txtNewDescription.Text, rtbChangeNotes.Text, currentRequest, dtpNewJobDate.Value, false);
+            AllUnfinishedTasks.Add(aTask); //reduce database calls
+            AllTechnicianTasks.Add(techTask);  //reduce database calls
 
-            // TODO: Create Technician task
-            TechnicianTask techTask = new TechnicianTask(aTask, currentTech, dtpNewJobDate.Value);
-
-            //save
-
-            //Available Techs can change
-            FilterTechnicians();
+            techTask.Save(); //actually put in database
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -127,6 +175,11 @@ namespace PSS.Presentation_Layer
             }
         }
 
-        
+        #endregion
+
+        private void ServiceDepartment_Load(object sender, EventArgs e)
+        {
+            //TODO: move populates here? Keep in constructor?
+        }
     }
 }
