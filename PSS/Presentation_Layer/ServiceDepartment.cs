@@ -13,7 +13,9 @@ namespace PSS.Presentation_Layer
 {
     public partial class ServiceDepartment : Form
     {
-        private readonly Client focusedClient; 
+        private readonly Client currentClient = null;
+        private Technician currentTech = null;
+        private string requestType = null;
 
         public ServiceDepartment()
         {
@@ -22,12 +24,82 @@ namespace PSS.Presentation_Layer
 
         public ServiceDepartment(Client client) : this()
         {
-            this.focusedClient = client;
+            this.currentClient = client;
+            PopulateServiceRequests();
+            PopulateSAL();          
+        }
+
+        private void PopulateSAL()
+        {
+            // TODO: Fill Client SAL
+            //need some kind of method like this currentClient.ActiveContract()
+            if (currentClient is IndividualClient iCl)
+            {
+                //IndividualClientContract iClientContract = ;
+            }
+            else if (currentClient is BusinessClient bCl)
+            {
+                //BusinessClientContract bClientContract;
+            }
+
+            ServiceLevelAgreement clientSAL = new ServiceLevelAgreement();
+            rtbSALdetails.Text = clientSAL.ToString();
+        }
+
+        private void PopulateServiceRequests()
+        {
+            //Get current Client's service requests
+            BaseList<ServiceRequest> clientSerivceRequests = currentClient.GetServiceRequests();
+            //TODO Filter only Requests that don't have a task yet, maybe currentClient.GetActiveServiceRequest instead of above
+
+            //TODO: Fill lstvServiceRequests with above
+
+
         }
 
         private void ServiceDepartment_Load(object sender, EventArgs e)
         {
-            //TODO: load client details into form.
+            
+        }
+
+        private void lstvServiceRequests_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterTechnicians();           
+        }
+
+        private void FilterTechnicians()
+        {
+            // TODO: populate lstvAvailableTechs with relevant Technician specialities 
+            //BaseList<Technician> availableTechs = Technician.GetFilteredTechnicians(requestType);
+        }
+
+        private void lstvAvailableTechs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // TODO: Change currentTech
+            // TODO: Change rtbTechDetails to selected technician
+        }
+
+        private void btnReAssignTech_Click(object sender, EventArgs e)
+        {
+            // TODO: Change currentTech
+
+            //Available Techs can change
+            FilterTechnicians();
+        }
+
+        private void btnCreateJob_Click(object sender, EventArgs e)
+        {
+
+            // TODO: Create Task
+            Business_Logic.Task aTask = new Business_Logic.Task();
+
+            // TODO: Create Technician task
+            TechnicianTask techTask = new TechnicianTask();
+
+            //save
+
+            //Available Techs can change
+            FilterTechnicians();
         }
 
         private void btnReturn_Click(object sender, EventArgs e)

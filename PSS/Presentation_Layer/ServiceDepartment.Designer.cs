@@ -84,6 +84,7 @@ namespace PSS.Presentation_Layer
             this.lstvServiceRequests.TabIndex = 0;
             this.lstvServiceRequests.UseCompatibleStateImageBehavior = false;
             this.lstvServiceRequests.View = System.Windows.Forms.View.List;
+            this.lstvServiceRequests.SelectedIndexChanged += new System.EventHandler(this.lstvServiceRequests_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -103,6 +104,7 @@ namespace PSS.Presentation_Layer
             this.lstvAvailableTechs.TabIndex = 2;
             this.lstvAvailableTechs.UseCompatibleStateImageBehavior = false;
             this.lstvAvailableTechs.View = System.Windows.Forms.View.List;
+            this.lstvAvailableTechs.SelectedIndexChanged += new System.EventHandler(this.lstvAvailableTechs_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -319,6 +321,7 @@ namespace PSS.Presentation_Layer
             this.btnReAssignTech.TabIndex = 10;
             this.btnReAssignTech.Text = "Assign Technician";
             this.btnReAssignTech.UseVisualStyleBackColor = true;
+            this.btnReAssignTech.Click += new System.EventHandler(this.btnReAssignTech_Click);
             // 
             // txtCurrentTech
             // 
