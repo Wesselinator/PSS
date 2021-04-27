@@ -99,5 +99,11 @@ namespace PSS.Business_Logic
         {
             return string.Format("TechnicianID: {0} | Specialty: {1} | PayRate: {2} | Person: [{3}] ", TechnicianID, Specialty, PayRate, Person);
         }
+
+        public Technician GetByTechnicianID(int id)
+        {
+            return DataEngine.GetByTechnicianID(id);
+        }
+
     }
 }

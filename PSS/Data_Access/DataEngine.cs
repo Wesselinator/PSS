@@ -106,6 +106,20 @@ namespace PSS.Data_Access
             return ret;
         }
 
+        public static Technician GetByTechnicianID(int id)
+        {
+            Technician ret;
+            ret = new Technician();
+            ret.FillWithID(id);
+            return ret;
+        }
+
+        //public static List<Technician> GetFilteredTechnicians(string speciality,)
+        //{
+            
+        //}
+
+
         #region DataObjects
 
         public static T GetDataObject<T>(params int[] ids) where T : MultiIntID, new()
