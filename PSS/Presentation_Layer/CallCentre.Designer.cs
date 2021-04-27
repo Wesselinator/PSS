@@ -67,10 +67,11 @@ namespace PSS.Presentation_Layer
             this.cbxProblemType.FormattingEnabled = true;
             this.cbxProblemType.Items.AddRange(new object[] {
             "Unknown Problem",
-            "Maintainance",
             "Printers",
-            "Computers",
-            "Servers",
+            "Computer Hardware",
+            "Computer Software",
+            "Servers Hardware",
+            "Server Software",
             "Cellphone"});
             this.cbxProblemType.Location = new System.Drawing.Point(624, 19);
             this.cbxProblemType.Name = "cbxProblemType";
