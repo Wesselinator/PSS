@@ -114,10 +114,26 @@ namespace PSS.Data_Access
             return ret;
         }
 
-        //public static List<Technician> GetFilteredTechnicians(string speciality,)
-        //{
-            
-        //}
+        public static List<Technician> GetAvailibleTechnicians(DateTime dateTimeToAssignTechnicianTo)
+        {
+            Technician tech = new Technician();
+            string getAvailibleTechniciansQuery = "SELECT t1.TechnicianID,p.FirstName,p.LastName, p.BirthDate,p.CellPhoneNumber,p.TelephoneNumber,p.Email,t1.Speciality,t1.PayRate"+
+            "FROM Person p"+
+            "JOIN Technician t1"+
+            "ON p.PersonID = t1.TechnicianID"+
+            "WHERE p.PersonID NOT IN("+
+                "SELECT DISTINCT p.PersonID"+
+                "FROM Person p"+
+                "JOIN Technician t"+
+                "ON p.PersonID = t.TechnicianID"+
+                "LEFT JOIN TechnicianTask tt"+
+                "ON t.TechnicianID = tt.TechnicianID"+
+                "LEFT JOIN TechnicianTaskFeedback ttf"+
+                "ON tt.TechnicianTaskID = ttf.TechnicianTaskID"+
+                "WHERE('2021/04/17 10:20:00' BETWEEN ttf.TimeArrived AND ttf.TimeDeparture)"+
+            ")";
+            DataTable availibleTechniciansTable = DataHandler.GetDataTable(getAvailibleTechniciansQuery);
+        }
 
 
         #region DataObjects
