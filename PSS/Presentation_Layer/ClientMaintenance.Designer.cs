@@ -608,10 +608,10 @@ namespace PSS.Presentation_Layer
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(713, 450);
+            this.btnConfirm.Location = new System.Drawing.Point(696, 450);
             this.btnConfirm.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(118, 33);
+            this.btnConfirm.Size = new System.Drawing.Size(135, 33);
             this.btnConfirm.TabIndex = 37;
             this.btnConfirm.Text = "Confirm Form";
             this.btnConfirm.UseVisualStyleBackColor = true;
@@ -619,12 +619,12 @@ namespace PSS.Presentation_Layer
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(713, 514);
+            this.btnBack.Location = new System.Drawing.Point(696, 514);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(118, 33);
+            this.btnBack.Size = new System.Drawing.Size(135, 33);
             this.btnBack.TabIndex = 36;
-            this.btnBack.Text = "Back";
+            this.btnBack.Text = "Return To Call Centre";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
