@@ -312,5 +312,23 @@ namespace PSS.Presentation_Layer
             cm.ShowDialog();
             Show();
         }
+
+        private void rbtnIndvidual_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnIndvidual.Checked)
+            {
+                lblBusinessName.Hide();
+                txtBusinessName.Hide();
+            }
+        }
+
+        private void rbtnBusiness_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnBusiness.Checked)
+            {
+                lblBusinessName.Show();
+                txtBusinessName.Show();
+            }
+        }
     }
 }

@@ -80,8 +80,8 @@ namespace PSS.Presentation_Layer
             this.btnBack = new System.Windows.Forms.Button();
             this.lblDepartment = new System.Windows.Forms.Label();
             this.lblClientMaintenance = new System.Windows.Forms.Label();
-            this.ciwMain = new PSS.Presentation_Layer.ClientInfoWidgit();
             this.btnCreateContract = new System.Windows.Forms.Button();
+            this.ciwMain = new PSS.Presentation_Layer.ClientInfoWidgit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -96,6 +96,7 @@ namespace PSS.Presentation_Layer
             this.txtBusinessName.Name = "txtBusinessName";
             this.txtBusinessName.Size = new System.Drawing.Size(151, 20);
             this.txtBusinessName.TabIndex = 48;
+            this.txtBusinessName.Visible = false;
             // 
             // lblBusinessName
             // 
@@ -106,6 +107,7 @@ namespace PSS.Presentation_Layer
             this.lblBusinessName.Size = new System.Drawing.Size(78, 13);
             this.lblBusinessName.TabIndex = 47;
             this.lblBusinessName.Text = "Business name";
+            this.lblBusinessName.Visible = false;
             // 
             // groupBox3
             // 
@@ -551,6 +553,7 @@ namespace PSS.Presentation_Layer
             this.rbtnBusiness.TabStop = true;
             this.rbtnBusiness.Text = "Business";
             this.rbtnBusiness.UseVisualStyleBackColor = true;
+            this.rbtnBusiness.CheckedChanged += new System.EventHandler(this.rbtnBusiness_CheckedChanged);
             // 
             // rbtnIndvidual
             // 
@@ -563,6 +566,7 @@ namespace PSS.Presentation_Layer
             this.rbtnIndvidual.TabStop = true;
             this.rbtnIndvidual.Text = "Individual";
             this.rbtnIndvidual.UseVisualStyleBackColor = true;
+            this.rbtnIndvidual.CheckedChanged += new System.EventHandler(this.rbtnIndvidual_CheckedChanged);
             // 
             // label4
             // 
@@ -649,16 +653,6 @@ namespace PSS.Presentation_Layer
             this.lblClientMaintenance.TabIndex = 34;
             this.lblClientMaintenance.Text = "Client Maintenance";
             // 
-            // ciwMain
-            // 
-            this.ciwMain.AutoSize = true;
-            this.ciwMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ciwMain.Client = null;
-            this.ciwMain.Location = new System.Drawing.Point(871, 450);
-            this.ciwMain.Name = "ciwMain";
-            this.ciwMain.Size = new System.Drawing.Size(247, 207);
-            this.ciwMain.TabIndex = 49;
-            // 
             // btnCreateContract
             // 
             this.btnCreateContract.Location = new System.Drawing.Point(263, 34);
@@ -669,6 +663,16 @@ namespace PSS.Presentation_Layer
             this.btnCreateContract.Text = "Create Contract";
             this.btnCreateContract.UseVisualStyleBackColor = true;
             this.btnCreateContract.Click += new System.EventHandler(this.btnCreateContract_Click);
+            // 
+            // ciwMain
+            // 
+            this.ciwMain.AutoSize = true;
+            this.ciwMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ciwMain.Client = null;
+            this.ciwMain.Location = new System.Drawing.Point(871, 450);
+            this.ciwMain.Name = "ciwMain";
+            this.ciwMain.Size = new System.Drawing.Size(247, 207);
+            this.ciwMain.TabIndex = 49;
             // 
             // ClientMaintenance
             // 
