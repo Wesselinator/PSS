@@ -13,6 +13,8 @@ namespace PSS.Business_Logic
 
         public void FillWithPivotColumn(int id, string column)
         {
+            this.Clear();
+
             DataTable dt =  DataInstance.GetAllOnPivot(id, column);
 
             foreach (DataRow row in dt.Rows)
