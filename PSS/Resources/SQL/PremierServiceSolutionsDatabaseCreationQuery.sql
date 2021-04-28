@@ -253,8 +253,8 @@ CREATE TABLE Task
  TaskType VARCHAR(20) NOT NULL,
  TaskDescription VARCHAR(MAX) NOT NULL,
  TaskNotes VARCHAR(MAX),
- ServiceRequestID INT NOT NULL REFERENCES ServiceRequest(ServiceRequestID),
- AddressID INT NOT NULL REFERENCES Address(AddressID), --Add constaint to take business or indiviual client address as default
+ ServiceRequestID INT NOT NULL,
+ --AddressID INT NOT NULL REFERENCES Address(AddressID), --Add constaint to take business or indiviual client address as default
  DateProcessed DATETIME NOT NULL,
  IsFinished BIT NOT NULL DEFAULT 0
 )
@@ -283,8 +283,7 @@ CREATE TABLE TechnicianTask
 )
 
 ALTER TABLE TechnicianTask
-ADD CONSTRAINT FK_TechnicianTask#Person FOREIGN KEY (TechnicianID) REFERENCES Technician(TechnicianID),
-	CONSTRAINT FK_TechnicianTask#Task FOREIGN KEY (TaskID) REFERENCES Task(TaskID)
+ADD CONSTRAINT FK_TechnicianTask#Task FOREIGN KEY (TaskID) REFERENCES Task(TaskID)
 
 GO
 
@@ -578,7 +577,7 @@ INSERT INTO IndividualClientServiceRequest (IndividualClientID, ServiceRequestID
 
 GO
 
-INSERT INTO Task (TaskID, TaskTitle, TaskType, TaskDescription, TaskNotes, ServiceRequestID, AddressID, DateProcessed, IsFinished)
-	VALUES (1, 'Fix hardware issue on HP printer model 775', 'Hardware Related', 'Printer error code reports a hardware problem. Attempt or fix, if not repairible on the customer site, schedule pickup repair', '', 1, 1, GETDATE(), DEFAULT);
+INSERT INTO Task (TaskID, TaskTitle, TaskType, TaskDescription, TaskNotes, ServiceRequestID, DateProcessed, IsFinished)
+	VALUES (1, 'Fix hardware issue on HP printer model 775', 'Hardware Related', 'Printer error code reports a hardware problem. Attempt or fix, if not repairible on the customer site, schedule pickup repair', '', 1, GETDATE(), 0);
 
 GO

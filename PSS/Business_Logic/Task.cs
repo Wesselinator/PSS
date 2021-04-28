@@ -3,13 +3,13 @@ using System.Text;
 using PSS.Data_Access;
 using System.Data;
 
-//TODO: Add Type
 namespace PSS.Business_Logic
 {
     public class Task : SingleIntID
     {
         public int TaskID { get => ID; private set => ID = value; }
         public string Title { get; set; }
+        public string Type { get; set; }
         public string Descripion { get; set; }
         public string Notes { get; set; }
         public ServiceRequest ServiceRequest { get; set; }
@@ -22,10 +22,11 @@ namespace PSS.Business_Logic
         public Task() : base(tableName, idColumn)
         { }
 
-        public Task(int taskID, string title, string descripion, string notes, ServiceRequest serviceRequest, DateTime dateProcessed, bool isFinished) : this()
+        public Task(int taskID, string title, string type, string descripion, string notes, ServiceRequest serviceRequest, DateTime dateProcessed, bool isFinished) : this()
         {
             this.TaskID = taskID;
             this.Title = title;
+            this.Type = type;
             this.Descripion = descripion;
             this.Notes = notes;
             this.ServiceRequest = serviceRequest;
@@ -33,10 +34,11 @@ namespace PSS.Business_Logic
             this.IsFinished = isFinished;
         }
 
-        public Task(string title, string descripion, string notes, ServiceRequest serviceRequest, DateTime dateProcessed, bool isFinished) : this()
+        public Task(string title, string type, string descripion, string notes, ServiceRequest serviceRequest, DateTime dateProcessed, bool isFinished) : this()
         {
             this.TaskID = base.GetNextID();
             this.Title = title;
+            this.Type = type;
             this.Descripion = descripion;
             this.Notes = notes;
             this.ServiceRequest = serviceRequest;
@@ -50,6 +52,7 @@ namespace PSS.Business_Logic
         {
             this.TaskID = row.Field<int>(IDColumn);
             this.Title = row.Field<string>("TaskTitle");
+            this.Type = row.Field<string>("TaskType");
             this.Descripion = row.Field<string>("TaskDescription");
             this.Notes = row.Field<string>("TaskNotes");
             this.ServiceRequest = DataEngine.GetDataObject<ServiceRequest>(row.Field<int>("ServiceRequestID"));
@@ -71,10 +74,11 @@ namespace PSS.Business_Logic
             sql.Append("SET ");
 
             sql.Append("TaskTitle = '" + Title + "',");
+            sql.Append("TaskType = '" + Type + "',");
             sql.Append("TaskDescripion = '" + Descripion + "',");
             sql.Append("TaskNotes = '" + Notes + "',");
             sql.Append("ServiceRequestID = " + ServiceRequest.ServiceRequestID + ",");
-            sql.Append("TaskDateProcessed = '" + DateProcessed.ToString("s") + "'"); //.ToUniversalTime. depending on what exactly SQL Server is smoking
+            sql.Append("TaskDateProcessed = '" + DateProcessed.ToString("s") + "'");
             sql.AppendLine("IsFinished = " + (IsFinished ? 1 : 0));
 
             sql.AppendLine("WHERE " + IDColumn + " = " + TaskID);
@@ -90,6 +94,7 @@ namespace PSS.Business_Logic
             sql.Append("VALUES (");
             sql.Append(TaskID + ", ");
             sql.Append("'" + Title + "', ");
+            sql.Append("'" + Type + "', ");
             sql.Append("'" + Descripion + "', ");
             sql.Append("'" + Notes + "', ");
             sql.Append(ServiceRequest.ServiceRequestID + ", ");

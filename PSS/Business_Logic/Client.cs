@@ -23,10 +23,11 @@ namespace PSS.Business_Logic
 
         #region Business Identifier
         private static readonly string IdentifierLetter = "ABCDE"; //char[] is a string!
-        private int ClientIdentifierLetter { get { 
-                int x = (int)ClientID.ToString("D8")[0]; //pad for zeros
+        private string ClientIdentifierLetter { get {
+                string s = ClientID.ToString("D8")[0].ToString();
+                int x = int.Parse(s);
                 if (x > 4 || x < 0) { throw new BadDataBaseData("ClientIdentifier is Wrong!"); } //bad data is in the database!!!
-                return IdentifierLetter[x];
+                return IdentifierLetter[x].ToString();
             } }
         private string ClientID7Digits { get { return ClientID.ToString("D8").Remove(0, 1); } } //remove first digit no matter what it is
         #endregion

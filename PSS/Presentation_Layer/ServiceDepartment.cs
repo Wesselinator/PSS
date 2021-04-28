@@ -149,13 +149,16 @@ namespace PSS.Presentation_Layer
 
         private void btnCreateJob_Click(object sender, EventArgs e)
         {
-            Task aTask = new Task(txtTaskTitle.Text, txtTaskDescription.Text, rtbNotes.Text, currentRequest, dtpTaskDate.Value, false); //New task created
+            //TODO: Add Task type
+            Task aTask = new Task(txtTaskTitle.Text, txtTaskDescription.Text, "", rtbNotes.Text, currentRequest, dtpTaskDate.Value, false); //New task created
             TechnicianTask techTask = new TechnicianTask(aTask, currentTech, dtpTaskDate.Value); //New Tech Task
 
             AllUnfinishedTasks.Add(aTask); //reduce database calls
             AllTechnicianTasks.Add(techTask);  //reduce database calls
 
             techTask.Save(); //actually put in database
+
+            MessageBox.Show("Task Created and Assigned", "Success");
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
