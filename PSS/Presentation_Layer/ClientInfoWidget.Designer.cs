@@ -202,9 +202,10 @@ namespace PSS.Presentation_Layer
             // lblBusinessIdentifier
             // 
             this.lblBusinessIdentifier.AutoSize = true;
-            this.lblBusinessIdentifier.Location = new System.Drawing.Point(96, 75);
+            this.lblBusinessIdentifier.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBusinessIdentifier.Location = new System.Drawing.Point(96, 79);
             this.lblBusinessIdentifier.Name = "lblBusinessIdentifier";
-            this.lblBusinessIdentifier.Size = new System.Drawing.Size(25, 13);
+            this.lblBusinessIdentifier.Size = new System.Drawing.Size(29, 17);
             this.lblBusinessIdentifier.TabIndex = 15;
             this.lblBusinessIdentifier.Text = "BID";
             // 

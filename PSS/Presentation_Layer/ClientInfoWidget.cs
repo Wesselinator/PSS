@@ -60,6 +60,8 @@ namespace PSS.Presentation_Layer
             lblEmail.Text = Client.Person.Email;
             lblTell.Text = Client.Person.TellephoneNumber;
             lblCell.Text = Client.Person.CellphoneNumber;
+
+            lblBusinessIdentifier.Text = Client.BusinessIdentifier;
         }
 
         private void PopulateIndividual(IndividualClient individual)
