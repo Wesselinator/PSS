@@ -107,12 +107,12 @@ namespace PSS.Business_Logic
         }
 
 
-        public override BaseList<FollowUp> GetFolowups()
+        public override BaseList<FollowUpReport> GetFolowups()
         {
             return IndividualClientFollowUps.GetFollowUps();
         }
 
-        public override void AddFolowup(FollowUp followUp)
+        public override void AddFolowup(FollowUpReport followUp)
         {
             IndividualClientFollowUps.Add(new IndividualClientFollowUp(ID, followUp));
         }

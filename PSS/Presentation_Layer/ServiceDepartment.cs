@@ -65,7 +65,7 @@ namespace PSS.Presentation_Layer
             //lsbxUnclaimedServiceRequests.Items.AddRange(UnClaimedServiceRequests.ToArray());
         }
 
-        private BaseList<Technician> AvailableTechnicians => AllTechnicians.Except(AllTechnicianTasks.Select(tt => tt.Technician)).ToBaseList(); //TODO: IDK how Technician Task will work, maybe do a DataEngine here?
+        private BaseList<Technician> AvailableTechnicians = Technician.GetAllAvailableClients();
 
         private void PopulateAvailableTechnicians()
         {
@@ -91,7 +91,7 @@ namespace PSS.Presentation_Layer
             //rtbSLAdetails.Text = 
         }
 
-        private TreeNode[] TechnicianTaskNodes(Technician t) => AllTechnicianTasks.Where(tt => tt.Technician == t).Select(tt => new TreeNode(tt.Task.Title)).ToArray(); //TODO: order
+        private TreeNode[] TechnicianTaskNodes(Technician t) => AllTechnicianTasks.Where(tt => tt.Technician.TechnicianID == t.TechnicianID).Select(tt => new TreeNode(tt.Task.Title)).ToArray(); //TODO: order
         private TreeNode[] TechnicianNodes => AllTechnicians.Select(t => new TreeNode(t.Person.FullName, TechnicianTaskNodes(t))).ToArray();
         private void PopulateTree()
         {

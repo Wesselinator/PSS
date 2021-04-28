@@ -7,7 +7,7 @@ namespace PSS.Data_Access
 {
     public static class DataHandler
     {
-        private static readonly string connStr = @"Server=.;Initial Catalog=PremierServiceSolutionsDB;Database=PremierServiceSolutionsDB;Integrated Security=SSPI";
+        private static readonly string connStr = @"Server=WESSEL-PC\WESSELSQL;Initial Catalog=PremierServiceSolutionsDB;Database=PremierServiceSolutionsDB;Integrated Security=SSPI";
 
         public static DataTable GetDataTable(string Query)
         {

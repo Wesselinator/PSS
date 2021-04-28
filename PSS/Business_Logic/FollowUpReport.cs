@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PSS.Business_Logic
 {
-    public class FollowUp : SingleIntID
+    public class FollowUpReport : SingleIntID
     {
         public int FollowupReportID { get => ID; private set => ID = value; }
         public string Title { get; set; }
@@ -19,13 +19,13 @@ namespace PSS.Business_Logic
 
 
 
-        private static readonly string tableName = "FollowUp";
+        private static readonly string tableName = "FollowUpReport";
         private static readonly string idColumn = "FollowupReportID";
 
-        public FollowUp() : base(tableName, idColumn) 
+        public FollowUpReport() : base(tableName, idColumn) 
         { }
 
-        public FollowUp(int followupReportID, string title, string type, string description, DateTime followUpDate, bool isIssueResolved, int satisfactionLevel) : this()
+        public FollowUpReport(int followupReportID, string title, string type, string description, DateTime followUpDate, bool isIssueResolved, int satisfactionLevel) : this()
         {
             this.FollowupReportID = followupReportID;
             this.Title = title;
@@ -41,10 +41,10 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             this.FollowupReportID = row.Field<int>(idColumn);
-            this.Title = row.Field<string>("Title");
-            this.Type = row.Field<string>("Type");
-            this.Description = row.Field<string>("Description");
-            this.FollowUpDate = row.Field<DateTime>("FollowUpCallDate");
+            this.Title = row.Field<string>("FollowUpTitle");
+            this.Type = row.Field<string>("FollowUpType");
+            this.Description = row.Field<string>("FollowUpDescription");
+            this.FollowUpDate = row.Field<DateTime>("FollowUpDate");
             this.IsIssueResolved = row.Field<bool>("IsIssueResolved");
             this.SatisfactionLevel = row.Field<int>("SatisfactionLevel");           
         }
@@ -55,10 +55,10 @@ namespace PSS.Business_Logic
             sql.Append("UPDATE " + tableName);
             sql.Append("SET ");
 
-            sql.Append("Title = '" + Title + "', ");
-            sql.Append("Type = '" + Type + "', ");
-            sql.Append("Description = '" + Description + "', ");
-            sql.Append("FollowUpCallDate = '" + FollowUpDate + "', ");
+            sql.Append("FollowUpTitle = '" + Title + "', ");
+            sql.Append("FollowUpType = '" + Type + "', ");
+            sql.Append("FollowUpDescription = '" + Description + "', ");
+            sql.Append("FollowUpDate = '" + FollowUpDate + "', ");
             sql.Append("IsIssueResolved = " + (IsIssueResolved ? 1 : 0) + ", ");
             sql.Append("SatisfactionLevel = " + SatisfactionLevel + " ");
 
@@ -98,7 +98,7 @@ namespace PSS.Business_Logic
 
         public override bool Equals(object obj)
         {
-            return obj is FollowUp up &&
+            return obj is FollowUpReport up &&
                    FollowupReportID == up.FollowupReportID &&
                    Title == up.Title &&
                    Type == up.Type &&

@@ -78,7 +78,7 @@
     <Compile Include="Business_Logic\Call.cs" />
     <Compile Include="Business_Logic\Contract.cs" />
     <Compile Include="Business_Logic\Client.cs" />
-    <Compile Include="Business_Logic\FollowUp.cs" />
+    <Compile Include="Business_Logic\FollowUpReport.cs" />
     <Compile Include="Business_Logic\IndividualClient.cs" />
     <Compile Include="Business_Logic\Base Lists\MultiIDList.cs" />
     <Compile Include="Business_Logic\Person.cs" />

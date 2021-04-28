@@ -68,13 +68,15 @@ CREATE TABLE [Contract]
  OfferStartDate DATETIME NOT NULL,
  OfferEndDate DATETIME,
  ContractDurationInMonths INT NOT NULL CHECK(ContractDurationInMonths>0),
- MontlyFee MONEY NOT NULL
+ MonthlyFee MONEY NOT NULL
 )
 
 GO
 
 ALTER TABLE [Contract]
 ADD CONSTRAINT CK_OfferEndDateAfterStartDate CHECK(OfferEndDate>=OfferStartDate)
+
+GO
 
 CREATE TABLE ServiceLevelAgreement
 (ServiceID INT REFERENCES Service(ServiceID),
@@ -139,6 +141,7 @@ CREATE TABLE BusinessClient
  Type VARCHAR(30) NOT NULL,
  Status VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
+ PrimaryContactPersonID INT NOT NULL, --If you want to remove this you have to fix the code
  AddressID INT NOT NULL REFERENCES Address(AddressID)
 )
 
@@ -207,7 +210,7 @@ CREATE TABLE ServiceRequest
  ServiceRequestType VARCHAR(20) NOT NULL,
  ServiceRequestDescription VARCHAR(MAX) NOT NULL,
  DateReceived DATETIME NOT NULL,
- AddressID INT REFERENCES Address(AddressID)
+ --AddressID INT REFERENCES Address(AddressID)
 )
 
 GO
@@ -240,50 +243,50 @@ GO
 
 -- This trigger will automatically insert the customer location as the default location where the service should be performed
 --The Trigger will be moved to businessclientservicerequest and individualclient service request upon the next revision
-CREATE TRIGGER trDefaultAddressForTask
-ON ServiceRequest
-FOR INSERT
-AS
-BEGIN
-	DECLARE @serviceRequestID INT,@addressID INT
+--CREATE TRIGGER trDefaultAddressForTask
+--ON ServiceRequest
+--FOR INSERT
+--AS
+--BEGIN
+--	DECLARE @serviceRequestID INT,@addressID INT
                     
-    DECLARE cur CURSOR FAST_FORWARD READ_ONLY LOCAL FOR
-        SELECT ServiceRequestID, AddressID
-        FROM INSERTED
+--    DECLARE cur CURSOR FAST_FORWARD READ_ONLY LOCAL FOR
+--        SELECT ServiceRequestID, AddressID
+--        FROM INSERTED
                     
-    OPEN cur
+--    OPEN cur
                     
-    FETCH NEXT FROM cur INTO @serviceRequestID,@addressID
+--    FETCH NEXT FROM cur INTO @serviceRequestID,@addressID
                     
-    WHILE @@FETCH_STATUS = 0
-	BEGIN 
-		SELECT ISNULL(@addressID,
-			(SELECT bc.AddressID
-			FROM ServiceRequest sr 
-			JOIN BusinessClientServiceRequest bcsr
-			ON sr.ServiceRequestID = bcsr.ServiceRequestID
-			JOIN BusinessClient bc
-			ON bcsr.BusinessClientID = bc.BusinessClientID
-			UNION ALL
-			SELECT ic.AddressID
-			FROM ServiceRequest sr 
-			JOIN IndividualClientServiceRequest icsr
-			ON sr.ServiceRequestID = icsr.ServiceRequestID
-			JOIN IndividualClient ic
-			ON icsr.IndividualClientID = ic.IndividualClientID
-			WHERE sr.ServiceRequestID=@serviceRequestID)
-		)
+--    WHILE @@FETCH_STATUS = 0
+--	BEGIN 
+--		SELECT ISNULL(@addressID,
+--			(SELECT bc.AddressID
+--			FROM ServiceRequest sr 
+--			JOIN BusinessClientServiceRequest bcsr
+--			ON sr.ServiceRequestID = bcsr.ServiceRequestID
+--			JOIN BusinessClient bc
+--			ON bcsr.BusinessClientID = bc.BusinessClientID
+--			UNION ALL
+--			SELECT ic.AddressID
+--			FROM ServiceRequest sr 
+--			JOIN IndividualClientServiceRequest icsr
+--			ON sr.ServiceRequestID = icsr.ServiceRequestID
+--			JOIN IndividualClient ic
+--			ON icsr.IndividualClientID = ic.IndividualClientID
+--			WHERE sr.ServiceRequestID=@serviceRequestID)
+--		)
 		
-		UPDATE ServiceRequest 
-		SET AddressID = @addressID
-		WHERE ServiceRequestID = @serviceRequestID;
-        FETCH NEXT FROM cur INTO @serviceRequestID,@addressID                   
-    END
+--		UPDATE ServiceRequest 
+--		SET AddressID = @addressID
+--		WHERE ServiceRequestID = @serviceRequestID;
+--        FETCH NEXT FROM cur INTO @serviceRequestID,@addressID                   
+--    END
                     
-    CLOSE cur
-    DEALLOCATE cur
-	--IF SELECT AddressID FROM INSERTED
-END
+--    CLOSE cur
+--    DEALLOCATE cur
+--	--IF SELECT AddressID FROM INSERTED
+--END
 
 --SELECT bc.AddressID
 --FROM ServiceRequest sr 
@@ -361,7 +364,7 @@ INSERT INTO Service (ServiceID, ServiceName, [Type], ServiceDescription)
 		   (18,'PSS Medium Workstation','Workstation Computer','Model Custom 2301/AMD RYZEN 5 3600 (6 Cores, 12 Threads, 35MB Cache, Turbo 4.2GHz)/16GB RAM/512GB NVME SSD/1TB HDD/Quadro P400'),
 		   (19,'PSS High End Workstation','Workstation Computer','Model Custom 2531/AMD RYZEN 9 5950X (16 Cores, 32 Threads, 3.4GHz, 72MB Cache, Turbo 4.9GHz+)/32GB RAM/2TB NVME SSD/NVIDIA QUADRO P1000')
 		   
-INSERT INTO Contract (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MontlyFee)
+INSERT INTO Contract (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MonthlyFee)
 	VALUES (1, 'Printing Necessities', 'Peasant', '2021/04/01', NULL, 36, 400),
 		   (2, 'Basic Printing', 'Commoner', '2021/04/01', NULL, 36, 600),
 		   (3, 'Premium Printing','Noble','2021/04/01',NULL,36, 900),
@@ -530,11 +533,11 @@ INSERT INTO IndividualClient (IndividualClientID, Type, Status, Notes, AddressID
 	       (9, 'Discount Customer', 'Active', 'The Client has been with PSS for years and is always on the lookout for a bargain', 2),
 	       (15, 'Potential Customer', 'Inactive', 'A potential client from the 2020/08/13 conference meeting', 9)
 		  
-INSERT INTO BusinessClient (BusinessClientID, BusinessName, Type, Status, Notes, AddressID)--will add the primary contact person id after discussion
-	VALUES (2, 'Renner Accounting Services', 'Loyal Customer', 'Active', 'Renner Accounting Services has been a loyal customer since 2005', 3),
-		   (4, 'Wielfred Marketing Agency', 'Wandering Customer', 'Active', 'The Wielfred marketing agency has abruptly stopped and changed printer contracts in the past', 4),
-		   (6, 'Personal Growth Consultations', 'New Customer', 'Active', 'Personal Growth Consultations is a small 1 man business who approached PSS in 2021', 5),
-		   (8, 'Garsfontein High School', 'New Customer', 'Active', 'Garsfontein High School contacted PSS in 2021 and were reffered to by Personal Growth Consultations', 7)
+INSERT INTO BusinessClient (BusinessClientID, BusinessName, Type, Status, Notes, PrimaryContactPersonID, AddressID)
+	VALUES (2, 'Renner Accounting Services', 'Loyal Customer', 'Active', 'Renner Accounting Services has been a loyal customer since 2005', 17, 3),
+		   (4, 'Wielfred Marketing Agency', 'Wandering Customer', 'Active', 'The Wielfred marketing agency has abruptly stopped and changed printer contracts in the past', 13, 4),
+		   (6, 'Personal Growth Consultations', 'New Customer', 'Active', 'Personal Growth Consultations is a small 1 man business who approached PSS in 2021', 7, 5);
+		   --(8, 'Garsfontein High School', 'New Customer', 'Active', 'Garsfontein High School contacted PSS in 2021 and were reffered to by Personal Growth Consultations', 7) --Get a person that makes sense as the contact person
 
 INSERT INTO	BusinessClientPerson (BusinessClientID, PersonID, Role)
 	VALUES (2,3, 'Head of computer/IT department'),
@@ -553,8 +556,8 @@ INSERT INTO IndividualClientContract (IndividualClientContractID, ContractID, In
 INSERT INTO BusinessClientContract (BusinessClientContractID, ContractID, BusinessClientID, EffectiveDate)
 	VALUES (1,7, 2, '2020/04/02'),
 		   (2,13, 4, '2019/01/02'),
-		   (3,11, 6, '2021/01/13'),
-		   (4,14, 8, '2019/04/02');
+		   (3,11, 6, '2021/01/13');
+		   --(4,14, 8, '2019/04/02');
 GO
 
 INSERT INTO ServiceRequest (ServiceRequestID, ServiceRequestTitle, ServiceRequestType, ServiceRequestDescription, DateReceived)
@@ -581,7 +584,7 @@ INSERT INTO Task (TaskID, TaskTitle, TaskType, TaskDescription, TaskNotes, Servi
 		   (2, 'Fix wifi Issue on MSI Cubi N Model 8GL-074EU', 'Hard/Software Repair', 'Wifi/Bluetooth card may be faulty or misconfigured on a software or harware level', NULL, 2,'2021/04/17', DEFAULT),
 		   (3, 'Routine hardware maintenance 25x MSI Cubi N Model 8GL-074EU', 'Hardware Maintanence', 'Clean fat clients. Inspect and report health of CPU, RAM, HDD. Repaste CPU if idle temperatures above 55�C', NULL, 3, '2021/04/17', DEFAULT),
 		   (4, 'Routine software maintenance 25x MSI Cubi N Model 8GL-074EU', 'Software Maintanence', 'Run PSS registry cleaner, run PSS antivirus, ensure Windows and Office is activited', NULL, 3, '2021/04/17', DEFAULT),
-		   (5, 'Diagnose and repair 3x problematic MSI Cubi N Model 8GL-074EU', 'Hard/Software Repair', 'All 3 Fat clients are noisy, 2 suffer from random restarts. Possible Fan, HDD or device driver problem', 'If issue not resolved, schedule pickup repair', 4, '2021/04/17', DEFAULT)
+		   (5, 'Diagnose and repair 3x problematic MSI Cubi N Model 8GL-074EU', 'Hard/Software Repair', 'All 3 Fat clients are noisy, 2 suffer from random restarts. Possible Fan, HDD or device driver problem', 'If issue not resolved, schedule pickup repair', 4, '2021/04/17', DEFAULT);
 
 INSERT INTO TechnicianTask (TechnicianTaskID, TechnicianID, TaskID, TimeToArrive)
 	VALUES (1, 2, 1, '2021/04/06 14:00:00'),
@@ -595,7 +598,7 @@ INSERT INTO TechnicianTaskFeedback (TechnicianTaskFeedbackID, TimeArrived, TimeD
 		   (2, '2021/04/18 09:15:00', '2021/04/18 10:20:00', 'Successful', 'MSI Cubi N Model 8GL-074EU wifi/bluetooth m.2 card replaced (Intel AX201NGW WIFI6 Wireless Network Card M.2)', 2),
 		   (3, '2021/04/18 08:55:00', '2021/04/18 13:50:00', 'Successful', 'Routine hardware maintenance performed successfully as per task description', 3),
 		   (4, '2021/04/18 08:55:00', '2021/04/18 13:50:00', 'Successful', 'Routine software maintenance performed successfully as per task description', 4),
-		   (5, '2021/04/18 08:50:00', '2021/04/18 13:50:00', 'Incomplete', 'Detected a driver issue with pc 1 and managed to resolve this issue, however the other 2 pcs could not been fixed. These 2 computers display healthy HDDs, have clean/lubricated fans and do not display any device driver anomalies. I have therefore created a service request for a pick-up repair', 5)
+		   (5, '2021/04/18 08:50:00', '2021/04/18 13:50:00', 'Incomplete', 'Detected a driver issue with pc 1 and managed to resolve this issue, however the other 2 pcs could not been fixed. These 2 computers display healthy HDDs, have clean/lubricated fans and do not display any device driver anomalies. I have therefore created a service request for a pick-up repair', 5);
 
 INSERT INTO FollowUpReport (FollowUpReportID, FollowUpTitle, FollowUpType, FollowUpDescription, FollowUpDate, IsIssueResolved, SatisfactionLevel)
 	VALUES (1, 'HP printer model M130a Laserjet Imaging Drum cleaned', 'Post-Repair', 'Followup with client to ensure printer is still working properly', '2021/04/13 10:00:00', 1, 5),
@@ -606,8 +609,8 @@ INSERT INTO FollowUpReport (FollowUpReportID, FollowUpTitle, FollowUpType, Follo
 INSERT INTO BusinessClientFollowUp (BusinessClientID, FollowUpReportID)
 	VALUES (6, 1),
 		   (2, 2),
-		   (2, 3),
-		   (8, 4)
+		   (2, 3);
+		   --(8, 4);
 
 INSERT INTO CallInstance (CallInstanceID, StartTime, EndTime, Description)
 	VALUES (1, '2021/04/13 10:00:00', '2021/04/13 10:12:23', 'Duration 12:23 minutes'),

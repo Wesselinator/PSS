@@ -10,9 +10,9 @@ namespace PSS.Business_Logic
 {
     public class ClientFollowUp : MultiIntID
     {
-        private FollowUp fu;
+        private FollowUpReport fu;
         public int ClientID { get => IDs[0]; private set => IDs[0] = value; }
-        public FollowUp FollowUp
+        public FollowUpReport FollowUp
         {
             get => fu;
 
@@ -31,7 +31,7 @@ namespace PSS.Business_Logic
             ID1 = idColumn1;
         }
 
-        public ClientFollowUp(string tableName, string idColumn1, int clientID, FollowUp followUp) : this(tableName, idColumn1)
+        public ClientFollowUp(string tableName, string idColumn1, int clientID, FollowUpReport followUp) : this(tableName, idColumn1)
         {
             this.ClientID = clientID;
             this.FollowUp = followUp;
@@ -42,7 +42,7 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             this.ClientID = row.Field<int>(ID1);
-            this.FollowUp = DataEngine.GetDataObject<FollowUp>(row.Field<int>(idColumn2));
+            this.FollowUp = DataEngine.GetDataObject<FollowUpReport>(row.Field<int>(idColumn2));
         }
 
         public override void Save()
@@ -89,7 +89,7 @@ namespace PSS.Business_Logic
         private static readonly string tableName = "BusinessClientFollowUp";
         public BusinessClientFollowUp() : base(tableName, BusinessClient.idColumn)
         {  }
-        public BusinessClientFollowUp(int ID, FollowUp followUp) : base(tableName, BusinessClient.idColumn, ID, followUp)
+        public BusinessClientFollowUp(int ID, FollowUpReport followUp) : base(tableName, BusinessClient.idColumn, ID, followUp)
         { }
     }
 
@@ -98,7 +98,7 @@ namespace PSS.Business_Logic
         private static readonly string tableName = "IndividualClientFollowUp";
         public IndividualClientFollowUp() : base(tableName, IndividualClient.idColumn)
         {  }
-        public IndividualClientFollowUp(int ID, FollowUp followUp) : base(tableName, BusinessClient.idColumn, ID, followUp)
+        public IndividualClientFollowUp(int ID, FollowUpReport followUp) : base(tableName, BusinessClient.idColumn, ID, followUp)
         { }
     }
 }

@@ -40,12 +40,12 @@ namespace PSS.Business_Logic
         }
 
 
-        public static BaseList<FollowUp> GetFollowUps(this MultiIDList<BusinessClientFollowUp> BCFUs)
+        public static BaseList<FollowUpReport> GetFollowUps(this MultiIDList<BusinessClientFollowUp> BCFUs)
         {
             return BCFUs.Select(bcfu => bcfu.FollowUp).ToBaseList();
         }
 
-        public static BaseList<FollowUp> GetFollowUps(this MultiIDList<IndividualClientFollowUp> ICFUs)
+        public static BaseList<FollowUpReport> GetFollowUps(this MultiIDList<IndividualClientFollowUp> ICFUs)
         {
             return ICFUs.Select(icfu => icfu.FollowUp).ToBaseList();
         }

@@ -128,11 +128,11 @@ namespace PSS.Business_Logic
             BusinessClientContracts.Add(new BusinessClientContract(ID, contract, effectiveDate));
         }
 
-        public override BaseList<FollowUp> GetFolowups()
+        public override BaseList<FollowUpReport> GetFolowups()
         {
             return BusinessClientFollowUps.GetFollowUps();
         }
-        public override void AddFolowup(FollowUp followUp)
+        public override void AddFolowup(FollowUpReport followUp)
         {
             BusinessClientFollowUps.Add(new BusinessClientFollowUp(ID, followUp));
         }

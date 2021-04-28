@@ -64,7 +64,7 @@ namespace PSS.Business_Logic
             Status = row.Field<string>("Status");
             Notes = row.Field<string>("Notes");
             Address = DataEngine.GetDataObject<Address>(row.Field<int>("AddressID"));
-            Person = DataEngine.GetDataObject<Person>(row.Field<int>(personColumn));
+            Person = DataEngine.GetDataObject<Person>(row.Field<int>(personColumn)); //TODO: BUSINSESS CONTACT PERSON
 
             FillLists(ClientID);
         }
@@ -129,8 +129,8 @@ namespace PSS.Business_Logic
         public abstract BaseList<Contract> GetContracts();
         public abstract void AddContract(Contract contract, DateTime effectiveDate);
 
-        public abstract BaseList<FollowUp> GetFolowups();
-        public abstract void AddFolowup(FollowUp followUp);
+        public abstract BaseList<FollowUpReport> GetFolowups();
+        public abstract void AddFolowup(FollowUpReport followUp);
 
         #endregion
 
