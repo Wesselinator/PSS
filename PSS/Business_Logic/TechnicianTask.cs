@@ -11,9 +11,9 @@ namespace PSS.Business_Logic
     {
         public int TechnicianTaskID { get => ID; private set => ID = value; }
 
-        public Task Task { get; set; }
-
         public Technician Technician { get; set; }
+
+        public Task Task { get; set; }
 
         public DateTime TimeToArrive { get; set; }
 
@@ -27,16 +27,16 @@ namespace PSS.Business_Logic
         public TechnicianTask(int technicianTaskID, Task task, Technician technician, DateTime timeToArrive) : this()
         {
             this.TechnicianTaskID = technicianTaskID;
-            this.Task = task;
             this.Technician = technician;
+            this.Task = task;
             this.TimeToArrive = timeToArrive;
         }
 
         public TechnicianTask(Task task, Technician technician, DateTime timeToArrive) : this()
         {
             this.TechnicianTaskID = base.GetNextID();
-            this.Task = task;
             this.Technician = technician;
+            this.Task = task;
             this.TimeToArrive = timeToArrive;
         }
 
@@ -44,16 +44,16 @@ namespace PSS.Business_Logic
 
         public override void Save()
         {
-            Task.Save();
             Technician.Save();
+            Task.Save();
             base.Save();
         }
 
         public override void FillFromRow(DataRow row)
         {
             this.TechnicianTaskID = row.Field<int>(IDColumn);
-            this.Task = DataEngine.GetDataObject<Task>(row.Field<int>("TaskID"));
             this.Technician = DataEngine.GetDataObject<Technician>(row.Field<int>("TechnicianID"));
+            this.Task = DataEngine.GetDataObject<Task>(row.Field<int>("TaskID"));
             this.TimeToArrive = row.Field<DateTime>("TimeToArrive");
         }
 
@@ -63,7 +63,7 @@ namespace PSS.Business_Logic
             sql.AppendLine("UPDATE " + TableName);
             sql.Append("SET ");
 
-            sql.Append("TechnicianID = " + TechnicianTaskID + ", ");
+            sql.Append("TechnicianID = " + Technician.TechnicianID + ", ");
             sql.Append("TaskID = " + Task.TaskID + ", ");
             sql.Append("TimeToArrive = '" + TimeToArrive.ToString("s") + "'");
 
@@ -79,8 +79,8 @@ namespace PSS.Business_Logic
             sql.Append("VALUES (");
 
             sql.Append(TechnicianTaskID.ToString() + ", ");
-            sql.Append(Task.TaskID + ", ");
             sql.Append(Technician.TechnicianID + ", ");
+            sql.Append(Task.TaskID + ", ");
             sql.Append("'" + TimeToArrive.ToString("s") + "'");
 
             sql.AppendLine(");");
@@ -99,8 +99,8 @@ namespace PSS.Business_Logic
         {
             return obj is TechnicianTask task &&
                    TechnicianTaskID == task.TechnicianTaskID &&
-                   EqualityComparer<Task>.Default.Equals(Task, task.Task) &&
-                   EqualityComparer<Technician>.Default.Equals(Technician, task.Technician) &&
+                   Task.Equals(task.Task) &&
+                   Technician.Equals(task.Technician) &&
                    TimeToArrive == task.TimeToArrive;
         }
 

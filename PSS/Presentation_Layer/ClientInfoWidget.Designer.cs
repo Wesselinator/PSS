@@ -44,6 +44,7 @@ namespace PSS.Presentation_Layer
             this.lblBuildingIcon = new System.Windows.Forms.Label();
             this.lblPostIcon = new System.Windows.Forms.Label();
             this.lblAdress2 = new System.Windows.Forms.Label();
+            this.lblBusinessIdentifier = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -151,7 +152,7 @@ namespace PSS.Presentation_Layer
             // 
             // lblCalenderIcon
             // 
-            this.lblCalenderIcon.Location = new System.Drawing.Point(96, 93);
+            this.lblCalenderIcon.Location = new System.Drawing.Point(96, 99);
             this.lblCalenderIcon.Name = "lblCalenderIcon";
             this.lblCalenderIcon.Size = new System.Drawing.Size(19, 14);
             this.lblCalenderIcon.TabIndex = 10;
@@ -161,7 +162,7 @@ namespace PSS.Presentation_Layer
             // lblBirthDate
             // 
             this.lblBirthDate.AutoSize = true;
-            this.lblBirthDate.Location = new System.Drawing.Point(113, 94);
+            this.lblBirthDate.Location = new System.Drawing.Point(113, 100);
             this.lblBirthDate.Name = "lblBirthDate";
             this.lblBirthDate.Size = new System.Drawing.Size(40, 13);
             this.lblBirthDate.TabIndex = 11;
@@ -198,12 +199,23 @@ namespace PSS.Presentation_Layer
             this.lblAdress2.TabIndex = 14;
             this.lblAdress2.Text = "City Ville, Best Country";
             // 
+            // lblBusinessIdentifier
+            // 
+            this.lblBusinessIdentifier.AutoSize = true;
+            this.lblBusinessIdentifier.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBusinessIdentifier.Location = new System.Drawing.Point(96, 79);
+            this.lblBusinessIdentifier.Name = "lblBusinessIdentifier";
+            this.lblBusinessIdentifier.Size = new System.Drawing.Size(29, 17);
+            this.lblBusinessIdentifier.TabIndex = 15;
+            this.lblBusinessIdentifier.Text = "BID";
+            // 
             // ClientInfoWidgit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Controls.Add(this.lblBusinessIdentifier);
             this.Controls.Add(this.lblAdress2);
             this.Controls.Add(this.lblPostIcon);
             this.Controls.Add(this.lblBuildingIcon);
@@ -243,5 +255,6 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Label lblBuildingIcon;
         private System.Windows.Forms.Label lblPostIcon;
         private System.Windows.Forms.Label lblAdress2;
+        private System.Windows.Forms.Label lblBusinessIdentifier;
     }
 }

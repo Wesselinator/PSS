@@ -1,4 +1,4 @@
-USE master
+ï»¿USE master
 GO
 --DROP TABLE IF EXISTS PremierServiceSolutionsDB.ContactInformation
 --DROP TABLE IF EXISTS PremierServiceSolutionsDB.ServiceLevelAgreement
@@ -579,7 +579,7 @@ INSERT INTO IndividualClientServiceRequest (IndividualClientID, ServiceRequestID
 INSERT INTO Task (TaskID, TaskTitle, TaskType, TaskDescription, TaskNotes, ServiceRequestID, DateProcessed, IsFinished)
 	VALUES (1, 'Repair hardware issue on HP printer model M130a', 'Hardware Repair', 'Printer error code 50 reports a hardware problem. Attempt or fix, if not repairible on the customer site, schedule pickup repair', 'Enter customer site from back door', 1, '2021/04/05', DEFAULT),
 		   (2, 'Fix wifi Issue on MSI Cubi N Model 8GL-074EU', 'Hard/Software Repair', 'Wifi/Bluetooth card may be faulty or misconfigured on a software or harware level', NULL, 2,'2021/04/17', DEFAULT),
-		   (3, 'Routine hardware maintenance 25x MSI Cubi N Model 8GL-074EU', 'Hardware Maintanence', 'Clean fat clients. Inspect and report health of CPU, RAM, HDD. Repaste CPU if idle temperatures above 55°C', NULL, 3, '2021/04/17', DEFAULT),
+		   (3, 'Routine hardware maintenance 25x MSI Cubi N Model 8GL-074EU', 'Hardware Maintanence', 'Clean fat clients. Inspect and report health of CPU, RAM, HDD. Repaste CPU if idle temperatures above 55ï¿½C', NULL, 3, '2021/04/17', DEFAULT),
 		   (4, 'Routine software maintenance 25x MSI Cubi N Model 8GL-074EU', 'Software Maintanence', 'Run PSS registry cleaner, run PSS antivirus, ensure Windows and Office is activited', NULL, 3, '2021/04/17', DEFAULT),
 		   (5, 'Diagnose and repair 3x problematic MSI Cubi N Model 8GL-074EU', 'Hard/Software Repair', 'All 3 Fat clients are noisy, 2 suffer from random restarts. Possible Fan, HDD or device driver problem', 'If issue not resolved, schedule pickup repair', 4, '2021/04/17', DEFAULT)
 

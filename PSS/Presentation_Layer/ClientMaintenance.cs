@@ -303,5 +303,32 @@ namespace PSS.Presentation_Layer
                     return;
             }
         }
+
+        private void btnCreateContract_Click(object sender, EventArgs e)
+        {
+            // TODO go to contract maintenance
+            ContractMaintenance cm = new ContractMaintenance();
+            Hide();
+            cm.ShowDialog();
+            Show();
+        }
+
+        private void rbtnIndvidual_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnIndvidual.Checked)
+            {
+                lblBusinessName.Hide();
+                txtBusinessName.Hide();
+            }
+        }
+
+        private void rbtnBusiness_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnBusiness.Checked)
+            {
+                lblBusinessName.Show();
+                txtBusinessName.Show();
+            }
+        }
     }
 }

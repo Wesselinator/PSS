@@ -32,6 +32,7 @@ namespace PSS.Presentation_Layer
             this.label1 = new System.Windows.Forms.Label();
             this.tcTask = new System.Windows.Forms.TabControl();
             this.tpCreate = new System.Windows.Forms.TabPage();
+            this.lblCurentClient = new System.Windows.Forms.Label();
             this.grbCreate = new System.Windows.Forms.GroupBox();
             this.rtbSALdetails = new System.Windows.Forms.RichTextBox();
             this.lsbxUnclaimedServiceRequests = new System.Windows.Forms.ListBox();
@@ -62,7 +63,6 @@ namespace PSS.Presentation_Layer
             this.lsbxAvailableTechnicians = new System.Windows.Forms.ListBox();
             this.grbxAvailableTechnicians = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lblCurentClient = new System.Windows.Forms.Label();
             this.tcTask.SuspendLayout();
             this.tpCreate.SuspendLayout();
             this.grbCreate.SuspendLayout();
@@ -86,7 +86,7 @@ namespace PSS.Presentation_Layer
             // 
             this.tcTask.Controls.Add(this.tpCreate);
             this.tcTask.Controls.Add(this.tpTrack);
-            this.tcTask.Location = new System.Drawing.Point(12, 12);
+            this.tcTask.Location = new System.Drawing.Point(12, 56);
             this.tcTask.Name = "tcTask";
             this.tcTask.SelectedIndex = 0;
             this.tcTask.Size = new System.Drawing.Size(570, 297);
@@ -105,6 +105,15 @@ namespace PSS.Presentation_Layer
             this.tpCreate.TabIndex = 0;
             this.tpCreate.Text = "Create Task";
             this.tpCreate.UseVisualStyleBackColor = true;
+            // 
+            // lblCurentClient
+            // 
+            this.lblCurentClient.AutoSize = true;
+            this.lblCurentClient.Location = new System.Drawing.Point(5, 47);
+            this.lblCurentClient.Name = "lblCurentClient";
+            this.lblCurentClient.Size = new System.Drawing.Size(70, 13);
+            this.lblCurentClient.TabIndex = 34;
+            this.lblCurentClient.Text = "Current Client";
             // 
             // grbCreate
             // 
@@ -358,7 +367,7 @@ namespace PSS.Presentation_Layer
             // 
             // btnReturn
             // 
-            this.btnReturn.Location = new System.Drawing.Point(400, 618);
+            this.btnReturn.Location = new System.Drawing.Point(396, 12);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(182, 38);
             this.btnReturn.TabIndex = 9;
@@ -380,7 +389,7 @@ namespace PSS.Presentation_Layer
             this.grbxAvailableTechnicians.Controls.Add(this.lsbxAvailableTechnicians);
             this.grbxAvailableTechnicians.Controls.Add(this.label4);
             this.grbxAvailableTechnicians.Controls.Add(this.rtbTechDetails);
-            this.grbxAvailableTechnicians.Location = new System.Drawing.Point(12, 315);
+            this.grbxAvailableTechnicians.Location = new System.Drawing.Point(12, 359);
             this.grbxAvailableTechnicians.Name = "grbxAvailableTechnicians";
             this.grbxAvailableTechnicians.Size = new System.Drawing.Size(324, 232);
             this.grbxAvailableTechnicians.TabIndex = 31;
@@ -397,27 +406,18 @@ namespace PSS.Presentation_Layer
             this.groupBox2.Controls.Add(this.lblNotes);
             this.groupBox2.Controls.Add(this.txtTaskDescription);
             this.groupBox2.Controls.Add(this.lblTaskTime);
-            this.groupBox2.Location = new System.Drawing.Point(342, 315);
+            this.groupBox2.Location = new System.Drawing.Point(342, 359);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(240, 232);
             this.groupBox2.TabIndex = 32;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Task";
             // 
-            // lblCurentClient
-            // 
-            this.lblCurentClient.AutoSize = true;
-            this.lblCurentClient.Location = new System.Drawing.Point(5, 47);
-            this.lblCurentClient.Name = "lblCurentClient";
-            this.lblCurentClient.Size = new System.Drawing.Size(70, 13);
-            this.lblCurentClient.TabIndex = 34;
-            this.lblCurentClient.Text = "Current Client";
-            // 
             // ServiceDepartment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(594, 668);
+            this.ClientSize = new System.Drawing.Size(594, 599);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.grbxAvailableTechnicians);
             this.Controls.Add(this.btnReturn);
