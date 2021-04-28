@@ -81,6 +81,7 @@ namespace PSS.Presentation_Layer
             this.lblDepartment = new System.Windows.Forms.Label();
             this.lblClientMaintenance = new System.Windows.Forms.Label();
             this.ciwMain = new PSS.Presentation_Layer.ClientInfoWidgit();
+            this.btnCreateContract = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -167,6 +168,7 @@ namespace PSS.Presentation_Layer
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnCreateContract);
             this.groupBox2.Controls.Add(this.btnModifyContract);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.cbxCurrentContracts);
@@ -181,7 +183,7 @@ namespace PSS.Presentation_Layer
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(353, 389);
+            this.groupBox2.Size = new System.Drawing.Size(415, 389);
             this.groupBox2.TabIndex = 45;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Contract and Service Level Agreement";
@@ -657,6 +659,17 @@ namespace PSS.Presentation_Layer
             this.ciwMain.Size = new System.Drawing.Size(247, 207);
             this.ciwMain.TabIndex = 49;
             // 
+            // btnCreateContract
+            // 
+            this.btnCreateContract.Location = new System.Drawing.Point(263, 34);
+            this.btnCreateContract.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCreateContract.Name = "btnCreateContract";
+            this.btnCreateContract.Size = new System.Drawing.Size(118, 33);
+            this.btnCreateContract.TabIndex = 38;
+            this.btnCreateContract.Text = "Create Contract";
+            this.btnCreateContract.UseVisualStyleBackColor = true;
+            this.btnCreateContract.Click += new System.EventHandler(this.btnCreateContract_Click);
+            // 
             // ClientMaintenance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -748,5 +761,6 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Label lblDepartment;
         private System.Windows.Forms.Label lblClientMaintenance;
         private ClientInfoWidgit ciwMain;
+        private System.Windows.Forms.Button btnCreateContract;
     }
 }
