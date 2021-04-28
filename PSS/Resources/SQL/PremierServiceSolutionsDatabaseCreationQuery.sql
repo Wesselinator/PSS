@@ -577,7 +577,7 @@ INSERT INTO IndividualClientServiceRequest (IndividualClientID, ServiceRequestID
 
 GO
 
-INSERT INTO Task (TaskID, TaskTitle, TaskType, TaskDescription, TaskNotes, ServiceRequestID, AddressID, DateProcessed, IsFinished)
-	VALUES (1, 'Fix hardware issue on HP printer model 775', 'Hardware Related', 'Printer error code reports a hardware problem. Attempt or fix, if not repairible on the customer site, schedule pickup repair', '', 1, 1, GETDATE(), DEFAULT);
+INSERT INTO Task (TaskID, TaskTitle, TaskType, TaskDescription, TaskNotes, ServiceRequestID, DateProcessed, IsFinished)
+	VALUES (1, 'Fix hardware issue on HP printer model 775', 'Hardware Related', 'Printer error code reports a hardware problem. Attempt or fix, if not repairible on the customer site, schedule pickup repair', '', 1, GETDATE(), 0);
 
 GO
