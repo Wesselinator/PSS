@@ -80,6 +80,7 @@ namespace PSS.Presentation_Layer
             this.btnBack = new System.Windows.Forms.Button();
             this.lblDepartment = new System.Windows.Forms.Label();
             this.lblClientMaintenance = new System.Windows.Forms.Label();
+            this.btnCreateContract = new System.Windows.Forms.Button();
             this.ciwMain = new PSS.Presentation_Layer.ClientInfoWidgit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -95,6 +96,7 @@ namespace PSS.Presentation_Layer
             this.txtBusinessName.Name = "txtBusinessName";
             this.txtBusinessName.Size = new System.Drawing.Size(151, 20);
             this.txtBusinessName.TabIndex = 48;
+            this.txtBusinessName.Visible = false;
             // 
             // lblBusinessName
             // 
@@ -105,6 +107,7 @@ namespace PSS.Presentation_Layer
             this.lblBusinessName.Size = new System.Drawing.Size(78, 13);
             this.lblBusinessName.TabIndex = 47;
             this.lblBusinessName.Text = "Business name";
+            this.lblBusinessName.Visible = false;
             // 
             // groupBox3
             // 
@@ -167,6 +170,7 @@ namespace PSS.Presentation_Layer
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnCreateContract);
             this.groupBox2.Controls.Add(this.btnModifyContract);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.cbxCurrentContracts);
@@ -181,7 +185,7 @@ namespace PSS.Presentation_Layer
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(353, 389);
+            this.groupBox2.Size = new System.Drawing.Size(415, 389);
             this.groupBox2.TabIndex = 45;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Contract and Service Level Agreement";
@@ -549,6 +553,7 @@ namespace PSS.Presentation_Layer
             this.rbtnBusiness.TabStop = true;
             this.rbtnBusiness.Text = "Business";
             this.rbtnBusiness.UseVisualStyleBackColor = true;
+            this.rbtnBusiness.CheckedChanged += new System.EventHandler(this.rbtnBusiness_CheckedChanged);
             // 
             // rbtnIndvidual
             // 
@@ -561,6 +566,7 @@ namespace PSS.Presentation_Layer
             this.rbtnIndvidual.TabStop = true;
             this.rbtnIndvidual.Text = "Individual";
             this.rbtnIndvidual.UseVisualStyleBackColor = true;
+            this.rbtnIndvidual.CheckedChanged += new System.EventHandler(this.rbtnIndvidual_CheckedChanged);
             // 
             // label4
             // 
@@ -606,10 +612,10 @@ namespace PSS.Presentation_Layer
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(713, 450);
+            this.btnConfirm.Location = new System.Drawing.Point(696, 450);
             this.btnConfirm.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(118, 33);
+            this.btnConfirm.Size = new System.Drawing.Size(135, 33);
             this.btnConfirm.TabIndex = 37;
             this.btnConfirm.Text = "Confirm Form";
             this.btnConfirm.UseVisualStyleBackColor = true;
@@ -617,12 +623,12 @@ namespace PSS.Presentation_Layer
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(713, 514);
+            this.btnBack.Location = new System.Drawing.Point(696, 514);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(118, 33);
+            this.btnBack.Size = new System.Drawing.Size(135, 33);
             this.btnBack.TabIndex = 36;
-            this.btnBack.Text = "Back";
+            this.btnBack.Text = "Return To Call Centre";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
@@ -646,6 +652,17 @@ namespace PSS.Presentation_Layer
             this.lblClientMaintenance.Size = new System.Drawing.Size(189, 24);
             this.lblClientMaintenance.TabIndex = 34;
             this.lblClientMaintenance.Text = "Client Maintenance";
+            // 
+            // btnCreateContract
+            // 
+            this.btnCreateContract.Location = new System.Drawing.Point(263, 34);
+            this.btnCreateContract.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCreateContract.Name = "btnCreateContract";
+            this.btnCreateContract.Size = new System.Drawing.Size(118, 33);
+            this.btnCreateContract.TabIndex = 38;
+            this.btnCreateContract.Text = "Create Contract";
+            this.btnCreateContract.UseVisualStyleBackColor = true;
+            this.btnCreateContract.Click += new System.EventHandler(this.btnCreateContract_Click);
             // 
             // ciwMain
             // 
@@ -748,5 +765,6 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Label lblDepartment;
         private System.Windows.Forms.Label lblClientMaintenance;
         private ClientInfoWidgit ciwMain;
+        private System.Windows.Forms.Button btnCreateContract;
     }
 }
