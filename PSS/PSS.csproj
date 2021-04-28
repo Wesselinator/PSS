@@ -131,6 +131,7 @@
     <Compile Include="Presentation_Layer\ServiceDepartment.Designer.cs">
       <DependentUpon>ServiceDepartment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentation_Layer\Suppress.cs" />
     <Compile Include="Presentation_Layer\Technician.cs">
       <SubType>Form</SubType>
     </Compile>

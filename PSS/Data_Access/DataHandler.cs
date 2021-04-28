@@ -15,9 +15,9 @@ namespace PSS.Data_Access
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
-                conn.Open();
                 try
                 {
+                    conn.Open();
                     SqlDataAdapter adapter = new SqlDataAdapter(Query, conn); 
                     adapter.Fill(data);
                 }
@@ -35,10 +35,10 @@ namespace PSS.Data_Access
         {
             using(SqlConnection conn = new SqlConnection(connStr))
             {
-                conn.Open();
                 SqlCommand command = new SqlCommand(Query, conn);
                 try
                 {
+                    conn.Open();
                     command.ExecuteNonQuery();
                 }
                 catch (Exception e)

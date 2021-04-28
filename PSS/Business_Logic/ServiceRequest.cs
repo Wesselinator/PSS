@@ -4,7 +4,6 @@ using System.Text;
 using System.Data;
 using PSS.Data_Access;
 
-//CHECK
 namespace PSS.Business_Logic
 {
     public class ServiceRequest : SingleIntID
@@ -13,6 +12,9 @@ namespace PSS.Business_Logic
         public string Title { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
+        public DateTime DateReceived { get; set; }
+
+        public string DisplayMember => Title;
 
         private static readonly string tableName = "ServiceRequest";
         private static readonly string idColumn = "ServiceRequestID";
@@ -20,20 +22,22 @@ namespace PSS.Business_Logic
         public ServiceRequest() : base(tableName, idColumn)
         { }
 
-        public ServiceRequest(int serviceRequestID, string title, string type, string description, Client client) : this()
+        public ServiceRequest(int serviceRequestID, string title, string type, string description, DateTime dateReceived) : this()
         {
             this.ServiceRequestID = serviceRequestID;
             this.Title = title;
             this.Type = type;
             this.Description = description;
+            this.DateReceived = dateReceived;
         }
 
-        public ServiceRequest(string title, string type, string description, Client client) : this()
+        public ServiceRequest(string title, string type, string description, DateTime dateReceived) : this()
         {
             this.ServiceRequestID = base.GetNextID();
             this.Title = title;
             this.Type = type;
             this.Description = description;
+            this.DateReceived = dateReceived;
         }
 
         #region Database
@@ -44,6 +48,7 @@ namespace PSS.Business_Logic
             this.Title = row.Field<string>("ServiceRequestTitle");
             this.Type = row.Field<string>("ServiceRequestType");
             this.Description = row.Field<string>("ServiceRequestDescription");
+            this.DateReceived = row.Field<DateTime>("DateReceived");
         }
 
         public override void Save()
@@ -59,7 +64,8 @@ namespace PSS.Business_Logic
 
             sql.Append("ServiceRequestTitle = '" + Title + "',");
             sql.Append("ServiceRequestType = '" + Type + "',");
-            sql.AppendLine("ServiceRequestDescription = '" + Description + "'");
+            sql.AppendLine("ServiceRequestDescription = '" + Description + "', ");
+            sql.AppendLine("DateReceived = '" + DateReceived.ToString("s") + "'");
 
             sql.AppendLine("WHERE " + IDColumn + " = " + ServiceRequestID);
 
@@ -76,6 +82,7 @@ namespace PSS.Business_Logic
             sql.Append("'" + Title + "', ");
             sql.Append("'" + Type + "', ");
             sql.Append("'" + Description + "', ");
+            sql.Append("'" + DateReceived.ToString("s") + "'");
 
             sql.AppendLine(");");
 

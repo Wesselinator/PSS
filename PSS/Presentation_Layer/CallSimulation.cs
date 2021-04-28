@@ -53,7 +53,7 @@ namespace PSS.Presentation_Layer
 
         private void LoadDropDown()
         {
-            cbClientDropDown.DisplayMember = "CBXString";
+            cbClientDropDown.DisplayMember = "DisplayMember";
 
             cbClientDropDown.Items.AddRange(Client.GetAllClients().ToArray());
         }
@@ -128,9 +128,7 @@ namespace PSS.Presentation_Layer
 
         private void btnFollowUp_Click(object sender, EventArgs e)
         {
-            ServiceDepartment serviceDepartmentForm = new ServiceDepartment();
-            serviceDepartmentForm.Show();
-
+            throw new NotImplementedException("We still have to make that form!");
         }
     }
 }

@@ -15,9 +15,10 @@ namespace PSS.Business_Logic
         public string Type { get; set; }
         public string Status { get; set; }
         public string Notes { get; set; }
-        public string CBXString { get => Person.CellphoneNumber + " | " + Person.FirstName; }
         public Address Address { get; set; }
         public Person Person { get; set; }
+
+        public string DisplayMember { get => Person.CellphoneNumber + " | " + Person.FirstName; }
 
 
         #region Business Identifier

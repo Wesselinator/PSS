@@ -10,8 +10,9 @@ namespace PSS.Business_Logic
     {
         public int TechnicianID { get => Person.PersonID; private set { ID = value; } }
         public string Specialty { get; set; }
-        public string PayRate { get; set; }
+        public decimal PayRate { get; set; }
         public Person Person { get; set; }
+        public string DisplayMember => Person.FullName;
 
         private static readonly string tableName = "Technician";
         private static readonly string idColumn = "TechnicianID";
@@ -19,7 +20,7 @@ namespace PSS.Business_Logic
         public Technician() : base(tableName, idColumn) 
         { }
 
-        public Technician(string specialty, string payRate, Person person) : this()
+        public Technician(string specialty, decimal payRate, Person person) : this()
         {
             TechnicianID = person.PersonID;
             Specialty = specialty;
@@ -27,7 +28,7 @@ namespace PSS.Business_Logic
             Person = person;
         }
 
-        public Technician(string specialty, string payRate) : this()
+        public Technician(string specialty, decimal payRate) : this()
         {
             int nextID = GetNextID(); //TODO: This is wrong, get from Person
             TechnicianID = nextID;
@@ -42,7 +43,7 @@ namespace PSS.Business_Logic
         {
             this.TechnicianID = row.Field<int>(idColumn);
             this.Specialty = row.Field<string>("Speciality");
-            this.PayRate = row.Field<string>("PayRate");
+            this.PayRate = row.Field<decimal>("PayRate");
             this.Person = DataEngine.GetDataObject<Person>(row.Field<int>(idColumn));
         }
 
@@ -53,7 +54,7 @@ namespace PSS.Business_Logic
             sql.Append("SET ");
 
             sql.Append("Speciality = '" + Specialty + "', ");
-            sql.Append("PayRate = '" + PayRate + "'");
+            sql.Append("PayRate = " + PayRate.ToString("0.00"));
 
             sql.Append("WHERE " + idColumn + " = " + TechnicianID);
 
@@ -68,7 +69,7 @@ namespace PSS.Business_Logic
 
             sql.Append(TechnicianID + ", ");
             sql.Append("'" + Specialty + "', ");
-            sql.Append("'" + PayRate + "' ");
+            sql.Append(PayRate.ToString("0.00"));
 
             sql.Append(");");
 
@@ -83,15 +84,15 @@ namespace PSS.Business_Logic
                    TechnicianID == technician.TechnicianID &&
                    Specialty == technician.Specialty &&
                    PayRate == technician.PayRate &&
-                   Person.Equals(technician);
+                   Person.Equals(technician.Person);
         }
 
         public override int GetHashCode()
         {
             int hashCode = 226706189;
             hashCode = hashCode * -1521134295 + TechnicianID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Specialty);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(PayRate);
+            hashCode = hashCode * -1521134295 + Specialty.GetHashCode();
+            hashCode = hashCode * -1521134295 + PayRate.GetHashCode();
             return hashCode;
         }
 

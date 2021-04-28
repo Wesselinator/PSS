@@ -21,13 +21,32 @@ namespace PSS.Business_Logic
         public void FillAll()
         {
             DataTable dt = DataInstance.GetAll();
+            FillWith(dt);
+            //return this;
+        }
 
-            foreach (DataRow row in dt.Rows)
+        public void FillWith(DataTable dataTable)
+        {
+            foreach (DataRow row in dataTable.Rows)
             {
                 T newT = new T();
                 newT.FillFromRow(row);
                 this.Add(newT);
             }
+        }
+
+        public static BaseList<T> GrabAll() //Quality of life
+        {
+            BaseList<T> ret = new BaseList<T>();
+            ret.FillAll();
+            return ret;
+        }
+
+        public static BaseList<T> GrabFill(DataTable dataTable) //Quality of life
+        {
+            BaseList<T> ret = new BaseList<T>();
+            ret.FillWith(dataTable);
+            return ret;
         }
     }
 }

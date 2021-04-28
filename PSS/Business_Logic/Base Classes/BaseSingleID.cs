@@ -27,11 +27,6 @@ namespace PSS.Business_Logic
             return dt.Rows[0];
         }
 
-        public override DataTable GetAll()
-        {
-            return GetAllWhere(ID);
-        }
-
         private DataTable GetAllWhere(T ID)
         {
             string sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}", TableName, IDColumn, ID);
@@ -40,7 +35,7 @@ namespace PSS.Business_Logic
 
         protected override sealed bool IDExists()
         {
-            return GetAll().Rows.Count != 0;
+            return GetAllWhere(ID).Rows.Count != 0;
         }
 
         public void FillWithID(T ID)

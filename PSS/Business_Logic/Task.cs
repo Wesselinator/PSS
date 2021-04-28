@@ -3,7 +3,7 @@ using System.Text;
 using PSS.Data_Access;
 using System.Data;
 
-//CHECK
+//TODO: Add Type
 namespace PSS.Business_Logic
 {
     public class Task : SingleIntID
@@ -49,9 +49,9 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             this.TaskID = row.Field<int>(IDColumn);
-            this.Title = row.Field<string>("Title");
-            this.Descripion = row.Field<string>("Descripion");
-            this.Notes = row.Field<string>("Notes");
+            this.Title = row.Field<string>("TaskTitle");
+            this.Descripion = row.Field<string>("TaskDescription");
+            this.Notes = row.Field<string>("TaskNotes");
             this.ServiceRequest = DataEngine.GetDataObject<ServiceRequest>(row.Field<int>("ServiceRequestID"));
             this.DateProcessed = row.Field<DateTime>("DateProcessed");
             this.IsFinished = row.Field<bool>("IsFinished");
@@ -100,6 +100,13 @@ namespace PSS.Business_Logic
             return sql.ToString();
         }
 
+        public static BaseList<Task> GetAllUnFinishedTasks()
+        {
+            string sql = "SELECT * FROM " + tableName + " WHERE IsFinished = 0";
+            DataTable dt = DataHandler.GetDataTable(sql);
+            return BaseList<Task>.GrabFill(dt);
+        }
+
         #endregion
 
         public override string ToString()
@@ -107,8 +114,8 @@ namespace PSS.Business_Logic
             return string.Format("TaskID: {0} | Title: {1} | Descripion: {2} | Notes: {3} |  ServiceRequest: [{4}] | DateProcessed: {5} | IsFinished: {6}", TaskID, Title, Descripion, Notes, ServiceRequest, DateProcessed, IsFinished);
         }
 
-        //TODO: wtf?
-        public static string GetProgressRapport(string ticketNo)
+        
+        public static string GetProgressRapport(string ticketNo) //TODO: wtf?
         {
             return DataEngine.GetProgressRapport(ticketNo);
         }

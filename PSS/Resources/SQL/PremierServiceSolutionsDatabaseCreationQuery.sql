@@ -1,23 +1,27 @@
 USE master
 GO
+--DROP TABLE IF EXISTS PremierServiceSolutionsDB.ContactInformation
+--DROP TABLE IF EXISTS PremierServiceSolutionsDB.ServiceLevelAgreement
+DROP TABLE IF EXISTS PremierServiceSolutionsDB.CallChangeAssociation
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.CallInstance
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.TechnicianTaskFeedback
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.TechnicianTask
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.Technician
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.Task
+DROP TABLE IF EXISTS PremierServiceSolutionsDB.BusinessClientServiceRequest
+DROP TABLE IF EXISTS PremierServiceSolutionsDB.IndividualClientServiceRequest
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.ServiceRequest
-DROP TABLE IF EXISTS PremierServiceSolutionsDB.FollowUpCall
+DROP TABLE IF EXISTS PremierServiceSolutionsDB.BusinessClientFollowUp
+DROP TABLE IF EXISTS PremierServiceSolutionsDB.IndividualClientFollowUp
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.FollowUpReport
-DROP TABLE IF EXISTS PremierServiceSolutionsDB.ClientEntityContract
+DROP TABLE IF EXISTS PremierServiceSolutionsDB.IndividualClientContract
+DROP TABLE IF EXISTS PremierServiceSolutionsDB.BusinessClientContract
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.BusinessClientPerson
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.BusinessClient
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.IndividualClient
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.[User]
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.Person
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.[Address]
-DROP TABLE IF EXISTS PremierServiceSolutionsDB.ContactInformation
-DROP TABLE IF EXISTS PremierServiceSolutionsDB.ServiceLevelAgreement
-DROP TABLE IF EXISTS PremierServiceSolutionsDB.CallChangeAssociation
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.ServiceLevelAgreement
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.[Contract]
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.[Service]
@@ -50,14 +54,14 @@ GO
 USE PremierServiceSolutionsDB
 GO
 
-CREATE TABLE Service
+CREATE TABLE [Service]
 (ServiceID INT PRIMARY KEY,
  ServiceName VARCHAR(30) NOT NULL,
  [Type] VARCHAR(30) NOT NULL,
  ServiceDescription VARCHAR(MAX) NOT NULL
 )
 
-CREATE TABLE Contract
+CREATE TABLE [Contract]
 (ContractID INT PRIMARY KEY,
  ContractName VARCHAR(45) NOT NULL,
  ServiceLevel VARCHAR(15) NOT NULL,
@@ -69,7 +73,7 @@ CREATE TABLE Contract
 
 GO
 
-ALTER TABLE Contract
+ALTER TABLE [Contract]
 ADD CONSTRAINT CK_OfferEndDateAfterStartDate CHECK(OfferEndDate>=OfferStartDate)
 
 CREATE TABLE ServiceLevelAgreement
@@ -122,7 +126,7 @@ CREATE TABLE [User]
 )
 
 CREATE TABLE IndividualClient
-(IndividualClientID INT REFERENCES Person(PersonID) PRIMARY KEY,
+(IndividualClientID INT PRIMARY KEY,
  Type VARCHAR(30) NOT NULL,
  Status VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),

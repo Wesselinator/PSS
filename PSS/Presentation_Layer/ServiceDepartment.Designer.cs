@@ -29,447 +29,336 @@ namespace PSS.Presentation_Layer
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstvServiceRequests = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
-            this.lstvAvailableTechs = new System.Windows.Forms.ListView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.txtNewTitle = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.dtpNewJobDate = new System.Windows.Forms.DateTimePicker();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtNewDescription = new System.Windows.Forms.TextBox();
-            this.rtbNewNotes = new System.Windows.Forms.RichTextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnCreateJob = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.rtbTechDetails = new System.Windows.Forms.RichTextBox();
+            this.tcTask = new System.Windows.Forms.TabControl();
+            this.tpCreate = new System.Windows.Forms.TabPage();
+            this.grbCreate = new System.Windows.Forms.GroupBox();
             this.rtbSALdetails = new System.Windows.Forms.RichTextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnReAssignJob = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lsbxUnclaimedServiceRequests = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnCreateJob = new System.Windows.Forms.Button();
+            this.lblClient = new System.Windows.Forms.Label();
+            this.cbxClient = new System.Windows.Forms.ComboBox();
+            this.tpTrack = new System.Windows.Forms.TabPage();
+            this.lsbxActiveTasks = new System.Windows.Forms.ListBox();
+            this.grbModify = new System.Windows.Forms.GroupBox();
+            this.gpbxAssignedTechnician = new System.Windows.Forms.GroupBox();
             this.btnReAssignTech = new System.Windows.Forms.Button();
             this.txtCurrentTech = new System.Windows.Forms.TextBox();
             this.lblCurrentTech = new System.Windows.Forms.Label();
-            this.lstvChangeTech = new System.Windows.Forms.ListView();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.rtbNewTechDetails = new System.Windows.Forms.RichTextBox();
-            this.dtpChangeJobDate = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtChangeDesc = new System.Windows.Forms.TextBox();
-            this.rtbChangeNotes = new System.Windows.Forms.RichTextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.lstvChangeTitle = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lstvJobs = new System.Windows.Forms.ListView();
+            this.btnReAssignTask = new System.Windows.Forms.Button();
+            this.lblTasks = new System.Windows.Forms.Label();
+            this.txtTaskTitle = new System.Windows.Forms.TextBox();
+            this.lblTaskTitle = new System.Windows.Forms.Label();
+            this.dtpTaskDate = new System.Windows.Forms.DateTimePicker();
+            this.lblTaskTime = new System.Windows.Forms.Label();
+            this.lblDescription = new System.Windows.Forms.Label();
+            this.txtTaskDescription = new System.Windows.Forms.TextBox();
+            this.rtbNotes = new System.Windows.Forms.RichTextBox();
+            this.lblNotes = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.rtbTechDetails = new System.Windows.Forms.RichTextBox();
             this.btnReturn = new System.Windows.Forms.Button();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.lsbxAvailableTechnicians = new System.Windows.Forms.ListBox();
+            this.grbxAvailableTechnicians = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblCurentClient = new System.Windows.Forms.Label();
+            this.tcTask.SuspendLayout();
+            this.tpCreate.SuspendLayout();
+            this.grbCreate.SuspendLayout();
+            this.tpTrack.SuspendLayout();
+            this.grbModify.SuspendLayout();
+            this.gpbxAssignedTechnician.SuspendLayout();
+            this.grbxAvailableTechnicians.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lstvServiceRequests
-            // 
-            this.lstvServiceRequests.HideSelection = false;
-            this.lstvServiceRequests.Location = new System.Drawing.Point(22, 54);
-            this.lstvServiceRequests.Name = "lstvServiceRequests";
-            this.lstvServiceRequests.Size = new System.Drawing.Size(290, 109);
-            this.lstvServiceRequests.TabIndex = 0;
-            this.lstvServiceRequests.UseCompatibleStateImageBehavior = false;
-            this.lstvServiceRequests.View = System.Windows.Forms.View.List;
-            this.lstvServiceRequests.SelectedIndexChanged += new System.EventHandler(this.lstvServiceRequests_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 26);
+            this.label1.Location = new System.Drawing.Point(6, 26);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 13);
+            this.label1.Size = new System.Drawing.Size(144, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Active Service Requests";
+            this.label1.Text = "Unclaimed Service Requests";
             // 
-            // lstvAvailableTechs
+            // tcTask
             // 
-            this.lstvAvailableTechs.HideSelection = false;
-            this.lstvAvailableTechs.Location = new System.Drawing.Point(22, 204);
-            this.lstvAvailableTechs.Name = "lstvAvailableTechs";
-            this.lstvAvailableTechs.Size = new System.Drawing.Size(290, 93);
-            this.lstvAvailableTechs.TabIndex = 2;
-            this.lstvAvailableTechs.UseCompatibleStateImageBehavior = false;
-            this.lstvAvailableTechs.View = System.Windows.Forms.View.List;
-            this.lstvAvailableTechs.SelectedIndexChanged += new System.EventHandler(this.lstvAvailableTechs_SelectedIndexChanged);
+            this.tcTask.Controls.Add(this.tpCreate);
+            this.tcTask.Controls.Add(this.tpTrack);
+            this.tcTask.Location = new System.Drawing.Point(12, 12);
+            this.tcTask.Name = "tcTask";
+            this.tcTask.SelectedIndex = 0;
+            this.tcTask.Size = new System.Drawing.Size(570, 297);
+            this.tcTask.TabIndex = 3;
             // 
-            // label2
+            // tpCreate
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 179);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Available Technicians";
+            this.tpCreate.Controls.Add(this.lblCurentClient);
+            this.tpCreate.Controls.Add(this.grbCreate);
+            this.tpCreate.Controls.Add(this.lblClient);
+            this.tpCreate.Controls.Add(this.cbxClient);
+            this.tpCreate.Location = new System.Drawing.Point(4, 22);
+            this.tpCreate.Name = "tpCreate";
+            this.tpCreate.Padding = new System.Windows.Forms.Padding(3);
+            this.tpCreate.Size = new System.Drawing.Size(562, 271);
+            this.tpCreate.TabIndex = 0;
+            this.tpCreate.Text = "Create Task";
+            this.tpCreate.UseVisualStyleBackColor = true;
             // 
-            // tabControl1
+            // grbCreate
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(914, 530);
-            this.tabControl1.TabIndex = 3;
+            this.grbCreate.Controls.Add(this.label1);
+            this.grbCreate.Controls.Add(this.rtbSALdetails);
+            this.grbCreate.Controls.Add(this.lsbxUnclaimedServiceRequests);
+            this.grbCreate.Controls.Add(this.label3);
+            this.grbCreate.Controls.Add(this.btnCreateJob);
+            this.grbCreate.Location = new System.Drawing.Point(6, 72);
+            this.grbCreate.Name = "grbCreate";
+            this.grbCreate.Size = new System.Drawing.Size(550, 193);
+            this.grbCreate.TabIndex = 33;
+            this.grbCreate.TabStop = false;
+            this.grbCreate.Text = "Create";
             // 
-            // tabPage1
+            // rtbSALdetails
             // 
-            this.tabPage1.Controls.Add(this.txtNewTitle);
-            this.tabPage1.Controls.Add(this.label14);
-            this.tabPage1.Controls.Add(this.dtpNewJobDate);
-            this.tabPage1.Controls.Add(this.label23);
-            this.tabPage1.Controls.Add(this.label7);
-            this.tabPage1.Controls.Add(this.txtNewDescription);
-            this.tabPage1.Controls.Add(this.rtbNewNotes);
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.btnCreateJob);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.rtbTechDetails);
-            this.tabPage1.Controls.Add(this.rtbSALdetails);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.lstvAvailableTechs);
-            this.tabPage1.Controls.Add(this.lstvServiceRequests);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(906, 504);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Create Job";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.rtbSALdetails.Location = new System.Drawing.Point(277, 42);
+            this.rtbSALdetails.Name = "rtbSALdetails";
+            this.rtbSALdetails.Size = new System.Drawing.Size(267, 95);
+            this.rtbSALdetails.TabIndex = 4;
+            this.rtbSALdetails.Text = "";
             // 
-            // txtNewTitle
+            // lsbxUnclaimedServiceRequests
             // 
-            this.txtNewTitle.Location = new System.Drawing.Point(98, 321);
-            this.txtNewTitle.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNewTitle.Name = "txtNewTitle";
-            this.txtNewTitle.Size = new System.Drawing.Size(190, 20);
-            this.txtNewTitle.TabIndex = 29;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(19, 324);
-            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(54, 13);
-            this.label14.TabIndex = 28;
-            this.label14.Text = "Task Title";
-            // 
-            // dtpNewJobDate
-            // 
-            this.dtpNewJobDate.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpNewJobDate.Location = new System.Drawing.Point(557, 353);
-            this.dtpNewJobDate.Margin = new System.Windows.Forms.Padding(2);
-            this.dtpNewJobDate.Name = "dtpNewJobDate";
-            this.dtpNewJobDate.Size = new System.Drawing.Size(151, 20);
-            this.dtpNewJobDate.TabIndex = 27;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(443, 359);
-            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(98, 13);
-            this.label23.TabIndex = 26;
-            this.label23.Text = "Job Date and TIme";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(19, 359);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 13);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Description";
-            // 
-            // txtNewDescription
-            // 
-            this.txtNewDescription.Location = new System.Drawing.Point(98, 356);
-            this.txtNewDescription.Name = "txtNewDescription";
-            this.txtNewDescription.Size = new System.Drawing.Size(252, 20);
-            this.txtNewDescription.TabIndex = 11;
-            // 
-            // rtbNewNotes
-            // 
-            this.rtbNewNotes.Location = new System.Drawing.Point(22, 415);
-            this.rtbNewNotes.Name = "rtbNewNotes";
-            this.rtbNewNotes.Size = new System.Drawing.Size(591, 58);
-            this.rtbNewNotes.TabIndex = 10;
-            this.rtbNewNotes.Text = "";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 390);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Notes";
-            // 
-            // btnCreateJob
-            // 
-            this.btnCreateJob.Location = new System.Drawing.Point(660, 424);
-            this.btnCreateJob.Name = "btnCreateJob";
-            this.btnCreateJob.Size = new System.Drawing.Size(182, 36);
-            this.btnCreateJob.TabIndex = 8;
-            this.btnCreateJob.Text = "Assign Job to selected Technician";
-            this.btnCreateJob.UseVisualStyleBackColor = true;
-            this.btnCreateJob.Click += new System.EventHandler(this.btnCreateJob_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(492, 204);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(154, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Maintenance technician details";
+            this.lsbxUnclaimedServiceRequests.FormattingEnabled = true;
+            this.lsbxUnclaimedServiceRequests.Location = new System.Drawing.Point(9, 42);
+            this.lsbxUnclaimedServiceRequests.Name = "lsbxUnclaimedServiceRequests";
+            this.lsbxUnclaimedServiceRequests.Size = new System.Drawing.Size(262, 95);
+            this.lsbxUnclaimedServiceRequests.TabIndex = 31;
+            this.lsbxUnclaimedServiceRequests.SelectedIndexChanged += new System.EventHandler(this.lsbxUnclaimedServiceRequests_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(492, 54);
+            this.label3.Location = new System.Drawing.Point(274, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(154, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "Service level agreement details";
             // 
-            // rtbTechDetails
+            // btnCreateJob
             // 
-            this.rtbTechDetails.Location = new System.Drawing.Point(348, 226);
-            this.rtbTechDetails.Name = "rtbTechDetails";
-            this.rtbTechDetails.Size = new System.Drawing.Size(430, 71);
-            this.rtbTechDetails.TabIndex = 5;
-            this.rtbTechDetails.Text = "";
+            this.btnCreateJob.Location = new System.Drawing.Point(337, 143);
+            this.btnCreateJob.Name = "btnCreateJob";
+            this.btnCreateJob.Size = new System.Drawing.Size(207, 36);
+            this.btnCreateJob.TabIndex = 8;
+            this.btnCreateJob.Text = "Assign Task to selected Technician";
+            this.btnCreateJob.UseVisualStyleBackColor = true;
+            this.btnCreateJob.Click += new System.EventHandler(this.btnCreateJob_Click);
             // 
-            // rtbSALdetails
+            // lblClient
             // 
-            this.rtbSALdetails.Location = new System.Drawing.Point(348, 82);
-            this.rtbSALdetails.Name = "rtbSALdetails";
-            this.rtbSALdetails.Size = new System.Drawing.Size(430, 81);
-            this.rtbSALdetails.TabIndex = 4;
-            this.rtbSALdetails.Text = "";
+            this.lblClient.AutoSize = true;
+            this.lblClient.Location = new System.Drawing.Point(6, 3);
+            this.lblClient.Name = "lblClient";
+            this.lblClient.Size = new System.Drawing.Size(72, 13);
+            this.lblClient.TabIndex = 32;
+            this.lblClient.Text = "Choose Client";
             // 
-            // tabPage2
+            // cbxClient
             // 
-            this.tabPage2.Controls.Add(this.btnReAssignJob);
-            this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Controls.Add(this.dtpChangeJobDate);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.txtChangeDesc);
-            this.tabPage2.Controls.Add(this.rtbChangeNotes);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.lstvChangeTitle);
-            this.tabPage2.Controls.Add(this.label25);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.lstvJobs);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(906, 504);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Track Job";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.cbxClient.Enabled = false;
+            this.cbxClient.FormattingEnabled = true;
+            this.cbxClient.Location = new System.Drawing.Point(5, 19);
+            this.cbxClient.Name = "cbxClient";
+            this.cbxClient.Size = new System.Drawing.Size(195, 21);
+            this.cbxClient.TabIndex = 10;
+            this.cbxClient.SelectedIndexChanged += new System.EventHandler(this.cbxClient_SelectedIndexChanged);
             // 
-            // btnReAssignJob
+            // tpTrack
             // 
-            this.btnReAssignJob.Location = new System.Drawing.Point(638, 374);
-            this.btnReAssignJob.Name = "btnReAssignJob";
-            this.btnReAssignJob.Size = new System.Drawing.Size(182, 38);
-            this.btnReAssignJob.TabIndex = 39;
-            this.btnReAssignJob.Text = "Re-assign Job";
-            this.btnReAssignJob.UseVisualStyleBackColor = true;
+            this.tpTrack.Controls.Add(this.lsbxActiveTasks);
+            this.tpTrack.Controls.Add(this.grbModify);
+            this.tpTrack.Controls.Add(this.lblTasks);
+            this.tpTrack.Location = new System.Drawing.Point(4, 22);
+            this.tpTrack.Name = "tpTrack";
+            this.tpTrack.Padding = new System.Windows.Forms.Padding(3);
+            this.tpTrack.Size = new System.Drawing.Size(562, 271);
+            this.tpTrack.TabIndex = 1;
+            this.tpTrack.Text = "Track Task";
+            this.tpTrack.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // lsbxActiveTasks
             // 
-            this.groupBox1.Controls.Add(this.btnReAssignTech);
-            this.groupBox1.Controls.Add(this.txtCurrentTech);
-            this.groupBox1.Controls.Add(this.lblCurrentTech);
-            this.groupBox1.Controls.Add(this.lstvChangeTech);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.rtbNewTechDetails);
-            this.groupBox1.Location = new System.Drawing.Point(402, 19);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(484, 309);
-            this.groupBox1.TabIndex = 38;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Maintenance Technician";
+            this.lsbxActiveTasks.FormattingEnabled = true;
+            this.lsbxActiveTasks.Location = new System.Drawing.Point(9, 36);
+            this.lsbxActiveTasks.Name = "lsbxActiveTasks";
+            this.lsbxActiveTasks.Size = new System.Drawing.Size(547, 82);
+            this.lsbxActiveTasks.TabIndex = 41;
+            this.lsbxActiveTasks.SelectedIndexChanged += new System.EventHandler(this.lsbxTasks_SelectedIndexChanged);
+            // 
+            // grbModify
+            // 
+            this.grbModify.Controls.Add(this.gpbxAssignedTechnician);
+            this.grbModify.Controls.Add(this.btnReAssignTask);
+            this.grbModify.Location = new System.Drawing.Point(9, 124);
+            this.grbModify.Name = "grbModify";
+            this.grbModify.Size = new System.Drawing.Size(547, 141);
+            this.grbModify.TabIndex = 40;
+            this.grbModify.TabStop = false;
+            this.grbModify.Text = "Modify";
+            // 
+            // gpbxAssignedTechnician
+            // 
+            this.gpbxAssignedTechnician.Controls.Add(this.btnReAssignTech);
+            this.gpbxAssignedTechnician.Controls.Add(this.txtCurrentTech);
+            this.gpbxAssignedTechnician.Controls.Add(this.lblCurrentTech);
+            this.gpbxAssignedTechnician.Location = new System.Drawing.Point(10, 27);
+            this.gpbxAssignedTechnician.Name = "gpbxAssignedTechnician";
+            this.gpbxAssignedTechnician.Size = new System.Drawing.Size(328, 97);
+            this.gpbxAssignedTechnician.TabIndex = 38;
+            this.gpbxAssignedTechnician.TabStop = false;
+            this.gpbxAssignedTechnician.Text = "Assigned Technician";
             // 
             // btnReAssignTech
             // 
-            this.btnReAssignTech.Location = new System.Drawing.Point(147, 251);
+            this.btnReAssignTech.Enabled = false;
+            this.btnReAssignTech.Location = new System.Drawing.Point(67, 43);
             this.btnReAssignTech.Name = "btnReAssignTech";
             this.btnReAssignTech.Size = new System.Drawing.Size(182, 38);
             this.btnReAssignTech.TabIndex = 10;
-            this.btnReAssignTech.Text = "Assign Technician";
+            this.btnReAssignTech.Text = "Assign New Technician";
             this.btnReAssignTech.UseVisualStyleBackColor = true;
             this.btnReAssignTech.Click += new System.EventHandler(this.btnReAssignTech_Click);
             // 
             // txtCurrentTech
             // 
             this.txtCurrentTech.Enabled = false;
-            this.txtCurrentTech.Location = new System.Drawing.Point(147, 22);
+            this.txtCurrentTech.Location = new System.Drawing.Point(106, 18);
             this.txtCurrentTech.Margin = new System.Windows.Forms.Padding(2);
             this.txtCurrentTech.Name = "txtCurrentTech";
-            this.txtCurrentTech.Size = new System.Drawing.Size(168, 20);
+            this.txtCurrentTech.Size = new System.Drawing.Size(166, 20);
             this.txtCurrentTech.TabIndex = 39;
             // 
             // lblCurrentTech
             // 
             this.lblCurrentTech.AutoSize = true;
-            this.lblCurrentTech.Location = new System.Drawing.Point(22, 25);
+            this.lblCurrentTech.Location = new System.Drawing.Point(5, 22);
             this.lblCurrentTech.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCurrentTech.Name = "lblCurrentTech";
             this.lblCurrentTech.Size = new System.Drawing.Size(97, 13);
             this.lblCurrentTech.TabIndex = 38;
             this.lblCurrentTech.Text = "Current Technician";
             // 
-            // lstvChangeTech
+            // btnReAssignTask
             // 
-            this.lstvChangeTech.HideSelection = false;
-            this.lstvChangeTech.Location = new System.Drawing.Point(25, 73);
-            this.lstvChangeTech.Name = "lstvChangeTech";
-            this.lstvChangeTech.Size = new System.Drawing.Size(290, 72);
-            this.lstvChangeTech.TabIndex = 34;
-            this.lstvChangeTech.UseCompatibleStateImageBehavior = false;
-            this.lstvChangeTech.View = System.Windows.Forms.View.List;
+            this.btnReAssignTask.Location = new System.Drawing.Point(359, 90);
+            this.btnReAssignTask.Name = "btnReAssignTask";
+            this.btnReAssignTask.Size = new System.Drawing.Size(182, 34);
+            this.btnReAssignTask.TabIndex = 39;
+            this.btnReAssignTask.Text = "Re-Assign Task";
+            this.btnReAssignTask.UseVisualStyleBackColor = true;
+            this.btnReAssignTask.Click += new System.EventHandler(this.btnReAssignTask_Click);
             // 
-            // label11
+            // lblTasks
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(22, 153);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(154, 13);
-            this.label11.TabIndex = 37;
-            this.label11.Text = "Maintenance technician details";
+            this.lblTasks.AutoSize = true;
+            this.lblTasks.Location = new System.Drawing.Point(6, 20);
+            this.lblTasks.Name = "lblTasks";
+            this.lblTasks.Size = new System.Drawing.Size(69, 13);
+            this.lblTasks.TabIndex = 3;
+            this.lblTasks.Text = "Active Tasks";
             // 
-            // label12
+            // txtTaskTitle
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(22, 48);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(100, 13);
-            this.label12.TabIndex = 35;
-            this.label12.Text = "Change Technician";
+            this.txtTaskTitle.Location = new System.Drawing.Point(10, 38);
+            this.txtTaskTitle.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTaskTitle.Name = "txtTaskTitle";
+            this.txtTaskTitle.Size = new System.Drawing.Size(221, 20);
+            this.txtTaskTitle.TabIndex = 29;
             // 
-            // rtbNewTechDetails
+            // lblTaskTitle
             // 
-            this.rtbNewTechDetails.Location = new System.Drawing.Point(25, 172);
-            this.rtbNewTechDetails.Name = "rtbNewTechDetails";
-            this.rtbNewTechDetails.Size = new System.Drawing.Size(430, 71);
-            this.rtbNewTechDetails.TabIndex = 36;
-            this.rtbNewTechDetails.Text = "";
+            this.lblTaskTitle.AutoSize = true;
+            this.lblTaskTitle.Location = new System.Drawing.Point(7, 23);
+            this.lblTaskTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTaskTitle.Name = "lblTaskTitle";
+            this.lblTaskTitle.Size = new System.Drawing.Size(57, 13);
+            this.lblTaskTitle.TabIndex = 28;
+            this.lblTaskTitle.Text = "Task Title:";
             // 
-            // dtpChangeJobDate
+            // dtpTaskDate
             // 
-            this.dtpChangeJobDate.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpChangeJobDate.Location = new System.Drawing.Point(132, 277);
-            this.dtpChangeJobDate.Margin = new System.Windows.Forms.Padding(2);
-            this.dtpChangeJobDate.Name = "dtpChangeJobDate";
-            this.dtpChangeJobDate.Size = new System.Drawing.Size(151, 20);
-            this.dtpChangeJobDate.TabIndex = 33;
+            this.dtpTaskDate.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpTaskDate.Location = new System.Drawing.Point(110, 91);
+            this.dtpTaskDate.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpTaskDate.Name = "dtpTaskDate";
+            this.dtpTaskDate.Size = new System.Drawing.Size(121, 20);
+            this.dtpTaskDate.TabIndex = 27;
             // 
-            // label8
+            // lblTaskTime
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(20, 283);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 13);
-            this.label8.TabIndex = 32;
-            this.label8.Text = "Job Date and Time";
+            this.lblTaskTime.AutoSize = true;
+            this.lblTaskTime.Location = new System.Drawing.Point(8, 94);
+            this.lblTaskTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTaskTime.Name = "lblTaskTime";
+            this.lblTaskTime.Size = new System.Drawing.Size(98, 13);
+            this.lblTaskTime.TabIndex = 26;
+            this.lblTaskTime.Text = "Job Date and TIme";
             // 
-            // label9
+            // lblDescription
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(20, 249);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(60, 13);
-            this.label9.TabIndex = 31;
-            this.label9.Text = "Description";
+            this.lblDescription.AutoSize = true;
+            this.lblDescription.Location = new System.Drawing.Point(7, 66);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(63, 13);
+            this.lblDescription.TabIndex = 12;
+            this.lblDescription.Text = "Description:";
             // 
-            // txtChangeDesc
+            // txtTaskDescription
             // 
-            this.txtChangeDesc.Location = new System.Drawing.Point(132, 242);
-            this.txtChangeDesc.Name = "txtChangeDesc";
-            this.txtChangeDesc.Size = new System.Drawing.Size(254, 20);
-            this.txtChangeDesc.TabIndex = 30;
+            this.txtTaskDescription.Location = new System.Drawing.Point(73, 63);
+            this.txtTaskDescription.Name = "txtTaskDescription";
+            this.txtTaskDescription.Size = new System.Drawing.Size(158, 20);
+            this.txtTaskDescription.TabIndex = 11;
             // 
-            // rtbChangeNotes
+            // rtbNotes
             // 
-            this.rtbChangeNotes.Location = new System.Drawing.Point(19, 341);
-            this.rtbChangeNotes.Name = "rtbChangeNotes";
-            this.rtbChangeNotes.Size = new System.Drawing.Size(591, 94);
-            this.rtbChangeNotes.TabIndex = 29;
-            this.rtbChangeNotes.Text = "";
+            this.rtbNotes.Location = new System.Drawing.Point(9, 137);
+            this.rtbNotes.Name = "rtbNotes";
+            this.rtbNotes.Size = new System.Drawing.Size(221, 86);
+            this.rtbNotes.TabIndex = 10;
+            this.rtbNotes.Text = "";
             // 
-            // label10
+            // lblNotes
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(20, 315);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(35, 13);
-            this.label10.TabIndex = 28;
-            this.label10.Text = "Notes";
+            this.lblNotes.AutoSize = true;
+            this.lblNotes.Location = new System.Drawing.Point(7, 121);
+            this.lblNotes.Name = "lblNotes";
+            this.lblNotes.Size = new System.Drawing.Size(35, 13);
+            this.lblNotes.TabIndex = 9;
+            this.lblNotes.Text = "Notes";
             // 
-            // lstvChangeTitle
+            // label4
             // 
-            this.lstvChangeTitle.Location = new System.Drawing.Point(132, 207);
-            this.lstvChangeTitle.Margin = new System.Windows.Forms.Padding(2);
-            this.lstvChangeTitle.Name = "lstvChangeTitle";
-            this.lstvChangeTitle.Size = new System.Drawing.Size(177, 20);
-            this.lstvChangeTitle.TabIndex = 22;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 121);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(154, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Maintenance technician details";
             // 
-            // label25
+            // rtbTechDetails
             // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(20, 210);
-            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(54, 13);
-            this.label25.TabIndex = 21;
-            this.label25.Text = "Task Title";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(129, 19);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(62, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Active Jobs";
-            // 
-            // lstvJobs
-            // 
-            this.lstvJobs.HideSelection = false;
-            this.lstvJobs.Location = new System.Drawing.Point(19, 44);
-            this.lstvJobs.Name = "lstvJobs";
-            this.lstvJobs.Size = new System.Drawing.Size(290, 141);
-            this.lstvJobs.TabIndex = 2;
-            this.lstvJobs.UseCompatibleStateImageBehavior = false;
-            this.lstvJobs.View = System.Windows.Forms.View.List;
+            this.rtbTechDetails.Location = new System.Drawing.Point(9, 137);
+            this.rtbTechDetails.Name = "rtbTechDetails";
+            this.rtbTechDetails.Size = new System.Drawing.Size(309, 86);
+            this.rtbTechDetails.TabIndex = 5;
+            this.rtbTechDetails.Text = "";
             // 
             // btnReturn
             // 
-            this.btnReturn.Location = new System.Drawing.Point(364, 548);
+            this.btnReturn.Location = new System.Drawing.Point(400, 618);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(182, 38);
             this.btnReturn.TabIndex = 9;
@@ -477,67 +366,117 @@ namespace PSS.Presentation_Layer
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
+            // lsbxAvailableTechnicians
+            // 
+            this.lsbxAvailableTechnicians.FormattingEnabled = true;
+            this.lsbxAvailableTechnicians.Location = new System.Drawing.Point(6, 23);
+            this.lsbxAvailableTechnicians.Name = "lsbxAvailableTechnicians";
+            this.lsbxAvailableTechnicians.Size = new System.Drawing.Size(312, 95);
+            this.lsbxAvailableTechnicians.TabIndex = 30;
+            this.lsbxAvailableTechnicians.SelectedIndexChanged += new System.EventHandler(this.lsbxAvailableTechnicians_SelectedIndexChanged);
+            // 
+            // grbxAvailableTechnicians
+            // 
+            this.grbxAvailableTechnicians.Controls.Add(this.lsbxAvailableTechnicians);
+            this.grbxAvailableTechnicians.Controls.Add(this.label4);
+            this.grbxAvailableTechnicians.Controls.Add(this.rtbTechDetails);
+            this.grbxAvailableTechnicians.Location = new System.Drawing.Point(12, 315);
+            this.grbxAvailableTechnicians.Name = "grbxAvailableTechnicians";
+            this.grbxAvailableTechnicians.Size = new System.Drawing.Size(324, 232);
+            this.grbxAvailableTechnicians.TabIndex = 31;
+            this.grbxAvailableTechnicians.TabStop = false;
+            this.grbxAvailableTechnicians.Text = "AvailableTechnicians";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lblTaskTitle);
+            this.groupBox2.Controls.Add(this.txtTaskTitle);
+            this.groupBox2.Controls.Add(this.lblDescription);
+            this.groupBox2.Controls.Add(this.rtbNotes);
+            this.groupBox2.Controls.Add(this.dtpTaskDate);
+            this.groupBox2.Controls.Add(this.lblNotes);
+            this.groupBox2.Controls.Add(this.txtTaskDescription);
+            this.groupBox2.Controls.Add(this.lblTaskTime);
+            this.groupBox2.Location = new System.Drawing.Point(342, 315);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(240, 232);
+            this.groupBox2.TabIndex = 32;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Task";
+            // 
+            // lblCurentClient
+            // 
+            this.lblCurentClient.AutoSize = true;
+            this.lblCurentClient.Location = new System.Drawing.Point(5, 47);
+            this.lblCurentClient.Name = "lblCurentClient";
+            this.lblCurentClient.Size = new System.Drawing.Size(70, 13);
+            this.lblCurentClient.TabIndex = 34;
+            this.lblCurentClient.Text = "Current Client";
+            // 
             // ServiceDepartment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 598);
+            this.ClientSize = new System.Drawing.Size(594, 668);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.grbxAvailableTechnicians);
             this.Controls.Add(this.btnReturn);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tcTask);
             this.Name = "ServiceDepartment";
             this.Text = "ServiceDepartment";
             this.Load += new System.EventHandler(this.ServiceDepartment_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.tcTask.ResumeLayout(false);
+            this.tpCreate.ResumeLayout(false);
+            this.tpCreate.PerformLayout();
+            this.grbCreate.ResumeLayout(false);
+            this.grbCreate.PerformLayout();
+            this.tpTrack.ResumeLayout(false);
+            this.tpTrack.PerformLayout();
+            this.grbModify.ResumeLayout(false);
+            this.gpbxAssignedTechnician.ResumeLayout(false);
+            this.gpbxAssignedTechnician.PerformLayout();
+            this.grbxAvailableTechnicians.ResumeLayout(false);
+            this.grbxAvailableTechnicians.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListView lstvAvailableTechs;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListView lstvServiceRequests;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabControl tcTask;
+        private System.Windows.Forms.TabPage tpCreate;
+        private System.Windows.Forms.TabPage tpTrack;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox rtbTechDetails;
         private System.Windows.Forms.RichTextBox rtbSALdetails;
         private System.Windows.Forms.Button btnCreateJob;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ListView lstvJobs;
+        private System.Windows.Forms.Label lblTasks;
         private System.Windows.Forms.Button btnReturn;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtNewDescription;
-        private System.Windows.Forms.RichTextBox rtbNewNotes;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox lstvChangeTitle;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.DateTimePicker dtpNewJobDate;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.DateTimePicker dtpChangeJobDate;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtChangeDesc;
-        private System.Windows.Forms.RichTextBox rtbChangeNotes;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblDescription;
+        private System.Windows.Forms.TextBox txtTaskDescription;
+        private System.Windows.Forms.RichTextBox rtbNotes;
+        private System.Windows.Forms.Label lblNotes;
+        private System.Windows.Forms.DateTimePicker dtpTaskDate;
+        private System.Windows.Forms.Label lblTaskTime;
+        private System.Windows.Forms.GroupBox gpbxAssignedTechnician;
         private System.Windows.Forms.Button btnReAssignTech;
         private System.Windows.Forms.TextBox txtCurrentTech;
         private System.Windows.Forms.Label lblCurrentTech;
-        private System.Windows.Forms.ListView lstvChangeTech;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.RichTextBox rtbNewTechDetails;
-        private System.Windows.Forms.Button btnReAssignJob;
-        private System.Windows.Forms.TextBox txtNewTitle;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnReAssignTask;
+        private System.Windows.Forms.TextBox txtTaskTitle;
+        private System.Windows.Forms.Label lblTaskTitle;
+        private System.Windows.Forms.ListBox lsbxAvailableTechnicians;
+        private System.Windows.Forms.ListBox lsbxUnclaimedServiceRequests;
+        private System.Windows.Forms.ComboBox cbxClient;
+        private System.Windows.Forms.GroupBox grbxAvailableTechnicians;
+        private System.Windows.Forms.Label lblClient;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grbCreate;
+        private System.Windows.Forms.GroupBox grbModify;
+        private System.Windows.Forms.ListBox lsbxActiveTasks;
+        private System.Windows.Forms.Label lblCurentClient;
     }
 }
