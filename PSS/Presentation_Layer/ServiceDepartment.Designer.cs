@@ -34,13 +34,13 @@ namespace PSS.Presentation_Layer
             this.tpCreate = new System.Windows.Forms.TabPage();
             this.lblCurentClient = new System.Windows.Forms.Label();
             this.grbCreate = new System.Windows.Forms.GroupBox();
-            this.rtbSALdetails = new System.Windows.Forms.RichTextBox();
+            this.rtbSLAdetails = new System.Windows.Forms.RichTextBox();
             this.lsbxUnclaimedServiceRequests = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnCreateJob = new System.Windows.Forms.Button();
             this.lblClient = new System.Windows.Forms.Label();
             this.cbxClient = new System.Windows.Forms.ComboBox();
-            this.tpTrack = new System.Windows.Forms.TabPage();
+            this.tpModify = new System.Windows.Forms.TabPage();
             this.lsbxActiveTasks = new System.Windows.Forms.ListBox();
             this.grbModify = new System.Windows.Forms.GroupBox();
             this.gpbxAssignedTechnician = new System.Windows.Forms.GroupBox();
@@ -63,14 +63,17 @@ namespace PSS.Presentation_Layer
             this.lsbxAvailableTechnicians = new System.Windows.Forms.ListBox();
             this.grbxAvailableTechnicians = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tpTrack = new System.Windows.Forms.TabPage();
+            this.tvTrack = new System.Windows.Forms.TreeView();
             this.tcTask.SuspendLayout();
             this.tpCreate.SuspendLayout();
             this.grbCreate.SuspendLayout();
-            this.tpTrack.SuspendLayout();
+            this.tpModify.SuspendLayout();
             this.grbModify.SuspendLayout();
             this.gpbxAssignedTechnician.SuspendLayout();
             this.grbxAvailableTechnicians.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.tpTrack.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -85,12 +88,14 @@ namespace PSS.Presentation_Layer
             // tcTask
             // 
             this.tcTask.Controls.Add(this.tpCreate);
+            this.tcTask.Controls.Add(this.tpModify);
             this.tcTask.Controls.Add(this.tpTrack);
             this.tcTask.Location = new System.Drawing.Point(12, 56);
             this.tcTask.Name = "tcTask";
             this.tcTask.SelectedIndex = 0;
             this.tcTask.Size = new System.Drawing.Size(570, 297);
             this.tcTask.TabIndex = 3;
+            this.tcTask.SelectedIndexChanged += new System.EventHandler(this.tcTask_SelectedIndexChanged);
             // 
             // tpCreate
             // 
@@ -118,7 +123,7 @@ namespace PSS.Presentation_Layer
             // grbCreate
             // 
             this.grbCreate.Controls.Add(this.label1);
-            this.grbCreate.Controls.Add(this.rtbSALdetails);
+            this.grbCreate.Controls.Add(this.rtbSLAdetails);
             this.grbCreate.Controls.Add(this.lsbxUnclaimedServiceRequests);
             this.grbCreate.Controls.Add(this.label3);
             this.grbCreate.Controls.Add(this.btnCreateJob);
@@ -129,13 +134,13 @@ namespace PSS.Presentation_Layer
             this.grbCreate.TabStop = false;
             this.grbCreate.Text = "Create";
             // 
-            // rtbSALdetails
+            // rtbSLAdetails
             // 
-            this.rtbSALdetails.Location = new System.Drawing.Point(277, 42);
-            this.rtbSALdetails.Name = "rtbSALdetails";
-            this.rtbSALdetails.Size = new System.Drawing.Size(267, 95);
-            this.rtbSALdetails.TabIndex = 4;
-            this.rtbSALdetails.Text = "";
+            this.rtbSLAdetails.Location = new System.Drawing.Point(277, 42);
+            this.rtbSLAdetails.Name = "rtbSLAdetails";
+            this.rtbSLAdetails.Size = new System.Drawing.Size(267, 95);
+            this.rtbSLAdetails.TabIndex = 4;
+            this.rtbSLAdetails.Text = "";
             // 
             // lsbxUnclaimedServiceRequests
             // 
@@ -184,18 +189,18 @@ namespace PSS.Presentation_Layer
             this.cbxClient.TabIndex = 10;
             this.cbxClient.SelectedIndexChanged += new System.EventHandler(this.cbxClient_SelectedIndexChanged);
             // 
-            // tpTrack
+            // tpModify
             // 
-            this.tpTrack.Controls.Add(this.lsbxActiveTasks);
-            this.tpTrack.Controls.Add(this.grbModify);
-            this.tpTrack.Controls.Add(this.lblTasks);
-            this.tpTrack.Location = new System.Drawing.Point(4, 22);
-            this.tpTrack.Name = "tpTrack";
-            this.tpTrack.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTrack.Size = new System.Drawing.Size(562, 271);
-            this.tpTrack.TabIndex = 1;
-            this.tpTrack.Text = "Track Task";
-            this.tpTrack.UseVisualStyleBackColor = true;
+            this.tpModify.Controls.Add(this.lsbxActiveTasks);
+            this.tpModify.Controls.Add(this.grbModify);
+            this.tpModify.Controls.Add(this.lblTasks);
+            this.tpModify.Location = new System.Drawing.Point(4, 22);
+            this.tpModify.Name = "tpModify";
+            this.tpModify.Padding = new System.Windows.Forms.Padding(3);
+            this.tpModify.Size = new System.Drawing.Size(562, 271);
+            this.tpModify.TabIndex = 1;
+            this.tpModify.Text = "Modify Task";
+            this.tpModify.UseVisualStyleBackColor = true;
             // 
             // lsbxActiveTasks
             // 
@@ -413,6 +418,23 @@ namespace PSS.Presentation_Layer
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Task";
             // 
+            // tpTrack
+            // 
+            this.tpTrack.Controls.Add(this.tvTrack);
+            this.tpTrack.Location = new System.Drawing.Point(4, 22);
+            this.tpTrack.Name = "tpTrack";
+            this.tpTrack.Size = new System.Drawing.Size(562, 271);
+            this.tpTrack.TabIndex = 2;
+            this.tpTrack.Text = "Track Tasks";
+            this.tpTrack.UseVisualStyleBackColor = true;
+            // 
+            // tvTrack
+            // 
+            this.tvTrack.Location = new System.Drawing.Point(5, 3);
+            this.tvTrack.Name = "tvTrack";
+            this.tvTrack.Size = new System.Drawing.Size(551, 265);
+            this.tvTrack.TabIndex = 0;
+            // 
             // ServiceDepartment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -430,8 +452,8 @@ namespace PSS.Presentation_Layer
             this.tpCreate.PerformLayout();
             this.grbCreate.ResumeLayout(false);
             this.grbCreate.PerformLayout();
-            this.tpTrack.ResumeLayout(false);
-            this.tpTrack.PerformLayout();
+            this.tpModify.ResumeLayout(false);
+            this.tpModify.PerformLayout();
             this.grbModify.ResumeLayout(false);
             this.gpbxAssignedTechnician.ResumeLayout(false);
             this.gpbxAssignedTechnician.PerformLayout();
@@ -439,6 +461,7 @@ namespace PSS.Presentation_Layer
             this.grbxAvailableTechnicians.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tpTrack.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -447,11 +470,11 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tcTask;
         private System.Windows.Forms.TabPage tpCreate;
-        private System.Windows.Forms.TabPage tpTrack;
+        private System.Windows.Forms.TabPage tpModify;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox rtbTechDetails;
-        private System.Windows.Forms.RichTextBox rtbSALdetails;
+        private System.Windows.Forms.RichTextBox rtbSLAdetails;
         private System.Windows.Forms.Button btnCreateJob;
         private System.Windows.Forms.Label lblTasks;
         private System.Windows.Forms.Button btnReturn;
@@ -478,5 +501,7 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.GroupBox grbModify;
         private System.Windows.Forms.ListBox lsbxActiveTasks;
         private System.Windows.Forms.Label lblCurentClient;
+        private System.Windows.Forms.TabPage tpTrack;
+        private System.Windows.Forms.TreeView tvTrack;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using PSS.Business_Logic;
 
@@ -16,6 +17,13 @@ namespace PSS.Presentation_Layer
         {
             currentClient = client;
             ciwMain.Client = client;
+
+            List<string> lines = new List<string>();
+            foreach (Contract contract in client.GetContracts())
+            {
+                lines.Add(contract.ToString());
+            }
+            rtbContracts.Lines = lines.ToArray();
         }
 
         //TODO: Consider removal

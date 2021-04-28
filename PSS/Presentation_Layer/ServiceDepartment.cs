@@ -30,12 +30,14 @@ namespace PSS.Presentation_Layer
             lblCurentClient.Text = client.Person.FullName;
             PopulateClients();
             PopulateUnclaimedClientServiceRequests();
+            PopulateSLA();
         }
 
         private void LoadViews()
         {
             PopulateAvailableTechnicians();
             PopulateTasks();
+            PopulateTree();
         }
 
         #region Data
@@ -45,7 +47,7 @@ namespace PSS.Presentation_Layer
         private readonly List<Client> AllClients = Client.GetAllClients(); 
 
         private readonly BaseList<Technician> AllTechnicians = BaseList<Technician>.GrabAll(); //we do need all technicians becuase we want all. If you have a problem write a DataEngine for this
-        private readonly BaseList<TechnicianTask> AllTechnicianTasks = BaseList<TechnicianTask>.GrabAll(); //TODO: why does this return zero?
+        private readonly BaseList<TechnicianTask> AllTechnicianTasks = BaseList<TechnicianTask>.GrabAll();
         private readonly BaseList<Task> AllUnfinishedTasks = Task.GetAllUnFinishedTasks();
 
         #endregion
@@ -62,7 +64,6 @@ namespace PSS.Presentation_Layer
             lsbxUnclaimedServiceRequests.DataSource = UnClaimedClientServiceRequests;
             //lsbxUnclaimedServiceRequests.Items.AddRange(UnClaimedServiceRequests.ToArray());
         }
-
 
         private BaseList<Technician> AvailableTechnicians => AllTechnicians.Except(AllTechnicianTasks.Select(tt => tt.Technician)).ToBaseList(); //TODO: IDK how Technician Task will work, maybe do a DataEngine here?
 
@@ -83,6 +84,19 @@ namespace PSS.Presentation_Layer
         private void PopulateTasks()
         {
             lsbxActiveTasks.DataSource = AllUnfinishedTasks;
+        }
+
+        private void PopulateSLA()
+        {
+            //rtbSLAdetails.Text = 
+        }
+
+        private TreeNode[] TechnicianTaskNodes(Technician t) => AllTechnicianTasks.Where(tt => tt.Technician == t).Select(tt => new TreeNode(tt.Task.Title)).ToArray(); //TODO: order
+        private TreeNode[] TechnicianNodes => AllTechnicians.Select(t => new TreeNode(t.Person.FullName, TechnicianTaskNodes(t))).ToArray();
+        private void PopulateTree()
+        {
+            tvTrack.Nodes.Clear();
+            tvTrack.Nodes.AddRange(TechnicianNodes);
         }
 
         #endregion
@@ -123,6 +137,15 @@ namespace PSS.Presentation_Layer
 
             btnReAssignTech.Enabled = true;
             //TODO: populate task
+        }
+
+        private void tcTask_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TabControl tabControl = (TabControl)sender;
+            if (tabControl.SelectedIndex == 2)
+            {
+                PopulateTree();
+            }
         }
 
         #endregion

@@ -37,7 +37,7 @@ namespace PSS.Presentation_Layer
             this.btnUpdateSR = new System.Windows.Forms.Button();
             this.rtbProblem = new System.Windows.Forms.RichTextBox();
             this.grbxContractInfo = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rtbContracts = new System.Windows.Forms.RichTextBox();
             this.grbxTransfer = new System.Windows.Forms.GroupBox();
             this.btnClientSatisfaction = new System.Windows.Forms.Button();
             this.btnServiceDept = new System.Windows.Forms.Button();
@@ -117,7 +117,7 @@ namespace PSS.Presentation_Layer
             // 
             // grbxContractInfo
             // 
-            this.grbxContractInfo.Controls.Add(this.richTextBox1);
+            this.grbxContractInfo.Controls.Add(this.rtbContracts);
             this.grbxContractInfo.Location = new System.Drawing.Point(12, 12);
             this.grbxContractInfo.Name = "grbxContractInfo";
             this.grbxContractInfo.Size = new System.Drawing.Size(776, 165);
@@ -125,13 +125,13 @@ namespace PSS.Presentation_Layer
             this.grbxContractInfo.TabStop = false;
             this.grbxContractInfo.Text = "Contract Information";
             // 
-            // richTextBox1
+            // rtbContracts
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(6, 19);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(764, 140);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.rtbContracts.Location = new System.Drawing.Point(6, 19);
+            this.rtbContracts.Name = "rtbContracts";
+            this.rtbContracts.Size = new System.Drawing.Size(764, 140);
+            this.rtbContracts.TabIndex = 0;
+            this.rtbContracts.Text = "";
             // 
             // grbxTransfer
             // 
@@ -208,7 +208,7 @@ namespace PSS.Presentation_Layer
         #endregion
         private System.Windows.Forms.GroupBox grbxProblem;
         private System.Windows.Forms.GroupBox grbxContractInfo;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rtbContracts;
         private System.Windows.Forms.Button btnUpdateSR;
         private System.Windows.Forms.RichTextBox rtbProblem;
         private System.Windows.Forms.GroupBox grbxTransfer;

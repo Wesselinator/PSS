@@ -78,6 +78,16 @@ namespace PSS.Business_Logic
 
         #endregion
 
+        public static BaseList<Technician> GetAllAvailableClients()
+        {
+            string sql = "";
+            DataTable dataTable = DataHandler.GetDataTable(sql);
+
+            BaseList<Technician> ret = new BaseList<Technician>();
+            ret.FillWith(dataTable);
+            return ret;
+        }
+
         public override bool Equals(object obj)
         {
             return obj is Technician technician &&
