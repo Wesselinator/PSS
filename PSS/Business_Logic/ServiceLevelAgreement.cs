@@ -23,6 +23,7 @@ namespace PSS.Business_Logic
         }
         public int ContractID { get => IDs[1]; private set => IDs[1] = value; }
         public string Agreement { get; set; }
+
         public int ServiceQuantity { get; set; }
 
         private static readonly string tableName = "ServiceLevelAgreement";
