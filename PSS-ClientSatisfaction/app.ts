@@ -5,7 +5,7 @@ import * as path from 'path';
 import routes from './routes/index';
 import users from './routes/user';
 
-const debug = require('debug')('my express app');
+const debug = require('debug')('PSS-ClientSatisfaction Microservice');
 const app = express();
 
 
@@ -58,8 +58,7 @@ app.set(ePORT, process.env.PORT || 3000);       //set from envoirnment or defaul
 app.set(eHOST, process.env.HOST || '0.0.0.0');
 
 const server = app.listen(app.get(ePORT), app.get(eHOST), function () {
-    debug(`Express server listening on port ${(server.address() as AddressInfo).port}`);
+    var message = `Express server listening on port ${(server.address() as AddressInfo).port}`;
+    debug(message);
+    console.info(message);
 });
-
-console.log(app.get(ePORT))
-console.log(app.get(eHOST))
