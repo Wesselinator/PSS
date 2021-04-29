@@ -387,7 +387,7 @@ GO
 ---------------------------SAMPLE DATA START---------------------------
 
 --Can possibly Change Name To ProductOrService, add column for type
-INSERT INTO [Service] (ServiceID, ServiceName, [Type], ServiceDescription)
+INSERT INTO Service (ServiceID, ServiceName, [Type], ServiceDescription)
 	VALUES (1,'On Site Repairs','Service','This Service involves calling out a specialized technician to fix an issue with a product on the customer''s site'),
 		   (2,'Pickup Repairs','Service','This Service involves fetching the product at the customer location and fixing it on PSS company grounds'),
 		   (3,'Customer Phone Calls','Service', 'This service determines the kind of calling support customers enjoy from the call centre'),
@@ -408,7 +408,7 @@ INSERT INTO [Service] (ServiceID, ServiceName, [Type], ServiceDescription)
 		   (18,'PSS Medium Workstation','Workstation Computer','Model Custom 2301/AMD RYZEN 5 3600 (6 Cores, 12 Threads, 35MB Cache, Turbo 4.2GHz)/16GB RAM/512GB NVME SSD/1TB HDD/Quadro P400'),
 		   (19,'PSS High End Workstation','Workstation Computer','Model Custom 2531/AMD RYZEN 9 5950X (16 Cores, 32 Threads, 3.4GHz, 72MB Cache, Turbo 4.9GHz+)/32GB RAM/2TB NVME SSD/NVIDIA QUADRO P1000')
 		   
-INSERT INTO [Contract] (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MonthlyFee)
+INSERT INTO Contract (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MonthlyFee)
 	VALUES (1, 'Printing Necessities', 'Peasant', '2021/04/01', NULL, 36, 400),
 		   (2, 'Basic Printing', 'Commoner', '2021/04/01', NULL, 36, 600),
 		   (3, 'Premium Printing','Noble','2021/04/01',NULL,36, 900),
@@ -533,7 +533,7 @@ INSERT INTO Person (PersonID, FirstName, LastName, BirthDate, CellPhoneNumber, T
 		   (15, 'Delma', 'Tadiwa', '1995/05/22', '+27825539658', NULL, 'd.tadiwa@gmail.com'),
 		   (17, 'Blessing', 'Moyo', '1988/07/25', '+27618824356', NULL, 'blessingmoyo@gmail.com')
 
-INSERT INTO [Address] (AddressID, Street, City, PostalCode, Province)
+INSERT INTO Address (AddressID, Street, City, PostalCode, Province)
 	VALUES (1, '961 Church St', 'Pretoria', '0155', 'Gauteng'),
 		   (2, '127 Willowmore Street', 'Pretoria', '0182', 'Gauteng'),
 		   (3, '1266 Diesel Street', 'Randfontein', '1767', 'Gauteng'),
