@@ -39,11 +39,14 @@ app.use((err, req, res, next) => {
         error: {}
     });
 });
-const PORT = 1337;
-const HOST = "0.0.0.0";
-app.listen(PORT, HOST);
-app.set('port', process.env.PORT || 3000);
-//const server = app.listen(app.get('port'), function () {
-//    debug(`Express server listening on port ${(server.address() as AddressInfo).port}`);
-//});
+// listening net
+const ePORT = 'port';
+const eHOST = 'host';
+app.set(ePORT, process.env.PORT || 3000); //set from envoirnment or default
+app.set(eHOST, process.env.HOST || '0.0.0.0');
+const server = app.listen(app.get(ePORT), app.get(eHOST), function () {
+    debug(`Express server listening on port ${server.address().port}`);
+});
+console.log(app.get(ePORT));
+console.log(app.get(eHOST));
 //# sourceMappingURL=app.js.map
