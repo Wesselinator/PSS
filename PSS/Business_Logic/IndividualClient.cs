@@ -116,6 +116,41 @@ namespace PSS.Business_Logic
         {
             IndividualClientFollowUps.Add(new IndividualClientFollowUp(ID, followUp));
         }
+
+
         #endregion
+
+        public override bool Equals(object obj)
+        {
+            return obj is IndividualClient client &&
+                   base.Equals(obj) &&
+                   Type == client.Type &&
+                   Status == client.Status &&
+                   Notes == client.Notes &&
+                   Address.Equals(client.Address) &&
+                   Person.Equals(client.Person) &&
+                   ClientID == client.ClientID &&
+                   EqualityComparer<MultiIDList<IndividualClientServiceRequest>>.Default.Equals(IndividualClientServiceRequests, client.IndividualClientServiceRequests) && //TODO: Check equals for multiIDLists
+                   EqualityComparer<MultiIDList<IndividualClientContract>>.Default.Equals(IndividualClientContracts, client.IndividualClientContracts) &&
+                   EqualityComparer<MultiIDList<IndividualClientFollowUp>>.Default.Equals(IndividualClientFollowUps, client.IndividualClientFollowUps);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 335634478;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Status);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Notes);
+            hashCode = hashCode * -1521134295 + Address.GetHashCode();
+            hashCode = hashCode * -1521134295 + Person.GetHashCode();
+            hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
+            hashCode = hashCode * -1521134295 + IndividualClientServiceRequests.GetHashCode();
+            hashCode = hashCode * -1521134295 + IndividualClientContracts.GetHashCode();
+            hashCode = hashCode * -1521134295 + IndividualClientFollowUps.GetHashCode();
+            return hashCode;
+        }
+
+
     }
 }

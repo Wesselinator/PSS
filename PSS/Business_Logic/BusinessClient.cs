@@ -147,5 +147,42 @@ namespace PSS.Business_Logic
                 "ServiceRequest: [{4}] | Contracts: [{5}] | FollowUps: [{6}]", 
                 ClientID, BusinessName, ContactPerson, BusinessClientPeople, BusinessClientServiceRequests, BusinessClientContracts, BusinessClientFollowUps);
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is BusinessClient client &&
+                   base.Equals(obj) &&
+                   Type == client.Type &&
+                   Status == client.Status &&
+                   Notes == client.Notes &&
+                   Address.Equals(client.Address) &&
+                   Person.Equals(client.Person) &&
+                   ClientID == client.ClientID &&
+                   BusinessName == client.BusinessName &&
+                   ContactPerson.Equals(client.ContactPerson) &&
+                   EqualityComparer<MultiIDList<BusinessClientPerson>>.Default.Equals(BusinessClientPeople, client.BusinessClientPeople) &&
+                   EqualityComparer<MultiIDList<BusinessClientServiceRequest>>.Default.Equals(BusinessClientServiceRequests, client.BusinessClientServiceRequests) &&
+                   EqualityComparer<MultiIDList<BusinessClientContract>>.Default.Equals(BusinessClientContracts, client.BusinessClientContracts) &&
+                   EqualityComparer<MultiIDList<BusinessClientFollowUp>>.Default.Equals(BusinessClientFollowUps, client.BusinessClientFollowUps);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 55132484;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Status);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Notes);
+            hashCode = hashCode * -1521134295 + Address.GetHashCode();
+            hashCode = hashCode * -1521134295 + Person.GetHashCode();
+            hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(BusinessName);
+            hashCode = hashCode * -1521134295 + ContactPerson.GetHashCode();
+            hashCode = hashCode * -1521134295 + BusinessClientPeople.GetHashCode();
+            hashCode = hashCode * -1521134295 + BusinessClientServiceRequests.GetHashCode();
+            hashCode = hashCode * -1521134295 + BusinessClientContracts.GetHashCode();
+            hashCode = hashCode * -1521134295 + BusinessClientFollowUps.GetHashCode();
+            return hashCode;
+        }
     }
 }

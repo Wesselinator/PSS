@@ -5,7 +5,7 @@ import express = require('express');
 const router = express.Router();
 
 router.get('/', (req: express.Request, res: express.Response) => {
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Client Satisfaction' });
 });
 
 export default router;
