@@ -20,14 +20,20 @@ namespace PSS.Business_Logic
         public int ContractDurationInMonths { get; set; }
         public decimal MonthlyFee { get; set; }
 
-        public string BusinessIdentifier { get => StartDate.ToString("yyyy") + "A" + "00000"; } //TODO: Finnish Business Identifier
+        public string DisplayMember => ContractName;
+
+        public MultiIDList<ServiceLevelAgreement> ServiceLevelAgreements { get; set; }
+
+        public string BusinessIdentifier { get => StartDate.ToString("yyyy") + "Z" + "D" + "00000"; } //TODO: Finnish Business Identifier
 
 
         private static readonly string tableName = "Contract";
         private static readonly string idColumn = "ContractID";
 
         public Contract() : base(tableName, idColumn)
-        { }
+        {
+            ServiceLevelAgreements = new MultiIDList<ServiceLevelAgreement>();
+        }
 
         public Contract(int contractID, string contractName, string serviceLevel, DateTime startDate, DateTime endDate, int contractDurationInMonths, decimal monthlyFee) : this()
         {
@@ -38,6 +44,7 @@ namespace PSS.Business_Logic
             EndDate = endDate;
             ContractDurationInMonths = contractDurationInMonths;
             MonthlyFee = monthlyFee;
+            FillList(contractID);
         }
 
         public Contract(string contractName, string serviceLevel, DateTime startDate, DateTime endDate, int contractDurationInMonths, decimal monthlyFee) : this() 
@@ -49,9 +56,15 @@ namespace PSS.Business_Logic
             EndDate = endDate;
             ContractDurationInMonths = contractDurationInMonths;
             MonthlyFee = monthlyFee;
+            FillList(ContractID);
         }
 
         #region DataBase
+
+        private void FillList(int id)
+        {
+            ServiceLevelAgreements.FillWithPivotColumn(id, idColumn);
+        }
 
         public override void FillFromRow(DataRow row)
         {
@@ -62,6 +75,7 @@ namespace PSS.Business_Logic
             this.EndDate = row.Field<DateTime?>("OfferEndDate");
             this.ContractDurationInMonths = row.Field<int>("ContractDurationInMonths");
             this.MonthlyFee = row.Field<decimal>("MonthlyFee");
+            FillList(ContractID);
         }
 
         protected override string Update()
@@ -74,7 +88,7 @@ namespace PSS.Business_Logic
             sql.Append("ServiceLevel = '" + ServiceLevel + "', ");
             sql.Append("OfferStartDate = '" + StartDate.ToString("s") + "', ");
             sql.AppendLine("OfferEndDate = '" + EndDate?.ToString("s") + "', ");
-            sql.Append("ContractDurationInMonths = '" + ContractDurationInMonths.ToString() + "', ");
+            sql.AppendLine("ContractDurationInMonths = " + ContractDurationInMonths + ", ");
             sql.AppendLine("MonthlyFee = " + MonthlyFee.ToString("0.00"));
 
             sql.AppendLine("WHERE " + IDColumn + " = " + ContractID);
@@ -93,12 +107,22 @@ namespace PSS.Business_Logic
             sql.Append("'" + ServiceLevel + "', ");
             sql.Append("'" + StartDate.ToString("s") + "', ");
             sql.Append("'" + EndDate?.ToString("s") + "', ");
-            sql.Append("'" + ContractDurationInMonths.ToString() + "', ");
+            sql.Append(ContractDurationInMonths + ", ");
             sql.Append(MonthlyFee.ToString("0.00"));
 
             sql.AppendLine(");");
 
             return sql.ToString();
+        }
+
+        public void AddService(Service service, string agreement, int serviceQuintity)
+        {
+            ServiceLevelAgreements.Add(new ServiceLevelAgreement(service, ContractID, agreement, serviceQuintity));
+        }
+
+        public BaseList<Service> GetServices()
+        {
+            return ServiceLevelAgreements.GetServices();
         }
 
         #endregion

@@ -54,5 +54,11 @@ namespace PSS.Business_Logic
         {
             return BCPs.Select(bcp => bcp.Person).ToBaseList();
         }
+
+
+        public static BaseList<Service> GetServices(this MultiIDList<ServiceLevelAgreement> SLAs)
+        {
+            return SLAs.Select(sla => sla.Service).ToBaseList();
+        }
     }
 }

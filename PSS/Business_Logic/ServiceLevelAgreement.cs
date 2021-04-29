@@ -8,7 +8,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    class ServiceLevelAgreement : MultiIntID
+    public class ServiceLevelAgreement : MultiIntID
     {
         private Service s;
         public Service Service
@@ -23,7 +23,6 @@ namespace PSS.Business_Logic
         }
         public int ContractID { get => IDs[1]; private set => IDs[1] = value; }
         public string Agreement { get; set; }
-
         public int ServiceQuantity { get; set; }
 
         private static readonly string tableName = "ServiceLevelAgreement";

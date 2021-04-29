@@ -9,7 +9,7 @@ namespace PSS.Business_Logic
 {
     public class MultiIDList<T> : BaseList<T> where T : MultiIntID, new()
     {
-        private T DataInstance = new T();
+        private readonly T DataInstance = new T();
 
         public void FillWithPivotColumn(int id, string column)
         {
