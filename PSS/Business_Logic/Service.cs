@@ -7,17 +7,17 @@ using PSS.Data_Access;
 //CHECK
 namespace PSS.Business_Logic
 {
-    class Service : SingleIntID
+    public class Service : SingleIntID
     {
         public int ServiceID { get => ID; private set => ID = value; }
         public string ServiceName { get; set; }
         public string ServiceDescription { get; set; }
-
+        
         private static readonly string tableName = "Service";
         private static readonly string idColumn = "ServiceID";
 
         public Service() : base(tableName, idColumn)
-        { }
+        {  }
 
         public Service(int serviceID, string serviceName, string serviceDescription) : this()
         {
@@ -35,7 +35,6 @@ namespace PSS.Business_Logic
 
 
         #region DataBase
-
 
         public override void FillFromRow(DataRow row)
         {
@@ -72,7 +71,6 @@ namespace PSS.Business_Logic
 
             return sql.ToString();
         }
-
 
         #endregion
 

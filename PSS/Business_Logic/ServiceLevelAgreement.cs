@@ -8,7 +8,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    class ServiceLevelAgreement : MultiIntID
+    public class ServiceLevelAgreement : MultiIntID
     {
         private Service s;
         public Service Service
@@ -22,7 +22,8 @@ namespace PSS.Business_Logic
             }
         }
         public int ContractID { get => IDs[1]; private set => IDs[1] = value; }
-        public string PerformanceExpectation { get; set; }
+        public string Agreement { get; set; }
+        public int ServiceQuantity { get; set; }
 
         private static readonly string tableName = "ServiceLevelAgreement";
         public static readonly string idColumn1 = "ServiceID";
@@ -31,11 +32,12 @@ namespace PSS.Business_Logic
         public ServiceLevelAgreement() : base(tableName, idColumn1, idColumn2)
         { }
 
-        public ServiceLevelAgreement(Service service, int contractID, string performanceExpectation) : this()
+        public ServiceLevelAgreement(Service service, int contractID, string agreement, int serviceQuantity) : this()
         {
             this.Service = service;
             this.ContractID = contractID;          
-            this.PerformanceExpectation = performanceExpectation;
+            this.Agreement = agreement;
+            this.se
         }
 
         #region Database
@@ -44,7 +46,7 @@ namespace PSS.Business_Logic
         {
             this.Service = DataEngine.GetDataObject<Service>(row.Field<int>("ServiceID"));
             this.ContractID = row.Field<int>(idColumn2);           
-            this.PerformanceExpectation = row.Field<string>("PerformanceExpectation");
+            this.Agreement = row.Field<string>("PerformanceExpectation");
         }
 
         public override void Save()
@@ -61,7 +63,7 @@ namespace PSS.Business_Logic
 
             sql.Append(Service.ServiceID + ", ");
             sql.Append(ContractID + ", ");
-            sql.AppendLine("'" + PerformanceExpectation + "'");
+            sql.AppendLine("'" + Agreement + "'");
 
             sql.AppendLine(");");
 
@@ -74,7 +76,7 @@ namespace PSS.Business_Logic
             sql.AppendLine("UPDATE " + TableName);
             sql.Append("SET ");
 
-            sql.AppendLine("PerformanceExpectation = '" + PerformanceExpectation + "'");
+            sql.AppendLine("PerformanceExpectation = '" + Agreement + "'");
 
             sql.Append("WHERE ");
             sql.Append(idColumn1 + " = " + Service.ServiceID);

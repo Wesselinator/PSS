@@ -103,7 +103,7 @@ namespace PSS.Presentation_Layer
             //populate components with current client info
             rbtnIndvidual.Enabled = false;
             rbtnBusiness.Enabled = false;
-            if (currentClient is IndividualClient iCl)
+            if (currentClient is IndividualClient)
             {
                 lblBusinessName.Hide();
                 txtBusinessName.Hide();
