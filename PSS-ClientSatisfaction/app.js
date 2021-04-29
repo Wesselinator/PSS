@@ -39,8 +39,11 @@ app.use((err, req, res, next) => {
         error: {}
     });
 });
+const PORT = 1337;
+const HOST = "0.0.0.0";
+app.listen(PORT, HOST);
 app.set('port', process.env.PORT || 3000);
-const server = app.listen(app.get('port'), function () {
-    debug(`Express server listening on port ${server.address().port}`);
-});
+//const server = app.listen(app.get('port'), function () {
+//    debug(`Express server listening on port ${(server.address() as AddressInfo).port}`);
+//});
 //# sourceMappingURL=app.js.map

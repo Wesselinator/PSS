@@ -33,6 +33,12 @@
     <None Include="app.ts" />
     <None Include="routes\index.ts" />
     <None Include="routes\user.ts" />
+    <Content Include=".dockerignore">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Dockerfile">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\main.css" />
