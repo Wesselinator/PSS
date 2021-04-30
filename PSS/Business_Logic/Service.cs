@@ -7,10 +7,12 @@ using PSS.Data_Access;
 //CHECK
 namespace PSS.Business_Logic
 {
-    class Service : SingleIntID
+    public class Service : SingleIntID
     {
         public int ServiceID { get => ID; private set => ID = value; }
         public string ServiceName { get; set; }
+
+        public string Type { get; set; }
         public string ServiceDescription { get; set; }
 
         private static readonly string tableName = "Service";
@@ -19,17 +21,19 @@ namespace PSS.Business_Logic
         public Service() : base(tableName, idColumn)
         { }
 
-        public Service(int serviceID, string serviceName, string serviceDescription) : this()
+        public Service(int serviceID, string serviceName, string type, string serviceDescription) : this()
         {
             ServiceID = serviceID;
             ServiceName = serviceName;
+            Type = type;
             ServiceDescription = serviceDescription;
         }
 
-        public Service(string serviceName, string serviceDescription) : this()
+        public Service(string serviceName, string type, string serviceDescription) : this()
         {
             ServiceID = base.GetNextID();
             ServiceName = serviceName;
+            Type = type;
             ServiceDescription = serviceDescription;
         }
 
@@ -41,6 +45,7 @@ namespace PSS.Business_Logic
         {
             this.ServiceID = row.Field<int>(IDColumn);
             this.ServiceName = row.Field<string>("ServiceName");
+            this.Type = row.Field<string>("Type");
             this.ServiceDescription = row.Field<string>("ServiceLevel");
         }
 
@@ -51,8 +56,8 @@ namespace PSS.Business_Logic
             sql.Append("SET ");
 
             sql.Append("ServiceName = '" + ServiceName + "', ");
-            sql.Append("ServiceDescription = '" + ServiceDescription + "'");
-
+            sql.Append("ServiceDescription = '" + ServiceDescription + "',");
+            sql.Append("[Type] = '" + Type + "'");
             sql.AppendLine("WHERE " + IDColumn + " = " + ServiceID);
 
             return sql.ToString();
@@ -61,11 +66,12 @@ namespace PSS.Business_Logic
         protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO " + TableName + " (ServiceID, ServiceName, ServiceDescription)");
+            sql.AppendLine("INSERT INTO " + TableName + " (ServiceID, ServiceName, [Type], ServiceDescription)");
             sql.Append("VALUES (");
 
             sql.Append(ServiceID + ", ");
             sql.Append("'" + ServiceName + "', ");
+            sql.Append("'" + Type + "', ");
             sql.Append("'" + ServiceDescription + "' ");
 
             sql.AppendLine(");");
@@ -83,7 +89,7 @@ namespace PSS.Business_Logic
             DataTable dt = DataHandler.GetDataTable("SELECT * FROM Service");
             foreach (DataRow service in dt.Rows)
             {
-                services.Add(new Service((int)service[0], (string)service[1], (string)service[2]));
+                services.Add(new Service((int)service[0], (string)service[1], "", (string)service[2])); //TODO: add type
             }
 
             return services;
@@ -94,6 +100,7 @@ namespace PSS.Business_Logic
             return obj is Service service &&
                    ServiceID == service.ServiceID &&
                    ServiceName == service.ServiceName &&
+                   Type == service.Type &&
                    ServiceDescription == service.ServiceDescription;
         }
 
@@ -102,13 +109,14 @@ namespace PSS.Business_Logic
             int hashCode = 723082494;
             hashCode = hashCode * -1521134295 + ServiceID.GetHashCode();
             hashCode = hashCode * -1521134295 + ServiceName.GetHashCode();
+            hashCode = hashCode * -1521134295 + Type.GetHashCode();
             hashCode = hashCode * -1521134295 + ServiceDescription.GetHashCode();
             return hashCode;
         }
 
         public override string ToString()
         {
-            return string.Format("ServiceID: {0} | ServiceName: {1} | ServiceDescription: {2}", ServiceID, ServiceName, ServiceDescription);
+            return string.Format("ServiceID: {0} | ServiceName: {1}| Type: {2} | ServiceDescription: {3}", ServiceID, ServiceName,Type, ServiceDescription);
         }
     }
 }

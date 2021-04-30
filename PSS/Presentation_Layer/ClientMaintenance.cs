@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PSS.Business_Logic;
 
@@ -103,7 +98,7 @@ namespace PSS.Presentation_Layer
             //populate components with current client info
             rbtnIndvidual.Enabled = false;
             rbtnBusiness.Enabled = false;
-            if (currentClient is IndividualClient iCl)
+            if (currentClient is IndividualClient)
             {
                 lblBusinessName.Hide();
                 txtBusinessName.Hide();

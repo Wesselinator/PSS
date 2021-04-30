@@ -9,12 +9,12 @@ namespace PSS.Business_Logic
         protected SingleIntID(string tableName, string idColumn) : base(tableName, idColumn)
         {  }
 
-        protected override int GetNextID()
+        public void SetNextID()
         {
-            return DefaultNextInt();
+            ID = GetNextID();
         }
 
-        private int DefaultNextInt()
+        protected override int GetNextID()
         {
             return base.GetNextIDFor(IDColumn);
         }

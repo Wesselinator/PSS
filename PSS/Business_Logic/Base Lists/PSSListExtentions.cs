@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PSS.Business_Logic
 {
@@ -53,6 +50,12 @@ namespace PSS.Business_Logic
         public static BaseList<Person> GetBusinessClientPeople(this MultiIDList<BusinessClientPerson> BCPs)
         {
             return BCPs.Select(bcp => bcp.Person).ToBaseList();
+        }
+
+
+        public static BaseList<Service> GetServices(this MultiIDList<ServiceLevelAgreement> SLAs)
+        {
+            return SLAs.Select(sla => sla.Service).ToBaseList();
         }
     }
 }

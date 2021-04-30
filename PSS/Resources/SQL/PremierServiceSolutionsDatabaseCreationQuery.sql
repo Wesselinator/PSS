@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS PremierServiceSolutionsDB.BusinessClientPerson
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.BusinessClient
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.IndividualClient
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.[User]
-DROP TABLE IF EXISTS PremierServiceSolutionsDB.Person
+DROP TABLE IF EXISTS PremierServiceSolutionsDB.[Person]
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.[Address]
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.ServiceLevelAgreement
 DROP TABLE IF EXISTS PremierServiceSolutionsDB.[Contract]
@@ -67,7 +67,7 @@ CREATE TABLE [Contract]
  ServiceLevel VARCHAR(15) NOT NULL,
  OfferStartDate DATETIME NOT NULL,
  OfferEndDate DATETIME,
- ContractDurationInMonths INT NOT NULL CHECK(ContractDurationInMonths>0),
+ ContractDurationInMonths INT NOT NULL,
  MonthlyFee MONEY NOT NULL
 )
 
@@ -98,7 +98,7 @@ GO
 --ALTER TABLE ContactInformation
 --ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL)
 
-CREATE TABLE Address
+CREATE TABLE [Address]
 (AddressID INT PRIMARY KEY,
  Street VARCHAR(50) NOT NULL,
  City VARCHAR(30) NOT NULL,
@@ -106,7 +106,9 @@ CREATE TABLE Address
  Province VARCHAR(20) NOT NULL
 )
 
-CREATE TABLE Person
+GO
+
+CREATE TABLE [Person]
 (PersonID INT PRIMARY KEY,
  FirstName VARCHAR(50) NOT NULL,
  LastName VARCHAR(50) NOT NULL,
@@ -115,40 +117,55 @@ CREATE TABLE Person
  TelephoneNumber VARCHAR(12),
  Email VARCHAR(320)
 )
-GO
 
-ALTER TABLE Person
+ALTER TABLE [Person]
 ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL)
+
+GO
 
 CREATE TABLE [User]
 (UserID INT PRIMARY KEY,
  UserName VARCHAR(50) NOT NULL,
- Password VARCHAR(50) NOT NULL,
- Role VARCHAR(50) NOT NULL
+ [Password] VARCHAR(50) NOT NULL,
+ [Role] VARCHAR(50) NOT NULL
 )
+
+GO
 
 CREATE TABLE IndividualClient
 (IndividualClientID INT PRIMARY KEY,
- Type VARCHAR(30) NOT NULL,
- Status VARCHAR(30) NOT NULL,
+ [Type] VARCHAR(30) NOT NULL,
+ [Status] VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
- AddressID INT NOT NULL REFERENCES Address(AddressID)
+ AddressID INT NOT NULL
 )
+
+ALTER TABLE IndividualClient
+ADD CONSTRAINT FK_IndividualClient#Person FOREIGN KEY (IndividualClientID) REFERENCES Person(PersonID),
+	CONSTRAINT FK_IndividualClien#Address FOREIGN KEY (AddressID) REFERENCES Address(AddressID)
+
+GO
 
 CREATE TABLE BusinessClient
 (BusinessClientID INT PRIMARY KEY,
  BusinessName VARCHAR(50),
- Type VARCHAR(30) NOT NULL,
- Status VARCHAR(30) NOT NULL,
+ [Type] VARCHAR(30) NOT NULL,
+ [Status] VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
  PrimaryContactPersonID INT NOT NULL, --If you want to remove this you have to fix the code
- AddressID INT NOT NULL REFERENCES Address(AddressID)
+ AddressID INT NOT NULL
 )
+
+ALTER TABLE BusinessClient
+ADD CONSTRAINT FK_BusinessClient#ContactPerson FOREIGN KEY (PrimaryContactPersonID) REFERENCES Person(PersonID),
+	CONSTRAINT FK_BusinessClient#Address FOREIGN KEY (AddressID) REFERENCES Address(AddressID);
+
+GO
 
 CREATE TABLE BusinessClientPerson
 (BusinessClientID INT REFERENCES BusinessClient(BusinessClientID),
  PersonID INT REFERENCES Person(PersonID),
- Role VARCHAR(50) NOT NULL,
+ [Role] VARCHAR(50) NOT NULL,
  --IsPrimaryContact BIT NOT NULL,
  PRIMARY KEY(BusinessClientID,PersonID)
 )
@@ -169,7 +186,7 @@ CREATE TABLE IndividualClientContract
  EffectiveDate DATETIME NOT NULL, 
 )
 
-GO
+
 
 CREATE TABLE FollowUpReport
 (FollowUpReportID INT PRIMARY KEY,
@@ -201,8 +218,13 @@ GO
 --(FollowUpCallID INT PRIMARY KEY,
 -- IsIssueResolved BIT NOT NULL,
 -- SatisfactionLevel INT NOT NULL,
--- FollowUpReportID INT NOT NULL REFERENCES FollowUpReport(FollowUpReportID)
+-- FollowUpReportID INT NOT NULL
 --)
+
+--ALTER TABLE FollowUpCall
+--ADD CONSTRAINT FK_FollowUpCall#FollowUpReport FOREIGN KEY (FollowUpReportID) REFERENCES FollowUpReport(FollowUpReportID)
+
+--GO
 
 CREATE TABLE ServiceRequest
 (ServiceRequestID INT PRIMARY KEY,
@@ -220,7 +242,6 @@ CREATE TABLE BusinessClientServiceRequest
  ServiceRequestID INT,
  PRIMARY KEY(BusinessClientID,ServiceRequestID)
 )
-GO
 
 CREATE TABLE IndividualClientServiceRequest
 (IndividualClientID INT,
@@ -228,17 +249,23 @@ CREATE TABLE IndividualClientServiceRequest
  PRIMARY KEY(IndividualClientID,ServiceRequestID)
 )
 
+GO
+
 CREATE TABLE Task
 (TaskID INT PRIMARY KEY,
  TaskTitle VARCHAR(80) NOT NULL,
  TaskType VARCHAR(20) NOT NULL,
  TaskDescription VARCHAR(MAX) NOT NULL,
  TaskNotes VARCHAR(MAX),
- ServiceRequestID INT NOT NULL REFERENCES ServiceRequest(ServiceRequestID),
+ ServiceRequestID INT NOT NULL,
  --AddressID INT REFERENCES Address(AddressID), --Add constaint to take business or indiviual client address as default
  DateProcessed DATETIME NOT NULL,
  IsFinished BIT NOT NULL DEFAULT 0
 )
+
+ALTER TABLE Task
+ADD CONSTRAINT FK_Task#ServiceRequest FOREIGN KEY (ServiceRequestID) REFERENCES ServiceRequest(ServiceRequestID);
+
 GO
 
 -- This trigger will automatically insert the customer location as the default location where the service should be performed
@@ -303,12 +330,18 @@ GO
 --ON icsr.IndividualClientID = ic.IndividualClientID
 --WHERE bc.AddressID=1 OR ic.AddressID=1
 
-GO
+--GO
+
 CREATE TABLE Technician
-(TechnicianID INT REFERENCES Person(PersonID) PRIMARY KEY,
+(TechnicianID INT PRIMARY KEY,
  Speciality VARCHAR(30) NOT NULL,
  PayRate MONEY NOT NULL
 )
+
+ALTER TABLE Technician
+ADD CONSTRAINT FK_Technician#Person FOREIGN KEY (TechnicianID) REFERENCES Person(PersonID)
+
+GO
 
 CREATE TABLE TechnicianTask
 (TechnicianTaskID INT PRIMARY KEY,
@@ -317,14 +350,23 @@ CREATE TABLE TechnicianTask
  TimeToArrive DATETIME NOT NULL
 )
 
+ALTER TABLE TechnicianTask
+ADD CONSTRAINT FK_TechnicianTask#Task FOREIGN KEY (TaskID) REFERENCES Task(TaskID)
+
+GO
+
 CREATE TABLE TechnicianTaskFeedback
 (TechnicianTaskFeedbackID INT PRIMARY KEY,
  TimeArrived DATETIME NOT NULL,
  TimeDeparture DATETIME NOT NULL,
  Status VARCHAR(30) NOT NULL,
  Notes VARCHAR(MAX),
- TechnicianTaskID INT NOT NULL REFERENCES TechnicianTask(TechnicianTaskID)
+ TechnicianTaskID INT NOT NULL
 )
+
+ALTER TABLE TechnicianTaskFeedback
+ADD CONSTRAINT FK_TechnicianTaskFeedback#Person FOREIGN KEY (TechnicianTaskID) REFERENCES TechnicianTask(TechnicianTaskID);
+
 GO
 
 CREATE TABLE CallInstance
@@ -342,8 +384,10 @@ CREATE TABLE CallChangeAssociation
 )
 GO
 
+---------------------------SAMPLE DATA START---------------------------
+
 --Can possibly Change Name To ProductOrService, add column for type
-INSERT INTO Service (ServiceID, ServiceName, [Type], ServiceDescription)
+INSERT INTO [Service] (ServiceID, ServiceName, [Type], ServiceDescription)
 	VALUES (1,'On Site Repairs','Service','This Service involves calling out a specialized technician to fix an issue with a product on the customer''s site'),
 		   (2,'Pickup Repairs','Service','This Service involves fetching the product at the customer location and fixing it on PSS company grounds'),
 		   (3,'Customer Phone Calls','Service', 'This service determines the kind of calling support customers enjoy from the call centre'),
@@ -364,7 +408,7 @@ INSERT INTO Service (ServiceID, ServiceName, [Type], ServiceDescription)
 		   (18,'PSS Medium Workstation','Workstation Computer','Model Custom 2301/AMD RYZEN 5 3600 (6 Cores, 12 Threads, 35MB Cache, Turbo 4.2GHz)/16GB RAM/512GB NVME SSD/1TB HDD/Quadro P400'),
 		   (19,'PSS High End Workstation','Workstation Computer','Model Custom 2531/AMD RYZEN 9 5950X (16 Cores, 32 Threads, 3.4GHz, 72MB Cache, Turbo 4.9GHz+)/32GB RAM/2TB NVME SSD/NVIDIA QUADRO P1000')
 		   
-INSERT INTO Contract (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MonthlyFee)
+INSERT INTO [Contract] (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MonthlyFee)
 	VALUES (1, 'Printing Necessities', 'Peasant', '2021/04/01', NULL, 36, 400),
 		   (2, 'Basic Printing', 'Commoner', '2021/04/01', NULL, 36, 600),
 		   (3, 'Premium Printing','Noble','2021/04/01',NULL,36, 900),
@@ -475,7 +519,7 @@ INSERT INTO ServiceLevelAgreement (ServiceID, ContractID, Agreement, ServiceQuan
 		   (6, 14, 'Applies to product failure resulting from a production fault or inability to repair product on customer premise',-1)
 
 GO
-INSERT INTO Person (PersonID, FirstName, LastName, BirthDate, CellPhoneNumber, TelephoneNumber, Email)
+INSERT INTO [Person] (PersonID, FirstName, LastName, BirthDate, CellPhoneNumber, TelephoneNumber, Email)
 	VALUES (1, 'Pieter', 'Du Toit', '1990/12/31', '+27824428419', NULL, 'Piet.toit@gmail.com'),
 		   (2, 'Jean', 'Van Rensburg', '1985/07/21', '+27762931242', NULL, 'jeanvrens@gmail.com'),
 		   (3, 'Jan', 'Coetzee', '1983/06/27', '+27762931847', NULL, 'jantutoring@gmail.com'),
@@ -489,7 +533,7 @@ INSERT INTO Person (PersonID, FirstName, LastName, BirthDate, CellPhoneNumber, T
 		   (15, 'Delma', 'Tadiwa', '1995/05/22', '+27825539658', NULL, 'd.tadiwa@gmail.com'),
 		   (17, 'Blessing', 'Moyo', '1988/07/25', '+27618824356', NULL, 'blessingmoyo@gmail.com')
 
-INSERT INTO Address (AddressID, Street, City, PostalCode, Province)
+INSERT INTO [Address] (AddressID, Street, City, PostalCode, Province)
 	VALUES (1, '961 Church St', 'Pretoria', '0155', 'Gauteng'),
 		   (2, '127 Willowmore Street', 'Pretoria', '0182', 'Gauteng'),
 		   (3, '1266 Diesel Street', 'Randfontein', '1767', 'Gauteng'),

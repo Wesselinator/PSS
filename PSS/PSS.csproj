@@ -89,6 +89,12 @@
     <Compile Include="Business_Logic\User.cs" />
     <Compile Include="Data_Access\DataEngine.cs" />
     <Compile Include="Data_Access\DataHandler.cs" />
+    <Compile Include="Presentation_Layer\ArrowlessNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Presentation_Layer\ArrowlessNumericUpDown.Designer.cs">
+      <DependentUpon>ArrowlessNumericUpDown.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentation_Layer\CallCentre.cs">
       <SubType>Form</SubType>
     </Compile>

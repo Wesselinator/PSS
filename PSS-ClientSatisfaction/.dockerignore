@@ -6,3 +6,5 @@ app.js.map
 
 bin
 obj
+
+*.njsproj*
