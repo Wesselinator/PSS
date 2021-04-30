@@ -75,7 +75,7 @@ namespace PSS.Presentation_Layer
         {
             if (currentRequest is null)
             {
-                currentRequest = new ServiceRequest(txtProblemTitle.Text, cbxProblemType.Text, rtbProblem.Text, DateTime.Now); //creates a new one
+                currentRequest = new ServiceRequest(txtProblemTitle.Text, cbxProblemType.Text, rtbProblem.Text, DateTime.Now,0); //creates a new one //TODO: Add adress ID
                 currentClient.AddServiceRequest(currentRequest);
             }
             else

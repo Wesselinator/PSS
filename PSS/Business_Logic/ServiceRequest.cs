@@ -14,6 +14,8 @@ namespace PSS.Business_Logic
         public string Description { get; set; }
         public DateTime DateReceived { get; set; }
 
+        public int AddressID { get; set; } //TODO: Check if this is correct or if it needs to be an adress object
+
         public string DisplayMember => Title;
 
         private static readonly string tableName = "ServiceRequest";
@@ -22,22 +24,24 @@ namespace PSS.Business_Logic
         public ServiceRequest() : base(tableName, idColumn)
         { }
 
-        public ServiceRequest(int serviceRequestID, string title, string type, string description, DateTime dateReceived) : this()
+        public ServiceRequest(int serviceRequestID, string title, string type, string description, DateTime dateReceived, int addressID) : this()
         {
             this.ServiceRequestID = serviceRequestID;
             this.Title = title;
             this.Type = type;
             this.Description = description;
             this.DateReceived = dateReceived;
+            this.AddressID = addressID;
         }
 
-        public ServiceRequest(string title, string type, string description, DateTime dateReceived) : this()
+        public ServiceRequest(string title, string type, string description, DateTime dateReceived, int addressID) : this()
         {
             this.ServiceRequestID = base.GetNextID();
             this.Title = title;
             this.Type = type;
             this.Description = description;
             this.DateReceived = dateReceived;
+            this.AddressID = addressID;
         }
 
         #region Database
@@ -65,7 +69,8 @@ namespace PSS.Business_Logic
             sql.Append("ServiceRequestTitle = '" + Title + "',");
             sql.Append("ServiceRequestType = '" + Type + "',");
             sql.AppendLine("ServiceRequestDescription = '" + Description + "', ");
-            sql.AppendLine("DateReceived = '" + DateReceived.ToString("s") + "'");
+            sql.AppendLine("DateReceived = '" + DateReceived.ToString("s") + "' ,");
+            sql.AppendLine("AddressID = " + AddressID + " ");
 
             sql.AppendLine("WHERE " + IDColumn + " = " + ServiceRequestID);
 
@@ -75,14 +80,15 @@ namespace PSS.Business_Logic
         protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO " + TableName);
+            sql.AppendLine("INSERT INTO " + TableName + " (ServiceRequestID, ServiceRequestTitle, ServiceRequestType, ServiceRequestDescription, DateReceived, AddressID) ");
             sql.Append("VALUES (");
 
             sql.Append(ServiceRequestID + ", ");
             sql.Append("'" + Title + "', ");
             sql.Append("'" + Type + "', ");
             sql.Append("'" + Description + "', ");
-            sql.Append("'" + DateReceived.ToString("s") + "'");
+            sql.Append("'" + DateReceived.ToString("s") + "' ,");
+            sql.Append(" " + AddressID.ToString() + "");
 
             sql.AppendLine(");");
 
@@ -97,7 +103,9 @@ namespace PSS.Business_Logic
                    ServiceRequestID == request.ServiceRequestID &&
                    Title == request.Title &&
                    Type == request.Type &&
-                   Description == request.Description;
+                   Description == request.Description &&
+                   AddressID.Equals(request.AddressID);
+                   
         }
 
         public override int GetHashCode()
@@ -107,12 +115,13 @@ namespace PSS.Business_Logic
             hashCode = hashCode * -1521134295 + Title.GetHashCode();
             hashCode = hashCode * -1521134295 + Type.GetHashCode();
             hashCode = hashCode * -1521134295 + Description.GetHashCode();
+            hashCode = hashCode * -1521134295 + AddressID.GetHashCode(); //TODO: Check if correct
             return hashCode;
         }
 
         public override string ToString()
         {
-            return string.Format("ServiceRequestID: {0} | Title: {1} | Type: {2} | Description: {3} ", ServiceRequestID, Title, Type, Description);
+            return string.Format("ServiceRequestID: {0} | Title: {1} | Type: {2} | Description: {3} | AddressID: {4}", ServiceRequestID, Title, Type, Description, AddressID);
         }
     }
 }
