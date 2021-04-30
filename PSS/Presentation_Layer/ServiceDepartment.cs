@@ -171,7 +171,7 @@ namespace PSS.Presentation_Layer
         {
             //TODO: Add Task type
             Task aTask = new Task(txtTaskTitle.Text, txtTaskDescription.Text, "", rtbNotes.Text, currentRequest, dtpTaskDate.Value, false); //New task created
-            TechnicianTask techTask = new TechnicianTask(aTask, currentTech, dtpTaskDate.Value); //New Tech Task
+            TechnicianTask techTask = new TechnicianTask(aTask, currentTech, dtpTaskDate.Value, dtpTaskDate.Value); //New Tech Task //TODO: add datetodepart
 
             AllUnfinishedTasks.Add(aTask); //reduce database calls
             AllTechnicianTasks.Add(techTask);  //reduce database calls
