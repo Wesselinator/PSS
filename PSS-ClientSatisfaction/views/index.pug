@@ -1,12 +1,123 @@
 extends layout
-
+//-This is not working dont look at this aids
 block content 
   div#heading   
     h1#mainheading= title
     p#welcome Welcome to Premier Service Solution
   div#maindiv
-    div#voidleft
+    div#voidleft 
     div#content
-    //- content goes here
+    ul.form-section.page-section
+        li#cid_1.form-input-wide(data-type='control_head')
+          .form-header-group.header-large
+            .header-text.httal.htvam
+              h1#header_1.form-header(data-component='header')
+                | Premier Service Solutions
+        li#cid_4.form-input-wide(data-type='control_head')
+          .form-header-group.header-default
+            .header-text.httal.htvam
+              h2#header_4.form-header(data-component='header')
+                | Client satisfaction form
+              #subHeader_4.form-subHeader
+                | For creating followup reports
+        li#id_7.form-line(data-type='control_radio')
+          label#label_7.form-label.form-label-top.form-label-auto(for='input_7')  Select a client type 
+          #cid_7.form-input-wide(data-layout='full')
+            .form-single-column(role='group' aria-labelledby='label_7' data-component='radio')
+              span.form-radio-item(style='clear:left')
+                span.dragger-item
+                input#input_7_0.form-radio(type='radio' name='q7_selectA7' value='Individual Client')
+                label#label_input_7_0(for='input_7_0')  Individual Client 
+              span.form-radio-item(style='clear:left')
+                span.dragger-item
+                input#input_7_1.form-radio(type='radio' name='q7_selectA7' value='Business Client')
+                label#label_input_7_1(for='input_7_1')  Business Client 
+        li#id_6.form-line(data-type='control_dropdown')
+          label#label_6.form-label.form-label-top.form-label-auto(for='input_6')  Select a client 
+          #cid_6.form-input-wide(data-layout='half')
+            select#input_6.form-dropdown(name='q6_selectA' style='width:310px' data-component='dropdown' aria-labelledby='label_6')
+              option(value='')  Please Select 
+              option(value='')   
+        li#id_8.form-line(data-type='control_textbox')
+          label#label_8.form-label.form-label-top.form-label-auto(for='input_8')  Follow up Title 
+          #cid_8.form-input-wide(data-layout='half')
+            input#input_8.form-textbox(type='text' name='q8_followUp' data-type='input-textbox' style='width:310px' size='310' value='' data-component='textbox' aria-labelledby='label_8')
+        li#id_9.form-line(data-type='control_dropdown')
+          label#label_9.form-label.form-label-top.form-label-auto(for='input_9')  Follow up Type 
+          #cid_9.form-input-wide(data-layout='half')
+            select#input_9.form-dropdown(name='q9_followUp9' style='width:310px' data-component='dropdown' aria-labelledby='label_9')
+              option(value='')  Please Select 
+              option(value='')   
+        li#id_10.form-line(data-type='control_textarea')
+          label#label_10.form-label.form-label-top.form-label-auto(for='input_10')  Follow up Description 
+          #cid_10.form-input-wide(data-layout='full')
+            textarea#input_10.form-textarea.custom-hint-group.form-custom-hint(name='q10_followUp10' style='width:648px;height:163px' data-component='textarea' aria-labelledby='label_10' data-customhint='Type here...' customhinted='true' placeholder='Type here...' spellcheck='false')
+        li#id_14.form-line(data-type='control_radio')
+          label#label_14.form-label.form-label-top.form-label-auto(for='input_14')  Mode for Date/time of the follow up (Can leave specify out) 
+          #cid_14.form-input-wide(data-layout='full')
+            .form-single-column(role='group' aria-labelledby='label_14' data-component='radio')
+              span.form-radio-item(style='clear:left')
+                span.dragger-item
+                input#input_14_0.form-radio(type='radio' name='q14_modeFor' value='Use Current Date/Time')
+                label#label_input_14_0(for='input_14_0')  Use Current Date/Time 
+              span.form-radio-item(style='clear:left')
+                span.dragger-item
+                input#input_14_1.form-radio(type='radio' name='q14_modeFor' value='Specify')
+                label#label_input_14_1(for='input_14_1')  Specify 
+        li#id_12.form-line(data-type='control_datetime')
+          label#label_12.form-label.form-label-top.form-label-auto(for='lite_mode_12')  Date/Time the the follow up occurred/ was received 
+          #cid_12.form-input-wide(data-layout='half')
+            div(data-wrapper-react='true')
+              div(style='display:none')
+                span.form-sub-label-container(style='vertical-align:top')
+                  input#month_12.form-textbox(type='tel' class='validate[limitDate]' name='q12_datetimeThe[month]' size='2' data-maxlength='2' data-age='' maxlength='2' value='' autocomplete='off' aria-labelledby='label_12 sublabel_12_month' im-insert='false')
+                  span.date-separate(aria-hidden='true')
+                    | -
+                  label#sublabel_12_month.form-sub-label(for='month_12' style='min-height:13px' aria-hidden='false')  Month 
+                span.form-sub-label-container(style='vertical-align:top')
+                  input#day_12.form-textbox(type='tel' class='validate[limitDate]' name='q12_datetimeThe[day]' size='2' data-maxlength='2' data-age='' maxlength='2' value='' autocomplete='off' aria-labelledby='label_12 sublabel_12_day' im-insert='false')
+                  span.date-separate(aria-hidden='true')
+                    | -
+                  label#sublabel_12_day.form-sub-label(for='day_12' style='min-height:13px' aria-hidden='false')  Day 
+                span.form-sub-label-container(style='vertical-align:top')
+                  input#year_12.form-textbox(type='tel' class='validate[limitDate]' name='q12_datetimeThe[year]' size='4' data-maxlength='4' data-age='' maxlength='4' value='' autocomplete='off' aria-labelledby='label_12 sublabel_12_year')
+                  label#sublabel_12_year.form-sub-label(for='year_12' style='min-height:13px' aria-hidden='false')  Year 
+                span.form-sub-label-container(style='vertical-align:top')
+                  input#lite_mode_12.form-textbox(type='text' class='validate[limitDate, validateLiteDate]' size='12' data-maxlength='12' maxlength='12' data-age='' value='' data-format='mmddyyyy' data-seperator='-' placeholder='MM-DD-YYYY' autocomplete='off' aria-labelledby='label_12 sublabel_12_litemode' im-insert='false')
+                  img#input_12_pick.newDefaultTheme-dateIcon.icon-liteMode(alt='Pick a Date' src='https://cdn.jotfor.ms/images/calendar.png' data-component='datetime' aria-hidden='true' data-allow-time='No' data-version='v2')
+                  label#sublabel_12_litemode.form-sub-label(for='lite_mode_12' style='min-height:13px' aria-hidden='false')  Date 
+        li#id_15.form-line(data-type='control_radio')
+          label#label_15.form-label.form-label-top.form-label-auto(for='input_15')  Is issue resolved 
+          #cid_15.form-input-wide(data-layout='full')
+            .form-single-column(role='group' aria-labelledby='label_15' data-component='radio')
+              span.form-radio-item(style='clear:left')
+                span.dragger-item
+                input#input_15_0.form-radio(type='radio' name='q15_isIssue' value='Yes')
+                label#label_input_15_0(for='input_15_0')  Yes 
+              span.form-radio-item(style='clear:left')
+                span.dragger-item
+                input#input_15_1.form-radio(type='radio' name='q15_isIssue' value='No')
+                label#label_input_15_1(for='input_15_1')  No 
+        li#id_17.form-line(data-type='control_spinner')
+          label#label_17.form-label.form-label-top.form-label-auto(for='input_17')  Satisfaction Level 
+          #cid_17.form-input-wide(data-layout='half')
+            div(data-wrapper-react='true')
+              div(tabindex='')
+                .form-spinner(style='width: 310px;')
+                  .form-spinner-input-td
+                    input#input_17.form-spinner-input.form-textbox(type='number' name='q17_satisfactionLevel' data-type='input-spinner' value='' data-component='spinner' aria-labelledby='label_17' size='5' autocomplete='off')
+                  .form-spinner-button-container
+                    .form-spinner-button.form-spinner-up(style='cursor: default;')
+                      img.form-spinner-image.form-spinner-up-image(src='//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg' alt='up arrow')
+                    .form-spinner-button.form-spinner-down(style='cursor: default;')
+                      img.form-spinner-image.form-spinner-down-image(src='//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg' alt='down arrow')
+        li#id_2.form-line(data-type='control_button')
+          #cid_2.form-input-wide(data-layout='full')
+            .form-buttons-wrapper.form-buttons-auto.jsTest-button-wrapperField(data-align='auto')
+              button#input_2.form-submit-button.submit-button.jf-form-buttons.jsTest-submitField(type='submit' data-component='button' data-content='')
+                | Submit
+        li(style='display:none')
+          | Should be Empty:
+          input(type='text' name='website' value='')   
     div#voidright
   
