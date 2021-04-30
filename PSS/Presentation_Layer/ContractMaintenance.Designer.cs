@@ -30,6 +30,10 @@ namespace PSS.Presentation_Layer
         private void InitializeComponent()
         {
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.rbModifyService = new System.Windows.Forms.RadioButton();
+            this.rbCreateService = new System.Windows.Forms.RadioButton();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnConfirmService = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -41,15 +45,20 @@ namespace PSS.Presentation_Layer
             this.btnNewContract = new System.Windows.Forms.Button();
             this.btnStopContract = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnConfirmContract = new System.Windows.Forms.Button();
-            this.rtbPerformanceExpectations = new System.Windows.Forms.RichTextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.btnAddServiceToContract = new System.Windows.Forms.Button();
-            this.cbxContractService = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.btnRemoveContract = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.rbSpecifiedQuantity = new System.Windows.Forms.RadioButton();
+            this.rbunlimited = new System.Windows.Forms.RadioButton();
+            this.lblQuantity = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.rtbPerformanceExpectations = new System.Windows.Forms.RichTextBox();
             this.lstvCurrentContractServices = new System.Windows.Forms.ListView();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnRemoveContract = new System.Windows.Forms.Button();
+            this.btnAddServiceToContract = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cbxContractService = new System.Windows.Forms.ComboBox();
+            this.btnConfirmContract = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtMonthlyFee = new System.Windows.Forms.TextBox();
             this.txtContractName = new System.Windows.Forms.TextBox();
@@ -82,24 +91,15 @@ namespace PSS.Presentation_Layer
             this.label16 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.btnBack = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.rbCreateService = new System.Windows.Forms.RadioButton();
-            this.rbModifyService = new System.Windows.Forms.RadioButton();
-            this.label18 = new System.Windows.Forms.Label();
-            this.lblQuantity = new System.Windows.Forms.Label();
-            this.rbunlimited = new System.Windows.Forms.RadioButton();
-            this.rbSpecifiedQuantity = new System.Windows.Forms.RadioButton();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -122,6 +122,52 @@ namespace PSS.Presentation_Layer
             this.groupBox3.TabIndex = 47;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Create or Modify Services";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(29, 23);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(79, 20);
+            this.label18.TabIndex = 39;
+            this.label18.Text = "Operation";
+            // 
+            // rbModifyService
+            // 
+            this.rbModifyService.AutoSize = true;
+            this.rbModifyService.Location = new System.Drawing.Point(215, 24);
+            this.rbModifyService.Name = "rbModifyService";
+            this.rbModifyService.Size = new System.Drawing.Size(80, 24);
+            this.rbModifyService.TabIndex = 38;
+            this.rbModifyService.TabStop = true;
+            this.rbModifyService.Text = "Modify";
+            this.rbModifyService.UseVisualStyleBackColor = true;
+            // 
+            // rbCreateService
+            // 
+            this.rbCreateService.AutoSize = true;
+            this.rbCreateService.Location = new System.Drawing.Point(105, 21);
+            this.rbCreateService.Name = "rbCreateService";
+            this.rbCreateService.Size = new System.Drawing.Size(82, 24);
+            this.rbCreateService.TabIndex = 37;
+            this.rbCreateService.TabStop = true;
+            this.rbCreateService.Text = "Create";
+            this.rbCreateService.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Gauteng",
+            "Free State",
+            "North West"});
+            this.comboBox1.Location = new System.Drawing.Point(105, 97);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(169, 28);
+            this.comboBox1.TabIndex = 36;
+            this.comboBox1.Text = "Choose or type...";
             // 
             // btnConfirmService
             // 
@@ -154,7 +200,7 @@ namespace PSS.Presentation_Layer
             this.txtServiceType.Location = new System.Drawing.Point(29, 100);
             this.txtServiceType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.txtServiceType.Name = "txtServiceType";
-            this.txtServiceType.Size = new System.Drawing.Size(31, 13);
+            this.txtServiceType.Size = new System.Drawing.Size(43, 20);
             this.txtServiceType.TabIndex = 32;
             this.txtServiceType.Text = "Type";
             // 
@@ -168,7 +214,7 @@ namespace PSS.Presentation_Layer
             this.cbxMainService.Location = new System.Drawing.Point(105, 59);
             this.cbxMainService.Margin = new System.Windows.Forms.Padding(2);
             this.cbxMainService.Name = "cbxMainService";
-            this.cbxMainService.Size = new System.Drawing.Size(169, 21);
+            this.cbxMainService.Size = new System.Drawing.Size(169, 28);
             this.cbxMainService.TabIndex = 24;
             this.cbxMainService.Text = "Choose or type...";
             // 
@@ -191,7 +237,7 @@ namespace PSS.Presentation_Layer
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(700, 474);
+            this.tabControl1.Size = new System.Drawing.Size(863, 565);
             this.tabControl1.TabIndex = 48;
             // 
             // tabPage1
@@ -205,7 +251,7 @@ namespace PSS.Presentation_Layer
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(692, 448);
+            this.tabPage1.Size = new System.Drawing.Size(855, 532);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Contracts";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -252,73 +298,64 @@ namespace PSS.Presentation_Layer
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Contract Information";
             // 
-            // btnConfirmContract
+            // groupBox4
             // 
-            this.btnConfirmContract.Location = new System.Drawing.Point(86, 277);
-            this.btnConfirmContract.Name = "btnConfirmContract";
-            this.btnConfirmContract.Size = new System.Drawing.Size(136, 32);
-            this.btnConfirmContract.TabIndex = 54;
-            this.btnConfirmContract.Text = "Confirm Contract";
-            this.btnConfirmContract.UseVisualStyleBackColor = true;
+            this.groupBox4.Controls.Add(this.numericUpDown1);
+            this.groupBox4.Controls.Add(this.rbSpecifiedQuantity);
+            this.groupBox4.Controls.Add(this.rbunlimited);
+            this.groupBox4.Controls.Add(this.lblQuantity);
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Controls.Add(this.rtbPerformanceExpectations);
+            this.groupBox4.Controls.Add(this.lstvCurrentContractServices);
+            this.groupBox4.Controls.Add(this.label14);
+            this.groupBox4.Controls.Add(this.btnRemoveContract);
+            this.groupBox4.Controls.Add(this.btnAddServiceToContract);
+            this.groupBox4.Controls.Add(this.label13);
+            this.groupBox4.Controls.Add(this.cbxContractService);
+            this.groupBox4.Location = new System.Drawing.Point(302, 13);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(332, 339);
+            this.groupBox4.TabIndex = 55;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Contract Services and SAL";
             // 
-            // rtbPerformanceExpectations
+            // numericUpDown1
             // 
-            this.rtbPerformanceExpectations.Location = new System.Drawing.Point(20, 192);
-            this.rtbPerformanceExpectations.Name = "rtbPerformanceExpectations";
-            this.rtbPerformanceExpectations.Size = new System.Drawing.Size(290, 47);
-            this.rtbPerformanceExpectations.TabIndex = 53;
-            this.rtbPerformanceExpectations.Text = "";
+            this.numericUpDown1.Location = new System.Drawing.Point(161, 272);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(64, 26);
+            this.numericUpDown1.TabIndex = 57;
             // 
-            // label14
+            // rbSpecifiedQuantity
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(17, 171);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(58, 13);
-            this.label14.TabIndex = 52;
-            this.label14.Text = "Agreement";
+            this.rbSpecifiedQuantity.AutoSize = true;
+            this.rbSpecifiedQuantity.Location = new System.Drawing.Point(70, 275);
+            this.rbSpecifiedQuantity.Name = "rbSpecifiedQuantity";
+            this.rbSpecifiedQuantity.Size = new System.Drawing.Size(90, 24);
+            this.rbSpecifiedQuantity.TabIndex = 56;
+            this.rbSpecifiedQuantity.TabStop = true;
+            this.rbSpecifiedQuantity.Text = "Specific";
+            this.rbSpecifiedQuantity.UseVisualStyleBackColor = true;
             // 
-            // btnAddServiceToContract
+            // rbunlimited
             // 
-            this.btnAddServiceToContract.Location = new System.Drawing.Point(89, 301);
-            this.btnAddServiceToContract.Name = "btnAddServiceToContract";
-            this.btnAddServiceToContract.Size = new System.Drawing.Size(136, 32);
-            this.btnAddServiceToContract.TabIndex = 51;
-            this.btnAddServiceToContract.Text = "Add Service to contract";
-            this.btnAddServiceToContract.UseVisualStyleBackColor = true;
+            this.rbunlimited.AutoSize = true;
+            this.rbunlimited.Location = new System.Drawing.Point(70, 252);
+            this.rbunlimited.Name = "rbunlimited";
+            this.rbunlimited.Size = new System.Drawing.Size(100, 24);
+            this.rbunlimited.TabIndex = 55;
+            this.rbunlimited.TabStop = true;
+            this.rbunlimited.Text = "Unlimited";
+            this.rbunlimited.UseVisualStyleBackColor = true;
             // 
-            // cbxContractService
+            // lblQuantity
             // 
-            this.cbxContractService.FormattingEnabled = true;
-            this.cbxContractService.Items.AddRange(new object[] {
-            "Gauteng",
-            "Free State",
-            "North West"});
-            this.cbxContractService.Location = new System.Drawing.Point(112, 145);
-            this.cbxContractService.Margin = new System.Windows.Forms.Padding(2);
-            this.cbxContractService.Name = "cbxContractService";
-            this.cbxContractService.Size = new System.Drawing.Size(169, 21);
-            this.cbxContractService.TabIndex = 50;
-            this.cbxContractService.Text = "Choose...";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(17, 148);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(61, 20);
-            this.label13.TabIndex = 49;
-            this.label13.Text = "Service";
-            // 
-            // btnRemoveContract
-            // 
-            this.btnRemoveContract.Location = new System.Drawing.Point(174, 20);
-            this.btnRemoveContract.Name = "btnRemoveContract";
-            this.btnRemoveContract.Size = new System.Drawing.Size(136, 32);
-            this.btnRemoveContract.TabIndex = 48;
-            this.btnRemoveContract.Text = "Remove Selected";
-            this.btnRemoveContract.UseVisualStyleBackColor = true;
+            this.lblQuantity.AutoSize = true;
+            this.lblQuantity.Location = new System.Drawing.Point(18, 251);
+            this.lblQuantity.Name = "lblQuantity";
+            this.lblQuantity.Size = new System.Drawing.Size(68, 20);
+            this.lblQuantity.TabIndex = 54;
+            this.lblQuantity.Text = "Quantity";
             // 
             // label12
             // 
@@ -330,6 +367,14 @@ namespace PSS.Presentation_Layer
             this.label12.TabIndex = 48;
             this.label12.Text = "Current Contract Services";
             // 
+            // rtbPerformanceExpectations
+            // 
+            this.rtbPerformanceExpectations.Location = new System.Drawing.Point(20, 192);
+            this.rtbPerformanceExpectations.Name = "rtbPerformanceExpectations";
+            this.rtbPerformanceExpectations.Size = new System.Drawing.Size(290, 47);
+            this.rtbPerformanceExpectations.TabIndex = 53;
+            this.rtbPerformanceExpectations.Text = "";
+            // 
             // lstvCurrentContractServices
             // 
             this.lstvCurrentContractServices.HideSelection = false;
@@ -339,6 +384,66 @@ namespace PSS.Presentation_Layer
             this.lstvCurrentContractServices.TabIndex = 46;
             this.lstvCurrentContractServices.UseCompatibleStateImageBehavior = false;
             this.lstvCurrentContractServices.View = System.Windows.Forms.View.List;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(17, 171);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(88, 20);
+            this.label14.TabIndex = 52;
+            this.label14.Text = "Agreement";
+            // 
+            // btnRemoveContract
+            // 
+            this.btnRemoveContract.Location = new System.Drawing.Point(174, 20);
+            this.btnRemoveContract.Name = "btnRemoveContract";
+            this.btnRemoveContract.Size = new System.Drawing.Size(136, 32);
+            this.btnRemoveContract.TabIndex = 48;
+            this.btnRemoveContract.Text = "Remove Selected";
+            this.btnRemoveContract.UseVisualStyleBackColor = true;
+            // 
+            // btnAddServiceToContract
+            // 
+            this.btnAddServiceToContract.Location = new System.Drawing.Point(89, 301);
+            this.btnAddServiceToContract.Name = "btnAddServiceToContract";
+            this.btnAddServiceToContract.Size = new System.Drawing.Size(136, 32);
+            this.btnAddServiceToContract.TabIndex = 51;
+            this.btnAddServiceToContract.Text = "Add Service to contract";
+            this.btnAddServiceToContract.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(17, 148);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(61, 20);
+            this.label13.TabIndex = 49;
+            this.label13.Text = "Service";
+            // 
+            // cbxContractService
+            // 
+            this.cbxContractService.FormattingEnabled = true;
+            this.cbxContractService.Items.AddRange(new object[] {
+            "Gauteng",
+            "Free State",
+            "North West"});
+            this.cbxContractService.Location = new System.Drawing.Point(112, 145);
+            this.cbxContractService.Margin = new System.Windows.Forms.Padding(2);
+            this.cbxContractService.Name = "cbxContractService";
+            this.cbxContractService.Size = new System.Drawing.Size(169, 28);
+            this.cbxContractService.TabIndex = 50;
+            this.cbxContractService.Text = "Choose...";
+            // 
+            // btnConfirmContract
+            // 
+            this.btnConfirmContract.Location = new System.Drawing.Point(86, 277);
+            this.btnConfirmContract.Name = "btnConfirmContract";
+            this.btnConfirmContract.Size = new System.Drawing.Size(136, 32);
+            this.btnConfirmContract.TabIndex = 54;
+            this.btnConfirmContract.Text = "Confirm Contract";
+            this.btnConfirmContract.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -355,7 +460,7 @@ namespace PSS.Presentation_Layer
             this.txtMonthlyFee.Location = new System.Drawing.Point(109, 226);
             this.txtMonthlyFee.Margin = new System.Windows.Forms.Padding(2);
             this.txtMonthlyFee.Name = "txtMonthlyFee";
-            this.txtMonthlyFee.Size = new System.Drawing.Size(169, 20);
+            this.txtMonthlyFee.Size = new System.Drawing.Size(169, 26);
             this.txtMonthlyFee.TabIndex = 45;
             // 
             // txtContractName
@@ -363,7 +468,7 @@ namespace PSS.Presentation_Layer
             this.txtContractName.Location = new System.Drawing.Point(109, 40);
             this.txtContractName.Margin = new System.Windows.Forms.Padding(2);
             this.txtContractName.Name = "txtContractName";
-            this.txtContractName.Size = new System.Drawing.Size(169, 20);
+            this.txtContractName.Size = new System.Drawing.Size(169, 26);
             this.txtContractName.TabIndex = 35;
             // 
             // label11
@@ -391,7 +496,7 @@ namespace PSS.Presentation_Layer
             this.txtContractDuration.Location = new System.Drawing.Point(132, 184);
             this.txtContractDuration.Margin = new System.Windows.Forms.Padding(2);
             this.txtContractDuration.Name = "txtContractDuration";
-            this.txtContractDuration.Size = new System.Drawing.Size(146, 20);
+            this.txtContractDuration.Size = new System.Drawing.Size(146, 26);
             this.txtContractDuration.TabIndex = 43;
             // 
             // cbxContractSL
@@ -404,7 +509,7 @@ namespace PSS.Presentation_Layer
             this.cbxContractSL.Location = new System.Drawing.Point(109, 76);
             this.cbxContractSL.Margin = new System.Windows.Forms.Padding(2);
             this.cbxContractSL.Name = "cbxContractSL";
-            this.cbxContractSL.Size = new System.Drawing.Size(169, 21);
+            this.cbxContractSL.Size = new System.Drawing.Size(169, 28);
             this.cbxContractSL.TabIndex = 37;
             this.cbxContractSL.Text = "Choose...";
             // 
@@ -434,7 +539,7 @@ namespace PSS.Presentation_Layer
             this.dtpContractEnd.Location = new System.Drawing.Point(127, 144);
             this.dtpContractEnd.Margin = new System.Windows.Forms.Padding(2);
             this.dtpContractEnd.Name = "dtpContractEnd";
-            this.dtpContractEnd.Size = new System.Drawing.Size(151, 20);
+            this.dtpContractEnd.Size = new System.Drawing.Size(151, 26);
             this.dtpContractEnd.TabIndex = 41;
             // 
             // dtpContractStart
@@ -443,7 +548,7 @@ namespace PSS.Presentation_Layer
             this.dtpContractStart.Location = new System.Drawing.Point(127, 109);
             this.dtpContractStart.Margin = new System.Windows.Forms.Padding(2);
             this.dtpContractStart.Name = "dtpContractStart";
-            this.dtpContractStart.Size = new System.Drawing.Size(151, 20);
+            this.dtpContractStart.Size = new System.Drawing.Size(151, 26);
             this.dtpContractStart.TabIndex = 39;
             // 
             // label7
@@ -466,7 +571,7 @@ namespace PSS.Presentation_Layer
             this.cbxAllContracts.Location = new System.Drawing.Point(105, 24);
             this.cbxAllContracts.Margin = new System.Windows.Forms.Padding(2);
             this.cbxAllContracts.Name = "cbxAllContracts";
-            this.cbxAllContracts.Size = new System.Drawing.Size(169, 21);
+            this.cbxAllContracts.Size = new System.Drawing.Size(169, 28);
             this.cbxAllContracts.TabIndex = 26;
             this.cbxAllContracts.Text = "Choose...";
             // 
@@ -487,7 +592,7 @@ namespace PSS.Presentation_Layer
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(692, 448);
+            this.tabPage2.Size = new System.Drawing.Size(855, 532);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Services";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -545,7 +650,7 @@ namespace PSS.Presentation_Layer
             this.txtServiceLevelName.Location = new System.Drawing.Point(138, 92);
             this.txtServiceLevelName.Margin = new System.Windows.Forms.Padding(2);
             this.txtServiceLevelName.Name = "txtServiceLevelName";
-            this.txtServiceLevelName.Size = new System.Drawing.Size(169, 20);
+            this.txtServiceLevelName.Size = new System.Drawing.Size(169, 26);
             this.txtServiceLevelName.TabIndex = 33;
             // 
             // label2
@@ -553,7 +658,7 @@ namespace PSS.Presentation_Layer
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(44, 142);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 13);
+            this.label2.Size = new System.Drawing.Size(148, 20);
             this.label2.TabIndex = 32;
             this.label2.Text = "Service Level Name";
             // 
@@ -578,7 +683,7 @@ namespace PSS.Presentation_Layer
             this.cbxServiceForSL.Location = new System.Drawing.Point(138, 51);
             this.cbxServiceForSL.Margin = new System.Windows.Forms.Padding(2);
             this.cbxServiceForSL.Name = "cbxServiceForSL";
-            this.cbxServiceForSL.Size = new System.Drawing.Size(169, 21);
+            this.cbxServiceForSL.Size = new System.Drawing.Size(169, 28);
             this.cbxServiceForSL.TabIndex = 24;
             this.cbxServiceForSL.Text = "Choose...";
             // 
@@ -602,7 +707,7 @@ namespace PSS.Presentation_Layer
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(692, 412);
+            this.tabPage3.Size = new System.Drawing.Size(692, 441);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Performance";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -669,123 +774,18 @@ namespace PSS.Presentation_Layer
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(243, 492);
+            this.btnBack.Location = new System.Drawing.Point(110, 591);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(182, 38);
             this.btnBack.TabIndex = 49;
             this.btnBack.Text = "Return to Call Centre";
             this.btnBack.UseVisualStyleBackColor = true;
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.numericUpDown1);
-            this.groupBox4.Controls.Add(this.rbSpecifiedQuantity);
-            this.groupBox4.Controls.Add(this.rbunlimited);
-            this.groupBox4.Controls.Add(this.lblQuantity);
-            this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Controls.Add(this.rtbPerformanceExpectations);
-            this.groupBox4.Controls.Add(this.lstvCurrentContractServices);
-            this.groupBox4.Controls.Add(this.label14);
-            this.groupBox4.Controls.Add(this.btnRemoveContract);
-            this.groupBox4.Controls.Add(this.btnAddServiceToContract);
-            this.groupBox4.Controls.Add(this.label13);
-            this.groupBox4.Controls.Add(this.cbxContractService);
-            this.groupBox4.Location = new System.Drawing.Point(302, 13);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(332, 339);
-            this.groupBox4.TabIndex = 55;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Contract Services and SAL";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Gauteng",
-            "Free State",
-            "North West"});
-            this.comboBox1.Location = new System.Drawing.Point(105, 97);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(169, 21);
-            this.comboBox1.TabIndex = 36;
-            this.comboBox1.Text = "Choose or type...";
-            // 
-            // rbCreateService
-            // 
-            this.rbCreateService.AutoSize = true;
-            this.rbCreateService.Location = new System.Drawing.Point(105, 21);
-            this.rbCreateService.Name = "rbCreateService";
-            this.rbCreateService.Size = new System.Drawing.Size(56, 17);
-            this.rbCreateService.TabIndex = 37;
-            this.rbCreateService.TabStop = true;
-            this.rbCreateService.Text = "Create";
-            this.rbCreateService.UseVisualStyleBackColor = true;
-            // 
-            // rbModifyService
-            // 
-            this.rbModifyService.AutoSize = true;
-            this.rbModifyService.Location = new System.Drawing.Point(215, 24);
-            this.rbModifyService.Name = "rbModifyService";
-            this.rbModifyService.Size = new System.Drawing.Size(56, 17);
-            this.rbModifyService.TabIndex = 38;
-            this.rbModifyService.TabStop = true;
-            this.rbModifyService.Text = "Modify";
-            this.rbModifyService.UseVisualStyleBackColor = true;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(29, 23);
-            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(53, 13);
-            this.label18.TabIndex = 39;
-            this.label18.Text = "Operation";
-            // 
-            // lblQuantity
-            // 
-            this.lblQuantity.AutoSize = true;
-            this.lblQuantity.Location = new System.Drawing.Point(18, 251);
-            this.lblQuantity.Name = "lblQuantity";
-            this.lblQuantity.Size = new System.Drawing.Size(46, 13);
-            this.lblQuantity.TabIndex = 54;
-            this.lblQuantity.Text = "Quantity";
-            // 
-            // rbunlimited
-            // 
-            this.rbunlimited.AutoSize = true;
-            this.rbunlimited.Location = new System.Drawing.Point(70, 252);
-            this.rbunlimited.Name = "rbunlimited";
-            this.rbunlimited.Size = new System.Drawing.Size(68, 17);
-            this.rbunlimited.TabIndex = 55;
-            this.rbunlimited.TabStop = true;
-            this.rbunlimited.Text = "Unlimited";
-            this.rbunlimited.UseVisualStyleBackColor = true;
-            // 
-            // rbSpecifiedQuantity
-            // 
-            this.rbSpecifiedQuantity.AutoSize = true;
-            this.rbSpecifiedQuantity.Location = new System.Drawing.Point(70, 275);
-            this.rbSpecifiedQuantity.Name = "rbSpecifiedQuantity";
-            this.rbSpecifiedQuantity.Size = new System.Drawing.Size(63, 17);
-            this.rbSpecifiedQuantity.TabIndex = 56;
-            this.rbSpecifiedQuantity.TabStop = true;
-            this.rbSpecifiedQuantity.Text = "Specific";
-            this.rbSpecifiedQuantity.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(161, 272);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(64, 20);
-            this.numericUpDown1.TabIndex = 57;
-            // 
             // ContractMaintenance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(733, 542);
+            this.ClientSize = new System.Drawing.Size(917, 662);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -798,14 +798,14 @@ namespace PSS.Presentation_Layer
             this.tabPage1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
