@@ -63,6 +63,7 @@
     <Compile Include="Business_Logic\Exceptions\IDDoesNotExist.cs" />
     <Compile Include="Business_Logic\Exceptions\PSSObjectIsNull.cs" />
     <Compile Include="Business_Logic\Exceptions\SpacetimeException.cs" />
+    <Compile Include="Business_Logic\Exceptions\TableIsAComposition.cs" />
     <Compile Include="Business_Logic\FollowUpCall.cs" />
     <Compile Include="Business_Logic\ServiceLevelAgreement.cs" />
     <Compile Include="Business_Logic\Base Classes\SingleIntID.cs" />
