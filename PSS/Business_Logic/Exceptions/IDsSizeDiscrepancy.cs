@@ -19,9 +19,6 @@ namespace PSS.Business_Logic
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 
-        private static string FormattedMessage(int expected, int recieved)
-        {
-            return $"Expected {expected} IDs, but recieved {recieved} instead.";
-        }
+        private static string FormattedMessage(int expected, int recieved) => $"Expected {expected} IDs, but recieved {recieved} instead.";
     }
 }

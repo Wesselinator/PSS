@@ -19,9 +19,6 @@ namespace PSS.Business_Logic
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 
-        private static string FormattedMessage(string enteredIDColumn)
-        {
-            return $"Entered ID Column:{enteredIDColumn} does not exist in this table!";
-        }
+        private static string FormattedMessage(string enteredIDColumn) => $"Entered ID Column:'{enteredIDColumn}' does not exist in this table!";
     }
 }

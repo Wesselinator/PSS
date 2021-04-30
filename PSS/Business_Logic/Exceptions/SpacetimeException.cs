@@ -15,9 +15,6 @@ namespace PSS.Business_Logic
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 
-        private static string MessageFormat(string tag)
-        {
-            return "Congradulations! This exception was never ever supposed to be reachable! You somehow, through a herefor unforseen series of events and actions. reached it! This one is tagged: " + tag;
-        }
+        private static string MessageFormat(string tag) => "Congradulations! This exception was never ever supposed to be reachable! You somehow, through a herefor unforseen series of events and actions. reached it! This one is tagged: " + tag;
     }
 }

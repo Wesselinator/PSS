@@ -33,9 +33,6 @@ namespace PSS.Business_Logic
             return $"Multi-ID:[{sids}] does not exist in {table}";
         }
 
-        private static string FormatedMessage(string table, object id)
-        {
-            return $"ID:{id} does not exist in {table}";
-        }
+        private static string FormatedMessage(string table, object id) => $"ID:{id} does not exist in {table}";
     }
 }
