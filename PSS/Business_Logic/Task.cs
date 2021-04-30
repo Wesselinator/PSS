@@ -89,7 +89,7 @@ namespace PSS.Business_Logic
         protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO " + TableName);
+            sql.AppendLine("INSERT INTO " + TableName + " (TaskID, TaskTitle, TaskType, TaskDescription, TaskNotes, ServiceRequestID, DateProcessed, IsFinished) ");
 
             sql.Append("VALUES (");
             sql.Append(TaskID + ", ");
@@ -117,12 +117,6 @@ namespace PSS.Business_Logic
         public override string ToString()
         {
             return string.Format("TaskID: {0} | Title: {1} | Descripion: {2} | Notes: {3} |  ServiceRequest: [{4}] | DateProcessed: {5} | IsFinished: {6}", TaskID, Title, Descripion, Notes, ServiceRequest, DateProcessed, IsFinished);
-        }
-
-        
-        public static string GetProgressRapport(string ticketNo) //TODO: wtf?
-        {
-            return DataEngine.GetProgressRapport(ticketNo);
         }
 
         public override bool Equals(object obj)
