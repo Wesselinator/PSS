@@ -69,7 +69,8 @@ namespace PSS.Business_Logic
             sql.Append("ServiceRequestTitle = '" + Title + "',");
             sql.Append("ServiceRequestType = '" + Type + "',");
             sql.AppendLine("ServiceRequestDescription = '" + Description + "', ");
-            sql.AppendLine("DateReceived = '" + DateReceived.ToString("s") + "'");
+            sql.AppendLine("DateReceived = '" + DateReceived.ToString("s") + "' ,");
+            sql.AppendLine("AddressID = " + AddressID + " ");
 
             sql.AppendLine("WHERE " + IDColumn + " = " + ServiceRequestID);
 
@@ -79,14 +80,15 @@ namespace PSS.Business_Logic
         protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO " + TableName + " (ServiceID, ContractID, Agreement, ServiceQuantity) ");
+            sql.AppendLine("INSERT INTO " + TableName + " (ServiceRequestID, ServiceRequestTitle, ServiceRequestType, ServiceRequestDescription, DateReceived, AddressID) ");
             sql.Append("VALUES (");
 
             sql.Append(ServiceRequestID + ", ");
             sql.Append("'" + Title + "', ");
             sql.Append("'" + Type + "', ");
             sql.Append("'" + Description + "', ");
-            sql.Append("'" + DateReceived.ToString("s") + "'");
+            sql.Append("'" + DateReceived.ToString("s") + "' ,");
+            sql.Append(" " + AddressID.ToString() + "");
 
             sql.AppendLine(");");
 
