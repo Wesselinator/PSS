@@ -1,6 +1,7 @@
 body {
-    background-color: darkcyan;
-    color: ghostwhite;
+    font-size: 16px;
+    background-color: #ecedf3;
+    color: #2c3345;
 }
 
 #heading {
@@ -29,21 +30,53 @@ body {
 }
 
 #voidleft {
-    float: left;
+    float: right;
     width: 25%;
     height: 100%;
 }
 
-#voidright {
-    float: left;
-    width: 25%;
-    height:100%;
-}
-
-#content{
-    float: left;
+#content {
+    float: right;
     background-color: azure;
     width: 50%;
     height: 100%;
     overflow: auto;
 }
+
+#voidright {
+    float: right;
+    width: 25%;
+    height:100%;
+}
+
+.form-section {
+    display: inline !important;
+}
+
+.form-pagebreak {
+    display: none !important;
+}
+
+.form-section-closed {
+    height: auto !important;
+}
+
+@media print { *
+    .page-section {
+        position: initial !important;
+    }
+}
+
+ul.page-section{
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    padding: 38px;
+    list-style: none;
+}
+
+*, :after, :before{
+    box-sizing: border-box;
+}
+
+
