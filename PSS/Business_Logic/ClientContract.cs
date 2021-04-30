@@ -105,8 +105,30 @@ namespace PSS.Business_Logic
             return sql.ToString();
         }
 
-
         #endregion
+
+        public override bool Equals(object obj)
+        {
+            return obj is ClientContract contract &&
+                   ClientContractID == contract.ClientContractID &&
+                   ClientID == contract.ClientID &&
+                   Contract.Equals(contract.Contract) &&
+                   EffectiveDate == contract.EffectiveDate &&
+                   ID1 == contract.ID1 &&
+                   ID3 == contract.ID3;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 422978113;
+            hashCode = hashCode * -1521134295 + ClientContractID.GetHashCode();
+            hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
+            hashCode = hashCode * -1521134295 + Contract.GetHashCode();
+            hashCode = hashCode * -1521134295 + EffectiveDate.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ID1);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ID3);
+            return hashCode;
+        }
     }
 
     public class BusinessClientContract : ClientContract

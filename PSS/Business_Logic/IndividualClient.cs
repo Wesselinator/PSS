@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Data;
-using PSS.Data_Access;
 
-//TODO: equals and hashcode and toStringOverride needed
 namespace PSS.Business_Logic
 {
     class IndividualClient : Client
@@ -36,6 +31,11 @@ namespace PSS.Business_Logic
         public IndividualClient(string type, string status, string notes, Address address) : base(tableName, idColumn, type, status, notes, address)
         {
             FillLists(ClientID); // this has a value now
+        }
+
+        protected override int GetNextID()
+        {
+            throw new TableIsAComposition(tableName);
         }
 
 
@@ -123,31 +123,19 @@ namespace PSS.Business_Logic
         public override bool Equals(object obj)
         {
             return obj is IndividualClient client &&
-                   base.Equals(obj) &&
-                   Type == client.Type &&
-                   Status == client.Status &&
-                   Notes == client.Notes &&
-                   Address.Equals(client.Address) &&
-                   Person.Equals(client.Person) &&
-                   ClientID == client.ClientID &&
-                   EqualityComparer<MultiIDList<IndividualClientServiceRequest>>.Default.Equals(IndividualClientServiceRequests, client.IndividualClientServiceRequests) && //TODO: Check equals for multiIDLists
-                   EqualityComparer<MultiIDList<IndividualClientContract>>.Default.Equals(IndividualClientContracts, client.IndividualClientContracts) &&
-                   EqualityComparer<MultiIDList<IndividualClientFollowUp>>.Default.Equals(IndividualClientFollowUps, client.IndividualClientFollowUps);
+                   base.Equals(obj); //&&
+                   //IndividualClientServiceRequests.Equals(client.IndividualClientServiceRequests) &&
+                   //IndividualClientContracts.Equals(client.IndividualClientContracts) &&
+                   //IndividualClientFollowUps.Equals(client.IndividualClientFollowUps);
         }
 
         public override int GetHashCode()
         {
             int hashCode = 335634478;
             hashCode = hashCode * -1521134295 + base.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Status);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Notes);
-            hashCode = hashCode * -1521134295 + Address.GetHashCode();
-            hashCode = hashCode * -1521134295 + Person.GetHashCode();
-            hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
-            hashCode = hashCode * -1521134295 + IndividualClientServiceRequests.GetHashCode();
-            hashCode = hashCode * -1521134295 + IndividualClientContracts.GetHashCode();
-            hashCode = hashCode * -1521134295 + IndividualClientFollowUps.GetHashCode();
+            //hashCode = hashCode * -1521134295 + IndividualClientServiceRequests.GetHashCode();
+            //hashCode = hashCode * -1521134295 + IndividualClientContracts.GetHashCode();
+            //hashCode = hashCode * -1521134295 + IndividualClientFollowUps.GetHashCode();
             return hashCode;
         }
 

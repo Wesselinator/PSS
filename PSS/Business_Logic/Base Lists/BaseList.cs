@@ -11,7 +11,7 @@ namespace PSS.Business_Logic
     public class BaseList<T> : List<T> where T : BaseTable, new()
     {
 
-        private T DataInstance = new T();
+        private readonly T DataInstance = new T();
 
         public void SaveAll()
         {

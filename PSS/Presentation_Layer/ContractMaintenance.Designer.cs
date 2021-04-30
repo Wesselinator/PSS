@@ -869,7 +869,6 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Label lblStartDate;
         private System.Windows.Forms.Label lblMonthlyFee;
         private System.Windows.Forms.Label lblContractDuration;
-        private System.Windows.Forms.ListBox lstvCurrentContractServices;
         private System.Windows.Forms.DateTimePicker dtpContractEnd;
         private System.Windows.Forms.Label lblEndDate;
         private System.Windows.Forms.GroupBox grbxContractInfo;

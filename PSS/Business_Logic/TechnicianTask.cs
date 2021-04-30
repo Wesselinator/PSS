@@ -116,8 +116,8 @@ namespace PSS.Business_Logic
         {
             int hashCode = 201898852;
             hashCode = hashCode * -1521134295 + TechnicianTaskID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<Task>.Default.GetHashCode(Task);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Technician>.Default.GetHashCode(Technician);
+            hashCode = hashCode * -1521134295 + Task.GetHashCode();
+            hashCode = hashCode * -1521134295 + Technician.GetHashCode();
             hashCode = hashCode * -1521134295 + TimeToArrive.GetHashCode();
             hashCode = hashCode * -1521134295 + TimeToDepart.GetHashCode();
             return hashCode;

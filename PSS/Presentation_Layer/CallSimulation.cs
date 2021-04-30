@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace PSS.Presentation_Layer
 {
-    //TODO: add call interaction
     public partial class CallSimulation : Form
     {
         DateTime startTime;

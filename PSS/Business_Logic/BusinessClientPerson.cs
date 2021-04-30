@@ -89,7 +89,7 @@ namespace PSS.Business_Logic
             return obj is BusinessClientPerson person &&
                    person.Equals(person.p) &&
                    BusinessClientID == person.BusinessClientID &&
-                   EqualityComparer<Person>.Default.Equals(Person, person.Person) &&
+                   Person.Equals(person.Person) &&
                    Role == person.Role;
         }
 
@@ -98,14 +98,14 @@ namespace PSS.Business_Logic
             int hashCode = 1461023681;
             hashCode = hashCode * -1521134295 + p.GetHashCode();
             hashCode = hashCode * -1521134295 + BusinessClientID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<Person>.Default.GetHashCode(Person);
+            hashCode = hashCode * -1521134295 + Person.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Role);
             return hashCode;
         }
 
         public override string ToString()
         {
-            return string.Format("Person: [{0}] | BusinessClientID: {1}| Role: {2} ", p, BusinessClientID, Role);
+            return string.Format("Person: [{0}] | BusinessClientID: {1} | Role: {2} ", Person.ToString(), BusinessClientID, Role);
         }
     }
 }
