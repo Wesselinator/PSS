@@ -118,6 +118,7 @@ namespace PSS.Business_Logic
 
         public BusinessClientContract(int ID, Contract contract, DateTime effectiveDate) : base(tableName, idColumn, BusinessClient.idColumn, ID, contract, effectiveDate)
         {  }
+
     }
 
     public class IndividualClientContract : ClientContract
@@ -129,4 +130,6 @@ namespace PSS.Business_Logic
         public IndividualClientContract(int ID, Contract contract, DateTime effectiveDate) : base(tableName, idColumn, BusinessClient.idColumn, ID, contract, effectiveDate)
         { }
     }
+
+
 }

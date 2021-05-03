@@ -428,13 +428,13 @@ namespace PSS.Presentation_Layer
             // 
             // lstvCurrentContractServices
             // 
-            this.lstvCurrentContractServices.HideSelection = false;
-            this.lstvCurrentContractServices.Location = new System.Drawing.Point(20, 60);
-            this.lstvCurrentContractServices.Name = "lstvCurrentContractServices";
-            this.lstvCurrentContractServices.Size = new System.Drawing.Size(290, 77);
-            this.lstvCurrentContractServices.TabIndex = 46;
-            this.lstvCurrentContractServices.UseCompatibleStateImageBehavior = false;
-            this.lstvCurrentContractServices.View = System.Windows.Forms.View.List;
+            //this.lstvCurrentContractServices.HideSelection = false;
+            //this.lstvCurrentContractServices.Location = new System.Drawing.Point(20, 60);
+            //this.lstvCurrentContractServices.Name = "lstvCurrentContractServices";
+            //this.lstvCurrentContractServices.Size = new System.Drawing.Size(290, 77);
+            //this.lstvCurrentContractServices.TabIndex = 46;
+            //this.lstvCurrentContractServices.UseCompatibleStateImageBehavior = false;
+            //this.lstvCurrentContractServices.View = System.Windows.Forms.View.List;
             // 
             // label14
             // 
@@ -478,13 +478,13 @@ namespace PSS.Presentation_Layer
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(17, 148);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(61, 20);
-            this.label13.TabIndex = 49;
-            this.label13.Text = "Service";
+            //this.label13.AutoSize = true;
+            //this.label13.Location = new System.Drawing.Point(17, 148);
+            //this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            //this.label13.Name = "label13";
+            //this.label13.Size = new System.Drawing.Size(61, 20);
+            //this.label13.TabIndex = 49;
+            //this.label13.Text = "Service";
             // 
             // cbxContractService
             // 
