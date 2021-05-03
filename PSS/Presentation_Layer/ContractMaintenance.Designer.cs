@@ -76,13 +76,6 @@ namespace PSS.Presentation_Layer
             this.cbxAllContracts = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tpService = new System.Windows.Forms.TabPage();
-            this.grbxWho = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.cbxServiceForSL = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.tpPerformance = new System.Windows.Forms.TabPage();
             this.lsbxContracts = new System.Windows.Forms.ListBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -100,7 +93,6 @@ namespace PSS.Presentation_Layer
             this.grbxServSLA.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpecificQuanity)).BeginInit();
             this.tpService.SuspendLayout();
-            this.grbxWho.SuspendLayout();
             this.tpPerformance.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -387,7 +379,7 @@ namespace PSS.Presentation_Layer
             this.grbxServSLA.Size = new System.Drawing.Size(248, 172);
             this.grbxServSLA.TabIndex = 55;
             this.grbxServSLA.TabStop = false;
-            this.grbxServSLA.Text = "Contract Services and SAL";
+            this.grbxServSLA.Text = "Contract Services";
             // 
             // nudSpecificQuanity
             // 
@@ -642,7 +634,6 @@ namespace PSS.Presentation_Layer
             // 
             // tpService
             // 
-            this.tpService.Controls.Add(this.grbxWho);
             this.tpService.Controls.Add(this.gbxCreateModifyServices);
             this.tpService.Location = new System.Drawing.Point(4, 22);
             this.tpService.Name = "tpService";
@@ -651,84 +642,6 @@ namespace PSS.Presentation_Layer
             this.tpService.TabIndex = 1;
             this.tpService.Text = "Services";
             this.tpService.UseVisualStyleBackColor = true;
-            // 
-            // grbxWho
-            // 
-            this.grbxWho.Controls.Add(this.button6);
-            this.grbxWho.Controls.Add(this.button5);
-            this.grbxWho.Controls.Add(this.button4);
-            this.grbxWho.Controls.Add(this.button2);
-            this.grbxWho.Controls.Add(this.cbxServiceForSL);
-            this.grbxWho.Controls.Add(this.label3);
-            this.grbxWho.Location = new System.Drawing.Point(16, 202);
-            this.grbxWho.Margin = new System.Windows.Forms.Padding(1);
-            this.grbxWho.Name = "grbxWho";
-            this.grbxWho.Padding = new System.Windows.Forms.Padding(2);
-            this.grbxWho.Size = new System.Drawing.Size(375, 121);
-            this.grbxWho.TabIndex = 48;
-            this.grbxWho.TabStop = false;
-            this.grbxWho.Text = "wut is this?";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(29, 69);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(97, 32);
-            this.button6.TabIndex = 36;
-            this.button6.Text = "Confirm";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(259, 69);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(97, 32);
-            this.button5.TabIndex = 50;
-            this.button5.Text = "Lower Priority";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(259, 26);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(97, 32);
-            this.button4.TabIndex = 49;
-            this.button4.Text = "Raise Priority";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(150, 69);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(97, 32);
-            this.button2.TabIndex = 25;
-            this.button2.Text = "New";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // cbxServiceForSL
-            // 
-            this.cbxServiceForSL.FormattingEnabled = true;
-            this.cbxServiceForSL.Items.AddRange(new object[] {
-            "Peasant",
-            "Commoner",
-            "Noble",
-            "Feudal lord"});
-            this.cbxServiceForSL.Location = new System.Drawing.Point(72, 23);
-            this.cbxServiceForSL.Margin = new System.Windows.Forms.Padding(1);
-            this.cbxServiceForSL.Name = "cbxServiceForSL";
-            this.cbxServiceForSL.Size = new System.Drawing.Size(114, 21);
-            this.cbxServiceForSL.TabIndex = 24;
-            this.cbxServiceForSL.Text = "Choose...";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 26);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Service";
             // 
             // tpPerformance
             // 
@@ -830,8 +743,6 @@ namespace PSS.Presentation_Layer
             this.grbxServSLA.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpecificQuanity)).EndInit();
             this.tpService.ResumeLayout(false);
-            this.grbxWho.ResumeLayout(false);
-            this.grbxWho.PerformLayout();
             this.tpPerformance.ResumeLayout(false);
             this.tpPerformance.PerformLayout();
             this.ResumeLayout(false);
@@ -849,16 +760,9 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.TabControl tcContractMaintance;
         private System.Windows.Forms.TabPage tpContracts;
         private System.Windows.Forms.TabPage tpService;
-        private System.Windows.Forms.GroupBox grbxWho;
         private System.Windows.Forms.TextBox txtServiceName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox cbxServiceForSL;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnConfirmService;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox cbxContractSL;
         private System.Windows.Forms.Label lblServiceLevel;
         private System.Windows.Forms.TextBox txtContractName;

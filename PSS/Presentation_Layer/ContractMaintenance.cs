@@ -175,12 +175,12 @@ namespace PSS.Presentation_Layer
             ListBox lb = (ListBox)sender;
             rtbContractDetails.Text = lb.SelectedItem.ToString(); //TODO: create nice Contract toFormattedString
             currentPerformance = (Contract)lsbxContracts.SelectedItem;
-            CalculateClientPerformance();
+            CalculateContractPerformance();
         }
 
-        private void CalculateClientPerformance()
+        private void CalculateContractPerformance()
         {
-            //TODO: Calculate in class or here? How do calculate? How make numbers go here?
+            //rtbPerformance.Text = 
         }
 
         #endregion

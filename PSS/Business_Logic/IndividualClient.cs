@@ -105,7 +105,10 @@ namespace PSS.Business_Logic
         {
             IndividualClientContracts.Add(new IndividualClientContract(ID, contract, effectiveDate));
         }
-
+        public override Contract GetCurrentContract()
+        {
+            throw new NotImplementedException(); 
+        }
 
         public override BaseList<FollowUpReport> GetFolowups()
         {

@@ -51,7 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business_Logic\Address.cs" />
-    <Compile Include="Business_Logic\Base Lists\PSSListExtentions.cs" />
+    <Compile Include="Business_Logic\Extentions\BetweenExt.cs" />
+    <Compile Include="Business_Logic\Extentions\GetExtentions.cs" />
+    <Compile Include="Business_Logic\Extentions\PSSListExtentions.cs" />
     <Compile Include="Business_Logic\CallChangeAssociation.cs" />
     <Compile Include="Business_Logic\ClientContract.cs" />
     <Compile Include="Business_Logic\ClientFollowUp.cs" />
