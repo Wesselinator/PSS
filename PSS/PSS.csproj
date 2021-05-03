@@ -157,10 +157,10 @@
     <Compile Include="Presentation_Layer\TestGetters.Designer.cs">
       <DependentUpon>TestGetters.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentation_Layer\ContractInfoWidget.cs">
+    <Compile Include="Presentation_Layer\UserControls\ContractInfoWidget.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Presentation_Layer\ContractInfoWidget.Designer.cs">
+    <Compile Include="Presentation_Layer\UserControls\ContractInfoWidget.Designer.cs">
       <DependentUpon>ContractInfoWidget.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -195,7 +195,7 @@
     <EmbeddedResource Include="Presentation_Layer\TestGetters.resx">
       <DependentUpon>TestGetters.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentation_Layer\ContractInfoWidget.resx">
+    <EmbeddedResource Include="Presentation_Layer\UserControls\ContractInfoWidget.resx">
       <DependentUpon>ContractInfoWidget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
