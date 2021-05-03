@@ -138,6 +138,12 @@
     <Compile Include="Presentation_Layer\ServiceDepartment.Designer.cs">
       <DependentUpon>ServiceDepartment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentation_Layer\ServiceInfoWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presentation_Layer\ServiceInfoWidget.Designer.cs">
+      <DependentUpon>ServiceInfoWidget.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentation_Layer\Suppress.cs" />
     <Compile Include="Presentation_Layer\Technician.cs">
       <SubType>Form</SubType>
@@ -173,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation_Layer\ServiceDepartment.resx">
       <DependentUpon>ServiceDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation_Layer\ServiceInfoWidget.resx">
+      <DependentUpon>ServiceInfoWidget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation_Layer\Technician.resx">
       <DependentUpon>Technician.cs</DependentUpon>
