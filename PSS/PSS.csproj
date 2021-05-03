@@ -92,10 +92,10 @@
     <Compile Include="Business_Logic\User.cs" />
     <Compile Include="Data_Access\DataEngine.cs" />
     <Compile Include="Data_Access\DataHandler.cs" />
-    <Compile Include="Presentation_Layer\ArrowlessNumericUpDown.cs">
+    <Compile Include="Presentation_Layer\UserControls\ArrowlessNumericUpDown.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Presentation_Layer\ArrowlessNumericUpDown.Designer.cs">
+    <Compile Include="Presentation_Layer\UserControls\ArrowlessNumericUpDown.Designer.cs">
       <DependentUpon>ArrowlessNumericUpDown.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentation_Layer\CallCentre.cs">
@@ -110,10 +110,10 @@
     <Compile Include="Presentation_Layer\CallSimulation.Designer.cs">
       <DependentUpon>CallSimulation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentation_Layer\ClientInfoWidget.cs">
+    <Compile Include="Presentation_Layer\UserControls\ClientInfoWidget.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Presentation_Layer\ClientInfoWidget.Designer.cs">
+    <Compile Include="Presentation_Layer\UserControls\ClientInfoWidget.Designer.cs">
       <DependentUpon>ClientInfoWidget.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentation_Layer\ClientMaintenance.cs">
@@ -140,6 +140,12 @@
     <Compile Include="Presentation_Layer\ServiceDepartment.Designer.cs">
       <DependentUpon>ServiceDepartment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentation_Layer\UserControls\ServiceInfoWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presentation_Layer\UserControls\ServiceInfoWidget.Designer.cs">
+      <DependentUpon>ServiceInfoWidget.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentation_Layer\Suppress.cs" />
     <Compile Include="Presentation_Layer\Technician.cs">
       <SubType>Form</SubType>
@@ -153,6 +159,12 @@
     <Compile Include="Presentation_Layer\TestGetters.Designer.cs">
       <DependentUpon>TestGetters.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentation_Layer\UserControls\ContractInfoWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presentation_Layer\UserControls\ContractInfoWidget.Designer.cs">
+      <DependentUpon>ContractInfoWidget.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Presentation_Layer\CallCentre.resx">
@@ -164,7 +176,7 @@
     <EmbeddedResource Include="Presentation_Layer\ClientFollowUp.resx">
       <DependentUpon>ClientFollowUp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentation_Layer\ClientInfoWidget.resx">
+    <EmbeddedResource Include="Presentation_Layer\UserControls\ClientInfoWidget.resx">
       <DependentUpon>ClientInfoWidget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation_Layer\ClientMaintenance.resx">
@@ -176,11 +188,17 @@
     <EmbeddedResource Include="Presentation_Layer\ServiceDepartment.resx">
       <DependentUpon>ServiceDepartment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentation_Layer\UserControls\ServiceInfoWidget.resx">
+      <DependentUpon>ServiceInfoWidget.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentation_Layer\Technician.resx">
       <DependentUpon>Technician.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation_Layer\TestGetters.resx">
       <DependentUpon>TestGetters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation_Layer\UserControls\ContractInfoWidget.resx">
+      <DependentUpon>ContractInfoWidget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
