@@ -8,7 +8,6 @@ block content
     #Content
       #SelectClientType.contentdiv
         h3#lblClienttype(for='SelectClientType') Select a Client Type
-        br
         form#ClientTypes
           input#IndividualClient.RadioClientType(type='radio' name='ClientTypeRadio' value='Individual Client')
           label(for='IndividualClient') IndividualClient
@@ -17,27 +16,22 @@ block content
           label(for='BusinessClient') BusinessClient
       #SelectClient.contentdiv
         h3#lblSelectClient(for='SelectClient') Select a client
-        br
-        select#dropdownSelectClient
+        select#dropdownSelectClient.inputbars
           option(value) Please Select
           option(value)
       #FollowUpTitle.contentdiv
         h3(for='FollowUpTitle') Follow up Title
-        br
-        input#FollowUpText(type='text')
+        input#FollowUpText.inputbars(type='text' placeholder='Enter title')
       #FollowUpType.contentdiv
         h3#lblFollowUpType(for='FollowUpType') Select a Type
-        br
-        select#dropdownFollowUpType
+        select#dropdownFollowUpType.inputbars
           option(value) Please Select
           option(value)
       #FollowUpDescription.contentdiv
         h3(for='FollowUpDescription') Follow up Description
-        br
-        input#FollowUpDescriptionText(type='text')
+        textarea#FollowUpDescriptionText(name='DescriptionTextArea' placeholder='Enter description')
       #DateTimeMode.contentdiv
         h3#lblDateTimeMode(for='DateTimeMode') Mode for date/time of followup
-        br
         form#DateTypes
           input#CurrentDateTime.RadioDateType(type='radio' name='DateTypeRadio' value='Current Date')
           label(for='CurrentDateTime') Use current date/time
@@ -46,11 +40,9 @@ block content
           label(for='SpecifyDateTime') Specify date/time
       #DateTime.contentdiv
         h3(for='DateTime') Date/Time the follow up occurred/was received
-        br
-        input#DateTimeText(type='text' size='10' data-maxlength='10' maxlength='10' data-age='' value='' data-format='mmddyyyy' data-seperator='-' placeholder='MM-DD-YYYY' autocomplete='off' aria-labelledby='label_12 sublabel_12_litemode' im-insert='false')
+        input#DateTimeText.inputbars(type='text' size='10' data-maxlength='10' maxlength='10' data-age='' value='' data-format='mmddyyyy' data-seperator='-' placeholder='MM-DD-YYYY' autocomplete='off' aria-labelledby='label_12 sublabel_12_litemode' im-insert='false')
       #IssueResolved.contentdiv
         h3#lblIssueResolved(for='IssueResolved') Mode for date/time of followup
-        br
         form#IssueResolved
           input#IsResolved.IsIssueResolved(type='radio' name='IsIssueResolvedRadio' value='Issue is resolved')
           label(for='IsResolved') Issue is resolved
@@ -59,8 +51,7 @@ block content
           label(for='IsNotResolved') Issue is not resolved
       #SatisfactionLevel.contentdiv
         h3#lblSatisfactionLvl Satisfaction Level
-        br
-        input#edtSatisfactionLvl(type='number' data-type='input-spinner' placeholder='0' data-component='spinner' min='0' max='10')
+        input#edtSatisfactionLvl.inputbars(type='number' data-type='input-spinner' placeholder='0' data-component='spinner' min='0' max='10')
       #Submit.contentdiv
         button#btnSubmit(type='submit' data-component='button') Submit
     #VoidRight
