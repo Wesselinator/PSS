@@ -2,6 +2,7 @@
 using System.Text;
 using System.Data;
 using PSS.Data_Access;
+using System.Collections.Generic;
 
 //CHECK
 namespace PSS.Business_Logic
@@ -81,7 +82,30 @@ namespace PSS.Business_Logic
             return sql.ToString();
         }
 
-
         #endregion
+
+        public override bool Equals(object obj)
+        {
+            return obj is BusinessClientPerson person &&
+                   person.Equals(person.p) &&
+                   BusinessClientID == person.BusinessClientID &&
+                   Person.Equals(person.Person) &&
+                   Role == person.Role;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1461023681;
+            hashCode = hashCode * -1521134295 + p.GetHashCode();
+            hashCode = hashCode * -1521134295 + BusinessClientID.GetHashCode();
+            hashCode = hashCode * -1521134295 + Person.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Role);
+            return hashCode;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Person: [{0}] | BusinessClientID: {1} | Role: {2} ", Person.ToString(), BusinessClientID, Role);
+        }
     }
 }

@@ -1,11 +1,8 @@
-﻿using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using PSS.Business_Logic;
 
 namespace PSS.Presentation_Layer
 {
-    //TODO: Add an empty mode
     public partial class ClientInfoWidgit : UserControl
     {
         private const string HouseBuilding = "🏠";
@@ -17,10 +14,7 @@ namespace PSS.Presentation_Layer
 
             set {
                 client = value;
-                if (!(client is null)) //use null colalece?
-                {
-                    Populate();
-                };
+                if (client is null) Empty(); else Populate();
             }
         }
         public ClientInfoWidgit()
@@ -30,7 +24,27 @@ namespace PSS.Presentation_Layer
 
         #region Populate
 
-        public void Populate() 
+        public void Empty()
+        {
+            lblTitle.Text = "Jane Doe Inc.";
+            lblSubtitle.Text = "Jane Doe";
+            lblEmail.Text = "john.doe@janedoeinc.co.za";
+
+            lblBusinessIdentifier.Text = "BID";
+
+            lblBirthDate.Text = "MM-dd";
+
+            lblTell.Text = "333 333 4444";
+            lblCell.Text = "+22 333 4444";
+
+            lblBuildingIcon.Text = "";
+
+            lblAdress.Text = "14 Street Lane, Suburbia";
+            lblAdress2.Text = "City Ville, Best Country";
+            lblPostal.Text = "0110";
+        }
+
+        private void Populate() 
         {
             if (Client is null)
             {
@@ -54,6 +68,10 @@ namespace PSS.Presentation_Layer
             lblEmail.Text = Client.Person.Email;
             lblTell.Text = Client.Person.TellephoneNumber;
             lblCell.Text = Client.Person.CellphoneNumber;
+            
+            lblAdress.Text = Client.Address.Street;
+            lblAdress2.Text = $"{Client.Address.City}, {Client.Address.Province}";
+            lblPostal.Text = Client.Address.PostalCode;
 
             lblBusinessIdentifier.Text = Client.BusinessIdentifier;
         }

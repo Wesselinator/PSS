@@ -17,6 +17,8 @@ namespace PSS.Business_Logic
 
         public DateTime TimeToArrive { get; set; }
 
+        public DateTime TimeToDepart { get; set; }
+
         private static readonly string tableName = "TechnicianTask";
         private static readonly string idColumn = "TechnicianTaskID";
 
@@ -24,20 +26,22 @@ namespace PSS.Business_Logic
         {
         }
 
-        public TechnicianTask(int technicianTaskID, Task task, Technician technician, DateTime timeToArrive) : this()
+        public TechnicianTask(int technicianTaskID, Task task, Technician technician, DateTime timeToArrive, DateTime timeToDepart) : this()
         {
             this.TechnicianTaskID = technicianTaskID;
             this.Technician = technician;
             this.Task = task;
             this.TimeToArrive = timeToArrive;
+            this.TimeToDepart = timeToDepart;
         }
 
-        public TechnicianTask(Task task, Technician technician, DateTime timeToArrive) : this()
+        public TechnicianTask(Task task, Technician technician, DateTime timeToArrive, DateTime timeToDepart) : this()
         {
             this.TechnicianTaskID = base.GetNextID();
             this.Technician = technician;
             this.Task = task;
             this.TimeToArrive = timeToArrive;
+            this.TimeToDepart = timeToDepart;
         }
 
         #region DataBase
@@ -55,6 +59,7 @@ namespace PSS.Business_Logic
             this.Technician = DataEngine.GetDataObject<Technician>(row.Field<int>("TechnicianID"));
             this.Task = DataEngine.GetDataObject<Task>(row.Field<int>("TaskID"));
             this.TimeToArrive = row.Field<DateTime>("TimeToArrive");
+            this.TimeToDepart = row.Field<DateTime>("TimeToDepart");
         }
 
         protected override string Update()
@@ -65,7 +70,8 @@ namespace PSS.Business_Logic
 
             sql.Append("TechnicianID = " + Technician.TechnicianID + ", ");
             sql.Append("TaskID = " + Task.TaskID + ", ");
-            sql.Append("TimeToArrive = '" + TimeToArrive.ToString("s") + "'");
+            sql.Append("TimeToArrive = '" + TimeToArrive.ToString("s") + "',");
+            sql.Append("TimeToArrive = '" + TimeToDepart.ToString("s") + "'");
 
             sql.AppendLine("WHERE " + IDColumn + " = " + TechnicianTaskID);
 
@@ -75,13 +81,14 @@ namespace PSS.Business_Logic
         protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO " + TableName);
+            sql.AppendLine("INSERT INTO " + TableName + " (TechnicianTaskID, TechnicianID, TaskID, TimeToArrive, TimeToDepart )");
             sql.Append("VALUES (");
 
             sql.Append(TechnicianTaskID.ToString() + ", ");
             sql.Append(Technician.TechnicianID + ", ");
             sql.Append(Task.TaskID + ", ");
-            sql.Append("'" + TimeToArrive.ToString("s") + "'");
+            sql.Append("'" + TimeToArrive.ToString("s") + "',");
+            sql.Append("'" + TimeToDepart.ToString("s") + "'");
 
             sql.AppendLine(");");
 
@@ -92,7 +99,7 @@ namespace PSS.Business_Logic
 
         public override string ToString()
         {
-            return string.Format("TechnicianTaskID: {0} | Task: [{1}] | Technician: [{2}] | TimeToArrive: {3}", TechnicianTaskID, Task, Technician, TimeToArrive);
+            return string.Format("TechnicianTaskID: {0} | Task: [{1}] | Technician: [{2}] | TimeToArrive: {3} | TimeToDepart: {4}", TechnicianTaskID, Task, Technician, TimeToArrive, TimeToDepart);
         }
 
         public override bool Equals(object obj)
@@ -101,16 +108,18 @@ namespace PSS.Business_Logic
                    TechnicianTaskID == task.TechnicianTaskID &&
                    Task.Equals(task.Task) &&
                    Technician.Equals(task.Technician) &&
-                   TimeToArrive == task.TimeToArrive;
+                   TimeToArrive == task.TimeToArrive &&
+                   TimeToDepart == task.TimeToDepart;
         }
 
         public override int GetHashCode()
         {
             int hashCode = 201898852;
             hashCode = hashCode * -1521134295 + TechnicianTaskID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<Task>.Default.GetHashCode(Task);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Technician>.Default.GetHashCode(Technician);
+            hashCode = hashCode * -1521134295 + Task.GetHashCode();
+            hashCode = hashCode * -1521134295 + Technician.GetHashCode();
             hashCode = hashCode * -1521134295 + TimeToArrive.GetHashCode();
+            hashCode = hashCode * -1521134295 + TimeToDepart.GetHashCode();
             return hashCode;
         }
     }

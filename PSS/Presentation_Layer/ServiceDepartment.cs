@@ -25,6 +25,10 @@ namespace PSS.Presentation_Layer
         { 
             this.currentClient = client;
             lblCurentClient.Text = client.Person.FullName;
+
+            AllClients.RemoveAll(c => c.ClientID == currentClient.ClientID);
+            AllClients.Add(currentClient);
+
             PopulateClients();
             PopulateUnclaimedClientServiceRequests();
             PopulateSLA();
@@ -33,7 +37,7 @@ namespace PSS.Presentation_Layer
         private void LoadViews()
         {
             PopulateAvailableTechnicians();
-            PopulateTasks();
+            PopulateTaskList();
             PopulateTree();
         }
 
@@ -43,7 +47,7 @@ namespace PSS.Presentation_Layer
         //change '=' to '=>' if update is prefered
         private readonly List<Client> AllClients = Client.GetAllClients(); 
 
-        private readonly BaseList<Technician> AllTechnicians = BaseList<Technician>.GrabAll(); //we do need all technicians becuase we want all. If you have a problem write a DataEngine for this
+        private readonly BaseList<Technician> AllTechnicians = BaseList<Technician>.GrabAll(); //we do need all technicians becuase we want all. If you have a problem, write a DataEngine for this
         private readonly BaseList<TechnicianTask> AllTechnicianTasks = BaseList<TechnicianTask>.GrabAll();
         private readonly BaseList<Task> AllUnfinishedTasks = Task.GetAllUnFinishedTasks();
 
@@ -59,33 +63,44 @@ namespace PSS.Presentation_Layer
 
             lsbxUnclaimedServiceRequests.DisplayMember = "DisplayMember";
             lsbxUnclaimedServiceRequests.DataSource = UnClaimedClientServiceRequests;
-            //lsbxUnclaimedServiceRequests.Items.AddRange(UnClaimedServiceRequests.ToArray());
         }
 
-        private BaseList<Technician> AvailableTechnicians = Technician.GetAllAvailableClients();
+        private readonly BaseList<Technician> AvailableTechnicians = Technician.GetAllAvailableClients();
 
         private void PopulateAvailableTechnicians()
         {
             lsbxAvailableTechnicians.DisplayMember = "DisplayMember";
             lsbxAvailableTechnicians.DataSource = AvailableTechnicians;
-            //lsbxAvailableTechnicians.Items.AddRange(AvailableTechnicians.ToArray());
         }
 
         private void PopulateClients()
         {
             cbxClient.DisplayMember = "DisplayMember";
             cbxClient.Items.AddRange(AllClients.ToArray());
-            //cbxClient.SelectedItem = currentClient; // yikes?
+            cbxClient.SelectedItem = currentClient; //this line usually breaks things
         }
 
-        private void PopulateTasks()
+        private void PopulateTaskList()
         {
             lsbxActiveTasks.DataSource = AllUnfinishedTasks;
         }
 
+        private void PopulateTask()
+        {
+            if (techTaskToModify is null)
+            {
+                return;
+            }
+
+            txtTaskTitle.Text = techTaskToModify.Task.Title;
+            txtTaskDescription.Text = techTaskToModify.Task.Descripion;
+            dtpTaskDate.Value = techTaskToModify.Task.DateProcessed;
+            rtbNotes.Text = techTaskToModify.Task.Notes;
+        }
+
         private void PopulateSLA()
         {
-            //rtbSLAdetails.Text = 
+            //TODO: the frick is this?
         }
 
         private TreeNode[] TechnicianTaskNodes(Technician t) => AllTechnicianTasks.Where(tt => tt.Technician.TechnicianID == t.TechnicianID).Select(tt => new TreeNode(tt.Task.Title)).ToArray(); //TODO: order
@@ -104,7 +119,7 @@ namespace PSS.Presentation_Layer
         private void lsbxAvailableTechnicians_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentTech = (Technician)lsbxAvailableTechnicians.SelectedItem;
-            rtbTechDetails.Text = currentTech.ToString(); //TODO: Create a Nice Technician Format String
+            rtbTechDetails.Text = currentTech.ToFormattedString();
         }
 
 
@@ -129,11 +144,11 @@ namespace PSS.Presentation_Layer
             //Console.WriteLine(string.Format("{0} was found in {1}", taskToModify.Title, techTaskToModify?.ToString()));
             if (!(techTaskToModify is null))
             {
-                txtCurrentTech.Text = techTaskToModify.Technician.Person.FullName;
+                txtCurrentTech.Text = techTaskToModify.Technician.Person.FullName; //can I do this with a datasource?
             }
 
+            PopulateTask(); //quality of life
             btnReAssignTech.Enabled = true;
-            //TODO: populate task
         }
 
         private void tcTask_SelectedIndexChanged(object sender, EventArgs e)
@@ -155,7 +170,7 @@ namespace PSS.Presentation_Layer
             techTaskToModify.Task.DateProcessed = dtpTaskDate.Value;
             techTaskToModify.Task.Notes = rtbNotes.Text;
 
-            //the technician SHOULD have been changed
+            //the technician SHOULD have been changed...
             AllTechnicians.Remove(techTaskToModify.Technician); //reduce database accesses
 
             techTaskToModify.Save();
@@ -163,18 +178,24 @@ namespace PSS.Presentation_Layer
 
         private void btnReAssignTech_Click(object sender, EventArgs e)
         {
-            techTaskToModify.Technician = (Technician)lsbxAvailableTechnicians.SelectedItem;
-            txtCurrentTech.Text = techTaskToModify.Technician.Person.FullName; //can I do this with a datasource?
+            Technician technician = (Technician)lsbxAvailableTechnicians.SelectedItem;
+
+            AvailableTechnicians.Add(techTaskToModify.Technician);
+            AvailableTechnicians.Remove(technician);                //reduce database accesses
+
+            techTaskToModify.Technician = technician;
+
+            txtCurrentTech.Text = technician.Person.FullName; //can I do this with a datasource?
         }
 
         private void btnCreateJob_Click(object sender, EventArgs e)
         {
             //TODO: Add Task type
             Task aTask = new Task(txtTaskTitle.Text, txtTaskDescription.Text, "", rtbNotes.Text, currentRequest, dtpTaskDate.Value, false); //New task created
-            TechnicianTask techTask = new TechnicianTask(aTask, currentTech, dtpTaskDate.Value); //New Tech Task
+            TechnicianTask techTask = new TechnicianTask(aTask, currentTech, dtpTaskDate.Value, dtpTaskDate.Value.AddDays(30)); //New Tech Task //TODO: add datetodepart
 
-            AllUnfinishedTasks.Add(aTask); //reduce database calls
-            AllTechnicianTasks.Add(techTask);  //reduce database calls
+            AllUnfinishedTasks.Add(aTask);      //reduce database calls
+            AllTechnicianTasks.Add(techTask);   //reduce database calls
 
             techTask.Save(); //actually put in database
 

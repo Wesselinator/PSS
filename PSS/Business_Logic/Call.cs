@@ -8,14 +8,11 @@ namespace PSS.Business_Logic
 {
     public class Call : SingleIntID
     {
-        private DateTime startTime;
-        private DateTime endTime;
-        private string descrition;
 
         public int CallInstanceID { get => ID; private set => ID = value; }
-        public DateTime StartTime { get => startTime; set => startTime = value; }
-        public DateTime EndTime { get => endTime; set => endTime = value; }
-        public string Description { get => descrition; set => descrition = value; }
+        public DateTime StartTime { get ; set ; }
+        public DateTime EndTime { get ; set ; }
+        public string Description { get ; set ; }
 
         private static readonly string tableName = "CallInstance";
         private static readonly string idColumn = "CallInstanceID";
@@ -44,9 +41,9 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             this.CallInstanceID = row.Field<int>(IDColumn);
-            this.startTime = row.Field<DateTime>("StartTime");
-            this.endTime = row.Field<DateTime>("EndTime");
-            this.descrition = row.Field<string>("Description");
+            this.StartTime = row.Field<DateTime>("StartTime");
+            this.EndTime = row.Field<DateTime>("EndTime");
+            this.Description = row.Field<string>("Description");
         }
 
         protected override string Update()
@@ -55,9 +52,9 @@ namespace PSS.Business_Logic
             sql.AppendLine("Update " + TableName);
 
             sql.Append("SET ");
-            sql.Append("StartTIme = '" + startTime + "', ");
-            sql.Append("EndTime = '" + endTime + "', ");
-            sql.Append("Description = '" + descrition + "', ");
+            sql.Append("StartTime = '" + StartTime + "', ");
+            sql.Append("EndTime = '" + EndTime + "', ");
+            sql.Append("Description = '" + Description + "', ");
 
             sql.Append("WHERE " + IDColumn + " = " + CallInstanceID);
 
@@ -67,13 +64,13 @@ namespace PSS.Business_Logic
         protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO " + TableName);
+            sql.AppendLine("INSERT INTO " + TableName + " (CallInstanceID, StartTime, EndTime, Description) ");
 
             sql.Append("VALUES (");
             sql.Append(CallInstanceID + ", ");
-            sql.Append("'" + startTime.ToString("s") + "', ");
-            sql.Append("'" + endTime.ToString("s") + "', ");
-            sql.Append("'" + descrition + "' ");
+            sql.Append("'" + StartTime.ToString("s") + "', ");
+            sql.Append("'" + EndTime.ToString("s") + "', ");
+            sql.Append("'" + Description + "' ");
             sql.Append(");");
 
 

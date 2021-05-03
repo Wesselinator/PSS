@@ -180,20 +180,21 @@ namespace PSS.Presentation_Layer
 
             Close();
         }
-
+        private string GetStatus => cbxStatus.SelectedIndex == -1 ? "Status Unknown" : cbxStatus.Text; //TODO: set default string globally somehow?
         private void ConfirmRegister()
         {
             Person newPerson = new Person(txtName.Text, txtSurname.Text, dtpDOB.Value, txtCellphone.Text, txtTelephone.Text, txtEmail.Text); //Creates a new person
             Address newAddress = new Address(txtStreet.Text, txtCity.Text, txtPostalCode.Text, cbxProvince.Text); //Creates new address
-            //TODO: get client type
             if (rbtnIndvidual.Checked)
             {
-                IndividualClient individualClient = new IndividualClient("", cbxStatus.Text, rtbNotes.Text, newAddress, newPerson);
+                //TODO: Obtain type
+                IndividualClient individualClient = new IndividualClient("", GetStatus, rtbNotes.Text, newAddress, newPerson);
                 currentClient = individualClient;
             }
             else
             {
-                BusinessClient businessClient = new BusinessClient(txtBusinessName.Text, "", cbxStatus.Text, rtbNotes.Text, newAddress, newPerson);
+                //TODO: Obtain type
+                BusinessClient businessClient = new BusinessClient(txtBusinessName.Text, "", GetStatus, rtbNotes.Text, newAddress, newPerson);
                 currentClient = businessClient;
             }
 
@@ -214,7 +215,7 @@ namespace PSS.Presentation_Layer
             currentClient.Address.PostalCode = txtPostalCode.Text;
             currentClient.Address.Province = cbxProvince.SelectedItem.ToString();
 
-            currentClient.Status = cbxStatus.SelectedItem.ToString(); //TODO: Add no-choice functionality
+            currentClient.Status = GetStatus;
             currentClient.Notes = rtbNotes.Text;//Text vs rtf?
 
             if (rbtnIndvidual.Checked)
@@ -301,7 +302,6 @@ namespace PSS.Presentation_Layer
 
         private void btnCreateContract_Click(object sender, EventArgs e)
         {
-            // TODO go to contract maintenance
             ContractMaintenance cm = new ContractMaintenance();
             Hide();
             cm.ShowDialog();

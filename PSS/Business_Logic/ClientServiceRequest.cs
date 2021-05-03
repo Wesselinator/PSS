@@ -82,6 +82,22 @@ namespace PSS.Business_Logic
 
         #endregion
 
+        public override bool Equals(object obj)
+        {
+            return obj is ClientServiceRequest request &&
+                   ClientID == request.ClientID &&
+                   ServiceRequest.Equals(request.ServiceRequest) &&
+                   ID1 == request.ID1;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -24631813;
+            hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
+            hashCode = hashCode * -1521134295 + ServiceRequest.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ID1);
+            return hashCode;
+        }
     }
 
     public sealed class BusinessClientServiceRequest : ClientServiceRequest

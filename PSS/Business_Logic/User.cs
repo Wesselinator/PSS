@@ -35,13 +35,19 @@ namespace PSS.Business_Logic
 
         public User(string userName, string password, string role) : this()
         {
-            int nextID = GetNextID(); //TODO: Get form People Table
-            this.UserID = Person.PersonID;
+            Person newPerson = new Person();
+            newPerson.SetNextID();
+            this.UserID = newPerson.PersonID;
             this.UserName = userName;
             this.Password = password;
             this.Role = role;
-            this.Person = new Person(nextID);
-        }   
+            this.Person = newPerson;
+        }
+
+        protected override int GetNextID()
+        {
+            throw new TableIsAComposition(tableName);
+        }
 
         #region DataBase
 
@@ -51,7 +57,7 @@ namespace PSS.Business_Logic
             this.UserName = row.Field<string>("UserName");
             this.Password = row.Field<string>("Password");
             this.Role = row.Field<string>("Role");
-            Person = DataEngine.GetDataObject<Person>(row.Field<int>(IDColumn));
+            this.Person = DataEngine.GetDataObject<Person>(row.Field<int>(IDColumn));
         }
 
         protected override string Update()

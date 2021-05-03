@@ -48,12 +48,14 @@ namespace PSS.Business_Logic
         //Special for Individual Client
         protected Client(string tableName, string idColumn, string type, string status, string notes, Address address) : this(tableName, idColumn) //Protected Becuase you should not be able to create half a client
         {
-            int newID = GetNextID(); //TODO: THIS is WRONG grab from Person
+            Person newPerson = new Person();
+            newPerson.SetNextID();
+    
             this.Type = type;
             this.Status = status;
             this.Notes = notes;
             this.Address = address;
-            this.Person = new Person(newID);
+            this.Person = newPerson;
         }
 
         #region DataBase
@@ -64,7 +66,7 @@ namespace PSS.Business_Logic
             Status = row.Field<string>("Status");
             Notes = row.Field<string>("Notes");
             Address = DataEngine.GetDataObject<Address>(row.Field<int>("AddressID"));
-            Person = DataEngine.GetDataObject<Person>(row.Field<int>(personColumn)); //TODO: BUSINSESS CONTACT PERSON
+            Person = DataEngine.GetDataObject<Person>(row.Field<int>(personColumn));
 
             FillLists(ClientID);
         }
@@ -102,20 +104,20 @@ namespace PSS.Business_Logic
             return sql.ToString();
         }
 
-        protected override int GetNextID()
-        {
-            int ret = base.GetNextID();
+        //protected override int GetNextID()
+        //{
+        //    int ret = base.GetNextID();
 
-            if (TableName == BusinessClient.tableName)
-            {
-                if (ret == 0) //Individual Client is empty
-                {
-                    ret++; // will become 2
-                }
-            }
+        //    if (TableName == BusinessClient.tableName)
+        //    {
+        //        if (ret == 0) //Individual Client is empty
+        //        {
+        //            ret++; // will become 2
+        //        }
+        //    }
 
-            return ret + 1; //always even or odd
-        }
+        //    return ret + 1; //always even or odd
+        //}
 
         #endregion
 
@@ -142,21 +144,24 @@ namespace PSS.Business_Logic
 
         public override bool Equals(object obj)
         {
-            //add if branch for businsess/individual testing?
             return obj is Client client &&
                    ClientID == client.ClientID &&
                    Type == client.Type &&
                    Status == client.Status &&
-                   Notes == client.Notes;
+                   Notes == client.Notes &&
+                   Address.Equals(client.Address) &&
+                   Person.Equals(client.Person);
         }
 
         public override int GetHashCode()
         {
-            int hashCode = -33787204;
+            int hashCode = -2057146732;
             hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
-            hashCode = hashCode * -1521134295 + Type.GetHashCode();
-            hashCode = hashCode * -1521134295 + Status.GetHashCode();
-            hashCode = hashCode * -1521134295 + Notes.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Status);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Notes);
+            hashCode = hashCode * -1521134295 + Address.GetHashCode();
+            hashCode = hashCode * -1521134295 + Person.GetHashCode();
             return hashCode;
         }
 
@@ -164,6 +169,5 @@ namespace PSS.Business_Logic
         {
             return string.Format("ClientID: {0} | Type: {1} | Status: {2} | Notes: {3} | Address: [{4}] | Person: [{5}]", ClientID, Type, Status, Notes, Address, Person);
         }
-
     }
 }

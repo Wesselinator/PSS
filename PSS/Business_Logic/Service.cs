@@ -40,13 +40,12 @@ namespace PSS.Business_Logic
 
         #region DataBase
 
-
         public override void FillFromRow(DataRow row)
         {
             this.ServiceID = row.Field<int>(IDColumn);
             this.ServiceName = row.Field<string>("ServiceName");
             this.Type = row.Field<string>("Type");
-            this.ServiceDescription = row.Field<string>("ServiceLevel");
+            this.ServiceDescription = row.Field<string>("ServiceDescription");
         }
 
         protected override string Update()
@@ -82,7 +81,7 @@ namespace PSS.Business_Logic
 
         #endregion
 
-
+        [Obsolete("Use BaseList<Service>.GrabAll() instead", false)]
         public List<Service> GetServices()
         {
             List<Service> services = new List<Service>();

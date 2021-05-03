@@ -79,9 +79,24 @@ namespace PSS.Business_Logic
             return sql.ToString();
         }
 
-
         #endregion
 
+        public override bool Equals(object obj)
+        {
+            return obj is ClientFollowUp up &&
+                   ClientID == up.ClientID &&
+                   FollowUp.Equals(up.FollowUp) &&
+                   ID1 == up.ID1;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 592563259;
+            hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
+            hashCode = hashCode * -1521134295 + FollowUp.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ID1);
+            return hashCode;
+        }
     }
 
     public class BusinessClientFollowUp : ClientFollowUp

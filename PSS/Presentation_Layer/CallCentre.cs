@@ -29,7 +29,7 @@ namespace PSS.Presentation_Layer
         //TODO: Consider removal
         public CallCentre(Client client, ServiceRequest existingRequest) : this(client)
         {
-            currentRequest = existingRequest; //assumes existing requesst reffers to an object in client
+            currentRequest = existingRequest; //assumes existing requesst refers to an object in client
         }
 
         #region Transfer
@@ -67,7 +67,7 @@ namespace PSS.Presentation_Layer
 
         private void btnClientSatisfaction_Click(object sender, EventArgs e)
         {
-            Hide(); //TODO: Add Client Satisfaction
+            Hide(); //TODO: Excecute Client Satisfaction Web
         }
 
 

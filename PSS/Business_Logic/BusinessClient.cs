@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.Data;
-using System.Linq;
-using PSS.Data_Access;
 using System.Collections.Generic;
 
-//CHECK
 namespace PSS.Business_Logic
 {
     public class BusinessClient : Client
@@ -137,7 +134,14 @@ namespace PSS.Business_Logic
             BusinessClientFollowUps.Add(new BusinessClientFollowUp(ID, followUp));
         }
 
-        //TODO: add Business Person Getters/Setters
+        public BaseList<Person> GetBusinessPersons()
+        {
+            return BusinessClientPeople.GetBusinessClientPeople();
+        }
+        public void AddBusinessPersons(Person person, string role)
+        {
+            BusinessClientPeople.Add(new BusinessClientPerson(ID, person, role));
+        }
 
         #endregion
 
@@ -152,36 +156,24 @@ namespace PSS.Business_Logic
         {
             return obj is BusinessClient client &&
                    base.Equals(obj) &&
-                   Type == client.Type &&
-                   Status == client.Status &&
-                   Notes == client.Notes &&
-                   Address.Equals(client.Address) &&
-                   Person.Equals(client.Person) &&
-                   ClientID == client.ClientID &&
                    BusinessName == client.BusinessName &&
-                   ContactPerson.Equals(client.ContactPerson) &&
-                   EqualityComparer<MultiIDList<BusinessClientPerson>>.Default.Equals(BusinessClientPeople, client.BusinessClientPeople) &&
-                   EqualityComparer<MultiIDList<BusinessClientServiceRequest>>.Default.Equals(BusinessClientServiceRequests, client.BusinessClientServiceRequests) &&
-                   EqualityComparer<MultiIDList<BusinessClientContract>>.Default.Equals(BusinessClientContracts, client.BusinessClientContracts) &&
-                   EqualityComparer<MultiIDList<BusinessClientFollowUp>>.Default.Equals(BusinessClientFollowUps, client.BusinessClientFollowUps);
+                   ContactPerson.Equals(client.ContactPerson); //&&
+                   //BusinessClientPeople.Equals(client.BusinessClientPeople) &&
+                   //BusinessClientServiceRequests.Equals(client.BusinessClientServiceRequests) &&
+                   //BusinessClientContracts.Equals(client.BusinessClientContracts) &&
+                   //BusinessClientFollowUps.Equals(client.BusinessClientFollowUps);
         }
 
         public override int GetHashCode()
         {
             int hashCode = 55132484;
             hashCode = hashCode * -1521134295 + base.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Status);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Notes);
-            hashCode = hashCode * -1521134295 + Address.GetHashCode();
-            hashCode = hashCode * -1521134295 + Person.GetHashCode();
-            hashCode = hashCode * -1521134295 + ClientID.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(BusinessName);
             hashCode = hashCode * -1521134295 + ContactPerson.GetHashCode();
-            hashCode = hashCode * -1521134295 + BusinessClientPeople.GetHashCode();
-            hashCode = hashCode * -1521134295 + BusinessClientServiceRequests.GetHashCode();
-            hashCode = hashCode * -1521134295 + BusinessClientContracts.GetHashCode();
-            hashCode = hashCode * -1521134295 + BusinessClientFollowUps.GetHashCode();
+            //hashCode = hashCode * -1521134295 + BusinessClientPeople.GetHashCode();
+            //hashCode = hashCode * -1521134295 + BusinessClientServiceRequests.GetHashCode();
+            //hashCode = hashCode * -1521134295 + BusinessClientContracts.GetHashCode();
+            //hashCode = hashCode * -1521134295 + BusinessClientFollowUps.GetHashCode();
             return hashCode;
         }
     }

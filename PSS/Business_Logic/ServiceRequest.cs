@@ -14,6 +14,8 @@ namespace PSS.Business_Logic
         public string Description { get; set; }
         public DateTime DateReceived { get; set; }
 
+        //public Address Address { get; set; }
+
         public string DisplayMember => Title;
 
         private static readonly string tableName = "ServiceRequest";
@@ -29,6 +31,7 @@ namespace PSS.Business_Logic
             this.Type = type;
             this.Description = description;
             this.DateReceived = dateReceived;
+            //this.Address = address;
         }
 
         public ServiceRequest(string title, string type, string description, DateTime dateReceived) : this()
@@ -38,6 +41,7 @@ namespace PSS.Business_Logic
             this.Type = type;
             this.Description = description;
             this.DateReceived = dateReceived;
+            //this.Address = address;
         }
 
         #region Database
@@ -66,6 +70,7 @@ namespace PSS.Business_Logic
             sql.Append("ServiceRequestType = '" + Type + "',");
             sql.AppendLine("ServiceRequestDescription = '" + Description + "', ");
             sql.AppendLine("DateReceived = '" + DateReceived.ToString("s") + "'");
+            //sql.AppendLine("AddressID = " + AddressID + " ");
 
             sql.AppendLine("WHERE " + IDColumn + " = " + ServiceRequestID);
 
@@ -75,7 +80,7 @@ namespace PSS.Business_Logic
         protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO " + TableName);
+            sql.AppendLine("INSERT INTO " + TableName + " (ServiceRequestID, ServiceRequestTitle, ServiceRequestType, ServiceRequestDescription, DateReceived) ");
             sql.Append("VALUES (");
 
             sql.Append(ServiceRequestID + ", ");
@@ -83,6 +88,7 @@ namespace PSS.Business_Logic
             sql.Append("'" + Type + "', ");
             sql.Append("'" + Description + "', ");
             sql.Append("'" + DateReceived.ToString("s") + "'");
+            //sql.Append(" " + AddressID.ToString() + "");
 
             sql.AppendLine(");");
 
@@ -97,7 +103,9 @@ namespace PSS.Business_Logic
                    ServiceRequestID == request.ServiceRequestID &&
                    Title == request.Title &&
                    Type == request.Type &&
-                   Description == request.Description;
+                   Description == request.Description; //&&
+                   //Address.Equals(request.Address);
+                   
         }
 
         public override int GetHashCode()
@@ -107,12 +115,14 @@ namespace PSS.Business_Logic
             hashCode = hashCode * -1521134295 + Title.GetHashCode();
             hashCode = hashCode * -1521134295 + Type.GetHashCode();
             hashCode = hashCode * -1521134295 + Description.GetHashCode();
+            //hashCode = hashCode * -1521134295 + Address.GetHashCode();
             return hashCode;
         }
 
         public override string ToString()
         {
-            return string.Format("ServiceRequestID: {0} | Title: {1} | Type: {2} | Description: {3} ", ServiceRequestID, Title, Type, Description);
+            //return string.Format("ServiceRequestID: {0} | Title: {1} | Type: {2} | Description: {3} | Address: [{4}]", ServiceRequestID, Title, Type, Description, Address);
+            return string.Format("ServiceRequestID: {0} | Title: {1} | Type: {2} | Description: {3}", ServiceRequestID, Title, Type, Description);
         }
     }
 }

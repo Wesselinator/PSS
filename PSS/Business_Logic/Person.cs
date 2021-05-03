@@ -16,18 +16,19 @@ namespace PSS.Business_Logic
         public int PersonID { get => ID; private set => ID = value; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string FullName { get => string.Format("{0} {1}", FirstName, LastName); }
-        public DateTime BirthDay { get; set; }
-        public string BirthDayString { get => BirthDay.ToString(BirthDayFormat); }
-        public string CellphoneNumber { get; set; }
+        public DateTime BirthDay { get; set; } //TODO: might be null?
+        public string CellphoneNumber { get; set; } //null values not allows with ? in C#7.3
         public string TellephoneNumber { get; set; }
         public string Email { get; set; }
+
+        public string FullName => string.Format("{0} {1}", FirstName, LastName);
+        public string BirthDayString => BirthDay.ToString(BirthDayFormat);
 
         private static readonly string tableName = "Person";
         private static readonly string idColumn = "PersonID";
 
         public Person() : base(tableName, idColumn)
-        { }
+        {  }
         public Person(int ID) : this() //This Table is used in compistion
         {
             PersonID = ID;
@@ -109,7 +110,17 @@ namespace PSS.Business_Logic
         public override string ToString()
         {
             return string.Format("PersonID: {0} | FirstName: {1} | LastName: {2} | BirthDay: {3} | CellphoneNumber: {4} | TellePhoneNumber: {5}" +
-                " | Email: {6}", PersonID, FirstName, LastName, BirthDay, CellphoneNumber, TellephoneNumber, Email);
+                " | Email: {6}", PersonID, FirstName, LastName, BirthDay, None(CellphoneNumber), None(TellephoneNumber), None(Email));
+        }
+        private static string None(string s) => s ?? "None";
+
+        public string[] ContactSet()
+        {
+            string[] ret = new string[3];
+            ret[0] = CellphoneNumber is null ? null : "Cell:" + CellphoneNumber;
+            ret[1] = TellephoneNumber is null ? null : "Tell:" + TellephoneNumber;
+            ret[2] = Email is null ? null : "Email:" + Email;
+            return ret.Where(s => s != null).ToArray();
         }
 
         public override bool Equals(object obj)
@@ -133,9 +144,9 @@ namespace PSS.Business_Logic
             hashCode = hashCode * -1521134295 + LastName.GetHashCode();
             hashCode = hashCode * -1521134295 + FullName.GetHashCode();
             hashCode = hashCode * -1521134295 + BirthDay.GetHashCode();
-            hashCode = hashCode * -1521134295 + CellphoneNumber.GetHashCode();
-            hashCode = hashCode * -1521134295 + TellephoneNumber.GetHashCode();
-            hashCode = hashCode * -1521134295 + Email.GetHashCode();
+            hashCode = hashCode * -1521134295 + CellphoneNumber?.GetHashCode() ?? 0;
+            hashCode = hashCode * -1521134295 + TellephoneNumber?.GetHashCode() ?? 0;
+            hashCode = hashCode * -1521134295 + Email?.GetHashCode() ?? 0;
             return hashCode;
         }
     }

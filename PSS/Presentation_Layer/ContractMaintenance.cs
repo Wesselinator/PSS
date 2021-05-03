@@ -111,7 +111,7 @@ namespace PSS.Presentation_Layer
 
         #endregion
 
-        private void btnRemoveContract_Click(object sender, EventArgs e)
+        private void btnRemoveCurrentService_Click(object sender, EventArgs e)
         {
             //TODO: Reconsider what happens here
         }

@@ -33,7 +33,9 @@ namespace PSS.Presentation_Layer
             this.label18 = new System.Windows.Forms.Label();
             this.rbModifyService = new System.Windows.Forms.RadioButton();
             this.rbCreateService = new System.Windows.Forms.RadioButton();
+            this.txtServiceName = new System.Windows.Forms.TextBox();
             this.cbxServiceType = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnConfirmService = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.txtServiceDescription = new System.Windows.Forms.TextBox();
@@ -55,7 +57,6 @@ namespace PSS.Presentation_Layer
             this.lblQuantity = new System.Windows.Forms.Label();
             this.rtbAgreement = new System.Windows.Forms.RichTextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.btnRemoveContract = new System.Windows.Forms.Button();
             this.btnAddServiceToContract = new System.Windows.Forms.Button();
             this.lblServices = new System.Windows.Forms.Label();
             this.cbxContractService = new System.Windows.Forms.ComboBox();
@@ -63,7 +64,7 @@ namespace PSS.Presentation_Layer
             this.lblCotractName = new System.Windows.Forms.Label();
             this.txtContractName = new System.Windows.Forms.TextBox();
             this.lblCurentServs = new System.Windows.Forms.Label();
-            this.btnRemoveContract = new System.Windows.Forms.Button();
+            this.btnRemoveCurrentService = new System.Windows.Forms.Button();
             this.lblMonthlyFee = new System.Windows.Forms.Label();
             this.lblServiceLevel = new System.Windows.Forms.Label();
             this.cbxContractSL = new System.Windows.Forms.ComboBox();
@@ -79,8 +80,6 @@ namespace PSS.Presentation_Layer
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.txtServiceName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.cbxServiceForSL = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -164,6 +163,14 @@ namespace PSS.Presentation_Layer
             this.rbCreateService.UseVisualStyleBackColor = true;
             this.rbCreateService.CheckedChanged += new System.EventHandler(this.rbCreateService_CheckedChanged);
             // 
+            // txtServiceName
+            // 
+            this.txtServiceName.Location = new System.Drawing.Point(92, 70);
+            this.txtServiceName.Margin = new System.Windows.Forms.Padding(1);
+            this.txtServiceName.Name = "txtServiceName";
+            this.txtServiceName.Size = new System.Drawing.Size(132, 20);
+            this.txtServiceName.TabIndex = 33;
+            // 
             // cbxServiceType
             // 
             this.cbxServiceType.FormattingEnabled = true;
@@ -173,6 +180,16 @@ namespace PSS.Presentation_Layer
             this.cbxServiceType.Size = new System.Drawing.Size(132, 21);
             this.cbxServiceType.TabIndex = 36;
             this.cbxServiceType.Text = "Choose or type...";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 73);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 13);
+            this.label2.TabIndex = 32;
+            this.label2.Text = "Service Name";
             // 
             // btnConfirmService
             // 
@@ -210,7 +227,7 @@ namespace PSS.Presentation_Layer
             this.txtServiceType.Location = new System.Drawing.Point(46, 95);
             this.txtServiceType.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.txtServiceType.Name = "txtServiceType";
-            this.txtServiceType.Size = new System.Drawing.Size(43, 20);
+            this.txtServiceType.Size = new System.Drawing.Size(31, 13);
             this.txtServiceType.TabIndex = 32;
             this.txtServiceType.Text = "Type";
             // 
@@ -296,7 +313,7 @@ namespace PSS.Presentation_Layer
             this.grbxContractInfo.Controls.Add(this.lblCotractName);
             this.grbxContractInfo.Controls.Add(this.txtContractName);
             this.grbxContractInfo.Controls.Add(this.lblCurentServs);
-            this.grbxContractInfo.Controls.Add(this.btnRemoveContract);
+            this.grbxContractInfo.Controls.Add(this.btnRemoveCurrentService);
             this.grbxContractInfo.Controls.Add(this.lblMonthlyFee);
             this.grbxContractInfo.Controls.Add(this.lblServiceLevel);
             this.grbxContractInfo.Controls.Add(this.cbxContractSL);
@@ -426,34 +443,15 @@ namespace PSS.Presentation_Layer
             this.rtbAgreement.TabIndex = 53;
             this.rtbAgreement.Text = "";
             // 
-            // lstvCurrentContractServices
-            // 
-            //this.lstvCurrentContractServices.HideSelection = false;
-            //this.lstvCurrentContractServices.Location = new System.Drawing.Point(20, 60);
-            //this.lstvCurrentContractServices.Name = "lstvCurrentContractServices";
-            //this.lstvCurrentContractServices.Size = new System.Drawing.Size(290, 77);
-            //this.lstvCurrentContractServices.TabIndex = 46;
-            //this.lstvCurrentContractServices.UseCompatibleStateImageBehavior = false;
-            //this.lstvCurrentContractServices.View = System.Windows.Forms.View.List;
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(10, 42);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(88, 20);
+            this.label14.Size = new System.Drawing.Size(58, 13);
             this.label14.TabIndex = 52;
             this.label14.Text = "Agreement";
-            // 
-            // btnRemoveContract
-            // 
-            this.btnRemoveContract.Location = new System.Drawing.Point(174, 20);
-            this.btnRemoveContract.Name = "btnRemoveContract";
-            this.btnRemoveContract.Size = new System.Drawing.Size(136, 32);
-            this.btnRemoveContract.TabIndex = 48;
-            this.btnRemoveContract.Text = "Remove Selected";
-            this.btnRemoveContract.UseVisualStyleBackColor = true;
             // 
             // btnAddServiceToContract
             // 
@@ -475,16 +473,6 @@ namespace PSS.Presentation_Layer
             this.lblServices.Size = new System.Drawing.Size(43, 13);
             this.lblServices.TabIndex = 49;
             this.lblServices.Text = "Service";
-            // 
-            // label13
-            // 
-            //this.label13.AutoSize = true;
-            //this.label13.Location = new System.Drawing.Point(17, 148);
-            //this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            //this.label13.Name = "label13";
-            //this.label13.Size = new System.Drawing.Size(61, 20);
-            //this.label13.TabIndex = 49;
-            //this.label13.Text = "Service";
             // 
             // cbxContractService
             // 
@@ -535,16 +523,15 @@ namespace PSS.Presentation_Layer
             this.lblCurentServs.TabIndex = 48;
             this.lblCurentServs.Text = "Current Contract Services";
             // 
-            // btnRemoveContract
+            // btnRemoveCurrentService
             // 
-            this.btnRemoveContract.Location = new System.Drawing.Point(356, 24);
-            this.btnRemoveContract.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRemoveContract.Name = "btnRemoveContract";
-            this.btnRemoveContract.Size = new System.Drawing.Size(115, 21);
-            this.btnRemoveContract.TabIndex = 48;
-            this.btnRemoveContract.Text = "Remove Selected";
-            this.btnRemoveContract.UseVisualStyleBackColor = true;
-            this.btnRemoveContract.Click += new System.EventHandler(this.btnRemoveContract_Click);
+            this.btnRemoveCurrentService.Location = new System.Drawing.Point(352, 23);
+            this.btnRemoveCurrentService.Name = "btnRemoveCurrentService";
+            this.btnRemoveCurrentService.Size = new System.Drawing.Size(119, 22);
+            this.btnRemoveCurrentService.TabIndex = 48;
+            this.btnRemoveCurrentService.Text = "Remove Selected";
+            this.btnRemoveCurrentService.UseVisualStyleBackColor = true;
+            this.btnRemoveCurrentService.Click += new System.EventHandler(this.btnRemoveCurrentService_Click);
             // 
             // lblMonthlyFee
             // 
@@ -570,9 +557,10 @@ namespace PSS.Presentation_Layer
             // 
             this.cbxContractSL.FormattingEnabled = true;
             this.cbxContractSL.Items.AddRange(new object[] {
-            "Gauteng",
-            "Free State",
-            "North West"});
+            "1- Peasant",
+            "2- Commoner",
+            "3- Noble",
+            "4- Feudal lord"});
             this.cbxContractSL.Location = new System.Drawing.Point(93, 48);
             this.cbxContractSL.Margin = new System.Windows.Forms.Padding(1);
             this.cbxContractSL.Name = "cbxContractSL";
@@ -708,24 +696,6 @@ namespace PSS.Presentation_Layer
             this.button4.TabIndex = 49;
             this.button4.Text = "Raise Priority";
             this.button4.UseVisualStyleBackColor = true;
-            // 
-            // txtServiceName
-            // 
-            this.txtServiceName.Location = new System.Drawing.Point(92, 70);
-            this.txtServiceName.Margin = new System.Windows.Forms.Padding(1);
-            this.txtServiceName.Name = "txtServiceName";
-            this.txtServiceName.Size = new System.Drawing.Size(132, 20);
-            this.txtServiceName.TabIndex = 33;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 73);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 13);
-            this.label2.TabIndex = 32;
-            this.label2.Text = "Service Name";
             // 
             // button2
             // 
@@ -903,7 +873,7 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.DateTimePicker dtpContractEnd;
         private System.Windows.Forms.Label lblEndDate;
         private System.Windows.Forms.GroupBox grbxContractInfo;
-        private System.Windows.Forms.Button btnRemoveContract;
+        private System.Windows.Forms.Button btnRemoveCurrentService;
         private System.Windows.Forms.Label lblCurentServs;
         private System.Windows.Forms.Button btnAddServiceToContract;
         private System.Windows.Forms.ComboBox cbxContractService;

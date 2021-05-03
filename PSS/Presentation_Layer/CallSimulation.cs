@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace PSS.Presentation_Layer
 {
-    //TODO: add call interaction
     public partial class CallSimulation : Form
     {
         DateTime startTime;
@@ -121,6 +120,7 @@ namespace PSS.Presentation_Layer
 
         private void btnFollowUp_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("call forwarded to clientsatisfaction department");
             throw new NotImplementedException("We still have to make that form!");
         }
     }

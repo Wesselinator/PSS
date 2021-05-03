@@ -154,7 +154,7 @@ namespace PSS.Business_Logic
 
         public override string ToString()
         {
-            return string.Format("ContractID: {0} | ContractName: {1} | ServiceLevel: {2} | StartDate: [{3}] | EndDate: [{4}] | ContractDurationInMonths: {5} | MonthlyFee: {6}", ContractID, ContractName, ServiceLevel, StartDate, EndDate, ContractDurationInMonths, MonthlyFee);
+            return string.Format("ContractID: {0} | ContractName: {1} | ServiceLevel: {2} | StartDate: [{3}] | EndDate: [{4}] | ContractDurationInMonths: {5} | MonthlyFee: {6}", ContractID, ContractName, ServiceLevel, StartDate, EndDate?.ToString() ?? "Still Active", ContractDurationInMonths, MonthlyFee);
         }
     }
 }

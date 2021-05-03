@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using System.Linq;
 using PSS.Data_Access;
 
 namespace PSS.Business_Logic
@@ -12,29 +13,36 @@ namespace PSS.Business_Logic
         public string Specialty { get; set; }
         public decimal PayRate { get; set; }
         public Person Person { get; set; }
+
         public string DisplayMember => Person.FullName;
 
         private static readonly string tableName = "Technician";
         private static readonly string idColumn = "TechnicianID";
 
         public Technician() : base(tableName, idColumn) 
-        { }
+        {  }
 
         public Technician(string specialty, decimal payRate, Person person) : this()
         {
-            TechnicianID = person.PersonID;
-            Specialty = specialty;
-            PayRate = payRate;
-            Person = person;
+            this.TechnicianID = person.PersonID;
+            this.Specialty = specialty;
+            this.PayRate = payRate;
+            this.Person = person;
         }
 
         public Technician(string specialty, decimal payRate) : this()
         {
-            int nextID = GetNextID(); //TODO: This is wrong, get from Person
-            TechnicianID = nextID;
-            Specialty = specialty;
-            PayRate = payRate;
-            Person = new Person(nextID);
+            Person newPerson = new Person();
+            newPerson.SetNextID();
+            this.TechnicianID = newPerson.PersonID;
+            this.Specialty = specialty;
+            this.PayRate = payRate;
+            this.Person = newPerson;
+        }
+
+        protected override int GetNextID()
+        {
+            throw new TableIsAComposition(tableName);
         }
 
         #region DataBase
@@ -120,9 +128,34 @@ namespace PSS.Business_Logic
             return hashCode;
         }
 
+        public string ToFormattedString()
+        {
+            return string.Format("{0} specializes in {1} and gets payed R{2:0.00} p/m.{3}", Person.FullName, Specialty, PayRate, ContractString());
+        }
+        private string ContractString()
+        {
+            string[] ret = Person.ContactSet();
+            string reach = " They can be reached by ";
+            switch (ret.Length)
+            {
+                case 1:
+                    return reach + ret[0];
+
+                case 2:
+                    return reach + ret[0] + " or by " + ret[1];
+
+                case 3:
+                    return reach + ret[0] + " or " + ret[1] + " or by " + ret[2];
+
+                case 0:
+                default: 
+                    return string.Empty;
+            }
+        }
+
         public override string ToString()
         {
-            return string.Format("TechnicianID: {0} | Specialty: {1} | PayRate: {2} | Person: [{3}] ", TechnicianID, Specialty, PayRate, Person);
+            return string.Format("TechnicianID: {0} | Specialty: {1} | PayRate: {2:0.00} | Person: [{3}] ", TechnicianID, Specialty, PayRate, Person);
         }
 
     }
