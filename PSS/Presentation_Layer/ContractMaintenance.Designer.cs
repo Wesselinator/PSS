@@ -557,9 +557,10 @@ namespace PSS.Presentation_Layer
             // 
             this.cbxContractSL.FormattingEnabled = true;
             this.cbxContractSL.Items.AddRange(new object[] {
-            "Gauteng",
-            "Free State",
-            "North West"});
+            "1- Peasant",
+            "2- Commoner",
+            "3- Noble",
+            "4- Feudal lord"});
             this.cbxContractSL.Location = new System.Drawing.Point(93, 48);
             this.cbxContractSL.Margin = new System.Windows.Forms.Padding(1);
             this.cbxContractSL.Name = "cbxContractSL";
