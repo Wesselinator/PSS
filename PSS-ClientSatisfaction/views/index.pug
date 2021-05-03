@@ -6,7 +6,7 @@ block content
   #Main
     #VoidLeft
     #Content
-      #SelectClientType
+      #SelectClientType.contentdiv
         label#lblClienttype(for='SelectClientType') Select a Client Type
         br
         ul#ClientTypes
@@ -16,32 +16,27 @@ block content
           li
             input#BusinessClient.RadioClientType(type='radio')
             label(for='BusinessClient') BusinessClient
-      br
-      #SelectClient
+      #SelectClient.contentdiv
         label#lblSelectClient(for='SelectClient') Select a client
         br
         select#dropdownSelectClient
           option(value) Please Select
           option(value)
-      br
-      #FollowUpTitle
+      #FollowUpTitle.contentdiv
         label(for='FollowUpTitle') Follow up Title
         br
         input#FollowUpText(type='text')
-      br
-      #FollowUpType
-        label#lblFollowUpType(for='FollowUpType') Select a client
+      #FollowUpType.contentdiv
+        label#lblFollowUpType(for='FollowUpType') Select a Type
         br
         select#dropdownFollowUpType
           option(value) Please Select
           option(value)
-      br
-      #FollowUpDescription
+      #FollowUpDescription.contentdiv
         label(for='FollowUpDescription') Follow up Description
         br
         input#FollowUpDescriptionText(type='text')
-      br
-      #DateTimeMode
+      #DateTimeMode.contentdiv
         label#lblDateTimeMode(for='DateTimeMode') Mode for date/time of followup
         br
         ul#DateTypes
@@ -51,13 +46,11 @@ block content
           li
             input#SpecifyDateTime.RadioDateType(type='radio')
             label(for='SpecifyDateTime') Specify date/time
-      br
-      #DateTime
+      #DateTime.contentdiv
         label(for='DateTime') Date/Time the follow up occurred/was received
         br
         input#DateTimeText(type='text' size='10' data-maxlength='10' maxlength='10' data-age='' value='' data-format='mmddyyyy' data-seperator='-' placeholder='MM-DD-YYYY' autocomplete='off' aria-labelledby='label_12 sublabel_12_litemode' im-insert='false')
-      br
-      #IssueResolved
+      #IssueResolved.contentdiv
         label#lblIssueResolved(for='IssueResolved') Mode for date/time of followup
         br
         ul#IssueResolved
@@ -67,13 +60,11 @@ block content
           li
             input#IsNotResolved.IsIssueResolved(type='radio')
             label(for='IsNotResolved') Issue is not resolved
-      br
-      #SatisfactionLevel
+      #SatisfactionLevel.contentdiv
         label#lblSatisfactionLvl Satisfaction Level
         br
         input#edtSatisfactionLvl(type='number' data-type='input-spinner' placeholder='0' data-component='spinner' min='0' max='10')
-      br
-      #Submit
+      #Submit.contentdiv
         button#btnSubmit(type='submit' data-component='button') Submit
     #VoidRight
 
