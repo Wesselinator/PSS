@@ -47,9 +47,9 @@ body {
 ul{
     list-style: none;
     margin: 2%;
+    padding-left: 0;
 }
 
 .contentdiv{
     margin: 2%;
 }
-
