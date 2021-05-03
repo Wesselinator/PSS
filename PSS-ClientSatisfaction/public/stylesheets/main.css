@@ -1,10 +1,12 @@
-body{
-    
+body {
+    background-image: url("https://webdesignersbrisbaneblog.files.wordpress.com/2020/04/website-design-brisbane1.jpeg");
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-#Header{
+#Header {
     border: black 2px solid;
-    border-radius: 2%;
+    border-radius: 10px;
+    background-color: aliceblue;
 }
 
 #Mainheader{
@@ -31,7 +33,8 @@ body{
     height: 100%;
     overflow: auto;
     border: black solid 2px;
-    border-radius: 2%;
+    border-radius: 10px;
+    background-color: aliceblue;
 }
 
 #VoidRight {
@@ -39,4 +42,14 @@ body{
     width: 25%;
     height: 100%;
     border: transparent solid 2px;
+}
+
+ul{
+    list-style: none;
+    margin: 2%;
+    padding-left: 0;
+}
+
+.contentdiv{
+    margin: 2%;
 }
