@@ -54,7 +54,7 @@ namespace PSS.Presentation_Layer
             RadioButton rb = (RadioButton)sender;
             if (rb.Checked)
             {
-                nudSpecificQuanity.Value = 0; //TODO: what is infinite???
+                nudSpecificQuanity.Value = -1; //TODO: this ok with the bounds?
             }
         }
 
