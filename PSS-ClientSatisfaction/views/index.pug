@@ -42,13 +42,13 @@ block content
         h3(for='DateTime') Date/Time the follow up occurred/was received
         input#DateTimeText.inputbars(type='date' size='10' maxlength='10')
       #IssueResolved.contentdiv
-        h3#lblIssueResolved(for='IssueResolved') Mode for date/time of followup
+        h3#lblIssueResolved(for='IssueResolved') Is issue resolved?
         form#IssueResolved
-          input#IsResolved.IsIssueResolved(type='radio' name='IsIssueResolvedRadio' value='Issue is resolved')
-          label(for='IsResolved') Issue is resolved
+          input#IsResolved.IsIssueResolved(type='radio' name='IsIssueResolvedRadio' value='Yes')
+          label(for='IsResolved') Yes
           br
-          input#IsNotResolved.IsIssueResolved(type='radio' name='IsIssueResolvedRadio' value='Issue is not resolved')
-          label(for='IsNotResolved') Issue is not resolved
+          input#IsNotResolved.IsIssueResolved(type='radio' name='IsIssueResolvedRadio' value='No')
+          label(for='IsNotResolved') No
       #SatisfactionLevel.contentdiv
         h3#lblSatisfactionLvl Satisfaction Level
         input#edtSatisfactionLvl.inputbars(type='number' data-type='input-spinner' placeholder='0' data-component='spinner' min='0' max='10')
