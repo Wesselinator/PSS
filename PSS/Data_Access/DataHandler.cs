@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using System.Data;
 
@@ -7,18 +7,20 @@ namespace PSS.Data_Access
 {
     public static class DataHandler
     {
-        private static readonly string connStr = @"Server=.;Initial Catalog=PremierServiceSolutionsDB;Database=PremierServiceSolutionsDB;Integrated Security=SSPI";
+        private static readonly string connStr = @"Server=127.0.0.1; Port=7331; Uid=PSSuser; Pwd=τнιsραssωοяδιsωεακ; Database=PremierServiceSolutionsDB";
 
         public static DataTable GetDataTable(string Query)
         {
-            DataTable data = new DataTable(); ;
+            TerminateSQL(ref Query);
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            DataTable data = new DataTable();
+
+            using (MySqlConnection conn = new MySqlConnection(connStr))
             {
                 try
                 {
                     conn.Open();
-                    SqlDataAdapter adapter = new SqlDataAdapter(Query, conn); 
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(Query, conn); 
                     adapter.Fill(data);
                 }
                 catch (Exception e)
@@ -33,9 +35,11 @@ namespace PSS.Data_Access
 
         private static void ExecuteNonQuery(string Query)//for insert, update and delete statements
         {
-            using(SqlConnection conn = new SqlConnection(connStr))
+            TerminateSQL(ref Query);
+
+            using (MySqlConnection conn = new MySqlConnection(connStr))
             {
-                SqlCommand command = new SqlCommand(Query, conn);
+                MySqlCommand command = new MySqlCommand(Query, conn);
                 try
                 {
                     conn.Open();
@@ -62,6 +66,23 @@ namespace PSS.Data_Access
         public static void Delete(string Query)
         {
             ExecuteNonQuery(Query);
+        }
+
+
+
+        private static void TerminateSQL(ref string Query)
+        {
+            char finalChar = Query[Query.Length - 1];
+
+            switch (finalChar)
+            {
+                case ';': 
+                    return;
+
+                default :
+                    Query += ";";
+                    break;
+            }
         }
     }
 }
