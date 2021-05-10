@@ -2,6 +2,7 @@
 using System.Text;
 using PSS.Data_Access;
 using System.Data;
+using System.Collections.Generic;
 
 namespace PSS.Business_Logic
 {
@@ -137,7 +138,8 @@ namespace PSS.Business_Logic
             hashCode = hashCode * -1521134295 + TaskID.GetHashCode();
             hashCode = hashCode * -1521134295 + Title.GetHashCode();
             hashCode = hashCode * -1521134295 + Descripion.GetHashCode();
-            hashCode = hashCode * -1521134295 + Notes.GetHashCode();
+            //hashCode = hashCode * -1521134295 + Notes?.GetHashCode() ?? 0;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Notes);
             hashCode = hashCode * -1521134295 + ServiceRequest.GetHashCode();
             hashCode = hashCode * -1521134295 + DateProcessed.GetHashCode();
             hashCode = hashCode * -1521134295 + IsFinished.GetHashCode();

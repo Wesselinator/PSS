@@ -83,6 +83,9 @@ namespace PSS.Presentation_Layer
         private void PopulateTaskList()
         {
             lsbxActiveTasks.DataSource = AllUnfinishedTasks;
+            //Tech Feedback tab
+            cbxSchedueledTask.DisplayMember = "DisplayMember";
+            cbxSchedueledTask.Items.AddRange(AllUnfinishedTasks.ToArray());
         }
 
         private void PopulateTask()
@@ -154,9 +157,21 @@ namespace PSS.Presentation_Layer
         private void tcTask_SelectedIndexChanged(object sender, EventArgs e)
         {
             TabControl tabControl = (TabControl)sender;
-            if (tabControl.SelectedIndex == 2)
+
+            switch (tabControl.SelectedIndex)
             {
-                PopulateTree();
+                case 3:
+                    grbTask.Enabled = false;
+                    grbxAvailableTechnicians.Enabled = false;
+                    break;
+
+                case 2:
+                    PopulateTree();
+                    goto default;
+                default:
+                    grbTask.Enabled = true;
+                    grbxAvailableTechnicians.Enabled = true;
+                    break;
             }
         }
 
@@ -224,6 +239,28 @@ namespace PSS.Presentation_Layer
         private void ServiceDepartment_Load(object sender, EventArgs e)
         {
             //TODO: move populates here? Keep in constructor?
+        }
+
+        private void cbxSchedueledTask_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // TODO: Fix task
+            techTaskToModify = (TechnicianTask)cbxSchedueledTask.SelectedItem;//Cannot convert Task to tech task
+
+            lblTaskServiceRequest.Text = techTaskToModify.Task.ServiceRequest.ToString();
+            PopulateTask();
+        }
+        
+        private void btnSubmitFeedback_Click(object sender, EventArgs e)
+        {
+            TechnicianTaskFeedback technicianTaskFeedback = new TechnicianTaskFeedback();
+            technicianTaskFeedback.SetNextID();
+            technicianTaskFeedback.TimeArived = dtpActualTimeArrived.Value;
+            technicianTaskFeedback.TimeDeparture = dtpTimeDep.Value;
+            technicianTaskFeedback.Notes = rtbFeedbackNotes.Text;
+            technicianTaskFeedback.Status = cmbStatus.SelectedItem.ToString();
+            technicianTaskFeedback.TechnicianTask = techTaskToModify;
+            techTaskToModify.Save();
+            MessageBox.Show("Task Feedback succesfully submitted");
         }
     }
 }
