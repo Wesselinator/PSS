@@ -64,7 +64,7 @@ CREATE OR REPLACE TABLE `Person`
 (PersonID INT PRIMARY KEY,
  FirstName VARCHAR(50) NOT NULL,
  LastName VARCHAR(50) NOT NULL,
- BirthDate DATE, #NULL?
+ BirthDate DATE NOT NULL, 
  CellPhoneNumber VARCHAR(12),
  TelephoneNumber VARCHAR(12),
  Email VARCHAR(320)
