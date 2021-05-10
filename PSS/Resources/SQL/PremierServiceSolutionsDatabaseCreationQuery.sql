@@ -63,6 +63,11 @@ CREATE TABLE [Service]
 
 GO
 
+CREATE TABLE ServiceLevel
+(ServiceLevelID INT PRIMARY KEY,
+ ServiceLevelName VARCHAR(30)
+)
+
 CREATE TABLE [Contract]
 (ContractID INT PRIMARY KEY,
  ContractName VARCHAR(45) NOT NULL,
@@ -87,6 +92,11 @@ CREATE TABLE ServiceLevelAgreement
 )
 
 GO
+
+CREATE TABLE Province
+(ProvinceID INT PRIMARY KEY,
+ ProvinceName VARCHAR(20)
+)
 
 CREATE TABLE [Address]
 (AddressID INT PRIMARY KEY,
@@ -399,7 +409,13 @@ INSERT INTO [Service] (ServiceID, ServiceName, [Type], ServiceDescription)
 		   (17,'PSS Basic Workstation','Workstation Computer','Model Custom 2122/AMD RYZEN 5 3400G PRO (4 Cores, 8 Threads, 6MB Cache, Turbo 4.2GHz)/8GB RAM/256GB NVME SSD/1TB HDD'),
 		   (18,'PSS Medium Workstation','Workstation Computer','Model Custom 2301/AMD RYZEN 5 3600 (6 Cores, 12 Threads, 35MB Cache, Turbo 4.2GHz)/16GB RAM/512GB NVME SSD/1TB HDD/Quadro P400'),
 		   (19,'PSS High End Workstation','Workstation Computer','Model Custom 2531/AMD RYZEN 9 5950X (16 Cores, 32 Threads, 3.4GHz, 72MB Cache, Turbo 4.9GHz+)/32GB RAM/2TB NVME SSD/NVIDIA QUADRO P1000');
-		   
+
+INSERT INTO ServiceLevel (ServiceLevelID, ServiceLevelName)
+	VALUES (1, 'Peasant'),
+		   (2, 'Commoner'),
+		   (3, 'Noble'),
+		   (4, 'Feudal lord')
+	   
 INSERT INTO [Contract] (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MonthlyFee)
 	VALUES (1, 'Printing Necessities', 'Peasant', '2021/04/01', NULL, 36, 400),
 		   (2, 'Basic Printing', 'Commoner', '2021/04/01', NULL, 36, 600),
@@ -419,7 +435,7 @@ INSERT INTO [Contract] (ContractID, ContractName, ServiceLevel, OfferStartDate, 
 INSERT INTO ServiceLevelAgreement (ServiceID, ContractID, Agreement, ServiceQuantity)
 	VALUES (11, 1, 'Lease to own',1),--valued at R 10 000
 		   (1, 1, 'Applies to all issues not relating to water or electrical damage',-1),--negative 1 presents an unlimited amount of the service availible for the contract duration
-		   (3, 1, 'Applies to specified working hours (Monday to Friday 8am to 8pm). These phone calls will enjoy priority level 4, thus a waiting time of up to 15 minutes may be incurred',-1),
+		   (3, 1, 'Applies to specified working hours. These phone calls will enjoy priority level 4, thus a waiting time of up to 15 minutes may be incurred',-1),
 		   (6, 1, 'Applies to product failure resulting from a production fault',-1),
 		   
 		   (12, 2, 'Lease to own',1),--valued at R 17 000
@@ -526,6 +542,17 @@ INSERT INTO [Person] (PersonID, FirstName, LastName, BirthDate, CellPhoneNumber,
 		   (13, 'Wielfred', 'Mekoa', '1991/03/12', '+27734175449', NULL, 'wielfredmekoa.marketing@gmail.com'),
 		   (15, 'Delma', 'Tadiwa', '1995/05/22', '+27825539658', NULL, 'd.tadiwa@gmail.com'),
 		   (17, 'Blessing', 'Moyo', '1988/07/25', '+27618824356', NULL, 'blessingmoyo@gmail.com');
+
+INSERT INTO Province (ProvinceName)
+	VALUES (1,'Gauteng'),
+		   (2,'Limpopo'),
+		   (3,'Mpumalanga'),
+		   (4,'North West'),
+		   (5,'Kwazulu Natal'),
+		   (6,'Free State'),
+		   (7,'Northern Cape'),
+		   (8,'Western Cape'),
+		   (9,'Eastern Cape')
 
 INSERT INTO [Address] (AddressID, Street, City, PostalCode, Province)
 	VALUES (1, '961 Church St', 'Pretoria', '0155', 'Gauteng'),
