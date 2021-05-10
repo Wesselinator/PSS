@@ -9,7 +9,6 @@ namespace PSS.Presentation_Layer
     public partial class ClientMaintenance : Form
     {
         private Client currentClient = null;
-        private Contract selectedClientContract => (Contract)cbxCurrentContracts.SelectedItem;
         private Contract selectedContract => (Contract)cbxContracts.SelectedItem;
 
         public bool registerMode { get; set; } //bool for logic if form is in registration mode or update mode
@@ -17,7 +16,6 @@ namespace PSS.Presentation_Layer
         public ClientMaintenance()
         {
             InitializeComponent();
-            ciwMain.Hide();
             RegisterMode();
         }      
 
@@ -25,8 +23,13 @@ namespace PSS.Presentation_Layer
         {
             InitializeComponent();
             currentClient = client;
-            ciwMain.Client = client;
             UpdateMode();
+        }
+
+        private void InitializeLists()
+        {
+            lsbxExistingPeople.DisplayMember = "DisplayMember";
+            lsbxExistingPeople.DataSource = People;
         }
 
         /// <summary>
@@ -56,11 +59,11 @@ namespace PSS.Presentation_Layer
 
 
             //Add all Contracts
-            cbxCurrentContracts.Items.Clear();
-            cbxCurrentContracts.Text = "None at the moment";
+            cbxContracts.Items.Clear();
+            cbxContracts.Text = "None at the moment";
 
             cbxContracts.Items.Clear();
-            cbxCurrentContracts.Text = "";
+            cbxContracts.Text = "";
             //BaseList<Contract> contracts = new BaseList<Contract>();
             //contracts.FillAll();
             //cbxContracts.Items.AddRange(contracts.ToArray());
@@ -73,6 +76,10 @@ namespace PSS.Presentation_Layer
 
             rtbServiceLevelDetails.Clear();
             rtbServiceLevelDetails.Text = "Service level details:\n";
+
+            grbPerson.Text = "Client Details";
+
+            lsbxBusinessPeople.SelectedIndex = -1;
         }
 
         /// <summary>
@@ -114,6 +121,8 @@ namespace PSS.Presentation_Layer
 
             Populate();
 
+            button1.Enabled = false;
+
             registerMode = false; //sets form to update mode
         }
 
@@ -147,8 +156,8 @@ namespace PSS.Presentation_Layer
 
             BaseList<Contract> contracts = new BaseList<Contract>(); //move to local?
             contracts = currentClient.GetContracts();
-            cbxCurrentContracts.DisplayMember = "ContractName";
-            cbxCurrentContracts.Items.AddRange(contracts.ToArray());
+            cbxContracts.DisplayMember = "ContractName";
+            cbxContracts.Items.AddRange(contracts.ToArray());
         }
 
         #endregion
@@ -283,6 +292,25 @@ namespace PSS.Presentation_Layer
             //selectedClientContract = selectedContract; //TODO: Figure out this set
         }
 
+        private void btnCreateContract_Click(object sender, EventArgs e)
+        {
+            ContractMaintenance cm = new ContractMaintenance();
+            Hide();
+            cm.ShowDialog();
+            Show();
+        }
+
+        private void rbtnIndvidual_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnIndvidual.Checked)
+            {
+                lblBusinessName.Hide();
+                txtBusinessName.Hide();
+
+                grbPerson.Text = "Client Details";
+            }
+        }
+
         private void btnBack_Click(object sender, EventArgs e)
         {
             switch (MessageBox.Show("Are you sure? Changes will NOT be saved!", "Discard and Go Back", MessageBoxButtons.YesNo))
@@ -300,22 +328,12 @@ namespace PSS.Presentation_Layer
             }
         }
 
-        private void btnCreateContract_Click(object sender, EventArgs e)
-        {
-            ContractMaintenance cm = new ContractMaintenance();
-            Hide();
-            cm.ShowDialog();
-            Show();
-        }
+        #region Client
 
-        private void rbtnIndvidual_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbtnIndvidual.Checked)
-            {
-                lblBusinessName.Hide();
-                txtBusinessName.Hide();
-            }
-        }
+        #region BusinessClient
+        //private BaseList<BusinessClientPerson> BusinessClientPeople = BaseList<BusinessClientPerson>.GrabAll();
+        private BusinessClient clientIsBusiness = null;
+        private BaseList<Person> BusinessPeople => clientIsBusiness.GetBusinessPersons();
 
         private void rbtnBusiness_CheckedChanged(object sender, EventArgs e)
         {
@@ -323,7 +341,112 @@ namespace PSS.Presentation_Layer
             {
                 lblBusinessName.Show();
                 txtBusinessName.Show();
+
+                grbPerson.Text = "Contact Person Details";
+            }
+
+            grbBPeople.Enabled = rbtnBusiness.Checked;
+
+            btnAddToBP.Enabled = rbtnBusiness.Checked;
+        }
+
+
+        #endregion
+
+        #endregion
+
+        #region People
+        private BaseList<Person> People = BaseList<Person>.GrabAll();
+        private Person selectedPerson => People.Find(p => p.PersonID == ((Person)lsbxExistingPeople.SelectedItem).PersonID);
+        private bool AddMode = true;
+
+        private void btnPerson_Click(object sender, EventArgs e)
+        {
+            if (AddMode)
+            {
+                Person person = new Person(txtName.Text, txtSurname.Text, dtpDOB.Value, txtCellphone.Text, txtTelephone.Text, txtEmail.Text);
+                person.Save();
+                People.Add(person);
+
+                MessageBox.Show("New Person Sucessfully Saved!", "Success!", MessageBoxButtons.OK);
+            }
+            else
+            {
+                PopulatePersonFromControls(selectedPerson);
+                selectedPerson.Save();
+
+                AddMode = true;
+
+                MessageBox.Show("Person Sucessfully Modified!", "Success!", MessageBoxButtons.OK);
             }
         }
+        private void btnModifyPerson_Click(object sender, EventArgs e)
+        {
+            if (lsbxExistingPeople.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a person", "Failure!", MessageBoxButtons.OK);
+                return;
+            }
+
+            ClearPerson();
+            btnPerson.Text = "Modify Person";
+            AddMode = false;
+
+            PopulateControlsFromPerson(selectedPerson);
+        }
+
+        private void btnNewPerson_Click(object sender, EventArgs e)
+        {
+            ClearPerson();
+            btnPerson.Text = "Add Person";
+            AddMode = true;
+        }
+
+
+        private void ClearPerson()
+        {
+            txtName.Clear();
+            txtSurname.Clear();
+            dtpDOB.Value = DateTime.Now;
+            txtCellphone.Clear();
+            txtTelephone.Clear();
+            txtEmail.Clear();
+        }
+
+        private void PopulatePersonFromControls(Person person)
+        {
+            person.FirstName = txtName.Text;
+            person.LastName = txtSurname.Text;
+            person.BirthDay = dtpDOB.Value;
+            person.CellphoneNumber = txtCellphone.Text;
+            person.TellephoneNumber = txtTelephone.Text;
+            person.Email = txtEmail.Text;
+        }
+
+        private void PopulateControlsFromPerson(Person person)
+        {
+            txtName.Text = person.FirstName;
+            txtSurname.Text = person.LastName;
+            dtpDOB.Value = person.BirthDay;
+            txtTelephone.Text = person.TellephoneNumber;
+            txtCellphone.Text = person.CellphoneNumber;
+            txtEmail.Text = person.Email;
+        }
+
+        private void btnAddToBP_Click(object sender, EventArgs e)
+        {
+            if (rbtnBusiness.Checked)
+            {
+                if (BusinessPeople.Contains(selectedPerson))
+                {
+                    MessageBox.Show("This business already contains this Person!", "Failure!", MessageBoxButtons.OK);
+                    return;
+                }
+
+                BusinessPeople.Add(selectedPerson);
+            }
+        }
+
+        #endregion
     }
 }

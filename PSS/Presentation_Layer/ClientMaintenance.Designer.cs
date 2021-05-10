@@ -36,18 +36,8 @@ namespace PSS.Presentation_Layer
             this.rtbNotes = new System.Windows.Forms.RichTextBox();
             this.cbxStatus = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnModifyContract = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbxCurrentContracts = new System.Windows.Forms.ComboBox();
-            this.btnAddContract = new System.Windows.Forms.Button();
-            this.rtbServiceLevelDetails = new System.Windows.Forms.RichTextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cbxServiceLevel = new System.Windows.Forms.ComboBox();
-            this.rtbContractDetails = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.cbxContracts = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grbPerson = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cbxProvince = new System.Windows.Forms.ComboBox();
@@ -78,20 +68,28 @@ namespace PSS.Presentation_Layer
             this.btnClear = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
-            this.lblDepartment = new System.Windows.Forms.Label();
             this.lblClientMaintenance = new System.Windows.Forms.Label();
-            this.btnCreateContract = new System.Windows.Forms.Button();
-            this.ciwMain = new PSS.Presentation_Layer.ClientInfoWidgit();
+            this.lsbxBusinessPeople = new System.Windows.Forms.ListBox();
+            this.grbBPeople = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btnPerson = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.lblPerson = new System.Windows.Forms.Label();
+            this.lsbxExistingPeople = new System.Windows.Forms.ListBox();
+            this.lblExistingPerson = new System.Windows.Forms.Label();
+            this.btnNewPerson = new System.Windows.Forms.Button();
+            this.btnAddToBP = new System.Windows.Forms.Button();
+            this.btnModifyPerson = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.grbPerson.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.grbBPeople.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtBusinessName
             // 
-            this.txtBusinessName.Location = new System.Drawing.Point(128, 120);
+            this.txtBusinessName.Location = new System.Drawing.Point(105, 113);
             this.txtBusinessName.Margin = new System.Windows.Forms.Padding(2);
             this.txtBusinessName.Name = "txtBusinessName";
             this.txtBusinessName.Size = new System.Drawing.Size(151, 20);
@@ -101,7 +99,7 @@ namespace PSS.Presentation_Layer
             // lblBusinessName
             // 
             this.lblBusinessName.AutoSize = true;
-            this.lblBusinessName.Location = new System.Drawing.Point(22, 122);
+            this.lblBusinessName.Location = new System.Drawing.Point(20, 116);
             this.lblBusinessName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBusinessName.Name = "lblBusinessName";
             this.lblBusinessName.Size = new System.Drawing.Size(78, 13);
@@ -111,14 +109,26 @@ namespace PSS.Presentation_Layer
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.lblPerson);
+            this.groupBox3.Controls.Add(this.comboBox2);
+            this.groupBox3.Controls.Add(this.cbxContracts);
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.txtBusinessName);
+            this.groupBox3.Controls.Add(this.grbBPeople);
+            this.groupBox3.Controls.Add(this.btnConfirm);
+            this.groupBox3.Controls.Add(this.lblBusinessName);
+            this.groupBox3.Controls.Add(this.panel2);
             this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Controls.Add(this.cbxStatus);
+            this.groupBox3.Controls.Add(this.rbtnBusiness);
             this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Location = new System.Drawing.Point(23, 398);
+            this.groupBox3.Controls.Add(this.rbtnIndvidual);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Location = new System.Drawing.Point(308, 128);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(619, 168);
+            this.groupBox3.Size = new System.Drawing.Size(651, 560);
             this.groupBox3.TabIndex = 46;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Client Management";
@@ -126,11 +136,11 @@ namespace PSS.Presentation_Layer
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.rtbNotes);
-            this.groupBox4.Location = new System.Drawing.Point(29, 64);
+            this.groupBox4.Location = new System.Drawing.Point(20, 182);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(469, 85);
+            this.groupBox4.Size = new System.Drawing.Size(482, 85);
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Notes";
@@ -140,7 +150,7 @@ namespace PSS.Presentation_Layer
             this.rtbNotes.Location = new System.Drawing.Point(11, 16);
             this.rtbNotes.Margin = new System.Windows.Forms.Padding(2);
             this.rtbNotes.Name = "rtbNotes";
-            this.rtbNotes.Size = new System.Drawing.Size(451, 64);
+            this.rtbNotes.Size = new System.Drawing.Size(460, 64);
             this.rtbNotes.TabIndex = 0;
             this.rtbNotes.Text = "";
             // 
@@ -151,183 +161,66 @@ namespace PSS.Presentation_Layer
             "Gauteng",
             "Free State",
             "North West"});
-            this.cbxStatus.Location = new System.Drawing.Point(105, 32);
+            this.cbxStatus.Location = new System.Drawing.Point(104, 149);
             this.cbxStatus.Margin = new System.Windows.Forms.Padding(2);
             this.cbxStatus.Name = "cbxStatus";
-            this.cbxStatus.Size = new System.Drawing.Size(129, 21);
+            this.cbxStatus.Size = new System.Drawing.Size(151, 21);
             this.cbxStatus.TabIndex = 24;
             this.cbxStatus.Text = "Choose...";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(29, 34);
+            this.label6.Location = new System.Drawing.Point(20, 152);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(37, 13);
             this.label6.TabIndex = 1;
             this.label6.Text = "Status";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnCreateContract);
-            this.groupBox2.Controls.Add(this.btnModifyContract);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.cbxCurrentContracts);
-            this.groupBox2.Controls.Add(this.btnAddContract);
-            this.groupBox2.Controls.Add(this.rtbServiceLevelDetails);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.cbxServiceLevel);
-            this.groupBox2.Controls.Add(this.rtbContractDetails);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.cbxContracts);
-            this.groupBox2.Location = new System.Drawing.Point(678, 42);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(415, 389);
-            this.groupBox2.TabIndex = 45;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Contract and Service Level Agreement";
-            // 
-            // btnModifyContract
-            // 
-            this.btnModifyContract.Location = new System.Drawing.Point(35, 343);
-            this.btnModifyContract.Margin = new System.Windows.Forms.Padding(2);
-            this.btnModifyContract.Name = "btnModifyContract";
-            this.btnModifyContract.Size = new System.Drawing.Size(118, 33);
-            this.btnModifyContract.TabIndex = 37;
-            this.btnModifyContract.Text = "Modify Contract";
-            this.btnModifyContract.UseVisualStyleBackColor = true;
-            this.btnModifyContract.Click += new System.EventHandler(this.btnModifyContract_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 19);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(92, 13);
-            this.label7.TabIndex = 36;
-            this.label7.Text = "Current Contracts ";
-            // 
-            // cbxCurrentContracts
-            // 
-            this.cbxCurrentContracts.FormattingEnabled = true;
-            this.cbxCurrentContracts.Location = new System.Drawing.Point(118, 16);
-            this.cbxCurrentContracts.Margin = new System.Windows.Forms.Padding(2);
-            this.cbxCurrentContracts.Name = "cbxCurrentContracts";
-            this.cbxCurrentContracts.Size = new System.Drawing.Size(123, 21);
-            this.cbxCurrentContracts.TabIndex = 35;
-            this.cbxCurrentContracts.Text = "Choose a contract...";
-            // 
-            // btnAddContract
-            // 
-            this.btnAddContract.Location = new System.Drawing.Point(193, 343);
-            this.btnAddContract.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAddContract.Name = "btnAddContract";
-            this.btnAddContract.Size = new System.Drawing.Size(118, 33);
-            this.btnAddContract.TabIndex = 34;
-            this.btnAddContract.Text = "Add Contract";
-            this.btnAddContract.UseVisualStyleBackColor = true;
-            this.btnAddContract.Click += new System.EventHandler(this.btnAddContract_Click);
-            // 
-            // rtbServiceLevelDetails
-            // 
-            this.rtbServiceLevelDetails.Enabled = false;
-            this.rtbServiceLevelDetails.Location = new System.Drawing.Point(18, 230);
-            this.rtbServiceLevelDetails.Margin = new System.Windows.Forms.Padding(2);
-            this.rtbServiceLevelDetails.Name = "rtbServiceLevelDetails";
-            this.rtbServiceLevelDetails.Size = new System.Drawing.Size(312, 98);
-            this.rtbServiceLevelDetails.TabIndex = 23;
-            this.rtbServiceLevelDetails.Text = "Service level details:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 204);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 13);
-            this.label5.TabIndex = 22;
-            this.label5.Text = "Service Level";
-            // 
-            // cbxServiceLevel
-            // 
-            this.cbxServiceLevel.FormattingEnabled = true;
-            this.cbxServiceLevel.Items.AddRange(new object[] {
-            "1- Peasant",
-            "2- Commoner",
-            "3- Noble",
-            "4- Feudal lord"});
-            this.cbxServiceLevel.Location = new System.Drawing.Point(118, 202);
-            this.cbxServiceLevel.Margin = new System.Windows.Forms.Padding(2);
-            this.cbxServiceLevel.Name = "cbxServiceLevel";
-            this.cbxServiceLevel.Size = new System.Drawing.Size(137, 21);
-            this.cbxServiceLevel.TabIndex = 21;
-            this.cbxServiceLevel.Text = "Choose a service level...";
-            this.cbxServiceLevel.SelectedIndexChanged += new System.EventHandler(this.cbxServiceLevel_SelectedIndexChanged);
-            // 
-            // rtbContractDetails
-            // 
-            this.rtbContractDetails.Enabled = false;
-            this.rtbContractDetails.Location = new System.Drawing.Point(18, 85);
-            this.rtbContractDetails.Margin = new System.Windows.Forms.Padding(2);
-            this.rtbContractDetails.Name = "rtbContractDetails";
-            this.rtbContractDetails.Size = new System.Drawing.Size(312, 101);
-            this.rtbContractDetails.TabIndex = 20;
-            this.rtbContractDetails.Text = "Contract details:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 59);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Contract ";
-            // 
             // cbxContracts
             // 
             this.cbxContracts.FormattingEnabled = true;
-            this.cbxContracts.Location = new System.Drawing.Point(118, 56);
+            this.cbxContracts.Location = new System.Drawing.Point(524, 52);
             this.cbxContracts.Margin = new System.Windows.Forms.Padding(2);
             this.cbxContracts.Name = "cbxContracts";
             this.cbxContracts.Size = new System.Drawing.Size(123, 21);
-            this.cbxContracts.TabIndex = 13;
+            this.cbxContracts.TabIndex = 35;
             this.cbxContracts.Text = "Choose a contract...";
-            this.cbxContracts.SelectedIndexChanged += new System.EventHandler(this.cbxContracts_SelectedIndexChanged);
             // 
-            // groupBox1
+            // grbPerson
             // 
-            this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.panel2);
-            this.groupBox1.Controls.Add(this.txtEmail);
-            this.groupBox1.Controls.Add(this.label20);
-            this.groupBox1.Controls.Add(this.txtTelephone);
-            this.groupBox1.Controls.Add(this.label21);
-            this.groupBox1.Controls.Add(this.dtpDOB);
-            this.groupBox1.Controls.Add(this.txtCellphone);
-            this.groupBox1.Controls.Add(this.label22);
-            this.groupBox1.Controls.Add(this.label23);
-            this.groupBox1.Controls.Add(this.txtSurname);
-            this.groupBox1.Controls.Add(this.txtName);
-            this.groupBox1.Controls.Add(this.label24);
-            this.groupBox1.Controls.Add(this.label25);
-            this.groupBox1.Location = new System.Drawing.Point(20, 152);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(622, 224);
-            this.groupBox1.TabIndex = 44;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Client Details";
+            this.grbPerson.Controls.Add(this.btnModifyPerson);
+            this.grbPerson.Controls.Add(this.btnAddToBP);
+            this.grbPerson.Controls.Add(this.btnNewPerson);
+            this.grbPerson.Controls.Add(this.lblExistingPerson);
+            this.grbPerson.Controls.Add(this.lsbxExistingPeople);
+            this.grbPerson.Controls.Add(this.btnPerson);
+            this.grbPerson.Controls.Add(this.txtEmail);
+            this.grbPerson.Controls.Add(this.label20);
+            this.grbPerson.Controls.Add(this.txtTelephone);
+            this.grbPerson.Controls.Add(this.label21);
+            this.grbPerson.Controls.Add(this.dtpDOB);
+            this.grbPerson.Controls.Add(this.txtCellphone);
+            this.grbPerson.Controls.Add(this.label22);
+            this.grbPerson.Controls.Add(this.label23);
+            this.grbPerson.Controls.Add(this.txtSurname);
+            this.grbPerson.Controls.Add(this.txtName);
+            this.grbPerson.Controls.Add(this.label24);
+            this.grbPerson.Controls.Add(this.label25);
+            this.grbPerson.Location = new System.Drawing.Point(11, 162);
+            this.grbPerson.Margin = new System.Windows.Forms.Padding(2);
+            this.grbPerson.Name = "grbPerson";
+            this.grbPerson.Padding = new System.Windows.Forms.Padding(2);
+            this.grbPerson.Size = new System.Drawing.Size(276, 472);
+            this.grbPerson.TabIndex = 44;
+            this.grbPerson.TabStop = false;
+            this.grbPerson.Text = "Person Details";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(371, 34);
+            this.label15.Location = new System.Drawing.Point(372, 34);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(45, 13);
@@ -344,7 +237,7 @@ namespace PSS.Presentation_Layer
             this.panel2.Controls.Add(this.label18);
             this.panel2.Controls.Add(this.txtStreet);
             this.panel2.Controls.Add(this.label19);
-            this.panel2.Location = new System.Drawing.Point(289, 52);
+            this.panel2.Location = new System.Drawing.Point(277, 52);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(225, 129);
@@ -457,7 +350,7 @@ namespace PSS.Presentation_Layer
             this.txtTelephone.Location = new System.Drawing.Point(107, 138);
             this.txtTelephone.Margin = new System.Windows.Forms.Padding(2);
             this.txtTelephone.Name = "txtTelephone";
-            this.txtTelephone.Size = new System.Drawing.Size(91, 20);
+            this.txtTelephone.Size = new System.Drawing.Size(151, 20);
             this.txtTelephone.TabIndex = 27;
             // 
             // label21
@@ -483,7 +376,7 @@ namespace PSS.Presentation_Layer
             this.txtCellphone.Location = new System.Drawing.Point(107, 111);
             this.txtCellphone.Margin = new System.Windows.Forms.Padding(2);
             this.txtCellphone.Name = "txtCellphone";
-            this.txtCellphone.Size = new System.Drawing.Size(91, 20);
+            this.txtCellphone.Size = new System.Drawing.Size(151, 20);
             this.txtCellphone.TabIndex = 24;
             // 
             // label22
@@ -511,7 +404,7 @@ namespace PSS.Presentation_Layer
             this.txtSurname.Location = new System.Drawing.Point(107, 58);
             this.txtSurname.Margin = new System.Windows.Forms.Padding(2);
             this.txtSurname.Name = "txtSurname";
-            this.txtSurname.Size = new System.Drawing.Size(140, 20);
+            this.txtSurname.Size = new System.Drawing.Size(151, 20);
             this.txtSurname.TabIndex = 21;
             // 
             // txtName
@@ -519,7 +412,7 @@ namespace PSS.Presentation_Layer
             this.txtName.Location = new System.Drawing.Point(107, 34);
             this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(140, 20);
+            this.txtName.Size = new System.Drawing.Size(151, 20);
             this.txtName.TabIndex = 20;
             // 
             // label24
@@ -545,7 +438,7 @@ namespace PSS.Presentation_Layer
             // rbtnBusiness
             // 
             this.rbtnBusiness.AutoSize = true;
-            this.rbtnBusiness.Location = new System.Drawing.Point(212, 85);
+            this.rbtnBusiness.Location = new System.Drawing.Point(176, 47);
             this.rbtnBusiness.Margin = new System.Windows.Forms.Padding(2);
             this.rbtnBusiness.Name = "rbtnBusiness";
             this.rbtnBusiness.Size = new System.Drawing.Size(67, 17);
@@ -558,7 +451,7 @@ namespace PSS.Presentation_Layer
             // rbtnIndvidual
             // 
             this.rbtnIndvidual.AutoSize = true;
-            this.rbtnIndvidual.Location = new System.Drawing.Point(118, 85);
+            this.rbtnIndvidual.Location = new System.Drawing.Point(102, 47);
             this.rbtnIndvidual.Margin = new System.Windows.Forms.Padding(2);
             this.rbtnIndvidual.Name = "rbtnIndvidual";
             this.rbtnIndvidual.Size = new System.Drawing.Size(70, 17);
@@ -571,7 +464,7 @@ namespace PSS.Presentation_Layer
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 86);
+            this.label4.Location = new System.Drawing.Point(20, 49);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 13);
@@ -581,7 +474,7 @@ namespace PSS.Presentation_Layer
             // lblTask
             // 
             this.lblTask.AutoSize = true;
-            this.lblTask.Location = new System.Drawing.Point(111, 44);
+            this.lblTask.Location = new System.Drawing.Point(49, 31);
             this.lblTask.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTask.Name = "lblTask";
             this.lblTask.Size = new System.Drawing.Size(70, 13);
@@ -591,7 +484,7 @@ namespace PSS.Presentation_Layer
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 44);
+            this.label2.Location = new System.Drawing.Point(11, 31);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
@@ -600,7 +493,7 @@ namespace PSS.Presentation_Layer
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(524, 76);
+            this.btnClear.Location = new System.Drawing.Point(418, 69);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(118, 33);
@@ -612,18 +505,18 @@ namespace PSS.Presentation_Layer
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(696, 450);
+            this.btnConfirm.Location = new System.Drawing.Point(200, 504);
             this.btnConfirm.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(135, 33);
             this.btnConfirm.TabIndex = 37;
-            this.btnConfirm.Text = "Confirm Form";
+            this.btnConfirm.Text = "Confirm Client";
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(696, 514);
+            this.btnBack.Location = new System.Drawing.Point(824, 9);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(135, 33);
@@ -632,80 +525,144 @@ namespace PSS.Presentation_Layer
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // lblDepartment
-            // 
-            this.lblDepartment.AutoSize = true;
-            this.lblDepartment.Location = new System.Drawing.Point(18, 16);
-            this.lblDepartment.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblDepartment.Name = "lblDepartment";
-            this.lblDepartment.Size = new System.Drawing.Size(62, 13);
-            this.lblDepartment.TabIndex = 35;
-            this.lblDepartment.Text = "Department";
-            // 
             // lblClientMaintenance
             // 
             this.lblClientMaintenance.AutoSize = true;
             this.lblClientMaintenance.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClientMaintenance.Location = new System.Drawing.Point(457, 9);
+            this.lblClientMaintenance.Location = new System.Drawing.Point(217, 11);
             this.lblClientMaintenance.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientMaintenance.Name = "lblClientMaintenance";
             this.lblClientMaintenance.Size = new System.Drawing.Size(189, 24);
             this.lblClientMaintenance.TabIndex = 34;
             this.lblClientMaintenance.Text = "Client Maintenance";
             // 
-            // btnCreateContract
+            // lsbxBusinessPeople
             // 
-            this.btnCreateContract.Location = new System.Drawing.Point(263, 34);
-            this.btnCreateContract.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCreateContract.Name = "btnCreateContract";
-            this.btnCreateContract.Size = new System.Drawing.Size(118, 33);
-            this.btnCreateContract.TabIndex = 38;
-            this.btnCreateContract.Text = "Create Contract";
-            this.btnCreateContract.UseVisualStyleBackColor = true;
-            this.btnCreateContract.Click += new System.EventHandler(this.btnCreateContract_Click);
+            this.lsbxBusinessPeople.FormattingEnabled = true;
+            this.lsbxBusinessPeople.Location = new System.Drawing.Point(11, 19);
+            this.lsbxBusinessPeople.Name = "lsbxBusinessPeople";
+            this.lsbxBusinessPeople.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lsbxBusinessPeople.Size = new System.Drawing.Size(460, 108);
+            this.lsbxBusinessPeople.TabIndex = 49;
             // 
-            // ciwMain
+            // grbBPeople
             // 
-            this.ciwMain.AutoSize = true;
-            this.ciwMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ciwMain.Client = null;
-            this.ciwMain.Location = new System.Drawing.Point(871, 450);
-            this.ciwMain.Name = "ciwMain";
-            this.ciwMain.Size = new System.Drawing.Size(247, 207);
-            this.ciwMain.TabIndex = 49;
+            this.grbBPeople.Controls.Add(this.lsbxBusinessPeople);
+            this.grbBPeople.Location = new System.Drawing.Point(20, 280);
+            this.grbBPeople.Name = "grbBPeople";
+            this.grbBPeople.Size = new System.Drawing.Size(482, 195);
+            this.grbBPeople.TabIndex = 50;
+            this.grbBPeople.TabStop = false;
+            this.grbBPeople.Text = "Business People";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(14, 47);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 49;
+            // 
+            // btnPerson
+            // 
+            this.btnPerson.Enabled = false;
+            this.btnPerson.Location = new System.Drawing.Point(34, 196);
+            this.btnPerson.Name = "btnPerson";
+            this.btnPerson.Size = new System.Drawing.Size(224, 23);
+            this.btnPerson.TabIndex = 30;
+            this.btnPerson.Text = "Person";
+            this.btnPerson.UseVisualStyleBackColor = true;
+            this.btnPerson.Click += new System.EventHandler(this.btnPerson_Click);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(105, 81);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(151, 21);
+            this.comboBox2.TabIndex = 51;
+            // 
+            // lblPerson
+            // 
+            this.lblPerson.AutoSize = true;
+            this.lblPerson.Location = new System.Drawing.Point(20, 84);
+            this.lblPerson.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPerson.Name = "lblPerson";
+            this.lblPerson.Size = new System.Drawing.Size(40, 13);
+            this.lblPerson.TabIndex = 52;
+            this.lblPerson.Text = "Person";
+            this.lblPerson.Visible = false;
+            // 
+            // lsbxExistingPeople
+            // 
+            this.lsbxExistingPeople.FormattingEnabled = true;
+            this.lsbxExistingPeople.Location = new System.Drawing.Point(34, 265);
+            this.lsbxExistingPeople.Name = "lsbxExistingPeople";
+            this.lsbxExistingPeople.Size = new System.Drawing.Size(224, 160);
+            this.lsbxExistingPeople.TabIndex = 31;
+            // 
+            // lblExistingPerson
+            // 
+            this.lblExistingPerson.AutoSize = true;
+            this.lblExistingPerson.Location = new System.Drawing.Point(34, 246);
+            this.lblExistingPerson.Name = "lblExistingPerson";
+            this.lblExistingPerson.Size = new System.Drawing.Size(79, 13);
+            this.lblExistingPerson.TabIndex = 32;
+            this.lblExistingPerson.Text = "Existing People";
+            // 
+            // btnNewPerson
+            // 
+            this.btnNewPerson.Location = new System.Drawing.Point(33, 431);
+            this.btnNewPerson.Name = "btnNewPerson";
+            this.btnNewPerson.Size = new System.Drawing.Size(47, 23);
+            this.btnNewPerson.TabIndex = 33;
+            this.btnNewPerson.Text = "New";
+            this.btnNewPerson.UseVisualStyleBackColor = true;
+            this.btnNewPerson.Click += new System.EventHandler(this.btnNewPerson_Click);
+            // 
+            // btnAddToBP
+            // 
+            this.btnAddToBP.Location = new System.Drawing.Point(153, 431);
+            this.btnAddToBP.Name = "btnAddToBP";
+            this.btnAddToBP.Size = new System.Drawing.Size(105, 23);
+            this.btnAddToBP.TabIndex = 34;
+            this.btnAddToBP.Text = "Add To Business";
+            this.btnAddToBP.UseVisualStyleBackColor = true;
+            this.btnAddToBP.Click += new System.EventHandler(this.btnAddToBP_Click);
+            // 
+            // btnModifyPerson
+            // 
+            this.btnModifyPerson.Location = new System.Drawing.Point(86, 431);
+            this.btnModifyPerson.Name = "btnModifyPerson";
+            this.btnModifyPerson.Size = new System.Drawing.Size(55, 23);
+            this.btnModifyPerson.TabIndex = 35;
+            this.btnModifyPerson.Text = "Modify";
+            this.btnModifyPerson.UseVisualStyleBackColor = true;
+            this.btnModifyPerson.Click += new System.EventHandler(this.btnModifyPerson_Click);
             // 
             // ClientMaintenance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1139, 696);
-            this.Controls.Add(this.ciwMain);
-            this.Controls.Add(this.txtBusinessName);
-            this.Controls.Add(this.lblBusinessName);
+            this.ClientSize = new System.Drawing.Size(977, 874);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.rbtnBusiness);
-            this.Controls.Add(this.rbtnIndvidual);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.grbPerson);
             this.Controls.Add(this.lblTask);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.btnBack);
-            this.Controls.Add(this.lblDepartment);
             this.Controls.Add(this.lblClientMaintenance);
             this.Name = "ClientMaintenance";
             this.Text = "Premier Service Solutions";
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grbPerson.ResumeLayout(false);
+            this.grbPerson.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.grbBPeople.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -720,18 +677,8 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.RichTextBox rtbNotes;
         private System.Windows.Forms.ComboBox cbxStatus;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnModifyContract;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cbxCurrentContracts;
-        private System.Windows.Forms.Button btnAddContract;
-        private System.Windows.Forms.RichTextBox rtbServiceLevelDetails;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cbxServiceLevel;
-        private System.Windows.Forms.RichTextBox rtbContractDetails;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbxContracts;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grbPerson;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ComboBox cbxProvince;
@@ -762,9 +709,17 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.Label lblDepartment;
         private System.Windows.Forms.Label lblClientMaintenance;
-        private ClientInfoWidgit ciwMain;
-        private System.Windows.Forms.Button btnCreateContract;
+        private System.Windows.Forms.ListBox lsbxBusinessPeople;
+        private System.Windows.Forms.GroupBox grbBPeople;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label lblPerson;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button btnPerson;
+        private System.Windows.Forms.Label lblExistingPerson;
+        private System.Windows.Forms.ListBox lsbxExistingPeople;
+        private System.Windows.Forms.Button btnModifyPerson;
+        private System.Windows.Forms.Button btnAddToBP;
+        private System.Windows.Forms.Button btnNewPerson;
     }
 }

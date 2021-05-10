@@ -20,7 +20,7 @@ namespace PSS.Data_Access
                 try
                 {
                     conn.Open();
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(Query, conn); 
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(Query, conn);
                     adapter.Fill(data);
                 }
                 catch (Exception e)

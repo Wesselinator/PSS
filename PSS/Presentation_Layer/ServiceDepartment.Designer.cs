@@ -49,6 +49,8 @@ namespace PSS.Presentation_Layer
             this.lblCurrentTech = new System.Windows.Forms.Label();
             this.btnReAssignTask = new System.Windows.Forms.Button();
             this.lblTasks = new System.Windows.Forms.Label();
+            this.tpTrack = new System.Windows.Forms.TabPage();
+            this.tvTrack = new System.Windows.Forms.TreeView();
             this.txtTaskTitle = new System.Windows.Forms.TextBox();
             this.lblTaskTitle = new System.Windows.Forms.Label();
             this.dtpTaskDate = new System.Windows.Forms.DateTimePicker();
@@ -63,17 +65,15 @@ namespace PSS.Presentation_Layer
             this.lsbxAvailableTechnicians = new System.Windows.Forms.ListBox();
             this.grbxAvailableTechnicians = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tpTrack = new System.Windows.Forms.TabPage();
-            this.tvTrack = new System.Windows.Forms.TreeView();
             this.tcTask.SuspendLayout();
             this.tpCreate.SuspendLayout();
             this.grbCreate.SuspendLayout();
             this.tpModify.SuspendLayout();
             this.grbModify.SuspendLayout();
             this.gpbxAssignedTechnician.SuspendLayout();
+            this.tpTrack.SuspendLayout();
             this.grbxAvailableTechnicians.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.tpTrack.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -283,6 +283,23 @@ namespace PSS.Presentation_Layer
             this.lblTasks.TabIndex = 3;
             this.lblTasks.Text = "Active Tasks";
             // 
+            // tpTrack
+            // 
+            this.tpTrack.Controls.Add(this.tvTrack);
+            this.tpTrack.Location = new System.Drawing.Point(4, 22);
+            this.tpTrack.Name = "tpTrack";
+            this.tpTrack.Size = new System.Drawing.Size(562, 271);
+            this.tpTrack.TabIndex = 2;
+            this.tpTrack.Text = "Track Tasks";
+            this.tpTrack.UseVisualStyleBackColor = true;
+            // 
+            // tvTrack
+            // 
+            this.tvTrack.Location = new System.Drawing.Point(5, 3);
+            this.tvTrack.Name = "tvTrack";
+            this.tvTrack.Size = new System.Drawing.Size(551, 265);
+            this.tvTrack.TabIndex = 0;
+            // 
             // txtTaskTitle
             // 
             this.txtTaskTitle.Location = new System.Drawing.Point(10, 38);
@@ -418,23 +435,6 @@ namespace PSS.Presentation_Layer
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Task";
             // 
-            // tpTrack
-            // 
-            this.tpTrack.Controls.Add(this.tvTrack);
-            this.tpTrack.Location = new System.Drawing.Point(4, 22);
-            this.tpTrack.Name = "tpTrack";
-            this.tpTrack.Size = new System.Drawing.Size(562, 271);
-            this.tpTrack.TabIndex = 2;
-            this.tpTrack.Text = "Track Tasks";
-            this.tpTrack.UseVisualStyleBackColor = true;
-            // 
-            // tvTrack
-            // 
-            this.tvTrack.Location = new System.Drawing.Point(5, 3);
-            this.tvTrack.Name = "tvTrack";
-            this.tvTrack.Size = new System.Drawing.Size(551, 265);
-            this.tvTrack.TabIndex = 0;
-            // 
             // ServiceDepartment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -457,11 +457,11 @@ namespace PSS.Presentation_Layer
             this.grbModify.ResumeLayout(false);
             this.gpbxAssignedTechnician.ResumeLayout(false);
             this.gpbxAssignedTechnician.PerformLayout();
+            this.tpTrack.ResumeLayout(false);
             this.grbxAvailableTechnicians.ResumeLayout(false);
             this.grbxAvailableTechnicians.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.tpTrack.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
