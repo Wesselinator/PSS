@@ -252,6 +252,7 @@ namespace PSS.Presentation_Layer
         
         private void btnSubmitFeedback_Click(object sender, EventArgs e)
         {
+            techTaskToModify.Task.IsFinished = true;
             TechnicianTaskFeedback technicianTaskFeedback = new TechnicianTaskFeedback();
             technicianTaskFeedback.SetNextID();
             technicianTaskFeedback.TimeArived = dtpActualTimeArrived.Value;
