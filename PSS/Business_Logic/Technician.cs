@@ -101,7 +101,7 @@ namespace PSS.Business_Logic
                 "ON t.TechnicianID = tt.TechnicianID " +
                 "LEFT JOIN TechnicianTaskFeedback ttf " +
                 "ON tt.TechnicianTaskID = ttf.TechnicianTaskID " +
-                "WHERE('2021/04/17 10:20:00' BETWEEN ttf.TimeArrived AND ttf.TimeDeparture)" +
+                "WHERE ('2021/04/18 10:00:00' BETWEEN tt.TimeToArrive AND tt.TimeToDepart)" +
             ")";
             DataTable dataTable = DataHandler.GetDataTable(sql);
 
