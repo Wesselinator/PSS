@@ -7,63 +7,51 @@ block content
     #VoidLeft
     #Content
       #SelectClientType.contentdiv
-        label#lblClienttype(for='SelectClientType') Select a Client Type
-        br
-        ul#ClientTypes
-          li
-            input#IndividualClient.RadioClientType(type='radio')
-            label(for='IndividualClient') IndividualClient
-          li
-            input#BusinessClient.RadioClientType(type='radio')
-            label(for='BusinessClient') BusinessClient
+        h3#lblClienttype(for='SelectClientType') Select a Client Type
+        form#ClientTypes
+          input#IndividualClient.RadioClientType(type='radio' name='ClientTypeRadio' value='Individual Client')
+          label(for='IndividualClient') IndividualClient
+          br
+          input#BusinessClient.RadioClientType(type='radio' name='ClientTypeRadio' value='Business Client')
+          label(for='BusinessClient') BusinessClient
       #SelectClient.contentdiv
-        label#lblSelectClient(for='SelectClient') Select a client
-        br
-        select#dropdownSelectClient
+        h3#lblSelectClient(for='SelectClient') Select a client
+        select#dropdownSelectClient.inputbars
           option(value) Please Select
           option(value)
       #FollowUpTitle.contentdiv
-        label(for='FollowUpTitle') Follow up Title
-        br
-        input#FollowUpText(type='text')
+        h3(for='FollowUpTitle') Follow up Title
+        input#FollowUpText.inputbars(type='text' placeholder='Enter title')
       #FollowUpType.contentdiv
-        label#lblFollowUpType(for='FollowUpType') Select a Type
-        br
-        select#dropdownFollowUpType
+        h3#lblFollowUpType(for='FollowUpType') Select a Type
+        select#dropdownFollowUpType.inputbars
           option(value) Please Select
           option(value)
       #FollowUpDescription.contentdiv
-        label(for='FollowUpDescription') Follow up Description
-        br
-        input#FollowUpDescriptionText(type='text')
+        h3(for='FollowUpDescription') Follow up Description
+        textarea#FollowUpDescriptionText(name='DescriptionTextArea' placeholder='Enter description')
       #DateTimeMode.contentdiv
-        label#lblDateTimeMode(for='DateTimeMode') Mode for date/time of followup
-        br
-        ul#DateTypes
-          li
-            input#CurrentDateTime.RadioDateType(type='radio')
-            label(for='CurrentDateTime') Use current date/time
-          li
-            input#SpecifyDateTime.RadioDateType(type='radio')
-            label(for='SpecifyDateTime') Specify date/time
+        h3#lblDateTimeMode(for='DateTimeMode') Mode for date/time of followup
+        form#DateTypes
+          input#CurrentDateTime.RadioDateType(type='radio' name='DateTypeRadio' value='Current Date')
+          label(for='CurrentDateTime') Use current date/time
+          br
+          input#SpecifyDateTime.RadioDateType(type='radio' name='DateTypeRadio' value='Specified Date')
+          label(for='SpecifyDateTime') Specify date/time
       #DateTime.contentdiv
-        label(for='DateTime') Date/Time the follow up occurred/was received
-        br
-        input#DateTimeText(type='text' size='10' data-maxlength='10' maxlength='10' data-age='' value='' data-format='mmddyyyy' data-seperator='-' placeholder='MM-DD-YYYY' autocomplete='off' aria-labelledby='label_12 sublabel_12_litemode' im-insert='false')
+        h3(for='DateTime') Date/Time the follow up occurred/was received
+        input#DateTimeText.inputbars(type='date' size='10' maxlength='10')
       #IssueResolved.contentdiv
-        label#lblIssueResolved(for='IssueResolved') Mode for date/time of followup
-        br
-        ul#IssueResolved
-          li
-            input#IsResolved.IsIssueResolved(type='radio')
-            label(for='IsResolved') Issue is resolved
-          li
-            input#IsNotResolved.IsIssueResolved(type='radio')
-            label(for='IsNotResolved') Issue is not resolved
+        h3#lblIssueResolved(for='IssueResolved') Is issue resolved?
+        form#IssueResolved
+          input#IsResolved.IsIssueResolved(type='radio' name='IsIssueResolvedRadio' value='Yes')
+          label(for='IsResolved') Yes
+          br
+          input#IsNotResolved.IsIssueResolved(type='radio' name='IsIssueResolvedRadio' value='No')
+          label(for='IsNotResolved') No
       #SatisfactionLevel.contentdiv
-        label#lblSatisfactionLvl Satisfaction Level
-        br
-        input#edtSatisfactionLvl(type='number' data-type='input-spinner' placeholder='0' data-component='spinner' min='0' max='10')
+        h3#lblSatisfactionLvl Satisfaction Level
+        input#edtSatisfactionLvl.inputbars(type='number' data-type='input-spinner' placeholder='0' data-component='spinner' min='0' max='10')
       #Submit.contentdiv
         button#btnSubmit(type='submit' data-component='button') Submit
     #VoidRight

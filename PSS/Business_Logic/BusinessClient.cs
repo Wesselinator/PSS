@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Data;
 using System.Collections.Generic;
@@ -123,6 +124,10 @@ namespace PSS.Business_Logic
         public override void AddContract(Contract contract, DateTime effectiveDate)
         {
             BusinessClientContracts.Add(new BusinessClientContract(ID, contract, effectiveDate));
+        }
+        public override Contract GetCurrentContract()
+        {
+            return BusinessClientContracts.Where(bcc => bcc.IsCurrent).Select(bcc => bcc.Contract).ToArray()[0];
         }
 
         public override BaseList<FollowUpReport> GetFolowups()

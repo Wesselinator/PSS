@@ -23,10 +23,10 @@ COPY . .
 # clean .js files incase they came along
 RUN npm run-script clean
 # build .js files from .ts
-RUN npm run-script build                
+RUN npm run-script build
 
 # publish port to docker
-EXPOSE 1337                             
+EXPOSE 1337
 
-# start node.
-CMD [ "node", "app.js" ]                
+# set container entrypoint
+CMD [ "npm", "start" ]

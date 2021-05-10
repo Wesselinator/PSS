@@ -1,20 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 namespace PSS.Business_Logic
 {
-    public static class PSSListExtentions
+    static class GetExtentions
     {
-        public static BaseList<T> ToBaseList<T>(this IEnumerable<T> source) where T : BaseTable, new()
-        {
-            BaseList<T> ret = new BaseList<T>();
-            foreach (T item in source)
-            {
-                ret.Add(item);
-            }
-            return ret;
-        }
-
         public static BaseList<ServiceRequest> GetServiceRequests(this MultiIDList<BusinessClientServiceRequest> BCSRs)
         {
             return BCSRs.Select(bcsr => bcsr.ServiceRequest).ToBaseList();

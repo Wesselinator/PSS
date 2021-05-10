@@ -25,6 +25,8 @@ namespace PSS.Business_Logic
         }
         public DateTime EffectiveDate { get; private set; }
 
+        public bool IsCurrent => DateTime.Now.Between(EffectiveDate, EffectiveDate.AddMonths(Contract.ContractDurationInMonths));
+
         private readonly string ID1;
         private static readonly string idColumn2 = "ContractID";
         private readonly string ID3;

@@ -129,6 +129,7 @@ namespace PSS.Business_Logic
         public abstract void AddServiceRequest(ServiceRequest serviceRequest);
 
         public abstract BaseList<Contract> GetContracts();
+        public abstract Contract GetCurrentContract();
         public abstract void AddContract(Contract contract, DateTime effectiveDate);
 
         public abstract BaseList<FollowUpReport> GetFolowups();

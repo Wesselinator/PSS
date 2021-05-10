@@ -54,7 +54,7 @@ namespace PSS.Presentation_Layer
             RadioButton rb = (RadioButton)sender;
             if (rb.Checked)
             {
-                nudSpecificQuanity.Value = 0; //TODO: what is infinite???
+                nudSpecificQuanity.Value = -1; //TODO: this ok with the bounds?
             }
         }
 
@@ -175,12 +175,12 @@ namespace PSS.Presentation_Layer
             ListBox lb = (ListBox)sender;
             rtbContractDetails.Text = lb.SelectedItem.ToString(); //TODO: create nice Contract toFormattedString
             currentPerformance = (Contract)lsbxContracts.SelectedItem;
-            CalculateClientPerformance();
+            CalculateContractPerformance();
         }
 
-        private void CalculateClientPerformance()
+        private void CalculateContractPerformance()
         {
-            //TODO: Calculate in class or here? How do calculate? How make numbers go here?
+            //rtbPerformance.Text = 
         }
 
         #endregion
