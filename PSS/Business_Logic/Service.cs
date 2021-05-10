@@ -88,7 +88,7 @@ namespace PSS.Business_Logic
             DataTable dt = DataHandler.GetDataTable("SELECT * FROM Service");
             foreach (DataRow service in dt.Rows)
             {
-                services.Add(new Service((int)service[0], (string)service[1], "", (string)service[2])); //TODO: add type
+                services.Add(new Service((int)service[0], (string)service[1], "", (string)service[2])); 
             }
 
             return services;

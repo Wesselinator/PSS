@@ -16,7 +16,7 @@ namespace PSS.Business_Logic
         public int PersonID { get => ID; private set => ID = value; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime BirthDay { get; set; } //TODO: might be null?
+        public DateTime BirthDay { get; set; } 
         public string CellphoneNumber { get; set; } //null values not allows with ? in C#7.3
         public string TellephoneNumber { get; set; }
         public string Email { get; set; }
