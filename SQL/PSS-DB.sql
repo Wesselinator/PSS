@@ -7,6 +7,19 @@ CREATE OR REPLACE TABLE `Service` (
  ServiceDescription VARCHAR(500) NOT NULL
 );
 
+#TODO: Connect these tables when time allows
+
+CREATE OR REPLACE TABLE ServiceLevel
+(ServiceLevelID INT PRIMARY KEY,
+ ServiceLevelName VARCHAR(30)
+);
+
+CREATE OR REPLACE TABLE Province
+(ProvinceName VARCHAR(20) PRIMARY KEY
+);
+
+#----------------------#
+
 CREATE OR REPLACE TABLE `Contract` (
  ContractID INT PRIMARY KEY,
  ContractName VARCHAR(45) NOT NULL,
@@ -243,6 +256,12 @@ INSERT INTO Service (ServiceID, ServiceName, `Type`, ServiceDescription)
 		   (18,'PSS Medium Workstation','Workstation Computer','Model Custom 2301/AMD RYZEN 5 3600 (6 Cores, 12 Threads, 35MB Cache, Turbo 4.2GHz)/16GB RAM/512GB NVME SSD/1TB HDD/Quadro P400'),
 		   (19,'PSS High End Workstation','Workstation Computer','Model Custom 2531/AMD RYZEN 9 5950X (16 Cores, 32 Threads, 3.4GHz, 72MB Cache, Turbo 4.9GHz+)/32GB RAM/2TB NVME SSD/NVIDIA QUADRO P1000');
 		   
+INSERT INTO ServiceLevel (ServiceLevelID, ServiceLevelName)
+	VALUES (1, 'Peasant'),
+		    (2, 'Commoner'),
+		    (3, 'Noble'),
+		    (4, 'Feudal lord');
+		   
 INSERT INTO `Contract` (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MonthlyFee)
 	VALUES (1, 'Printing Necessities', 'Peasant', '2021/04/01', NULL, 36, 400),
 		   (2, 'Basic Printing', 'Commoner', '2021/04/01', NULL, 36, 600),
@@ -369,6 +388,17 @@ INSERT INTO `Person` (PersonID, FirstName, LastName, BirthDate, CellPhoneNumber,
 		   (13, 'Wielfred', 'Mekoa', '1991/03/12', '+27734175449', NULL, 'wielfredmekoa.marketing@gmail.com'),
 		   (15, 'Delma', 'Tadiwa', '1995/05/22', '+27825539658', NULL, 'd.tadiwa@gmail.com'),
 		   (17, 'Blessing', 'Moyo', '1988/07/25', '+27618824356', NULL, 'blessingmoyo@gmail.com');
+		   
+INSERT INTO Province (ProvinceName)
+	VALUES ('Gauteng'),
+		    ('Limpopo'),
+		    ('Mpumalanga'),
+		    ('North West'),
+		    ('Kwazulu Natal'),
+		    ('Free State'),
+		    ('Northern Cape'),
+		    ('Western Cape'),
+		    ('Eastern Cape');
 
 INSERT INTO `Address` (AddressID, Street, City, PostalCode, Province)
 	VALUES (1, '961 Church St', 'Pretoria', '0155', 'Gauteng'),
@@ -465,7 +495,7 @@ INSERT INTO IndividualClientServiceRequest (IndividualClientID, ServiceRequestID
 INSERT INTO Task (TaskID, TaskTitle, TaskType, TaskDescription, TaskNotes, ServiceRequestID, DateProcessed, IsFinished)
 	VALUES (1, 'Repair hardware issue on HP printer model M130a', 'Hardware Repair', 'Printer error code 50 reports a hardware problem. Attempt or fix, if not repairible on the customer site, schedule pickup repair', 'Enter customer site from back door', 1, '2021/04/05', DEFAULT),
 		   (2, 'Fix wifi Issue on MSI Cubi N Model 8GL-074EU', 'Hard/Software Repair', 'Wifi/Bluetooth card may be faulty or misconfigured on a software or harware level', NULL, 2,'2021/04/16', DEFAULT),
-		   (3, 'Routine hardware maintenance 25x MSI Cubi N Model 8GL-074EU', 'Hardware Maintanence', 'Clean fat clients. Inspect and report health of CPU, RAM, HDD. Repaste CPU if idle temperatures above 55Ã‚Â°C', NULL, 3, '2021/04/17', DEFAULT),
+		   (3, 'Routine hardware maintenance 25x MSI Cubi N Model 8GL-074EU', 'Hardware Maintanence', 'Clean fat clients. Inspect and report health of CPU, RAM, HDD. Repaste CPU if idle temperatures above 55Ãƒâ€šÃ‚Â°C', NULL, 3, '2021/04/17', DEFAULT),
 		   (4, 'Routine software maintenance 25x MSI Cubi N Model 8GL-074EU', 'Software Maintanence', 'Run PSS registry cleaner, run PSS antivirus, ensure Windows and Office is activited', NULL, 3, '2021/04/17', DEFAULT),
 		   (5, 'Diagnose and repair 3x problematic MSI Cubi N Model 8GL-074EU', 'Hard/Software Repair', 'All 3 Fat clients are noisy, 2 suffer from random restarts. Possible Fan, HDD or device driver problem', 'If issue not resolved, schedule pickup repair', 4, '2021/04/17', DEFAULT);
 
@@ -501,55 +531,3 @@ INSERT INTO CallInstance (CallInstanceID, StartTime, EndTime, `Description`)
 		   (2, '2021/04/18 11:00:00', '2021/04/18 11:17:04', 'Duration 17:04 minutes'),
 		   (3, '2021/04/25 12:00:00', '2021/04/25 12:05:12', 'Duration 05:12 minutes'),
 		   (4, '2021/04/18 14:52:00', '2021/04/18 15:03:05', 'Duration 11:05 minutes');
-
-#SELECT te.TechnicianID, P.FirstName 'IndividualClientFirstName', bc.BusinessName, 
-#FROM Person p
-#JOIN IndividualClient ic
-#ON p.PersonID = ic.IndividualClientID
-#JOIN Address a
-#ON ic.AddressID = a.AddressID
-#JOIN BusinessClient bc
-#ON a.AddressID = bc.AddressID
-#JOIN ServiceRequest sr
-#ON sr.ClientEntityID=bc.BusinessClientID OR sr.ClientEntityID=ic.IndividualClientID
-#JOIN Task t
-#ON sr.ServiceRequestID = t.ServiceRequestID
-#JOIN TechnicianTask tt
-#ON t.TaskID = tt.TaskID
-#JOIN Technician te
-#ON tt.TechnicianID = te.TechnicianID
-#JOIN TechnicianTaskFeedback ttf
-#ON tt.TechnicianTaskID = ttf.TechnicianTaskID
-
-
-
-#SELECT * FROM Service
-
-
-#SELECT TOP 1 sr.ServiceRequestID,
-#CASE
-#	WHEN t.TaskID IS NULL THEN 1
-#	WHEN tt.TechnicianTaskID IS NULL THEN 2
-#	WHEN ttf.TechnicianTaskFeedbackID IS NULL THEN 3
-#	WHEN ttf.TechnicianTaskFeedbackID IS NOT NULL THEN 4
-#END 'ProgressLevel',
-#CASE
-#	WHEN t.TaskID IS NULL THEN 'Service Request Received'
-#	WHEN tt.TechnicianTaskID IS NULL THEN 'Service Request Processed Into Task'
-#	WHEN ttf.TechnicianTaskFeedbackID IS NULL THEN 'Task Has Been Assigned To A Technian Who Is Due To Arrive At '+tt.TimeToArrive
-#	WHEN ttf.TechnicianTaskFeedbackID IS NOT NULL THEN 'Task Addressed By Technician. Task Current Status:\n'+ ttf.Status
-#END 'Progress'
-#FROM ServiceRequest sr
-#LEFT JOIN Task t
-#ON sr.ServiceRequestID = t.ServiceRequestID
-#LEFT JOIN TechnicianTask tt
-#ON t.TaskID = tt.TaskID
-#LEFT JOIN TechnicianTaskFeedback ttf
-#ON tt.TechnicianTaskID = ttf.TechnicianTaskID
-#WHERE sr.ServiceRequestID=0 
-#ORDER BY t.DateProcessed DESC, ProgressLevel DESC #lastest dateprocessed first
-
-
-#INSERT INTO BusinessClient (BusinessClientID, BusinessName, Type, Status, Notes, AddressID)
-#	VALUES (1, 'JP', 'Executive', 'Active', 'Valued customer', 0);
-
