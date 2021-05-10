@@ -120,6 +120,7 @@ namespace PSS.Presentation_Layer
 
         private void btnFollowUp_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("call forwarded to clientsatisfaction department");
             try
             {
                 showLink();
@@ -127,8 +128,7 @@ namespace PSS.Presentation_Layer
             catch (Exception)
             {
                 MessageBox.Show("Unable to fine webpage");
-            }
-            MessageBox.Show("call forwarded to clientsatisfaction department");
+            }   
         }
 
         private void showLink()
