@@ -120,8 +120,22 @@ namespace PSS.Presentation_Layer
 
         private void btnFollowUp_Click(object sender, EventArgs e)
         {
+            try
+            {
+                showLink();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to fine webpage");
+            }
             MessageBox.Show("call forwarded to clientsatisfaction department");
-            throw new NotImplementedException("We still have to make that form!");
         }
+
+        private void showLink()
+        {
+            System.Diagnostics.Process.Start("http://localhost:1337/"); //this works? kinda? dont know if opens the node
+            
+        }
+
     }
 }
