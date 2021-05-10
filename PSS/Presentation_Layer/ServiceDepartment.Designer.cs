@@ -49,6 +49,22 @@ namespace PSS.Presentation_Layer
             this.lblCurrentTech = new System.Windows.Forms.Label();
             this.btnReAssignTask = new System.Windows.Forms.Button();
             this.lblTasks = new System.Windows.Forms.Label();
+            this.tpTrack = new System.Windows.Forms.TabPage();
+            this.tvTrack = new System.Windows.Forms.TreeView();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbxSchedueledTask = new System.Windows.Forms.ComboBox();
+            this.btnSubmitFeedback = new System.Windows.Forms.Button();
+            this.lblTaskServiceRequest = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.rtbFeedbackNotes = new System.Windows.Forms.RichTextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblTechArrived = new System.Windows.Forms.Label();
+            this.dtpTimeDep = new System.Windows.Forms.DateTimePicker();
+            this.dtpActualTimeArrived = new System.Windows.Forms.DateTimePicker();
+            this.lblTechDep = new System.Windows.Forms.Label();
+            this.cmbStatus = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.txtTaskTitle = new System.Windows.Forms.TextBox();
             this.lblTaskTitle = new System.Windows.Forms.Label();
             this.dtpTaskDate = new System.Windows.Forms.DateTimePicker();
@@ -62,18 +78,17 @@ namespace PSS.Presentation_Layer
             this.btnReturn = new System.Windows.Forms.Button();
             this.lsbxAvailableTechnicians = new System.Windows.Forms.ListBox();
             this.grbxAvailableTechnicians = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tpTrack = new System.Windows.Forms.TabPage();
-            this.tvTrack = new System.Windows.Forms.TreeView();
+            this.grbTask = new System.Windows.Forms.GroupBox();
             this.tcTask.SuspendLayout();
             this.tpCreate.SuspendLayout();
             this.grbCreate.SuspendLayout();
             this.tpModify.SuspendLayout();
             this.grbModify.SuspendLayout();
             this.gpbxAssignedTechnician.SuspendLayout();
-            this.grbxAvailableTechnicians.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.tpTrack.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.grbxAvailableTechnicians.SuspendLayout();
+            this.grbTask.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -90,6 +105,7 @@ namespace PSS.Presentation_Layer
             this.tcTask.Controls.Add(this.tpCreate);
             this.tcTask.Controls.Add(this.tpModify);
             this.tcTask.Controls.Add(this.tpTrack);
+            this.tcTask.Controls.Add(this.tabPage1);
             this.tcTask.Location = new System.Drawing.Point(12, 56);
             this.tcTask.Name = "tcTask";
             this.tcTask.SelectedIndex = 0;
@@ -283,6 +299,164 @@ namespace PSS.Presentation_Layer
             this.lblTasks.TabIndex = 3;
             this.lblTasks.Text = "Active Tasks";
             // 
+            // tpTrack
+            // 
+            this.tpTrack.Controls.Add(this.tvTrack);
+            this.tpTrack.Location = new System.Drawing.Point(4, 22);
+            this.tpTrack.Name = "tpTrack";
+            this.tpTrack.Size = new System.Drawing.Size(562, 271);
+            this.tpTrack.TabIndex = 2;
+            this.tpTrack.Text = "Track Tasks";
+            this.tpTrack.UseVisualStyleBackColor = true;
+            // 
+            // tvTrack
+            // 
+            this.tvTrack.Location = new System.Drawing.Point(5, 3);
+            this.tvTrack.Name = "tvTrack";
+            this.tvTrack.Size = new System.Drawing.Size(551, 265);
+            this.tvTrack.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label7);
+            this.tabPage1.Controls.Add(this.cbxSchedueledTask);
+            this.tabPage1.Controls.Add(this.btnSubmitFeedback);
+            this.tabPage1.Controls.Add(this.lblTaskServiceRequest);
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.rtbFeedbackNotes);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.lblTechArrived);
+            this.tabPage1.Controls.Add(this.dtpTimeDep);
+            this.tabPage1.Controls.Add(this.dtpActualTimeArrived);
+            this.tabPage1.Controls.Add(this.lblTechDep);
+            this.tabPage1.Controls.Add(this.cmbStatus);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(562, 271);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "Tech Feedback";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(16, 22);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(130, 13);
+            this.label7.TabIndex = 50;
+            this.label7.Text = "Choose Schedueled Task";
+            // 
+            // cbxSchedueledTask
+            // 
+            this.cbxSchedueledTask.FormattingEnabled = true;
+            this.cbxSchedueledTask.Location = new System.Drawing.Point(161, 19);
+            this.cbxSchedueledTask.Name = "cbxSchedueledTask";
+            this.cbxSchedueledTask.Size = new System.Drawing.Size(195, 21);
+            this.cbxSchedueledTask.TabIndex = 49;
+            this.cbxSchedueledTask.SelectedIndexChanged += new System.EventHandler(this.cbxSchedueledTask_SelectedIndexChanged);
+            // 
+            // btnSubmitFeedback
+            // 
+            this.btnSubmitFeedback.Location = new System.Drawing.Point(196, 220);
+            this.btnSubmitFeedback.Name = "btnSubmitFeedback";
+            this.btnSubmitFeedback.Size = new System.Drawing.Size(182, 34);
+            this.btnSubmitFeedback.TabIndex = 48;
+            this.btnSubmitFeedback.Text = "Submit Feedback";
+            this.btnSubmitFeedback.UseVisualStyleBackColor = true;
+            this.btnSubmitFeedback.Click += new System.EventHandler(this.btnSubmitFeedback_Click);
+            // 
+            // lblTaskServiceRequest
+            // 
+            this.lblTaskServiceRequest.AutoSize = true;
+            this.lblTaskServiceRequest.Location = new System.Drawing.Point(158, 52);
+            this.lblTaskServiceRequest.Name = "lblTaskServiceRequest";
+            this.lblTaskServiceRequest.Size = new System.Drawing.Size(121, 13);
+            this.lblTaskServiceRequest.TabIndex = 47;
+            this.lblTaskServiceRequest.Text = "Service Request Details";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(16, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(113, 13);
+            this.label6.TabIndex = 46;
+            this.label6.Text = "Task Service Request";
+            // 
+            // rtbFeedbackNotes
+            // 
+            this.rtbFeedbackNotes.Location = new System.Drawing.Point(161, 146);
+            this.rtbFeedbackNotes.Name = "rtbFeedbackNotes";
+            this.rtbFeedbackNotes.Size = new System.Drawing.Size(325, 41);
+            this.rtbFeedbackNotes.TabIndex = 31;
+            this.rtbFeedbackNotes.Text = "";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 146);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 30;
+            this.label5.Text = "Notes";
+            // 
+            // lblTechArrived
+            // 
+            this.lblTechArrived.AutoSize = true;
+            this.lblTechArrived.Location = new System.Drawing.Point(16, 91);
+            this.lblTechArrived.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblTechArrived.Name = "lblTechArrived";
+            this.lblTechArrived.Size = new System.Drawing.Size(66, 13);
+            this.lblTechArrived.TabIndex = 42;
+            this.lblTechArrived.Text = "Time Arrived";
+            // 
+            // dtpTimeDep
+            // 
+            this.dtpTimeDep.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpTimeDep.Location = new System.Drawing.Point(161, 109);
+            this.dtpTimeDep.Margin = new System.Windows.Forms.Padding(1);
+            this.dtpTimeDep.Name = "dtpTimeDep";
+            this.dtpTimeDep.Size = new System.Drawing.Size(102, 20);
+            this.dtpTimeDep.TabIndex = 45;
+            // 
+            // dtpActualTimeArrived
+            // 
+            this.dtpActualTimeArrived.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpActualTimeArrived.Location = new System.Drawing.Point(161, 87);
+            this.dtpActualTimeArrived.Margin = new System.Windows.Forms.Padding(1);
+            this.dtpActualTimeArrived.Name = "dtpActualTimeArrived";
+            this.dtpActualTimeArrived.Size = new System.Drawing.Size(102, 20);
+            this.dtpActualTimeArrived.TabIndex = 43;
+            // 
+            // lblTechDep
+            // 
+            this.lblTechDep.AutoSize = true;
+            this.lblTechDep.Location = new System.Drawing.Point(16, 115);
+            this.lblTechDep.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblTechDep.Name = "lblTechDep";
+            this.lblTechDep.Size = new System.Drawing.Size(77, 13);
+            this.lblTechDep.TabIndex = 44;
+            this.lblTechDep.Text = "Time Departed";
+            // 
+            // cmbStatus
+            // 
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Location = new System.Drawing.Point(161, 196);
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(100, 21);
+            this.cmbStatus.TabIndex = 6;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 196);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Status";
+            // 
             // txtTaskTitle
             // 
             this.txtTaskTitle.Location = new System.Drawing.Point(10, 38);
@@ -401,46 +575,29 @@ namespace PSS.Presentation_Layer
             this.grbxAvailableTechnicians.TabStop = false;
             this.grbxAvailableTechnicians.Text = "AvailableTechnicians";
             // 
-            // groupBox2
+            // grbTask
             // 
-            this.groupBox2.Controls.Add(this.lblTaskTitle);
-            this.groupBox2.Controls.Add(this.txtTaskTitle);
-            this.groupBox2.Controls.Add(this.lblDescription);
-            this.groupBox2.Controls.Add(this.rtbNotes);
-            this.groupBox2.Controls.Add(this.dtpTaskDate);
-            this.groupBox2.Controls.Add(this.lblNotes);
-            this.groupBox2.Controls.Add(this.txtTaskDescription);
-            this.groupBox2.Controls.Add(this.lblTaskTime);
-            this.groupBox2.Location = new System.Drawing.Point(342, 359);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(240, 232);
-            this.groupBox2.TabIndex = 32;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Task";
-            // 
-            // tpTrack
-            // 
-            this.tpTrack.Controls.Add(this.tvTrack);
-            this.tpTrack.Location = new System.Drawing.Point(4, 22);
-            this.tpTrack.Name = "tpTrack";
-            this.tpTrack.Size = new System.Drawing.Size(562, 271);
-            this.tpTrack.TabIndex = 2;
-            this.tpTrack.Text = "Track Tasks";
-            this.tpTrack.UseVisualStyleBackColor = true;
-            // 
-            // tvTrack
-            // 
-            this.tvTrack.Location = new System.Drawing.Point(5, 3);
-            this.tvTrack.Name = "tvTrack";
-            this.tvTrack.Size = new System.Drawing.Size(551, 265);
-            this.tvTrack.TabIndex = 0;
+            this.grbTask.Controls.Add(this.lblTaskTitle);
+            this.grbTask.Controls.Add(this.txtTaskTitle);
+            this.grbTask.Controls.Add(this.lblDescription);
+            this.grbTask.Controls.Add(this.rtbNotes);
+            this.grbTask.Controls.Add(this.dtpTaskDate);
+            this.grbTask.Controls.Add(this.lblNotes);
+            this.grbTask.Controls.Add(this.txtTaskDescription);
+            this.grbTask.Controls.Add(this.lblTaskTime);
+            this.grbTask.Location = new System.Drawing.Point(342, 359);
+            this.grbTask.Name = "grbTask";
+            this.grbTask.Size = new System.Drawing.Size(240, 232);
+            this.grbTask.TabIndex = 32;
+            this.grbTask.TabStop = false;
+            this.grbTask.Text = "Task";
             // 
             // ServiceDepartment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(594, 599);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.grbTask);
             this.Controls.Add(this.grbxAvailableTechnicians);
             this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.tcTask);
@@ -457,11 +614,13 @@ namespace PSS.Presentation_Layer
             this.grbModify.ResumeLayout(false);
             this.gpbxAssignedTechnician.ResumeLayout(false);
             this.gpbxAssignedTechnician.PerformLayout();
+            this.tpTrack.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.grbxAvailableTechnicians.ResumeLayout(false);
             this.grbxAvailableTechnicians.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.tpTrack.ResumeLayout(false);
+            this.grbTask.ResumeLayout(false);
+            this.grbTask.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -496,12 +655,26 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.ComboBox cbxClient;
         private System.Windows.Forms.GroupBox grbxAvailableTechnicians;
         private System.Windows.Forms.Label lblClient;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grbTask;
         private System.Windows.Forms.GroupBox grbCreate;
         private System.Windows.Forms.GroupBox grbModify;
         private System.Windows.Forms.ListBox lsbxActiveTasks;
         private System.Windows.Forms.Label lblCurentClient;
         private System.Windows.Forms.TabPage tpTrack;
         private System.Windows.Forms.TreeView tvTrack;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.ComboBox cmbStatus;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RichTextBox rtbFeedbackNotes;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblTechArrived;
+        private System.Windows.Forms.DateTimePicker dtpTimeDep;
+        private System.Windows.Forms.DateTimePicker dtpActualTimeArrived;
+        private System.Windows.Forms.Label lblTechDep;
+        private System.Windows.Forms.Button btnSubmitFeedback;
+        private System.Windows.Forms.Label lblTaskServiceRequest;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbxSchedueledTask;
     }
 }
