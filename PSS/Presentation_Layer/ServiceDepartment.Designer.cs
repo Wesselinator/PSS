@@ -443,6 +443,10 @@ namespace PSS.Presentation_Layer
             // cmbStatus
             // 
             this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Items.AddRange(new object[] {
+            "Completed",
+            "In progress",
+            "Could not complete"});
             this.cmbStatus.Location = new System.Drawing.Point(161, 196);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(100, 21);

@@ -133,7 +133,7 @@ namespace PSS.Presentation_Layer
 
         private void showLink()
         {
-            System.Diagnostics.Process.Start("http://localhost:1337/"); //this works? kinda? dont know if opens the node
+            System.Diagnostics.Process.Start("http://localhost:1337/"); 
             
         }
 
