@@ -109,8 +109,8 @@ namespace PSS.Business_Logic
             hashCode = hashCode * -1521134295 + TechnicianTaskFeedID.GetHashCode();
             hashCode = hashCode * -1521134295 + TimeArived.GetHashCode();
             hashCode = hashCode * -1521134295 + TimeDeparture.GetHashCode();
-            hashCode = hashCode * -1521134295 + Notes.GetHashCode();
-            hashCode = hashCode * -1521134295 + Status.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Notes);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Status);
             hashCode = hashCode * -1521134295 + TechnicianTask.GetHashCode();
             return hashCode;
         }
