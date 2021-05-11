@@ -10,9 +10,9 @@
   "description": "Client Satisfaction webpage for agents",
   "main": "app.js",
   "dependencies": {
-    "mysql": "latest",
     "debug": "4.3.2",
     "express": "4.17.1",
+    "mysql": "^2.18.1",
     "pug": "3.0.2"
   },
   "devDependencies": {
