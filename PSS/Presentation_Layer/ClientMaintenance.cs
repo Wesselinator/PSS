@@ -498,7 +498,7 @@ namespace PSS.Presentation_Layer
                 return;
             }
 
-            ClientMaintenance CM = new ClientMaintenance(currentClient);
+            ContractMaintenance CM = new ContractMaintenance();
             this.Hide();
             CM.ShowDialog();
             this.Show();
