@@ -112,9 +112,9 @@ namespace PSS.Business_Logic
         {
             int hashCode = 208219931;
             hashCode = hashCode * -1521134295 + FollowupReportID.GetHashCode();
-            hashCode = hashCode * -1521134295 + Title.GetHashCode();
-            hashCode = hashCode * -1521134295 + Type.GetHashCode();
-            hashCode = hashCode * -1521134295 + Description.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Title);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
             hashCode = hashCode * -1521134295 + FollowUpDate.GetHashCode();
             hashCode = hashCode * -1521134295 + IsIssueResolved.GetHashCode();
             hashCode = hashCode * -1521134295 + SatisfactionLevel.GetHashCode();

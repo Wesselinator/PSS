@@ -112,9 +112,9 @@ namespace PSS.Business_Logic
         {
             int hashCode = -1848433835;
             hashCode = hashCode * -1521134295 + ServiceRequestID.GetHashCode();
-            hashCode = hashCode * -1521134295 + Title.GetHashCode();
-            hashCode = hashCode * -1521134295 + Type.GetHashCode();
-            hashCode = hashCode * -1521134295 + Description.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Title);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
             //hashCode = hashCode * -1521134295 + Address.GetHashCode();
             return hashCode;
         }

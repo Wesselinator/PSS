@@ -123,7 +123,7 @@ namespace PSS.Business_Logic
         {
             int hashCode = 226706189;
             hashCode = hashCode * -1521134295 + TechnicianID.GetHashCode();
-            hashCode = hashCode * -1521134295 + Specialty.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Specialty);
             hashCode = hashCode * -1521134295 + PayRate.GetHashCode();
             return hashCode;
         }

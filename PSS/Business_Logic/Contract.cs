@@ -143,8 +143,8 @@ namespace PSS.Business_Logic
         {
             int hashCode = 1066324823;
             hashCode = hashCode * -1521134295 + ContractID.GetHashCode();
-            hashCode = hashCode * -1521134295 + ContractName.GetHashCode();
-            hashCode = hashCode * -1521134295 + ServiceLevel.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ContractName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ServiceLevel);
             hashCode = hashCode * -1521134295 + StartDate.GetHashCode();
             hashCode = hashCode * -1521134295 + EndDate.GetHashCode();
             hashCode = hashCode * -1521134295 + ContractDurationInMonths.GetHashCode();

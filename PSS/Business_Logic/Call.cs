@@ -94,7 +94,7 @@ namespace PSS.Business_Logic
             hashCode = hashCode * -1521134295 + CallInstanceID.GetHashCode();
             hashCode = hashCode * -1521134295 + StartTime.GetHashCode();
             hashCode = hashCode * -1521134295 + EndTime.GetHashCode();
-            hashCode = hashCode * -1521134295 + Description.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
             return hashCode;
         }
         
