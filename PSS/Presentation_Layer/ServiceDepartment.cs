@@ -85,7 +85,7 @@ namespace PSS.Presentation_Layer
             lsbxActiveTasks.DataSource = AllUnfinishedTasks;
             //Tech Feedback tab
             cbxSchedueledTask.DisplayMember = "DisplayMember";
-            cbxSchedueledTask.Items.AddRange(AllUnfinishedTasks.ToArray());
+            cbxSchedueledTask.Items.AddRange(TechnicianTask.GetUnfinishedTechTasks().ToArray());
         }
 
         private void PopulateTask()
@@ -243,8 +243,8 @@ namespace PSS.Presentation_Layer
 
         private void cbxSchedueledTask_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // TODO: Fix task
-            techTaskToModify = (TechnicianTask)cbxSchedueledTask.SelectedItem;//Cannot convert Task to tech task
+            // TODO: Check if working
+            techTaskToModify = (TechnicianTask)cbxSchedueledTask.SelectedItem;
 
             lblTaskServiceRequest.Text = techTaskToModify.Task.ServiceRequest.ToString();
             PopulateTask();
