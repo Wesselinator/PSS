@@ -47,6 +47,7 @@ namespace PSS.Presentation_Layer
             this.btnAddToBP = new System.Windows.Forms.Button();
             this.lsbxBusinessPeople = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.nudPostalCode = new PSS.Presentation_Layer.ArrowlessNumericUpDown();
             this.cbxProvince = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -85,14 +86,13 @@ namespace PSS.Presentation_Layer
             this.lblClientMaintenance = new System.Windows.Forms.Label();
             this.cbxChooseClient = new System.Windows.Forms.ComboBox();
             this.btnCM = new System.Windows.Forms.Button();
-            this.nudPostalCode = new PSS.Presentation_Layer.ArrowlessNumericUpDown();
             this.groupBox3.SuspendLayout();
             this.Contract.SuspendLayout();
             this.grbBPeople.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPostalCode)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.grbPerson.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPostalCode)).BeginInit();
             this.SuspendLayout();
             // 
             // txtBusinessName
@@ -117,6 +117,7 @@ namespace PSS.Presentation_Layer
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnCM);
             this.groupBox3.Controls.Add(this.Contract);
             this.groupBox3.Controls.Add(this.cbxType);
             this.groupBox3.Controls.Add(this.lblClientType);
@@ -134,7 +135,7 @@ namespace PSS.Presentation_Layer
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.rbtnIndvidual);
             this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Location = new System.Drawing.Point(308, 128);
+            this.groupBox3.Location = new System.Drawing.Point(313, 83);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
@@ -302,6 +303,18 @@ namespace PSS.Presentation_Layer
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(225, 129);
             this.panel2.TabIndex = 30;
+            // 
+            // nudPostalCode
+            // 
+            this.nudPostalCode.Location = new System.Drawing.Point(85, 68);
+            this.nudPostalCode.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nudPostalCode.Name = "nudPostalCode";
+            this.nudPostalCode.Size = new System.Drawing.Size(52, 20);
+            this.nudPostalCode.TabIndex = 24;
             // 
             // cbxProvince
             // 
@@ -479,7 +492,7 @@ namespace PSS.Presentation_Layer
             this.grbPerson.Controls.Add(this.txtName);
             this.grbPerson.Controls.Add(this.label24);
             this.grbPerson.Controls.Add(this.label25);
-            this.grbPerson.Location = new System.Drawing.Point(14, 128);
+            this.grbPerson.Location = new System.Drawing.Point(19, 83);
             this.grbPerson.Margin = new System.Windows.Forms.Padding(2);
             this.grbPerson.Name = "grbPerson";
             this.grbPerson.Padding = new System.Windows.Forms.Padding(2);
@@ -648,7 +661,7 @@ namespace PSS.Presentation_Layer
             // lblTask
             // 
             this.lblTask.AutoSize = true;
-            this.lblTask.Location = new System.Drawing.Point(49, 31);
+            this.lblTask.Location = new System.Drawing.Point(59, 45);
             this.lblTask.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTask.Name = "lblTask";
             this.lblTask.Size = new System.Drawing.Size(70, 13);
@@ -658,7 +671,7 @@ namespace PSS.Presentation_Layer
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 31);
+            this.label2.Location = new System.Drawing.Point(16, 45);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
@@ -667,7 +680,7 @@ namespace PSS.Presentation_Layer
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(855, 11);
+            this.btnBack.Location = new System.Drawing.Point(850, 25);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(135, 33);
@@ -680,7 +693,7 @@ namespace PSS.Presentation_Layer
             // 
             this.lblClientMaintenance.AutoSize = true;
             this.lblClientMaintenance.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClientMaintenance.Location = new System.Drawing.Point(217, 11);
+            this.lblClientMaintenance.Location = new System.Drawing.Point(408, 11);
             this.lblClientMaintenance.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientMaintenance.Name = "lblClientMaintenance";
             this.lblClientMaintenance.Size = new System.Drawing.Size(189, 24);
@@ -690,40 +703,27 @@ namespace PSS.Presentation_Layer
             // cbxChooseClient
             // 
             this.cbxChooseClient.FormattingEnabled = true;
-            this.cbxChooseClient.Location = new System.Drawing.Point(299, 59);
+            this.cbxChooseClient.Location = new System.Drawing.Point(156, 42);
             this.cbxChooseClient.Name = "cbxChooseClient";
-            this.cbxChooseClient.Size = new System.Drawing.Size(121, 21);
+            this.cbxChooseClient.Size = new System.Drawing.Size(139, 21);
             this.cbxChooseClient.TabIndex = 49;
             this.cbxChooseClient.SelectedIndexChanged += new System.EventHandler(this.cbxChooseClient_SelectedIndexChanged);
             // 
             // btnCM
             // 
-            this.btnCM.Location = new System.Drawing.Point(497, 57);
+            this.btnCM.Location = new System.Drawing.Point(521, 196);
             this.btnCM.Name = "btnCM";
-            this.btnCM.Size = new System.Drawing.Size(163, 23);
+            this.btnCM.Size = new System.Drawing.Size(150, 32);
             this.btnCM.TabIndex = 50;
             this.btnCM.Text = "Open Contract Maintence";
             this.btnCM.UseVisualStyleBackColor = true;
             this.btnCM.Click += new System.EventHandler(this.btnCM_Click);
             // 
-            // nudPostalCode
-            // 
-            this.nudPostalCode.Location = new System.Drawing.Point(85, 68);
-            this.nudPostalCode.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.nudPostalCode.Name = "nudPostalCode";
-            this.nudPostalCode.Size = new System.Drawing.Size(52, 20);
-            this.nudPostalCode.TabIndex = 24;
-            // 
             // ClientMaintenance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1001, 619);
-            this.Controls.Add(this.btnCM);
+            this.ClientSize = new System.Drawing.Size(1016, 577);
             this.Controls.Add(this.cbxChooseClient);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.grbPerson);
@@ -740,10 +740,10 @@ namespace PSS.Presentation_Layer
             this.grbBPeople.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPostalCode)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.grbPerson.ResumeLayout(false);
             this.grbPerson.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPostalCode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

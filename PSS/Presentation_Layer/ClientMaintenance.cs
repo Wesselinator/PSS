@@ -492,11 +492,12 @@ namespace PSS.Presentation_Layer
 
         private void btnCM_Click(object sender, EventArgs e)
         {
-            if (currentClient is null)
-            {
-                MessageBox.Show("No Client Selected!", "Failure!", MessageBoxButtons.OK);
-                return;
-            }
+            //Only needed if we want to pass a client to Contract Maintenance
+            //if (currentClient is null)
+            //{
+            //    MessageBox.Show("No Client Selected!", "Failure!", MessageBoxButtons.OK);
+            //    return;
+            //}
 
             ContractMaintenance CM = new ContractMaintenance();
             this.Hide();
