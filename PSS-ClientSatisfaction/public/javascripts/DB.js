@@ -1,14 +1,18 @@
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-    host: "127.0.0.1",
+    host: "localhost",
     port: "7331",
     user: "PSSuser",
-    password: "???s??ss?????s????",
+    password: "τнιsραssωοяδιsωεακ",
     database: "PremierServiceSolutionsDB"
 });
 
+var x = "Not Connected!";
+
 con.connect(function (err) {
     if (err) throw err;
-    exports.x = "Connected!";
+    x = "Connected!";
+	console.log(x);
 });
+
