@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Data;
+using System.Collections.Generic;
 
 //CHECK
 namespace PSS.Business_Logic
@@ -105,10 +106,10 @@ namespace PSS.Business_Logic
         public override int GetHashCode()
         {
             int hashCode = -1008569148;
-            hashCode = hashCode * -1521134295 + Street.GetHashCode();
-            hashCode = hashCode * -1521134295 + City.GetHashCode();
-            hashCode = hashCode * -1521134295 + PostalCode.GetHashCode();
-            hashCode = hashCode * -1521134295 + Province.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Street);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(City);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(PostalCode);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Province);
             return hashCode;
         }
     }

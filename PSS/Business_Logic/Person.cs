@@ -163,13 +163,13 @@ namespace PSS.Business_Logic
         {
             int hashCode = -632513257;
             hashCode = hashCode * -1521134295 + PersonID.GetHashCode();
-            hashCode = hashCode * -1521134295 + FirstName.GetHashCode();
-            hashCode = hashCode * -1521134295 + LastName.GetHashCode();
-            hashCode = hashCode * -1521134295 + FullName.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FirstName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(LastName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FullName);
             hashCode = hashCode * -1521134295 + BirthDay.GetHashCode();
-            hashCode = hashCode * -1521134295 + CellphoneNumber?.GetHashCode() ?? 0;
-            hashCode = hashCode * -1521134295 + TellephoneNumber?.GetHashCode() ?? 0;
-            hashCode = hashCode * -1521134295 + Email?.GetHashCode() ?? 0;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CellphoneNumber);//Not necessary for ?? 0, anymore since the equality comparer will anyway return 0 if the string is null
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TellephoneNumber);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
             return hashCode;
         }
     }
