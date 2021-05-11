@@ -11,7 +11,7 @@ namespace PSS.Business_Logic
         public int TaskID { get => ID; private set => ID = value; }
         public string Title { get; set; }
         public string Type { get; set; }
-        public string Descripion { get; set; }
+        public string Description { get; set; }
         public string Notes { get; set; }
         public ServiceRequest ServiceRequest { get; set; }
         public DateTime DateProcessed { get; set; }
@@ -28,7 +28,7 @@ namespace PSS.Business_Logic
             this.TaskID = taskID;
             this.Title = title;
             this.Type = type;
-            this.Descripion = descripion;
+            this.Description = descripion;
             this.Notes = notes;
             this.ServiceRequest = serviceRequest;
             this.DateProcessed = dateProcessed;
@@ -40,7 +40,7 @@ namespace PSS.Business_Logic
             this.TaskID = base.GetNextID();
             this.Title = title;
             this.Type = type;
-            this.Descripion = descripion;
+            this.Description = descripion;
             this.Notes = notes;
             this.ServiceRequest = serviceRequest;
             this.DateProcessed = dateProcessed;
@@ -54,7 +54,7 @@ namespace PSS.Business_Logic
             this.TaskID = row.Field<int>(IDColumn);
             this.Title = row.Field<string>("TaskTitle");
             this.Type = row.Field<string>("TaskType");
-            this.Descripion = row.Field<string>("TaskDescription");
+            this.Description = row.Field<string>("TaskDescription");
             this.Notes = row.Field<string>("TaskNotes");
             this.ServiceRequest = DataEngine.GetDataObject<ServiceRequest>(row.Field<int>("ServiceRequestID"));
             this.DateProcessed = row.Field<DateTime>("DateProcessed");
@@ -76,10 +76,10 @@ namespace PSS.Business_Logic
 
             sql.Append("TaskTitle = '" + Title + "', ");
             sql.Append("TaskType = '" + Type + "', ");
-            sql.Append("TaskDescripion = '" + Descripion + "', ");
+            sql.Append("TaskDescription = '" + Description + "', ");
             sql.Append("TaskNotes = '" + Notes + "', ");
             sql.Append("ServiceRequestID = " + ServiceRequest.ServiceRequestID + ", ");
-            sql.Append("TaskDateProcessed = '" + DateProcessed.ToString("s") + "', ");
+            sql.Append("DateProcessed = '" + DateProcessed.ToString("s") + "', ");
             sql.AppendLine("IsFinished = " + (IsFinished ? 1 : 0));
 
             sql.AppendLine("WHERE " + IDColumn + " = " + TaskID);
@@ -96,7 +96,7 @@ namespace PSS.Business_Logic
             sql.Append(TaskID + ", ");
             sql.Append("'" + Title + "', ");
             sql.Append("'" + Type + "', ");
-            sql.Append("'" + Descripion + "', ");
+            sql.Append("'" + Description + "', ");
             sql.Append("'" + Notes?.ToString() + "', ");
             sql.Append(ServiceRequest.ServiceRequestID + ", ");
             sql.Append("'" + DateProcessed.ToString("s") + "' , ");
@@ -116,7 +116,7 @@ namespace PSS.Business_Logic
 
         public override string ToString()
         {
-            return string.Format("TaskID: {0} | Title: {1} | Descripion: {2} | Notes: {3} |  ServiceRequest: [{4}] | DateProcessed: {5} | IsFinished: {6}", TaskID, Title, Descripion, Notes, ServiceRequest, DateProcessed, IsFinished);
+            return string.Format("TaskID: {0} | Title: {1} | Description: {2} | Notes: {3} |  ServiceRequest: [{4}] | DateProcessed: {5} | IsFinished: {6}", TaskID, Title, Description, Notes, ServiceRequest, DateProcessed, IsFinished);
         }
 
         public override bool Equals(object obj)
@@ -124,7 +124,7 @@ namespace PSS.Business_Logic
             return obj is Task task &&
                    TaskID == task.TaskID &&
                    Title == task.Title &&
-                   Descripion == task.Descripion &&
+                   Description == task.Description &&
                    Notes == task.Notes &&
                    ServiceRequest.Equals(task.ServiceRequest) &&
                    DateProcessed == task.DateProcessed &&

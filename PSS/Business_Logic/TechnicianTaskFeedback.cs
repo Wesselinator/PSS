@@ -16,8 +16,8 @@ namespace PSS.Business_Logic
         public string Status { get; set; }
         public TechnicianTask TechnicianTask { get; set; }
 
-        private static readonly string tableName = "TechnicianTaskFeed";
-        private static readonly string idColumn = "TechnicianTaskFeedID";
+        private static readonly string tableName = "TechnicianTaskFeedback";
+        private static readonly string idColumn = "TechnicianTaskFeedbackID";
 
         public TechnicianTaskFeedback() : base(tableName, idColumn)
         { }

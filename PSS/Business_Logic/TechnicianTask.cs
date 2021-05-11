@@ -95,6 +95,17 @@ namespace PSS.Business_Logic
             return sql.ToString();
         }
 
+        public static BaseList<TechnicianTask> GetUnfinishedTechTasks()
+        {
+
+            string sql = "SELECT tt.* FROM " + tableName + " tt " +
+                         "LEFT JOIN Task t ON tt.TaskID = t.TaskID " +
+                         "LEFT JOIN Technician tech ON tt.TechnicianID = tech.TechnicianID " +
+                         "WHERE t.IsFinished = 0;";
+       
+            return BaseList<TechnicianTask>.GrabFill(sql);
+        }
+
         #endregion
 
         public override string ToString()
