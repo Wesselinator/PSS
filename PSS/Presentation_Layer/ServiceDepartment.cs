@@ -96,7 +96,7 @@ namespace PSS.Presentation_Layer
             }
 
             txtTaskTitle.Text = techTaskToModify.Task.Title;
-            txtTaskDescription.Text = techTaskToModify.Task.Descripion;
+            txtTaskDescription.Text = techTaskToModify.Task.Description;
             dtpTaskDate.Value = techTaskToModify.Task.DateProcessed;
             rtbNotes.Text = techTaskToModify.Task.Notes;
         }
@@ -181,7 +181,7 @@ namespace PSS.Presentation_Layer
         private void btnReAssignTask_Click(object sender, EventArgs e)
         {
             techTaskToModify.Task.Title = txtTaskTitle.Text;
-            techTaskToModify.Task.Descripion = txtTaskDescription.Text;
+            techTaskToModify.Task.Description = txtTaskDescription.Text;
             techTaskToModify.Task.DateProcessed = dtpTaskDate.Value;
             techTaskToModify.Task.Notes = rtbNotes.Text;
 
