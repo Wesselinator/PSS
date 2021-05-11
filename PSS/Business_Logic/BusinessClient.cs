@@ -127,7 +127,7 @@ namespace PSS.Business_Logic
         }
         public override Contract GetCurrentContract()
         {
-            return BusinessClientContracts.Where(bcc => bcc.IsCurrent).Select(bcc => bcc.Contract).ToArray()[0];
+            return BusinessClientContracts.Where(bcc => bcc.IsCurrent).Select(bcc => bcc.Contract).FirstOrDefault();
         }
 
         public override BaseList<FollowUpReport> GetFolowups()
@@ -147,6 +147,8 @@ namespace PSS.Business_Logic
         {
             BusinessClientPeople.Add(new BusinessClientPerson(ID, person, role));
         }
+
+        //public void SetBusinessPeople(Bus)
 
         #endregion
 

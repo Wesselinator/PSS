@@ -109,8 +109,7 @@ namespace PSS.Business_Logic
         public static BaseList<Task> GetAllUnFinishedTasks()
         {
             string sql = "SELECT * FROM " + tableName + " WHERE IsFinished = 0";
-            DataTable dt = DataHandler.GetDataTable(sql);
-            return BaseList<Task>.GrabFill(dt);
+            return BaseList<Task>.GrabFill(sql);
         }
 
         #endregion

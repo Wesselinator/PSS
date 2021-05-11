@@ -34,7 +34,13 @@ namespace PSS.Business_Logic
         public string BusinessIdentifier { get => ClientIdentifierLetter + ClientID7Digits; }
 
         public Client(string tableName, string idColumn) : base(tableName, idColumn)
-        {  }
+        {
+            Address = new Address();
+            Person = new Person();
+
+            Address.SetNextID();
+            Person.SetNextID();
+        }
 
         protected Client(string tableName, string idColumn, string type, string status, string notes, Address address, Person person) : this(tableName, idColumn) //Protected Becuase you should not be able to create half a client
         {
@@ -62,6 +68,7 @@ namespace PSS.Business_Logic
 
         protected void FillPartialRow(DataRow row, string personColumn)
         {
+            ClientID = row.Field<int>(IDColumn);
             Type = row.Field<string>("Type");
             Status = row.Field<string>("Status");
             Notes = row.Field<string>("Notes");
@@ -87,7 +94,7 @@ namespace PSS.Business_Logic
             sql.Append("Notes = '" + Notes + "', ");
             sql.AppendLine("AddressID = " + Address.AddressID);
 
-            sql.AppendLine("WHERE ClientID = " + ClientID);
+            sql.AppendLine("WHERE " + IDColumn + " = " + ClientID);
 
             return sql.ToString();
         }

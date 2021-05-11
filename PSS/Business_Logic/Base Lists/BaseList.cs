@@ -48,5 +48,10 @@ namespace PSS.Business_Logic
             ret.FillWith(dataTable);
             return ret;
         }
+
+        public static BaseList<T> GrabFill(string sql) //even more Quality of life!
+        {
+            return GrabFill(DataHandler.GetDataTable(sql));
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using System.Data;
@@ -72,10 +73,10 @@ namespace PSS.Data_Access
 
         private static void TerminateSQL(ref string Query)
         {
-            char finalChar = Query[Query.Length - 1];
+            char finalChar = Query.TrimEnd('\n', '\r', ' ').Last();
 
             switch (finalChar)
-            {
+            { 
                 case ';': 
                     return;
 

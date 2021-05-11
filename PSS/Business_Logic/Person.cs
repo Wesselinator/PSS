@@ -22,6 +22,7 @@ namespace PSS.Business_Logic
         public string Email { get; set; }
 
         public string FullName => string.Format("{0} {1}", FirstName, LastName);
+        public string DisplayMember => FullName;
         public string BirthDayString => BirthDay.ToString(BirthDayFormat);
 
         private static readonly string tableName = "Person";
@@ -96,13 +97,35 @@ namespace PSS.Business_Logic
             sql.Append("'" + FirstName + "', ");
             sql.Append("'" + LastName + "', ");
             sql.Append("'" + BirthDayString + "', ");
-            sql.Append("'" + CellphoneNumber + "' ");
-            sql.Append("'" + TellephoneNumber + "' ");
-            sql.Append("'" + Email + "' ");
+            sql.Append("'" + CellphoneNumber + "', ");
+            sql.Append("'" + TellephoneNumber + "', ");
+            sql.Append("'" + Email + "'");
 
             sql.AppendLine(");");
 
             return sql.ToString();
+        }
+
+        public static BaseList<Person> GetNonClients()
+        {
+            //This query can also be down with subqueries
+            //The rule of thumb is that joins will always be faster then subquiers, however...
+
+            //In the case of Exclusive LEFT/RIGHT JOINS [see below] subqueries perform slightly better, espeacially in distrubuted database enviornments
+
+            //Our use case will likely not excede the 20 000 record mark and is therefor not a performance concern
+            //NOTE: if your tables are not properley indexed subqueries WILL perform poorer
+
+            //Feel free to update this with subqueries if you like
+            string sql = "SELECT p.* FROM Person p " +
+                         "LEFT JOIN individualclient ic ON p.PersonID = ic.IndividualClientID " +
+                         "LEFT JOIN businessclient bc ON p.PersonID = bc.PrimaryContactPersonID " +
+                         "LEFT JOIN businessclientperson bcp ON p.PersonID = bcp.PersonID " +
+                         "WHERE ic.IndividualClientID IS NULL " +
+                         "AND bc.PrimaryContactPersonID IS NULL " +
+                         "AND bcp.PersonID IS NULL;";
+            //TODO: Should people whom are part of a business client be allowed to become an individual client aswell?
+            return BaseList<Person>.GrabFill(sql);
         }
 
         #endregion        

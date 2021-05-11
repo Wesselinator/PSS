@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Data;
 
+//TODO: If Person gets updated, ID won't also you shouldn't try and change it.
 namespace PSS.Business_Logic
 {
     class IndividualClient : Client
@@ -25,11 +27,13 @@ namespace PSS.Business_Logic
 
         public IndividualClient(string type, string status, string notes, Address address, Person person) : base(tableName, idColumn, type, status, notes, address, person)
         {
+            ID = Person.PersonID;
             FillLists(person.PersonID);
         }
 
         public IndividualClient(string type, string status, string notes, Address address) : base(tableName, idColumn, type, status, notes, address)
         {
+            ID = Person.PersonID;
             FillLists(ClientID); // this has a value now
         }
 
@@ -58,6 +62,9 @@ namespace PSS.Business_Logic
             Address.Save();
             Person.Save(); //what will this do?
             base.Save();
+            IndividualClientContracts.SaveAll();
+            IndividualClientFollowUps.SaveAll();
+            IndividualClientServiceRequests.SaveAll();
         }
 
         protected override string Update()
@@ -107,7 +114,7 @@ namespace PSS.Business_Logic
         }
         public override Contract GetCurrentContract()
         {
-            throw new NotImplementedException(); 
+            return IndividualClientContracts.Where(icc => icc.IsCurrent).Select(icc => icc.Contract).FirstOrDefault();
         }
 
         public override BaseList<FollowUpReport> GetFolowups()

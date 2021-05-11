@@ -21,6 +21,8 @@ namespace PSS.Business_Logic
         }
         public string Role { get; set; }
 
+        public string DisplayMember => Person.DisplayMember + " [" + Role + "]";
+
         private static readonly string tableName = "BusinessClientPerson";
         public static readonly string idColumn1 = BusinessClient.idColumn;
         private static readonly string idColumn2 = "PersonID";

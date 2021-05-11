@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -8,20 +9,19 @@ namespace PSS.Presentation_Layer
 {
     public partial class ClientMaintenance : Form
     {
-        private Client currentClient = null;
-        private Contract selectedContract => (Contract)cbxContracts.SelectedItem;
-
         public bool registerMode { get; set; } //bool for logic if form is in registration mode or update mode
 
         public ClientMaintenance()
         {
             InitializeComponent();
+            InitializeLists();
             RegisterMode();
         }      
 
         public ClientMaintenance(Client client) 
         {
             InitializeComponent();
+            InitializeLists();
             currentClient = client;
             UpdateMode();
         }
@@ -29,7 +29,24 @@ namespace PSS.Presentation_Layer
         private void InitializeLists()
         {
             lsbxExistingPeople.DisplayMember = "DisplayMember";
-            lsbxExistingPeople.DataSource = People;
+            lsbxBusinessPeople.Items.Clear();
+            lsbxExistingPeople.Items.AddRange(People.ToArray());
+
+            cbxClientPerson.DisplayMember = "DisplayMember";
+            cbxClientPerson.Items.Clear();
+            cbxClientPerson.Items.AddRange(NonClients.ToArray());
+
+            lsbxBusinessPeople.DisplayMember = "DisplayMember";
+
+            cbxCurentContract.DisplayMember = "DisplayMember";
+            cbxCurentContract.DataSource = AllContracts;
+            cbxCurentContract.SelectedItem = currentClient?.GetCurrentContract();
+
+            lsbxPreviousContracts.DisplayMember = "DisplayMember";
+            lsbxPreviousContracts.DataSource = currentClient?.GetContracts();
+
+            cbxChooseClient.DisplayMember = "DisplayMember";
+            cbxChooseClient.DataSource = Clients;
         }
 
         /// <summary>
@@ -50,7 +67,7 @@ namespace PSS.Presentation_Layer
             txtEmail.Clear();
             txtStreet.Clear();
             txtCity.Clear();
-            txtPostalCode.Clear();
+            nudPostalCode.Value = 0;
 
             cbxProvince.SelectedIndex = -1;
             cbxProvince.Text = "Choose...";
@@ -59,23 +76,8 @@ namespace PSS.Presentation_Layer
 
 
             //Add all Contracts
-            cbxContracts.Items.Clear();
-            cbxContracts.Text = "None at the moment";
-
-            cbxContracts.Items.Clear();
-            cbxContracts.Text = "";
-            //BaseList<Contract> contracts = new BaseList<Contract>();
-            //contracts.FillAll();
-            //cbxContracts.Items.AddRange(contracts.ToArray());
-            rtbContractDetails.Clear();
-            rtbContractDetails.Text = "Contract details:\n";
-
-
-            //Service level items won't change?
-            cbxServiceLevel.Text = "Choose a service level";
-
-            rtbServiceLevelDetails.Clear();
-            rtbServiceLevelDetails.Text = "Service level details:\n";
+            cbxCurentContract.Items.Clear();
+            cbxCurentContract.Text = "None at the moment";
 
             grbPerson.Text = "Client Details";
 
@@ -88,8 +90,13 @@ namespace PSS.Presentation_Layer
         private void RegisterMode()
         {
             lblTask.Text = "Register Client";
-            btnConfirm.Text = "Finalize Registration";
-            ResetControls();
+            btnClient.Text = "Finalize Registration";
+
+            cbxChooseClient.Enabled = false;
+            rbtnIndvidual.Enabled = true;
+            rbtnBusiness.Enabled = true;
+            rbtnBusiness.Checked = true; //controll pivot onChenged event
+
             registerMode = true; //sets form to registration mode
         }
 
@@ -99,31 +106,14 @@ namespace PSS.Presentation_Layer
         private void UpdateMode()
         {
             lblTask.Text = "Update Client";
-            btnConfirm.Text = "Update Client";
-            ResetControls();
+            btnClient.Text = "Update Client";
+            cbxChooseClient.Enabled = true;
 
-            //populate components with current client info
-            rbtnIndvidual.Enabled = false;
-            rbtnBusiness.Enabled = false;
-            if (currentClient is IndividualClient)
-            {
-                lblBusinessName.Hide();
-                txtBusinessName.Hide();
-                rbtnIndvidual.Checked = true;
-            }
-            else if (currentClient is BusinessClient bCl)
-            {
-                lblBusinessName.Show();
-                txtBusinessName.Show();
-                txtBusinessName.Text = bCl.BusinessName;
-                rbtnBusiness.Checked = true;
-            }
-
-            Populate();
-
-            button1.Enabled = false;
+            cbxChooseClient.SelectedItem = currentClient;
 
             registerMode = false; //sets form to update mode
+
+            Populate();
         }
 
         #region Populate
@@ -137,27 +127,16 @@ namespace PSS.Presentation_Layer
                 throw new PSSObjectIsNull("Client not initialized");
             }
 
-            txtName.Text = currentClient.Person.FirstName;
-            txtSurname.Text = currentClient.Person.LastName;
-            dtpDOB.Value = currentClient.Person.BirthDay;
-            txtCellphone.Text = currentClient.Person.CellphoneNumber;
-            txtTelephone.Text = currentClient.Person.TellephoneNumber;
-            txtEmail.Text = currentClient.Person.Email;
+            PopulateControlsFromClient(currentClient);
 
-            txtStreet.Text = currentClient.Address.Street;
-            txtCity.Text = currentClient.Address.City;
-            txtPostalCode.Text = currentClient.Address.PostalCode;
-            cbxProvince.SelectedItem = currentClient.Address.Province;
+            cbxCurentContract.SelectedItem = currentClient?.GetCurrentContract();
 
-            cbxStatus.SelectedItem = currentClient.Status;
+            lsbxPreviousContracts.DataSource = currentClient?.GetContracts();
 
-            rtbNotes.Text = currentClient.Notes;
-
-
-            BaseList<Contract> contracts = new BaseList<Contract>(); //move to local?
-            contracts = currentClient.GetContracts();
-            cbxContracts.DisplayMember = "ContractName";
-            cbxContracts.Items.AddRange(contracts.ToArray());
+            //BaseList<Contract> contracts = new BaseList<Contract>(); //move to local?
+            //contracts = currentClient.GetContracts();
+            //cbxCurentContract.DisplayMember = "ContractName";
+            //cbxCurentContract.Items.AddRange(contracts.ToArray());
         }
 
         #endregion
@@ -176,188 +155,209 @@ namespace PSS.Presentation_Layer
         }
 
         #region Confirm
-        private void btnConfirm_Click(object sender, EventArgs e)
-        {
-            if (registerMode == false)
-            {
-                ConfirmModify();
-            }
-            else
-            {
-                ConfirmRegister();
-            }            
-
-            Close();
-        }
-        private string GetStatus => cbxStatus.SelectedIndex == -1 ? "Status Unknown" : cbxStatus.Text; //TODO: set default string globally somehow?
+        private string GetStatus => cbxStatus.SelectedIndex == -1 ? "Status Unknown" : cbxStatus.Text;
         private void ConfirmRegister()
         {
-            Person newPerson = new Person(txtName.Text, txtSurname.Text, dtpDOB.Value, txtCellphone.Text, txtTelephone.Text, txtEmail.Text); //Creates a new person
-            Address newAddress = new Address(txtStreet.Text, txtCity.Text, txtPostalCode.Text, cbxProvince.Text); //Creates new address
-            if (rbtnIndvidual.Checked)
-            {
-                //TODO: Obtain type
-                IndividualClient individualClient = new IndividualClient("", GetStatus, rtbNotes.Text, newAddress, newPerson);
-                currentClient = individualClient;
-            }
-            else
-            {
-                //TODO: Obtain type
-                BusinessClient businessClient = new BusinessClient(txtBusinessName.Text, "", GetStatus, rtbNotes.Text, newAddress, newPerson);
-                currentClient = businessClient;
-            }
+            PopulateClientFromControls(currentClient); //created new client in radio controls with type
 
             currentClient.Save();
         }
 
         private void ConfirmModify()
         {
-            currentClient.Person.FirstName = txtName.Text;
-            currentClient.Person.LastName = txtSurname.Text;
-            currentClient.Person.BirthDay = dtpDOB.Value;
-            currentClient.Person.CellphoneNumber = txtCellphone.Text;
-            currentClient.Person.TellephoneNumber = txtTelephone.Text;
-            currentClient.Person.Email = txtEmail.Text;
+            PopulateClientFromControls(currentClient);
 
-            currentClient.Address.Street = txtStreet.Text;
-            currentClient.Address.City = txtCity.Text;
-            currentClient.Address.PostalCode = txtPostalCode.Text;
-            currentClient.Address.Province = cbxProvince.SelectedItem.ToString();
-
-            currentClient.Status = GetStatus;
-            currentClient.Notes = rtbNotes.Text;//Text vs rtf?
-
-            if (rbtnIndvidual.Checked)
-            {
-                IndividualClient aClient = (IndividualClient)currentClient;
-                aClient.Save();
-            }
-            else
-            {
-                BusinessClient bClient = (BusinessClient)currentClient;
-                bClient.BusinessName = txtBusinessName.Text;
-                bClient.Save();
-            }
+            currentClient.Save();
         }
         #endregion
 
-        private void cbxContracts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            rtbContractDetails.Text = "Contract Details:\n" + cbxContracts.SelectedItem.ToString();
-        }
+        //private void cbxServiceLevel_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    // TODO:  Do we need to expand on these details?, maybe we can use enums here
+        //    switch (cbxServiceLevel.SelectedIndex)
+        //    {
+        //        case 0: rtbServiceLevelDetails.Text = "Service level details:\n"
+        //                                            + "Response time: 48+ hours\n  "
+        //                                            + "Repair times: Between 08:00 and 18:00 on Weekdays."
+        //                                            + "              No repair ons weekends";
+        //            break;
+        //        case 1:
+        //            rtbServiceLevelDetails.Text = "Service level details:\n"
+        //                                        + "Response time: 24+ hours\n  "
+        //                                        + "Repair times: Between 06:00 and 20:00 on Weekdays."
+        //                                        +"              No repair ons weekends";
 
-        private void cbxServiceLevel_SelectedIndexChanged(object sender, EventArgs e)
+        //            break;
+        //        case 2:
+        //            rtbServiceLevelDetails.Text = "Service level details:\n"
+        //                                        + "Response time: 12+ hours\n  "
+        //                                        + "Repair times: Any time during weekdays"
+        //                                        + "              Between 08:00 and 18:00 on weekends";
+        //            break;
+        //        case 3:
+        //            rtbServiceLevelDetails.Text = "Service level details:\n"
+        //                                        + "Response time: 24/7 instant responses\n  "
+        //                                        + "Repair times: If technicians are available they can assist at any time that suits the client ";
+        //            break;
+        //        default:
+        //            rtbServiceLevelDetails.Text = "Service level details:\n";
+        //            break;
+        //    }
+
+        //}
+
+        #region Client
+        private Client currentClient = null;
+        private List<Client> Clients = Client.GetAllClients();
+
+        private void cbxChooseClient_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // TODO:  Do we need to expand on these details?, maybe we can use enums here
-            switch (cbxServiceLevel.SelectedIndex)
+            currentClient = (Client)cbxChooseClient.SelectedItem;
+
+            rbtnIndvidual.Enabled = false;
+            rbtnBusiness.Enabled = false;
+
+            if (currentClient is IndividualClient)
             {
-                case 0: rtbServiceLevelDetails.Text = "Service level details:\n"
-                                                    + "Response time: 48+ hours\n  "
-                                                    + "Repair times: Between 08:00 and 18:00 on Weekdays."
-                                                    + "              No repair ons weekends";
-                    break;
-                case 1:
-                    rtbServiceLevelDetails.Text = "Service level details:\n"
-                                                + "Response time: 24+ hours\n  "
-                                                + "Repair times: Between 06:00 and 20:00 on Weekdays."
-                                                +"              No repair ons weekends";
-
-                    break;
-                case 2:
-                    rtbServiceLevelDetails.Text = "Service level details:\n"
-                                                + "Response time: 12+ hours\n  "
-                                                + "Repair times: Any time during weekdays"
-                                                + "              Between 08:00 and 18:00 on weekends";
-                    break;
-                case 3:
-                    rtbServiceLevelDetails.Text = "Service level details:\n"
-                                                + "Response time: 24/7 instant responses\n  "
-                                                + "Repair times: If technicians are available they can assist at any time that suits the client ";
-                    break;
-                default:
-                    rtbServiceLevelDetails.Text = "Service level details:\n";
-                    break;
+                rbtnIndvidual.Checked = true;
+            }
+            else if (currentClient is BusinessClient bCl)
+            {
+                txtBusinessName.Text = bCl.BusinessName;
+                rbtnBusiness.Checked = true;
             }
 
+            Populate();
         }
 
-        private void btnAddContract_Click(object sender, EventArgs e)
-        {
-            //TODO: What does effective date mean again?
-            currentClient.AddContract(selectedContract, DateTime.Now);
-        }
-
-        private void btnModifyContract_Click(object sender, EventArgs e)
-        {
-            //selectedClientContract = selectedContract; //TODO: Figure out this set
-        }
-
-        private void btnCreateContract_Click(object sender, EventArgs e)
-        {
-            ContractMaintenance cm = new ContractMaintenance();
-            Hide();
-            cm.ShowDialog();
-            Show();
-        }
+        #region IndividualClient
 
         private void rbtnIndvidual_CheckedChanged(object sender, EventArgs e)
         {
             if (rbtnIndvidual.Checked)
             {
-                lblBusinessName.Hide();
-                txtBusinessName.Hide();
+                lblPerson.Text = "Person";
 
-                grbPerson.Text = "Client Details";
+                if (registerMode)
+                {
+                    currentClient = new IndividualClient();
+                }
+                else
+                {
+                    cbxClientPerson.Enabled = false;
+                    cbxClientPerson.Text = currentClient.DisplayMember;
+                }
             }
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            switch (MessageBox.Show("Are you sure? Changes will NOT be saved!", "Discard and Go Back", MessageBoxButtons.YesNo))
-            {
-                case DialogResult.None:
-                case DialogResult.No:
-                    goto default; //fall-through goto default incase we want to add additional functionality.
-
-                case DialogResult.Yes:
-                    this.Close();
-                    break;
-
-                default:
-                    return;
-            }
-        }
-
-        #region Client
+        #endregion
 
         #region BusinessClient
-        //private BaseList<BusinessClientPerson> BusinessClientPeople = BaseList<BusinessClientPerson>.GrabAll();
-        private BusinessClient clientIsBusiness = null;
-        private BaseList<Person> BusinessPeople => clientIsBusiness.GetBusinessPersons();
 
         private void rbtnBusiness_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbtnBusiness.Checked)
+            bool businessChecked = rbtnBusiness.Checked;
+            if (businessChecked)
             {
-                lblBusinessName.Show();
-                txtBusinessName.Show();
+                lblPerson.Text = "Contact Person";
 
-                grbPerson.Text = "Contact Person Details";
+                if (registerMode)
+                {
+                    currentClient = new BusinessClient();
+                }
+                else
+                {
+                    cbxClientPerson.Enabled = true;
+                }
             }
 
-            grbBPeople.Enabled = rbtnBusiness.Checked;
+            lblBusinessName.Enabled = businessChecked;
+            txtBusinessName.Enabled = businessChecked;
 
-            btnAddToBP.Enabled = rbtnBusiness.Checked;
+            grbBPeople.Enabled = businessChecked;
+            btnAddToBP.Enabled = businessChecked;
         }
 
 
         #endregion
+
+        private void cbxClientPerson_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lsbxExistingPeople.SelectedItem = cbxClientPerson.SelectedItem;
+        }
+
+        private void btnClient_Click(object sender, EventArgs e)
+        {
+            if (registerMode)
+            {
+                ConfirmRegister(); //aaaaaa
+            }
+            else
+            {
+                ConfirmModify();
+            }
+
+            Close();
+        }
+
+        private void PopulateClientFromControls(Client client)
+        {
+            PopulatePersonFromControls(client.Person);
+            PopulateAdressFromControls(client.Address);
+
+            client.Notes = rtbNotes.Text;
+            client.Status = cbxStatus.Text;
+            client.Type = cbxType.Text;
+
+            if (client is BusinessClient bc)
+            {
+                bc.BusinessName = txtBusinessName.Text;
+            }
+        }
+
+        private void PopulateControlsFromClient(Client client)
+        {
+            PopulateControlsFromPerson(client.Person);
+            PopulateControlsFromAdress(client.Address);
+
+            rtbNotes.Text = client.Notes;
+            cbxStatus.Text = client.Status;
+            cbxType.Text = client.Type;
+
+            if (client is BusinessClient bc)
+            {
+                txtBusinessName.Text = bc.BusinessName;
+
+                lsbxBusinessPeople.Items.Clear();
+                lsbxBusinessPeople.Items.AddRange(bc.GetBusinessPersons().ToArray());
+            }
+        }
+
+        private void PopulateAdressFromControls(Address address)
+        {
+            address.City = txtCity.Text;
+            address.PostalCode = nudPostalCode.Text.PadLeft(4, '0');
+            address.Province = cbxProvince.Text;
+            address.Street = txtStreet.Text;
+        }
+
+        private void PopulateControlsFromAdress(Address address)
+        {
+            txtCity.Text = address.City;
+            nudPostalCode.Text = address.PostalCode;
+            txtStreet.Text = address.Street;
+            cbxProvince.Text = address.Province;
+        }
 
         #endregion
 
         #region People
+
         private BaseList<Person> People = BaseList<Person>.GrabAll();
-        private Person selectedPerson => People.Find(p => p.PersonID == ((Person)lsbxExistingPeople.SelectedItem).PersonID);
+        private BaseList<Person> NonClients = Person.GetNonClients();
+        private bool listSelected(Person p) => p.PersonID == ((Person)lsbxExistingPeople.SelectedItem).PersonID;
+        private Person selectedPersonInExisting => People.Find(listSelected);
+        private Person selectedPersonInNonClient => NonClients.Find(listSelected);
         private bool AddMode = true;
 
         private void btnPerson_Click(object sender, EventArgs e)
@@ -367,19 +367,29 @@ namespace PSS.Presentation_Layer
                 Person person = new Person(txtName.Text, txtSurname.Text, dtpDOB.Value, txtCellphone.Text, txtTelephone.Text, txtEmail.Text);
                 person.Save();
                 People.Add(person);
+                NonClients.Add(person);
 
                 MessageBox.Show("New Person Sucessfully Saved!", "Success!", MessageBoxButtons.OK);
             }
             else
             {
-                PopulatePersonFromControls(selectedPerson);
-                selectedPerson.Save();
-
-                AddMode = true;
+                PopulatePersonFromControls(selectedPersonInExisting);
+                PopulatePersonFromControls(selectedPersonInNonClient); //This is a lazy way of ceeping the 2 list synced. I'm not allowed to use Binding lists
+                selectedPersonInExisting.Save();
 
                 MessageBox.Show("Person Sucessfully Modified!", "Success!", MessageBoxButtons.OK);
             }
+
+            btnPerson.Enabled = false;
+
+            lsbxExistingPeople.Items.Clear();
+            lsbxExistingPeople.Items.AddRange(People.ToArray());
+
+            cbxClientPerson.Items.Clear();
+            cbxClientPerson.Items.AddRange(NonClients.ToArray());
         }
+
+        //TODO: add a nice enabled/disabled on the Person txt
         private void btnModifyPerson_Click(object sender, EventArgs e)
         {
             if (lsbxExistingPeople.SelectedIndex == -1)
@@ -391,8 +401,9 @@ namespace PSS.Presentation_Layer
             ClearPerson();
             btnPerson.Text = "Modify Person";
             AddMode = false;
+            btnPerson.Enabled = true;
 
-            PopulateControlsFromPerson(selectedPerson);
+            PopulateControlsFromPerson(selectedPersonInExisting);
         }
 
         private void btnNewPerson_Click(object sender, EventArgs e)
@@ -400,8 +411,9 @@ namespace PSS.Presentation_Layer
             ClearPerson();
             btnPerson.Text = "Add Person";
             AddMode = true;
+            btnPerson.Enabled = true;
         }
-
+        //---------
 
         private void ClearPerson()
         {
@@ -437,16 +449,76 @@ namespace PSS.Presentation_Layer
         {
             if (rbtnBusiness.Checked)
             {
-                if (BusinessPeople.Contains(selectedPerson))
+                if (currentClient is BusinessClient bc)
                 {
-                    MessageBox.Show("This business already contains this Person!", "Failure!", MessageBoxButtons.OK);
-                    return;
-                }
+                    if (bc.GetBusinessPersons().Contains(selectedPersonInExisting))
+                    {
+                        MessageBox.Show("This business already contains this Person!", "Failure!", MessageBoxButtons.OK);
+                        return;
+                    }
 
-                BusinessPeople.Add(selectedPerson);
+                    bc.AddBusinessPersons(selectedPersonInExisting, txtRole.Text);
+
+                    lsbxBusinessPeople.Items.Clear();
+                    lsbxBusinessPeople.Items.AddRange(bc.GetBusinessPersons().ToArray());
+                }
             }
         }
 
+        private void lsbxExistingPeople_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnAddToBP.Text = "Add " + selectedPersonInExisting.FirstName + " To Business People";
+
+            PopulateControlsFromPerson(selectedPersonInExisting);
+        }
+
         #endregion
+
+        #region Contracts
+        private BaseList<Contract> AllContracts = BaseList<Contract>.GrabAll();
+        private Contract selectedContract => (Contract)cbxCurentContract.SelectedItem;
+
+        private void btnAddContract_Click(object sender, EventArgs e)
+        {
+            currentClient.AddContract(selectedContract, DateTime.Now);
+        }
+
+        private void btnModifyContract_Click(object sender, EventArgs e)
+        {
+            //selectedClientContract = selectedContract; //TODO: Figure out this set
+        }
+
+        #endregion
+
+        private void btnCM_Click(object sender, EventArgs e)
+        {
+            if (currentClient is null)
+            {
+                MessageBox.Show("No Client Selected!", "Failure!", MessageBoxButtons.OK);
+                return;
+            }
+
+            ClientMaintenance CM = new ClientMaintenance(currentClient);
+            this.Hide();
+            CM.ShowDialog();
+            this.Show();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            switch (MessageBox.Show("Are you sure? Changes will NOT be saved!", "Discard and Go Back", MessageBoxButtons.YesNo))
+            {
+                case DialogResult.None:
+                case DialogResult.No:
+                    goto default; //fall-through goto default incase we want to add additional functionality.
+
+                case DialogResult.Yes:
+                    this.Close();
+                    break;
+
+                default:
+                    return;
+            }
+        }
     }
 }
