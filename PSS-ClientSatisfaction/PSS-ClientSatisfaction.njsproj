@@ -39,6 +39,9 @@
     <Content Include="Dockerfile">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="public\javascripts\DB.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="script.js" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
