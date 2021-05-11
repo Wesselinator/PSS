@@ -39,7 +39,7 @@
     <Content Include="Dockerfile">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="public\javascripts\script.js" />
+    <Content Include="script.js" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\main.css" />
