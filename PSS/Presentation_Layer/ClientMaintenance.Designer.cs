@@ -32,13 +32,14 @@ namespace PSS.Presentation_Layer
             this.txtBusinessName = new System.Windows.Forms.TextBox();
             this.lblBusinessName = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Contract = new System.Windows.Forms.GroupBox();
+            this.cbxCurentContract = new System.Windows.Forms.ComboBox();
             this.lsbxPreviousContracts = new System.Windows.Forms.ListBox();
             this.cbxType = new System.Windows.Forms.ComboBox();
             this.lblClientType = new System.Windows.Forms.Label();
             this.lblPerson = new System.Windows.Forms.Label();
             this.btnClient = new System.Windows.Forms.Button();
             this.cbxClientPerson = new System.Windows.Forms.ComboBox();
-            this.cbxCurentContract = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.grbBPeople = new System.Windows.Forms.GroupBox();
             this.lblRole = new System.Windows.Forms.Label();
@@ -80,20 +81,18 @@ namespace PSS.Presentation_Layer
             this.label25 = new System.Windows.Forms.Label();
             this.lblTask = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnClear = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.lblClientMaintenance = new System.Windows.Forms.Label();
             this.cbxChooseClient = new System.Windows.Forms.ComboBox();
             this.btnCM = new System.Windows.Forms.Button();
             this.nudPostalCode = new PSS.Presentation_Layer.ArrowlessNumericUpDown();
-            this.Contract = new System.Windows.Forms.GroupBox();
             this.groupBox3.SuspendLayout();
+            this.Contract.SuspendLayout();
             this.grbBPeople.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.grbPerson.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPostalCode)).BeginInit();
-            this.Contract.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtBusinessName
@@ -143,6 +142,27 @@ namespace PSS.Presentation_Layer
             this.groupBox3.TabIndex = 46;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Client Management";
+            // 
+            // Contract
+            // 
+            this.Contract.Controls.Add(this.cbxCurentContract);
+            this.Contract.Controls.Add(this.lsbxPreviousContracts);
+            this.Contract.Location = new System.Drawing.Point(521, 37);
+            this.Contract.Name = "Contract";
+            this.Contract.Size = new System.Drawing.Size(156, 152);
+            this.Contract.TabIndex = 57;
+            this.Contract.TabStop = false;
+            this.Contract.Text = "Contracts";
+            // 
+            // cbxCurentContract
+            // 
+            this.cbxCurentContract.FormattingEnabled = true;
+            this.cbxCurentContract.Location = new System.Drawing.Point(5, 18);
+            this.cbxCurentContract.Margin = new System.Windows.Forms.Padding(2);
+            this.cbxCurentContract.Name = "cbxCurentContract";
+            this.cbxCurentContract.Size = new System.Drawing.Size(146, 21);
+            this.cbxCurentContract.TabIndex = 35;
+            this.cbxCurentContract.Text = "Choose a contract...";
             // 
             // lsbxPreviousContracts
             // 
@@ -209,16 +229,6 @@ namespace PSS.Presentation_Layer
             this.cbxClientPerson.TabIndex = 51;
             this.cbxClientPerson.Text = "Choose Person...";
             this.cbxClientPerson.SelectedIndexChanged += new System.EventHandler(this.cbxClientPerson_SelectedIndexChanged);
-            // 
-            // cbxCurentContract
-            // 
-            this.cbxCurentContract.FormattingEnabled = true;
-            this.cbxCurentContract.Location = new System.Drawing.Point(5, 18);
-            this.cbxCurentContract.Margin = new System.Windows.Forms.Padding(2);
-            this.cbxCurentContract.Name = "cbxCurentContract";
-            this.cbxCurentContract.Size = new System.Drawing.Size(146, 21);
-            this.cbxCurentContract.TabIndex = 35;
-            this.cbxCurentContract.Text = "Choose a contract...";
             // 
             // label15
             // 
@@ -655,18 +665,6 @@ namespace PSS.Presentation_Layer
             this.label2.TabIndex = 39;
             this.label2.Text = "Task:";
             // 
-            // btnClear
-            // 
-            this.btnClear.Location = new System.Drawing.Point(462, 47);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(2);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(118, 33);
-            this.btnClear.TabIndex = 38;
-            this.btnClear.Text = "Clear fields";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Visible = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
             // btnBack
             // 
             this.btnBack.Location = new System.Drawing.Point(855, 11);
@@ -692,7 +690,7 @@ namespace PSS.Presentation_Layer
             // cbxChooseClient
             // 
             this.cbxChooseClient.FormattingEnabled = true;
-            this.cbxChooseClient.Location = new System.Drawing.Point(235, 59);
+            this.cbxChooseClient.Location = new System.Drawing.Point(299, 59);
             this.cbxChooseClient.Name = "cbxChooseClient";
             this.cbxChooseClient.Size = new System.Drawing.Size(121, 21);
             this.cbxChooseClient.TabIndex = 49;
@@ -700,7 +698,7 @@ namespace PSS.Presentation_Layer
             // 
             // btnCM
             // 
-            this.btnCM.Location = new System.Drawing.Point(692, 69);
+            this.btnCM.Location = new System.Drawing.Point(497, 57);
             this.btnCM.Name = "btnCM";
             this.btnCM.Size = new System.Drawing.Size(163, 23);
             this.btnCM.TabIndex = 50;
@@ -720,17 +718,6 @@ namespace PSS.Presentation_Layer
             this.nudPostalCode.Size = new System.Drawing.Size(52, 20);
             this.nudPostalCode.TabIndex = 24;
             // 
-            // Contract
-            // 
-            this.Contract.Controls.Add(this.cbxCurentContract);
-            this.Contract.Controls.Add(this.lsbxPreviousContracts);
-            this.Contract.Location = new System.Drawing.Point(521, 52);
-            this.Contract.Name = "Contract";
-            this.Contract.Size = new System.Drawing.Size(156, 152);
-            this.Contract.TabIndex = 57;
-            this.Contract.TabStop = false;
-            this.Contract.Text = "grbxContracts";
-            // 
             // ClientMaintenance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -742,13 +729,13 @@ namespace PSS.Presentation_Layer
             this.Controls.Add(this.grbPerson);
             this.Controls.Add(this.lblTask);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.lblClientMaintenance);
             this.Name = "ClientMaintenance";
             this.Text = "Client Maintenance";
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.Contract.ResumeLayout(false);
             this.grbBPeople.ResumeLayout(false);
             this.grbBPeople.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -757,7 +744,6 @@ namespace PSS.Presentation_Layer
             this.grbPerson.ResumeLayout(false);
             this.grbPerson.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPostalCode)).EndInit();
-            this.Contract.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -800,7 +786,6 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblTask;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Label lblClientMaintenance;
         private System.Windows.Forms.ListBox lsbxBusinessPeople;
