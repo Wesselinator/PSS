@@ -74,12 +74,12 @@ namespace PSS.Business_Logic
             sql.AppendLine("UPDATE " + TableName);
             sql.Append("SET ");
 
-            sql.Append("TaskTitle = '" + Title + "',");
-            sql.Append("TaskType = '" + Type + "',");
-            sql.Append("TaskDescripion = '" + Descripion + "',");
-            sql.Append("TaskNotes = '" + Notes + "',");
-            sql.Append("ServiceRequestID = " + ServiceRequest.ServiceRequestID + ",");
-            sql.Append("TaskDateProcessed = '" + DateProcessed.ToString("s") + "'");
+            sql.Append("TaskTitle = '" + Title + "', ");
+            sql.Append("TaskType = '" + Type + "', ");
+            sql.Append("TaskDescripion = '" + Descripion + "', ");
+            sql.Append("TaskNotes = '" + Notes + "', ");
+            sql.Append("ServiceRequestID = " + ServiceRequest.ServiceRequestID + ", ");
+            sql.Append("TaskDateProcessed = '" + DateProcessed.ToString("s") + "', ");
             sql.AppendLine("IsFinished = " + (IsFinished ? 1 : 0));
 
             sql.AppendLine("WHERE " + IDColumn + " = " + TaskID);
@@ -97,9 +97,9 @@ namespace PSS.Business_Logic
             sql.Append("'" + Title + "', ");
             sql.Append("'" + Type + "', ");
             sql.Append("'" + Descripion + "', ");
-            sql.Append("'" + Notes + "', ");
+            sql.Append("'" + Notes?.ToString() + "', ");
             sql.Append(ServiceRequest.ServiceRequestID + ", ");
-            sql.Append("'" + DateProcessed.ToString("s") + "', ");
+            sql.Append("'" + DateProcessed.ToString("s") + "' , ");
             sql.Append( (IsFinished ? 1 : 0) );
             sql.AppendLine(");");
 
