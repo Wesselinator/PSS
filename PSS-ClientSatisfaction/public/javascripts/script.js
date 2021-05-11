@@ -1,2 +1,6 @@
-var r = require;
-var DB = r("./DB.js");
+
+function showMessage() {
+    alert("Henlo");
+}
+
+console.log(x);
