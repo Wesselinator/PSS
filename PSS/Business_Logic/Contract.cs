@@ -24,7 +24,16 @@ namespace PSS.Business_Logic
 
         public MultiIDList<ServiceLevelAgreement> ServiceLevelAgreements { get; set; }
 
-        public string BusinessIdentifier { get => StartDate.ToString("yyyy") + "Z" + "D" + "00000"; } //TODO: Finnish Business Identifier
+        #region BusinessIdentifier
+        private Random RNG => new Random(ContractID);
+        private static readonly string ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private char contractType => ALPHA[RNG.Next(0,26)]; //lol no contract type
+        private static readonly string[] LEVEL = { "Peasant", "Commoner", "Noble", "Feudal lord" };
+        private char serviceLevelAlpha => ALPHA[LEVEL.ToList().FindIndex(s => ServiceLevel.Contains(s))]; //TODO: error handling
+        private string numeric => RNG.Next(0,999999).ToString().PadLeft(6, '0');
+        #endregion
+
+        public string BusinessIdentifier => StartDate.ToString("yyyy") + contractType.ToString() + serviceLevelAlpha.ToString() + numeric;
 
 
         private static readonly string tableName = "Contract";
