@@ -1,6 +1,6 @@
 USE PremierServiceSolutionsDB;
 
-CREATE OR REPLACE TABLE `Service` (
+CREATE OR REPLACE TABLE Service (
  ServiceID INT PRIMARY KEY,
  ServiceName VARCHAR(30) NOT NULL,
  `Type` VARCHAR(30) NOT NULL,
@@ -20,20 +20,20 @@ CREATE OR REPLACE TABLE Province
 
 #----------------------#
 
-CREATE OR REPLACE TABLE `Contract` (
+CREATE OR REPLACE TABLE Contract (
  ContractID INT PRIMARY KEY,
  ContractName VARCHAR(45) NOT NULL,
- ServiceLevel VARCHAR(15) NOT NULL,
+ `ServiceLevel` VARCHAR(15) NOT NULL,
  OfferStartDate DATETIME NOT NULL,
  OfferEndDate DATETIME,
  ContractDurationInMonths INT NOT NULL,
  MonthlyFee DECIMAL NOT NULL
 );
 
-ALTER TABLE `Contract`
+ALTER TABLE Contract
 ADD CONSTRAINT CK_OfferEndDateAfterStartDate CHECK(OfferEndDate>=OfferStartDate);
 
-CREATE OR REPLACE TABLE `ServiceLevelAgreement`
+CREATE OR REPLACE TABLE ServiceLevelAgreement
 (ServiceID INT REFERENCES `Service`(ServiceID),
  ContractID INT REFERENCES `Contract`(ContractID),
  Agreement VARCHAR(500) NOT NULL,
@@ -41,7 +41,7 @@ CREATE OR REPLACE TABLE `ServiceLevelAgreement`
  PRIMARY KEY(ServiceID,ContractID)
 );
 
-CREATE OR REPLACE TABLE `IndividualClient`
+CREATE OR REPLACE TABLE IndividualClient
 (IndividualClientID INT PRIMARY KEY,
  `Type` VARCHAR(30) NOT NULL,
  `Status` VARCHAR(30) NOT NULL,
@@ -49,7 +49,7 @@ CREATE OR REPLACE TABLE `IndividualClient`
  AddressID INT NOT NULL
 );
 
-CREATE OR REPLACE TABLE `BusinessClient`
+CREATE OR REPLACE TABLE BusinessClient
 (`BusinessClientID` INT PRIMARY KEY,
  `BusinessName` VARCHAR(50),
  `Type` VARCHAR(30) NOT NULL,
@@ -65,15 +65,15 @@ CREATE OR REPLACE TABLE Technician
  PayRate DECIMAL NOT NULL
 );
 
-CREATE OR REPLACE TABLE `Address`
+CREATE OR REPLACE TABLE Address
 (AddressID INT PRIMARY KEY,
  Street VARCHAR(50) NOT NULL,
  City VARCHAR(30) NOT NULL,
  PostalCode CHAR(4),
- Province VARCHAR(20) NOT NULL
+ `Province` VARCHAR(20) NOT NULL
 );
 
-CREATE OR REPLACE TABLE `Person`
+CREATE OR REPLACE TABLE Person
 (PersonID INT PRIMARY KEY,
  FirstName VARCHAR(50) NOT NULL,
  LastName VARCHAR(50) NOT NULL,
@@ -83,14 +83,14 @@ CREATE OR REPLACE TABLE `Person`
  Email VARCHAR(320)
 );
 
-ALTER TABLE `Person`
+ALTER TABLE Person
 ADD CONSTRAINT CK_AtLeastOneModeOfContact CHECK(CellPhoneNumber!=NULL OR TelephoneNumber!=NULL OR Email!=NULL);
 
-ALTER TABLE `IndividualClient`
+ALTER TABLE IndividualClient
 ADD CONSTRAINT FK_IndividualClient_Person FOREIGN KEY (IndividualClientID) REFERENCES `Person`(PersonID),
 ADD CONSTRAINT FK_IndividualClient_Address FOREIGN KEY (AddressID) REFERENCES `Address`(AddressID);
 
-ALTER TABLE `BusinessClient`
+ALTER TABLE BusinessClient
 ADD CONSTRAINT FK_BusinessClient_ContactPerson FOREIGN KEY (PrimaryContactPersonID) REFERENCES `Person`(PersonID),
 ADD CONSTRAINT FK_BusinessClient_Address FOREIGN KEY (AddressID) REFERENCES `Address`(AddressID);
 
@@ -99,10 +99,10 @@ ADD CONSTRAINT FK_Technician_Person FOREIGN KEY (TechnicianID) REFERENCES Person
 
 
 CREATE OR REPLACE TABLE `User`
-(`UserID` INT PRIMARY KEY,
- `UserName` VARCHAR(50) NOT NULL,
+(UserID INT PRIMARY KEY,
+ UserName VARCHAR(50) NOT NULL,
  `Password` VARCHAR(50) NOT NULL,
- `Role` VARCHAR(50) NOT NULL
+ Role VARCHAR(50) NOT NULL
 );
 
 CREATE OR REPLACE TABLE BusinessClientPerson
@@ -155,13 +155,13 @@ CREATE OR REPLACE TABLE BusinessClientFollowUp
  PRIMARY KEY(BusinessClientID, FollowUpReportID)
 );
 
-CREATE OR REPLACE TABLE `TechnicianTaskFeedback`
-(`TechnicianTaskFeedbackID` INT PRIMARY KEY,
- `TimeArrived` DATETIME NOT NULL,
- `TimeDeparture` DATETIME NOT NULL,
+CREATE OR REPLACE TABLE TechnicianTaskFeedback
+(TechnicianTaskFeedbackID INT PRIMARY KEY,
+ TimeArrived DATETIME NOT NULL,
+ TimeDeparture DATETIME NOT NULL,
  `Status` VARCHAR(30) NOT NULL,
- `Notes` VARCHAR(500),
- `TechnicianTaskID` INT NOT NULL
+ Notes VARCHAR(500),
+ TechnicianTaskID INT NOT NULL
 );
 
 CREATE OR REPLACE TABLE TechnicianTask
@@ -172,7 +172,7 @@ CREATE OR REPLACE TABLE TechnicianTask
  TimeToDepart DATETIME NOT NULL
 );
 
-CREATE OR REPLACE TABLE `Task`
+CREATE OR REPLACE TABLE Task
 (TaskID INT PRIMARY KEY,
  TaskTitle VARCHAR(80) NOT NULL,
  TaskType VARCHAR(20) NOT NULL,
@@ -184,7 +184,7 @@ CREATE OR REPLACE TABLE `Task`
  IsFinished BOOLEAN NOT NULL DEFAULT 0
 );
 
-CREATE OR REPLACE TABLE `ServiceRequest`
+CREATE OR REPLACE TABLE ServiceRequest
 (ServiceRequestID INT PRIMARY KEY,
  ServiceRequestTitle VARCHAR(80) NOT NULL,
  ServiceRequestType VARCHAR(20) NOT NULL,
@@ -193,13 +193,13 @@ CREATE OR REPLACE TABLE `ServiceRequest`
  #AddressID INT REFERENCES Address(AddressID)
 );
 
-ALTER TABLE `Task`
+ALTER TABLE Task
 ADD CONSTRAINT FK_Task_ServiceRequest FOREIGN KEY (ServiceRequestID) REFERENCES `ServiceRequest`(ServiceRequestID);
 
-ALTER TABLE `TechnicianTask`
+ALTER TABLE TechnicianTask
 ADD CONSTRAINT FK_TechnicianTask_Task FOREIGN KEY (TaskID) REFERENCES `Task`(TaskID);
 
-ALTER TABLE `TechnicianTaskFeedback`
+ALTER TABLE TechnicianTaskFeedback
 ADD CONSTRAINT FK_TechnicianTaskFeedback_Person FOREIGN KEY (TechnicianTaskID) REFERENCES `TechnicianTask`(TechnicianTaskID);
 
 CREATE OR REPLACE TABLE BusinessClientServiceRequest
@@ -262,7 +262,7 @@ INSERT INTO ServiceLevel (ServiceLevelID, ServiceLevelName)
 		    (3, 'Noble'),
 		    (4, 'Feudal lord');
 		   
-INSERT INTO `Contract` (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MonthlyFee)
+INSERT INTO Contract (ContractID, ContractName, ServiceLevel, OfferStartDate, OfferEndDate, ContractDurationInMonths, MonthlyFee)
 	VALUES (1, 'Printing Necessities', 'Peasant', '2021/04/01', NULL, 36, 400),
 		   (2, 'Basic Printing', 'Commoner', '2021/04/01', NULL, 36, 600),
 		   (3, 'Premium Printing','Noble','2021/04/01',NULL,36, 900),
@@ -373,34 +373,34 @@ INSERT INTO ServiceLevelAgreement (ServiceID, ContractID, Agreement, ServiceQuan
 		   (6, 14, 'Applies to product failure resulting from a production fault or inability to repair product on customer premise',-1);
 
 
-INSERT INTO `Person` (PersonID, FirstName, LastName, BirthDate, CellPhoneNumber, TelephoneNumber, Email)
-	VALUES (1, 'Pieter', 'Du Toit', '1990/12/31', '+27824428419', NULL, 'Piet.toit@gmail.com'),
+INSERT INTO Person (PersonID, FirstName, LastName, BirthDate, CellPhoneNumber, TelephoneNumber, Email)
+	VALUES (1, 'Pieter', 'Du Toit', '1990/12/31', '+27824428419', '0125587744', 'Piet.toit@gmail.com'),
 		   (2, 'Jean', 'Van Rensburg', '1985/07/21', '+27762931242', NULL, 'jeanvrens@gmail.com'),
 		   (3, 'Jan', 'Coetzee', '1983/06/27', '+27762931847', NULL, 'jantutoring@gmail.com'),
 		   (4, 'Blake', 'Thompson', '1990/05/13', '+27862342231', NULL, 'b.thompson@gmail.com'),
 		   (5, 'San-Marie', 'Kritzinger', '1979/05/14', '+27761214222', NULL, 'kritzinger.s@gmail.com'),
 		   (6, 'Nigel', 'Ozark', '1990/06/04', '+27720542344', NULL, 'nigel.ozark90@gmail.com'),
 		   (7, 'John', 'Smith', '1984/01/19', '+27714361997', NULL, 'john.growtoday@gmail.com'),
-		   (8, 'Marco', 'Venter', '1997/05/14', '+27715931934', NULL, 'marco.v97@gmail.com'),
+		   (8, 'Marco', 'Venter', '1997/05/14', '+27715931934', '0225846288', 'marco.v97@gmail.com'),
 		   (9, 'Sam', 'Walker', '1993/09/09', '+27842431875', NULL, 'sam.w@gmail.com'),
 		   (10, 'Karen', 'Pienaar', '1995/06/21', '+27613472253', NULL, 'karenpcrepairs@gmail.com'),
 		   (11, 'Kathy', 'Bellbottom', '1970/11/09', '+2714123322', NULL, 'bellb.kathy@yahoo.com'),
-		   (13, 'Wielfred', 'Mekoa', '1991/03/12', '+27734175449', NULL, 'wielfredmekoa.marketing@gmail.com'),
+		   (13, 'Wielfred', 'Mekoa', '1991/03/12', '+27734175449', '0316545556', 'wielfredmekoa.marketing@gmail.com'),
 		   (15, 'Delma', 'Tadiwa', '1995/05/22', '+27825539658', NULL, 'd.tadiwa@gmail.com'),
 		   (17, 'Blessing', 'Moyo', '1988/07/25', '+27618824356', NULL, 'blessingmoyo@gmail.com');
 		   
 INSERT INTO Province (ProvinceName)
-	VALUES ('Gauteng'),
-		    ('Limpopo'),
-		    ('Mpumalanga'),
-		    ('North West'),
-		    ('Kwazulu Natal'),
-		    ('Free State'),
-		    ('Northern Cape'),
-		    ('Western Cape'),
-		    ('Eastern Cape');
+	VALUES	('Gauteng'),
+			('Limpopo'),
+			('Mpumalanga'),
+			('North West'),
+			('Kwazulu Natal'),
+			('Free State'),
+			('Northern Cape'),
+			('Western Cape'),
+			('Eastern Cape');
 
-INSERT INTO `Address` (AddressID, Street, City, PostalCode, Province)
+INSERT INTO Address (AddressID, Street, City, PostalCode, Province)
 	VALUES (1, '961 Church St', 'Pretoria', '0155', 'Gauteng'),
 		   (2, '127 Willowmore Street', 'Pretoria', '0182', 'Gauteng'),
 		   (3, '1266 Diesel Street', 'Randfontein', '1767', 'Gauteng'),
@@ -425,7 +425,7 @@ INSERT INTO `Address` (AddressID, Street, City, PostalCode, Province)
 INSERT INTO `User` (UserID, UserName, `Password`, `Role`)
 	VALUES (11, 'KathyB', 'Admin', 'Admin');
 
-INSERT INTO `Technician` (TechnicianID, Speciality, PayRate)
+INSERT INTO Technician (TechnicianID, Speciality, PayRate)
 	VALUES (2, 'Printers', 500),
 		   (4, 'Computers', 600),
 		   (6, 'Servers', 1000),
@@ -495,7 +495,7 @@ INSERT INTO IndividualClientServiceRequest (IndividualClientID, ServiceRequestID
 INSERT INTO Task (TaskID, TaskTitle, TaskType, TaskDescription, TaskNotes, ServiceRequestID, DateProcessed, IsFinished)
 	VALUES (1, 'Repair hardware issue on HP printer model M130a', 'Hardware Repair', 'Printer error code 50 reports a hardware problem. Attempt or fix, if not repairible on the customer site, schedule pickup repair', 'Enter customer site from back door', 1, '2021/04/05', DEFAULT),
 		   (2, 'Fix wifi Issue on MSI Cubi N Model 8GL-074EU', 'Hard/Software Repair', 'Wifi/Bluetooth card may be faulty or misconfigured on a software or harware level', NULL, 2,'2021/04/16', DEFAULT),
-		   (3, 'Routine hardware maintenance 25x MSI Cubi N Model 8GL-074EU', 'Hardware Maintanence', 'Clean fat clients. Inspect and report health of CPU, RAM, HDD. Repaste CPU if idle temperatures above 55Ãƒâ€šÃ‚Â°C', NULL, 3, '2021/04/17', DEFAULT),
+		   (3, 'Routine hardware maintenance 25x MSI Cubi N Model 8GL-074EU', 'Hardware Maintanence', 'Clean fat clients. Inspect and report health of CPU, RAM, HDD. Repaste CPU if idle temperatures above 55°C', NULL, 3, '2021/04/17', DEFAULT),
 		   (4, 'Routine software maintenance 25x MSI Cubi N Model 8GL-074EU', 'Software Maintanence', 'Run PSS registry cleaner, run PSS antivirus, ensure Windows and Office is activited', NULL, 3, '2021/04/17', DEFAULT),
 		   (5, 'Diagnose and repair 3x problematic MSI Cubi N Model 8GL-074EU', 'Hard/Software Repair', 'All 3 Fat clients are noisy, 2 suffer from random restarts. Possible Fan, HDD or device driver problem', 'If issue not resolved, schedule pickup repair', 4, '2021/04/17', DEFAULT);
 
