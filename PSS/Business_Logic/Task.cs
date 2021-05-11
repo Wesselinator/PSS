@@ -76,10 +76,10 @@ namespace PSS.Business_Logic
 
             sql.Append("TaskTitle = '" + Title + "', ");
             sql.Append("TaskType = '" + Type + "', ");
-            sql.Append("TaskDescripion = '" + Description + "', ");
+            sql.Append("TaskDescription = '" + Description + "', ");
             sql.Append("TaskNotes = '" + Notes + "', ");
             sql.Append("ServiceRequestID = " + ServiceRequest.ServiceRequestID + ", ");
-            sql.Append("TaskDateProcessed = '" + DateProcessed.ToString("s") + "', ");
+            sql.Append("DateProcessed = '" + DateProcessed.ToString("s") + "', ");
             sql.AppendLine("IsFinished = " + (IsFinished ? 1 : 0));
 
             sql.AppendLine("WHERE " + IDColumn + " = " + TaskID);
