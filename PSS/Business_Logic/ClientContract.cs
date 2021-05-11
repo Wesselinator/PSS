@@ -115,9 +115,7 @@ namespace PSS.Business_Logic
                    ClientContractID == contract.ClientContractID &&
                    ClientID == contract.ClientID &&
                    Contract.Equals(contract.Contract) &&
-                   EffectiveDate == contract.EffectiveDate &&
-                   ID1 == contract.ID1 &&
-                   ID3 == contract.ID3;
+                   EffectiveDate == contract.EffectiveDate;
         }
 
         public override int GetHashCode()

@@ -85,8 +85,7 @@ namespace PSS.Business_Logic
         {
             return obj is ClientFollowUp up &&
                    ClientID == up.ClientID &&
-                   FollowUp.Equals(up.FollowUp) &&
-                   ID1 == up.ID1;
+                   FollowUp.Equals(up.FollowUp);
         }
 
         public override int GetHashCode()

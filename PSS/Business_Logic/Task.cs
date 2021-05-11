@@ -137,8 +137,7 @@ namespace PSS.Business_Logic
             hashCode = hashCode * -1521134295 + TaskID.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Title);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Descripion);
-            //hashCode = hashCode * -1521134295 + Notes?.GetHashCode() ?? 0;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Notes);
             hashCode = hashCode * -1521134295 + ServiceRequest.GetHashCode();
             hashCode = hashCode * -1521134295 + DateProcessed.GetHashCode();

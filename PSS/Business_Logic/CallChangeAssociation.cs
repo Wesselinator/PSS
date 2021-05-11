@@ -83,7 +83,7 @@ namespace PSS.Business_Logic
         {
             return obj is CallChangeAssociation association &&
                    CallChangeAssociationID == association.CallChangeAssociationID &&
-                   EqualityComparer<Call>.Default.Equals(CallInstanceID, association.CallInstanceID) &&
+                   CallInstanceID.Equals(association.CallInstanceID) &&
                    fTableName == association.fTableName &&
                    TableRecordID == association.TableRecordID;
         }
