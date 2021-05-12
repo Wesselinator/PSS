@@ -61,6 +61,10 @@ h3{
     padding-left: 2%;
 }
 
+#addComp{
+    padding-top: 2%;  
+}
+
 #Submit{
     display: flex;
     justify-content: center;
