@@ -7,7 +7,6 @@ using PSS.Business_Logic;
 
 namespace PSS.Presentation_Layer
 {
-    //TODO: refresh
     public partial class ServiceDepartment : Form
     {
         private ServiceRequest currentRequest = null;
@@ -18,7 +17,7 @@ namespace PSS.Presentation_Layer
         {
             InitializeComponent();
             LoadViews();
-            //TODO: Enable cbx
+            cbxClient.Enabled = true;
         }
 
         public ServiceDepartment(Client client) : this()
@@ -28,6 +27,8 @@ namespace PSS.Presentation_Layer
 
             AllClients.RemoveAll(c => c.ClientID == currentClient.ClientID);
             AllClients.Add(currentClient);
+
+            cbxClient.Enabled = false;
 
             PopulateClients();
             PopulateUnclaimedClientServiceRequests();
@@ -59,8 +60,6 @@ namespace PSS.Presentation_Layer
         private BaseList<ServiceRequest> UnClaimedClientServiceRequests => ClientServiceRequests.Except(AllUnfinishedTasks.Select(task => task.ServiceRequest)).ToBaseList();
         private void PopulateUnclaimedClientServiceRequests()
         {
-            //TODO: apparntly this is supposed to be the client's unclaimed service request? That'll always be one right?
-
             lsbxUnclaimedServiceRequests.DisplayMember = "DisplayMember";
             lsbxUnclaimedServiceRequests.DataSource = UnClaimedClientServiceRequests;
         }
@@ -97,7 +96,8 @@ namespace PSS.Presentation_Layer
 
             txtTaskTitle.Text = techTaskToModify.Task.Title;
             txtTaskDescription.Text = techTaskToModify.Task.Description;
-            dtpTaskDate.Value = techTaskToModify.Task.DateProcessed;
+            dtpDeparture.Value = techTaskToModify.TimeToDepart;
+            dtpArival.Value = techTaskToModify.TimeToArrive;
             rtbNotes.Text = techTaskToModify.Task.Notes;
         }
 
@@ -106,13 +106,19 @@ namespace PSS.Presentation_Layer
             //TODO: the frick is this?
         }
 
+        #region Tree
         private TreeNode[] TechnicianTaskNodes(Technician t) => AllTechnicianTasks.Where(tt => tt.Technician.TechnicianID == t.TechnicianID).Select(tt => new TreeNode(tt.Task.Title)).ToArray(); //TODO: order
         private TreeNode[] TechnicianNodes => AllTechnicians.Select(t => new TreeNode(t.Person.FullName, TechnicianTaskNodes(t))).ToArray();
+
+        private TreeNode[] DanglingTaskNodes => Task.GetAllDanglingTasks().Select(t => new TreeNode(t.Title)).ToArray();
+        private TreeNode UnassignedNode => new TreeNode("Unassigned Tasks", DanglingTaskNodes);
         private void PopulateTree()
         {
             tvTrack.Nodes.Clear();
             tvTrack.Nodes.AddRange(TechnicianNodes);
+            tvTrack.Nodes.Add(UnassignedNode);
         }
+        #endregion
 
         #endregion
 
@@ -144,7 +150,6 @@ namespace PSS.Presentation_Layer
         {
             Task taskToModify = (Task)lsbxActiveTasks.SelectedItem;
             techTaskToModify = AllTechnicianTasks.Find(tt => tt.Task.TaskID == taskToModify.TaskID); //might not find it?
-            //Console.WriteLine(string.Format("{0} was found in {1}", taskToModify.Title, techTaskToModify?.ToString()));
             if (!(techTaskToModify is null))
             {
                 txtCurrentTech.Text = techTaskToModify.Technician.Person.FullName; //can I do this with a datasource?
@@ -160,19 +165,25 @@ namespace PSS.Presentation_Layer
 
             switch (tabControl.SelectedIndex)
             {
-                case 3:
-                    grbTask.Enabled = false;
-                    grbxAvailableTechnicians.Enabled = false;
+                case 0:
+                case 1:
+                    grbTask.Enabled = true;
+                    grbxAvailableTechnicians.Enabled = true;
                     break;
 
                 case 2:
                     PopulateTree();
                     goto default;
                 default:
-                    grbTask.Enabled = true;
-                    grbxAvailableTechnicians.Enabled = true;
+                    grbTask.Enabled = false;
+                    grbxAvailableTechnicians.Enabled = false;
                     break;
             }
+        }
+
+        private void dtpDeparture_ValueChanged(object sender, EventArgs e)
+        {
+            dtpArival.Value = dtpArival.Value.AddHours(2);
         }
 
         #endregion
@@ -182,7 +193,9 @@ namespace PSS.Presentation_Layer
         {
             techTaskToModify.Task.Title = txtTaskTitle.Text;
             techTaskToModify.Task.Description = txtTaskDescription.Text;
-            techTaskToModify.Task.DateProcessed = dtpTaskDate.Value;
+            techTaskToModify.Task.DateProcessed = DateTime.Now;
+            techTaskToModify.TimeToArrive = dtpArival.Value;
+            techTaskToModify.TimeToDepart = dtpDeparture.Value;
             techTaskToModify.Task.Notes = rtbNotes.Text;
 
             //the technician SHOULD have been changed...
@@ -205,9 +218,8 @@ namespace PSS.Presentation_Layer
 
         private void btnCreateJob_Click(object sender, EventArgs e)
         {
-            //TODO: Add Task type
-            Task aTask = new Task(txtTaskTitle.Text, txtTaskDescription.Text, "", rtbNotes.Text, currentRequest, dtpTaskDate.Value, false); //New task created
-            TechnicianTask techTask = new TechnicianTask(aTask, currentTech, dtpTaskDate.Value, dtpTaskDate.Value.AddDays(30)); //New Tech Task //TODO: add datetodepart
+            Task aTask = new Task(txtTaskTitle.Text, txtTaskDescription.Text, txtTaskType.Text, rtbNotes.Text, currentRequest, DateTime.Now, false); //New task created
+            TechnicianTask techTask = new TechnicianTask(aTask, currentTech, dtpDeparture.Value, dtpArival.Value); //New Tech Task
 
             AllUnfinishedTasks.Add(aTask);      //reduce database calls
             AllTechnicianTasks.Add(techTask);   //reduce database calls
@@ -236,32 +248,31 @@ namespace PSS.Presentation_Layer
 
         #endregion
 
-        private void ServiceDepartment_Load(object sender, EventArgs e)
-        {
-            //TODO: move populates here? Keep in constructor?
-        }
-
         private void cbxSchedueledTask_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // TODO: Check if working
             techTaskToModify = (TechnicianTask)cbxSchedueledTask.SelectedItem;
 
             lblTaskServiceRequest.Text = techTaskToModify.Task.ServiceRequest.ToString();
+
             PopulateTask();
         }
         
         private void btnSubmitFeedback_Click(object sender, EventArgs e)
         {
-            techTaskToModify.Task.IsFinished = true;
+            if (cbxReportStatus.SelectedIndex == 0)
+            {
+                techTaskToModify.Task.IsFinished = true;
+                cbxSchedueledTask.Items.Remove(techTaskToModify);
+            }
             TechnicianTaskFeedback technicianTaskFeedback = new TechnicianTaskFeedback();
             technicianTaskFeedback.SetNextID();
             technicianTaskFeedback.TimeArived = dtpActualTimeArrived.Value;
-            technicianTaskFeedback.TimeDeparture = dtpTimeDep.Value;
+            technicianTaskFeedback.TimeDeparture = dtpActualTimeDep.Value;
             technicianTaskFeedback.Notes = rtbFeedbackNotes.Text;
-            technicianTaskFeedback.Status = cmbStatus.SelectedItem.ToString();
-            technicianTaskFeedback.TechnicianTask = techTaskToModify;
-            techTaskToModify.Save();
-            MessageBox.Show("Task Feedback succesfully submitted");
+            technicianTaskFeedback.Status = cbxReportStatus.SelectedItem.ToString();
+            technicianTaskFeedback.TechnicianTask = techTaskToModify; 
+
+            MessageBox.Show("Task Feedback succesfully submitted", "Success!");
         }
     }
 }

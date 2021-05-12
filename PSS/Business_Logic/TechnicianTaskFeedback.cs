@@ -54,6 +54,12 @@ namespace PSS.Business_Logic
             this.TechnicianTask = DataEngine.GetDataObject<TechnicianTask>(row.Field<int>("TechnicianTaskID"));
         }
 
+        public override void Save()
+        {
+            TechnicianTask.Save();
+            base.Save();
+        }
+
         protected override string Update()
         {
             StringBuilder sql = new StringBuilder();

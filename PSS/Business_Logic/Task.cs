@@ -112,6 +112,14 @@ namespace PSS.Business_Logic
             return BaseList<Task>.GrabFill(sql);
         }
 
+        public static BaseList<Task> GetAllDanglingTasks()
+        {
+            string sql = "SELECT DISTINCT t.* FROM " + tableName + " t " +
+                         "LEFT JOIN techniciantask tt ON t.TaskID = tt.TaskID " +
+                         "WHERE tt.TaskID IS NULL;";
+            return BaseList<Task>.GrabFill(sql);
+        }
+
         #endregion
 
         public override string ToString()

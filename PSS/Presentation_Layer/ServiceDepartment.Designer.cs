@@ -60,15 +60,15 @@ namespace PSS.Presentation_Layer
             this.rtbFeedbackNotes = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lblTechArrived = new System.Windows.Forms.Label();
-            this.dtpTimeDep = new System.Windows.Forms.DateTimePicker();
+            this.dtpActualTimeDep = new System.Windows.Forms.DateTimePicker();
             this.dtpActualTimeArrived = new System.Windows.Forms.DateTimePicker();
             this.lblTechDep = new System.Windows.Forms.Label();
-            this.cmbStatus = new System.Windows.Forms.ComboBox();
+            this.cbxReportStatus = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtTaskTitle = new System.Windows.Forms.TextBox();
             this.lblTaskTitle = new System.Windows.Forms.Label();
-            this.dtpTaskDate = new System.Windows.Forms.DateTimePicker();
-            this.lblTaskTime = new System.Windows.Forms.Label();
+            this.dtpDeparture = new System.Windows.Forms.DateTimePicker();
+            this.lblDepart = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
             this.txtTaskDescription = new System.Windows.Forms.TextBox();
             this.rtbNotes = new System.Windows.Forms.RichTextBox();
@@ -79,6 +79,10 @@ namespace PSS.Presentation_Layer
             this.lsbxAvailableTechnicians = new System.Windows.Forms.ListBox();
             this.grbxAvailableTechnicians = new System.Windows.Forms.GroupBox();
             this.grbTask = new System.Windows.Forms.GroupBox();
+            this.dtpArival = new System.Windows.Forms.DateTimePicker();
+            this.lblArival = new System.Windows.Forms.Label();
+            this.txtTaskType = new System.Windows.Forms.TextBox();
+            this.lblTaskType = new System.Windows.Forms.Label();
             this.tcTask.SuspendLayout();
             this.tpCreate.SuspendLayout();
             this.grbCreate.SuspendLayout();
@@ -326,10 +330,10 @@ namespace PSS.Presentation_Layer
             this.tabPage1.Controls.Add(this.rtbFeedbackNotes);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.lblTechArrived);
-            this.tabPage1.Controls.Add(this.dtpTimeDep);
+            this.tabPage1.Controls.Add(this.dtpActualTimeDep);
             this.tabPage1.Controls.Add(this.dtpActualTimeArrived);
             this.tabPage1.Controls.Add(this.lblTechDep);
-            this.tabPage1.Controls.Add(this.cmbStatus);
+            this.tabPage1.Controls.Add(this.cbxReportStatus);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -353,7 +357,7 @@ namespace PSS.Presentation_Layer
             this.cbxSchedueledTask.FormattingEnabled = true;
             this.cbxSchedueledTask.Location = new System.Drawing.Point(161, 19);
             this.cbxSchedueledTask.Name = "cbxSchedueledTask";
-            this.cbxSchedueledTask.Size = new System.Drawing.Size(195, 21);
+            this.cbxSchedueledTask.Size = new System.Drawing.Size(325, 21);
             this.cbxSchedueledTask.TabIndex = 49;
             this.cbxSchedueledTask.SelectedIndexChanged += new System.EventHandler(this.cbxSchedueledTask_SelectedIndexChanged);
             // 
@@ -412,14 +416,14 @@ namespace PSS.Presentation_Layer
             this.lblTechArrived.TabIndex = 42;
             this.lblTechArrived.Text = "Time Arrived";
             // 
-            // dtpTimeDep
+            // dtpActualTimeDep
             // 
-            this.dtpTimeDep.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpTimeDep.Location = new System.Drawing.Point(161, 109);
-            this.dtpTimeDep.Margin = new System.Windows.Forms.Padding(1);
-            this.dtpTimeDep.Name = "dtpTimeDep";
-            this.dtpTimeDep.Size = new System.Drawing.Size(102, 20);
-            this.dtpTimeDep.TabIndex = 45;
+            this.dtpActualTimeDep.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpActualTimeDep.Location = new System.Drawing.Point(161, 109);
+            this.dtpActualTimeDep.Margin = new System.Windows.Forms.Padding(1);
+            this.dtpActualTimeDep.Name = "dtpActualTimeDep";
+            this.dtpActualTimeDep.Size = new System.Drawing.Size(102, 20);
+            this.dtpActualTimeDep.TabIndex = 45;
             // 
             // dtpActualTimeArrived
             // 
@@ -440,17 +444,17 @@ namespace PSS.Presentation_Layer
             this.lblTechDep.TabIndex = 44;
             this.lblTechDep.Text = "Time Departed";
             // 
-            // cmbStatus
+            // cbxReportStatus
             // 
-            this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Items.AddRange(new object[] {
+            this.cbxReportStatus.FormattingEnabled = true;
+            this.cbxReportStatus.Items.AddRange(new object[] {
             "Completed",
             "In progress",
             "Could not complete"});
-            this.cmbStatus.Location = new System.Drawing.Point(161, 196);
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(100, 21);
-            this.cmbStatus.TabIndex = 6;
+            this.cbxReportStatus.Location = new System.Drawing.Point(161, 196);
+            this.cbxReportStatus.Name = "cbxReportStatus";
+            this.cbxReportStatus.Size = new System.Drawing.Size(159, 21);
+            this.cbxReportStatus.TabIndex = 6;
             // 
             // label2
             // 
@@ -466,7 +470,7 @@ namespace PSS.Presentation_Layer
             this.txtTaskTitle.Location = new System.Drawing.Point(10, 38);
             this.txtTaskTitle.Margin = new System.Windows.Forms.Padding(2);
             this.txtTaskTitle.Name = "txtTaskTitle";
-            this.txtTaskTitle.Size = new System.Drawing.Size(221, 20);
+            this.txtTaskTitle.Size = new System.Drawing.Size(220, 20);
             this.txtTaskTitle.TabIndex = 29;
             // 
             // lblTaskTitle
@@ -479,29 +483,30 @@ namespace PSS.Presentation_Layer
             this.lblTaskTitle.TabIndex = 28;
             this.lblTaskTitle.Text = "Task Title:";
             // 
-            // dtpTaskDate
+            // dtpDeparture
             // 
-            this.dtpTaskDate.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpTaskDate.Location = new System.Drawing.Point(110, 91);
-            this.dtpTaskDate.Margin = new System.Windows.Forms.Padding(2);
-            this.dtpTaskDate.Name = "dtpTaskDate";
-            this.dtpTaskDate.Size = new System.Drawing.Size(121, 20);
-            this.dtpTaskDate.TabIndex = 27;
+            this.dtpDeparture.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpDeparture.Location = new System.Drawing.Point(109, 119);
+            this.dtpDeparture.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpDeparture.Name = "dtpDeparture";
+            this.dtpDeparture.Size = new System.Drawing.Size(121, 20);
+            this.dtpDeparture.TabIndex = 27;
+            this.dtpDeparture.ValueChanged += new System.EventHandler(this.dtpDeparture_ValueChanged);
             // 
-            // lblTaskTime
+            // lblDepart
             // 
-            this.lblTaskTime.AutoSize = true;
-            this.lblTaskTime.Location = new System.Drawing.Point(8, 94);
-            this.lblTaskTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTaskTime.Name = "lblTaskTime";
-            this.lblTaskTime.Size = new System.Drawing.Size(98, 13);
-            this.lblTaskTime.TabIndex = 26;
-            this.lblTaskTime.Text = "Job Date and TIme";
+            this.lblDepart.AutoSize = true;
+            this.lblDepart.Location = new System.Drawing.Point(6, 121);
+            this.lblDepart.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDepart.Name = "lblDepart";
+            this.lblDepart.Size = new System.Drawing.Size(102, 13);
+            this.lblDepart.TabIndex = 26;
+            this.lblDepart.Text = "Expected Departure";
             // 
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(7, 66);
+            this.lblDescription.Location = new System.Drawing.Point(6, 92);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(63, 13);
             this.lblDescription.TabIndex = 12;
@@ -509,23 +514,23 @@ namespace PSS.Presentation_Layer
             // 
             // txtTaskDescription
             // 
-            this.txtTaskDescription.Location = new System.Drawing.Point(73, 63);
+            this.txtTaskDescription.Location = new System.Drawing.Point(72, 89);
             this.txtTaskDescription.Name = "txtTaskDescription";
             this.txtTaskDescription.Size = new System.Drawing.Size(158, 20);
             this.txtTaskDescription.TabIndex = 11;
             // 
             // rtbNotes
             // 
-            this.rtbNotes.Location = new System.Drawing.Point(9, 137);
+            this.rtbNotes.Location = new System.Drawing.Point(9, 187);
             this.rtbNotes.Name = "rtbNotes";
-            this.rtbNotes.Size = new System.Drawing.Size(221, 86);
+            this.rtbNotes.Size = new System.Drawing.Size(221, 52);
             this.rtbNotes.TabIndex = 10;
             this.rtbNotes.Text = "";
             // 
             // lblNotes
             // 
             this.lblNotes.AutoSize = true;
-            this.lblNotes.Location = new System.Drawing.Point(7, 121);
+            this.lblNotes.Location = new System.Drawing.Point(8, 171);
             this.lblNotes.Name = "lblNotes";
             this.lblNotes.Size = new System.Drawing.Size(35, 13);
             this.lblNotes.TabIndex = 9;
@@ -544,7 +549,7 @@ namespace PSS.Presentation_Layer
             // 
             this.rtbTechDetails.Location = new System.Drawing.Point(9, 137);
             this.rtbTechDetails.Name = "rtbTechDetails";
-            this.rtbTechDetails.Size = new System.Drawing.Size(309, 86);
+            this.rtbTechDetails.Size = new System.Drawing.Size(309, 100);
             this.rtbTechDetails.TabIndex = 5;
             this.rtbTechDetails.Text = "";
             // 
@@ -574,40 +579,76 @@ namespace PSS.Presentation_Layer
             this.grbxAvailableTechnicians.Controls.Add(this.rtbTechDetails);
             this.grbxAvailableTechnicians.Location = new System.Drawing.Point(12, 359);
             this.grbxAvailableTechnicians.Name = "grbxAvailableTechnicians";
-            this.grbxAvailableTechnicians.Size = new System.Drawing.Size(324, 232);
+            this.grbxAvailableTechnicians.Size = new System.Drawing.Size(324, 245);
             this.grbxAvailableTechnicians.TabIndex = 31;
             this.grbxAvailableTechnicians.TabStop = false;
             this.grbxAvailableTechnicians.Text = "AvailableTechnicians";
             // 
             // grbTask
             // 
+            this.grbTask.Controls.Add(this.dtpArival);
+            this.grbTask.Controls.Add(this.lblArival);
+            this.grbTask.Controls.Add(this.txtTaskType);
+            this.grbTask.Controls.Add(this.lblTaskType);
+            this.grbTask.Controls.Add(this.dtpDeparture);
             this.grbTask.Controls.Add(this.lblTaskTitle);
             this.grbTask.Controls.Add(this.txtTaskTitle);
             this.grbTask.Controls.Add(this.lblDescription);
             this.grbTask.Controls.Add(this.rtbNotes);
-            this.grbTask.Controls.Add(this.dtpTaskDate);
             this.grbTask.Controls.Add(this.lblNotes);
             this.grbTask.Controls.Add(this.txtTaskDescription);
-            this.grbTask.Controls.Add(this.lblTaskTime);
+            this.grbTask.Controls.Add(this.lblDepart);
             this.grbTask.Location = new System.Drawing.Point(342, 359);
             this.grbTask.Name = "grbTask";
-            this.grbTask.Size = new System.Drawing.Size(240, 232);
+            this.grbTask.Size = new System.Drawing.Size(240, 245);
             this.grbTask.TabIndex = 32;
             this.grbTask.TabStop = false;
             this.grbTask.Text = "Task";
+            // 
+            // dtpArival
+            // 
+            this.dtpArival.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpArival.Location = new System.Drawing.Point(109, 144);
+            this.dtpArival.Name = "dtpArival";
+            this.dtpArival.Size = new System.Drawing.Size(121, 20);
+            this.dtpArival.TabIndex = 33;
+            // 
+            // lblArival
+            // 
+            this.lblArival.AutoSize = true;
+            this.lblArival.Location = new System.Drawing.Point(6, 150);
+            this.lblArival.Name = "lblArival";
+            this.lblArival.Size = new System.Drawing.Size(81, 13);
+            this.lblArival.TabIndex = 32;
+            this.lblArival.Text = "Expected Arival";
+            // 
+            // txtTaskType
+            // 
+            this.txtTaskType.Location = new System.Drawing.Point(72, 63);
+            this.txtTaskType.Name = "txtTaskType";
+            this.txtTaskType.Size = new System.Drawing.Size(158, 20);
+            this.txtTaskType.TabIndex = 31;
+            // 
+            // lblTaskType
+            // 
+            this.lblTaskType.AutoSize = true;
+            this.lblTaskType.Location = new System.Drawing.Point(6, 66);
+            this.lblTaskType.Name = "lblTaskType";
+            this.lblTaskType.Size = new System.Drawing.Size(34, 13);
+            this.lblTaskType.TabIndex = 30;
+            this.lblTaskType.Text = "Type:";
             // 
             // ServiceDepartment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(594, 599);
+            this.ClientSize = new System.Drawing.Size(586, 608);
             this.Controls.Add(this.grbTask);
             this.Controls.Add(this.grbxAvailableTechnicians);
             this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.tcTask);
             this.Name = "ServiceDepartment";
             this.Text = "ServiceDepartment";
-            this.Load += new System.EventHandler(this.ServiceDepartment_Load);
             this.tcTask.ResumeLayout(false);
             this.tpCreate.ResumeLayout(false);
             this.tpCreate.PerformLayout();
@@ -645,8 +686,8 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.TextBox txtTaskDescription;
         private System.Windows.Forms.RichTextBox rtbNotes;
         private System.Windows.Forms.Label lblNotes;
-        private System.Windows.Forms.DateTimePicker dtpTaskDate;
-        private System.Windows.Forms.Label lblTaskTime;
+        private System.Windows.Forms.DateTimePicker dtpDeparture;
+        private System.Windows.Forms.Label lblDepart;
         private System.Windows.Forms.GroupBox gpbxAssignedTechnician;
         private System.Windows.Forms.Button btnReAssignTech;
         private System.Windows.Forms.TextBox txtCurrentTech;
@@ -667,12 +708,12 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.TabPage tpTrack;
         private System.Windows.Forms.TreeView tvTrack;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.ComboBox cmbStatus;
+        private System.Windows.Forms.ComboBox cbxReportStatus;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox rtbFeedbackNotes;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblTechArrived;
-        private System.Windows.Forms.DateTimePicker dtpTimeDep;
+        private System.Windows.Forms.DateTimePicker dtpActualTimeDep;
         private System.Windows.Forms.DateTimePicker dtpActualTimeArrived;
         private System.Windows.Forms.Label lblTechDep;
         private System.Windows.Forms.Button btnSubmitFeedback;
@@ -680,5 +721,9 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cbxSchedueledTask;
+        private System.Windows.Forms.TextBox txtTaskType;
+        private System.Windows.Forms.Label lblTaskType;
+        private System.Windows.Forms.Label lblArival;
+        private System.Windows.Forms.DateTimePicker dtpArival;
     }
 }

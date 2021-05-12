@@ -19,6 +19,8 @@ namespace PSS.Business_Logic
 
         public DateTime TimeToDepart { get; set; }
 
+        public string DisplayMember => Technician.Person.FullName + " ->> " + Task.Title;
+
         private static readonly string tableName = "TechnicianTask";
         private static readonly string idColumn = "TechnicianTaskID";
 
