@@ -8,6 +8,7 @@ namespace PSS.Presentation_Layer
 {
     public partial class ContractMaintenance : Form
     {
+        //TODO: find/make space for contract info
         public ContractMaintenance()
         {
             InitializeComponent();
@@ -16,21 +17,19 @@ namespace PSS.Presentation_Layer
 
         private void LoadViews()
         {
+            lsbxCurrentService.DisplayMember = "DisplayMember";
+
             lsbxContracts.DisplayMember = "DisplayMember";
             lsbxContracts.DataSource = AllContracts;
+
+            cbxAllContracts.DisplayMember = "DisplayMember";
+            cbxAllContracts.DataSource = AllContracts;
 
             cbxContractService.DisplayMember = "DisplayMember";
             cbxContractService.DataSource = AllServices;
 
             cbxServiceChange.DisplayMember = "DisplayMember";
             cbxServiceChange.DataSource = AllServices;
-        }
-
-        private void LoadCurrentService()
-        {
-            lsbxCurrentService.DisplayMember = "DisplayMember";
-            lsbxCurrentService.Items.Clear();
-            lsbxCurrentService.Items.AddRange(currentContract.GetServices().ToArray());  //DataBind?
         }
 
         #region Data
@@ -62,7 +61,11 @@ namespace PSS.Presentation_Layer
         private void cbxAllContracts_SelectedIndexChanged(object sender, EventArgs e)
         {
             grbxContractInfo.Enabled = true;
-            LoadCurrentService();
+
+            currentContract  = (Contract)cbxAllContracts.SelectedItem;
+
+            lsbxCurrentService.Items.Clear();
+            lsbxCurrentService.Items.AddRange(currentContract.GetServices().ToArray());
         }
 
         #endregion
@@ -95,7 +98,7 @@ namespace PSS.Presentation_Layer
             Service service = (Service)cbxContractService.SelectedItem;
             int quantity = (int)Math.Round(nudSpecificQuanity.Value);
 
-            currentContract.AddService(service, rtbAgreement.Text, quantity);
+            currentContract?.AddService(service, rtbAgreement.Text, quantity);
         }
 
         private void btnStopContract_Click(object sender, EventArgs e)
@@ -113,7 +116,9 @@ namespace PSS.Presentation_Layer
 
         private void btnRemoveCurrentService_Click(object sender, EventArgs e)
         {
-            //TODO: Reconsider what happens here
+            //TODO: Remove the comment for master
+            lsbxCurrentService.Items.Remove(lsbxCurrentService.SelectedItem);
+            //there is no way to remove things permently at the momment, just look like this
         }
 
         #region Services
@@ -180,7 +185,8 @@ namespace PSS.Presentation_Layer
 
         private void CalculateContractPerformance()
         {
-            //rtbPerformance.Text = 
+            //TODO: Calculate Performance
+            rtbPerformance.Text = "Performance Number: " + Contract.GetContractNum((Contract)lsbxContracts.SelectedItem);
         }
 
         #endregion

@@ -73,7 +73,6 @@ namespace PSS.Presentation_Layer
             this.dtpContractEnd = new System.Windows.Forms.DateTimePicker();
             this.dtpContractStart = new System.Windows.Forms.DateTimePicker();
             this.lblEndDate = new System.Windows.Forms.Label();
-            this.cbxAllContracts = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tpService = new System.Windows.Forms.TabPage();
             this.tpPerformance = new System.Windows.Forms.TabPage();
@@ -84,6 +83,7 @@ namespace PSS.Presentation_Layer
             this.rtbContractDetails = new System.Windows.Forms.RichTextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
+            this.cbxAllContracts = new System.Windows.Forms.ComboBox();
             this.gbxCreateModifyServices.SuspendLayout();
             this.tcContractMaintance.SuspendLayout();
             this.tpContracts.SuspendLayout();
@@ -110,7 +110,7 @@ namespace PSS.Presentation_Layer
             this.gbxCreateModifyServices.Controls.Add(this.txtServiceType);
             this.gbxCreateModifyServices.Controls.Add(this.cbxServiceChange);
             this.gbxCreateModifyServices.Controls.Add(this.label6);
-            this.gbxCreateModifyServices.Location = new System.Drawing.Point(16, 10);
+            this.gbxCreateModifyServices.Location = new System.Drawing.Point(136, 85);
             this.gbxCreateModifyServices.Margin = new System.Windows.Forms.Padding(1);
             this.gbxCreateModifyServices.Name = "gbxCreateModifyServices";
             this.gbxCreateModifyServices.Padding = new System.Windows.Forms.Padding(1);
@@ -255,20 +255,20 @@ namespace PSS.Presentation_Layer
             this.tcContractMaintance.Location = new System.Drawing.Point(12, 41);
             this.tcContractMaintance.Name = "tcContractMaintance";
             this.tcContractMaintance.SelectedIndex = 0;
-            this.tcContractMaintance.Size = new System.Drawing.Size(513, 373);
+            this.tcContractMaintance.Size = new System.Drawing.Size(513, 372);
             this.tcContractMaintance.TabIndex = 48;
             // 
             // tpContracts
             // 
+            this.tpContracts.Controls.Add(this.cbxAllContracts);
             this.tpContracts.Controls.Add(this.btnNewContract);
             this.tpContracts.Controls.Add(this.btnStopContract);
             this.tpContracts.Controls.Add(this.grbxContractInfo);
-            this.tpContracts.Controls.Add(this.cbxAllContracts);
             this.tpContracts.Controls.Add(this.label1);
             this.tpContracts.Location = new System.Drawing.Point(4, 22);
             this.tpContracts.Name = "tpContracts";
             this.tpContracts.Padding = new System.Windows.Forms.Padding(2);
-            this.tpContracts.Size = new System.Drawing.Size(505, 347);
+            this.tpContracts.Size = new System.Drawing.Size(505, 346);
             this.tpContracts.TabIndex = 0;
             this.tpContracts.Text = "Contracts";
             this.tpContracts.UseVisualStyleBackColor = true;
@@ -608,21 +608,6 @@ namespace PSS.Presentation_Layer
             this.lblEndDate.TabIndex = 40;
             this.lblEndDate.Text = "Offer End Date";
             // 
-            // cbxAllContracts
-            // 
-            this.cbxAllContracts.FormattingEnabled = true;
-            this.cbxAllContracts.Items.AddRange(new object[] {
-            "Gauteng",
-            "Free State",
-            "North West"});
-            this.cbxAllContracts.Location = new System.Drawing.Point(85, 24);
-            this.cbxAllContracts.Margin = new System.Windows.Forms.Padding(1);
-            this.cbxAllContracts.Name = "cbxAllContracts";
-            this.cbxAllContracts.Size = new System.Drawing.Size(118, 21);
-            this.cbxAllContracts.TabIndex = 26;
-            this.cbxAllContracts.Text = "Choose...";
-            this.cbxAllContracts.SelectedIndexChanged += new System.EventHandler(this.cbxAllContracts_SelectedIndexChanged);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -639,7 +624,7 @@ namespace PSS.Presentation_Layer
             this.tpService.Location = new System.Drawing.Point(4, 22);
             this.tpService.Name = "tpService";
             this.tpService.Padding = new System.Windows.Forms.Padding(2);
-            this.tpService.Size = new System.Drawing.Size(505, 347);
+            this.tpService.Size = new System.Drawing.Size(505, 346);
             this.tpService.TabIndex = 1;
             this.tpService.Text = "Services";
             this.tpService.UseVisualStyleBackColor = true;
@@ -654,7 +639,7 @@ namespace PSS.Presentation_Layer
             this.tpPerformance.Controls.Add(this.label16);
             this.tpPerformance.Location = new System.Drawing.Point(4, 22);
             this.tpPerformance.Name = "tpPerformance";
-            this.tpPerformance.Size = new System.Drawing.Size(505, 347);
+            this.tpPerformance.Size = new System.Drawing.Size(505, 346);
             this.tpPerformance.TabIndex = 2;
             this.tpPerformance.Text = "Performance";
             this.tpPerformance.UseVisualStyleBackColor = true;
@@ -722,11 +707,20 @@ namespace PSS.Presentation_Layer
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // cbxAllContracts
+            // 
+            this.cbxAllContracts.FormattingEnabled = true;
+            this.cbxAllContracts.Location = new System.Drawing.Point(87, 24);
+            this.cbxAllContracts.Name = "cbxAllContracts";
+            this.cbxAllContracts.Size = new System.Drawing.Size(121, 21);
+            this.cbxAllContracts.TabIndex = 57;
+            this.cbxAllContracts.SelectedIndexChanged += new System.EventHandler(this.cbxAllContracts_SelectedIndexChanged);
+            // 
             // ContractMaintenance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 419);
+            this.ClientSize = new System.Drawing.Size(528, 414);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.tcContractMaintance);
             this.Name = "ContractMaintenance";
@@ -768,7 +762,6 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Label lblServiceLevel;
         private System.Windows.Forms.TextBox txtContractName;
         private System.Windows.Forms.Label lblCotractName;
-        private System.Windows.Forms.ComboBox cbxAllContracts;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtpContractStart;
         private System.Windows.Forms.Label lblStartDate;
@@ -807,5 +800,6 @@ namespace PSS.Presentation_Layer
         private ArrowlessNumericUpDown nudMonthlyFee;
         private System.Windows.Forms.ListBox lsbxContracts;
         private System.Windows.Forms.ListBox lsbxCurrentService;
+        private System.Windows.Forms.ComboBox cbxAllContracts;
     }
 }
