@@ -29,13 +29,16 @@ namespace PSS.Presentation_Layer
             Service[] services = contract?.GetServices().ToArray();
 
             lsbxServices.DisplayMember = "DisplayMember";
-            lsbxServices.Items.AddRange(services);
+            if (!(services is null))
+            {
+                lsbxServices.Items.AddRange(services);
+            }
 
             lsbxPreviousCalls.DisplayMember = "DisplayMember";
             lsbxPreviousCalls.Items.AddRange(Call.GetPreviousCallsFrom(client).ToArray());
         }
 
-        //TODO: Consider removal
+        //TODO: This is in the requirements but we never access it
         public CallCentre(Client client, ServiceRequest existingRequest) : this(client)
         {
             currentRequest = existingRequest; //assumes existing requesst refers to an object in client
