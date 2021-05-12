@@ -45,6 +45,12 @@ namespace PSS.Business_Logic
             this.TableRecordID = row.Field<string>("TableRecordID");
         }
 
+        public override void Save()
+        {
+            CallInstanceID.Save();
+            base.Save();
+        }
+
         protected override string Update()
         {
             StringBuilder sql = new StringBuilder();
@@ -92,7 +98,7 @@ namespace PSS.Business_Logic
         {
             int hashCode = 1886432251;
             hashCode = hashCode * -1521134295 + CallChangeAssociationID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<Call>.Default.GetHashCode(CallInstanceID);
+            hashCode = hashCode * -1521134295 + CallInstanceID.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(fTableName);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TableRecordID);
             return hashCode;

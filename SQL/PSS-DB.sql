@@ -448,8 +448,8 @@ INSERT INTO IndividualClient (IndividualClientID, `Type`, `Status`, Notes, Addre
 		  
 INSERT INTO BusinessClient (BusinessClientID, BusinessName, `Type`, `Status`, Notes, PrimaryContactPersonID, AddressID)
 	VALUES (2, 'Renner Accounting Services', 'Loyal Customer', 'Active', 'Renner Accounting Services has been a loyal customer since 2005', 17, 3),
-		   (4, 'Wielfred Marketing Agency', 'Wandering Customer', 'Active', 'The Wielfred marketing agency has abruptly stopped and changed printer contracts in the past', 13, 4),
-		   (6, 'Personal Growth Consultations', 'New Customer', 'Active', 'Personal Growth Consultations is a small 1 man business who approached PSS in 2021', 7, 5);
+		    (4, 'Wielfred Marketing Agency', 'Wandering Customer', 'Active', 'The Wielfred marketing agency has abruptly stopped and changed printer contracts in the past', 13, 4),
+		    (6, 'Personal Growth Consultations', 'New Customer', 'Active', 'Personal Growth Consultations is a small 1 man business who approached PSS in 2021', 7, 5);
 		   #(8, 'Garsfontein High School', 'New Customer', 'Active', 'Garsfontein High School contacted PSS in 2021 and were reffered to by Personal Growth Consultations', 7) #Get a person that makes sense as the contact person
 
 INSERT INTO	BusinessClientPerson (BusinessClientID, PersonID, `Role`)
@@ -522,12 +522,18 @@ INSERT INTO FollowUpReport (FollowUpReportID, FollowUpTitle, FollowUpType, Follo
 
 INSERT INTO BusinessClientFollowUp (BusinessClientID, FollowUpReportID)
 	VALUES (6, 1),
-		   (2, 2),
-		   (2, 3);
+			 (2, 2),
+		    (2, 3);
 		   #(8, 4);
 
-INSERT INTO CallInstance (CallInstanceID, StartTime, EndTime, `Description`)
-	VALUES (1, '2021/04/13 10:00:00', '2021/04/13 10:12:23', 'Duration 12:23 minutes'),
-		   (2, '2021/04/18 11:00:00', '2021/04/18 11:17:04', 'Duration 17:04 minutes'),
-		   (3, '2021/04/25 12:00:00', '2021/04/25 12:05:12', 'Duration 05:12 minutes'),
-		   (4, '2021/04/18 14:52:00', '2021/04/18 15:03:05', 'Duration 11:05 minutes');
+INSERT INTO CallInstance (CallInstanceID, StartTime, EndTime, Description)
+	VALUES (1, '2021/04/13 10:00:00', '2021/04/13 10:12:23', 'Got a new customer!'),
+		    (2, '2021/04/18 11:00:00', '2021/04/18 11:17:04', 'Handled clients issue'),
+		    (3, '2021/04/25 12:00:00', '2021/04/25 12:15:12', 'Conviced customer PSS is the best solution for them'),
+		    (4, '2021/04/18 14:52:00', '2021/04/18 15:23:05', 'After much convincing, client is satisfied');
+		   
+INSERT INTO callchangeassociation (CallChangeAssociationID, CallInstanceID, TableName, TableRecordID)
+	VALUES (1, 1, "IndividualClient", "1"),
+			 (2, 2, "BusinessClient", "2"),
+			 (3, 3, "BusinessClient", "4"),
+			 (4, 4, "BusinessClient", "4");

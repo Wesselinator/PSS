@@ -99,8 +99,10 @@ namespace PSS.Presentation_Layer
             endTime = DateTime.Now;
 
             EnterDescription();
-            Call calll = new Call(startTime, endTime, description);
-            calll.Save();
+
+            Call call = new Call(startTime, endTime, description);
+            CallChangeAssociation association = new CallChangeAssociation(call, SelectedClient.TableName, SelectedClient.ClientID.ToString());
+            association.Save();
 
 
             Application.Exit();

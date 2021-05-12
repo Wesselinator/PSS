@@ -14,6 +14,8 @@ namespace PSS.Business_Logic
         public DateTime EndTime { get ; set ; }
         public string Description { get ; set ; }
 
+        public string DisplayMember => string.Format("StartTime: {0}  <->  EndTime: {1}", StartTime, EndTime);
+
         private static readonly string tableName = "CallInstance";
         private static readonly string idColumn = "CallInstanceID";
 
@@ -75,6 +77,17 @@ namespace PSS.Business_Logic
 
 
             return sql.ToString();
+        }
+
+
+        public static BaseList<Call> GetPreviousCallsFrom(Client client)
+        {
+            string sql = "SELECT calli.* FROM callinstance calli " +
+                         "INNER JOIN callchangeassociation cca ON cca.CallInstanceID = calli.CallInstanceID " +
+                         "WHERE TableName =  '" + client.TableName + "' " +
+                         "AND cca.TableRecordID = " + client.ClientID + ";";
+
+            return BaseList<Call>.GrabFill(sql);
         }
 
         #endregion 
