@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 
-//TODO: If Person gets updated, ID won't also you shouldn't try and change it.
+//TODO: If Person gets updated, ID won't. also you shouldn't try and change it.
 namespace PSS.Business_Logic
 {
     class IndividualClient : Client

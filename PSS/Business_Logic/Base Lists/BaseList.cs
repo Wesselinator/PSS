@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Data;
 using PSS.Data_Access;
 
@@ -43,7 +40,7 @@ namespace PSS.Business_Logic
         }
 
         public static BaseList<T> GrabFill(DataTable dataTable) //Quality of life
-        {
+        { 
             BaseList<T> ret = new BaseList<T>();
             ret.FillWith(dataTable);
             return ret;

@@ -178,7 +178,7 @@ namespace PSS.Presentation_Layer
 
         //private void cbxServiceLevel_SelectedIndexChanged(object sender, EventArgs e)
         //{
-        //    // TODO:  Do we need to expand on these details?, maybe we can use enums here
+        //    // TODO: move this somewhere?
         //    switch (cbxServiceLevel.SelectedIndex)
         //    {
         //        case 0: rtbServiceLevelDetails.Text = "Service level details:\n"

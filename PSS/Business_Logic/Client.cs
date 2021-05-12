@@ -80,13 +80,6 @@ namespace PSS.Business_Logic
 
         protected abstract void FillLists(int id);
 
-
-        //TODO: test to see if below hits becuase base.
-        //public override void Save()
-        //{
-        //    throw new NotImplementedException(); //This is Correct. It should never hit this.
-        //}
-
         protected string UpdatePartial(StringBuilder sql)
         {
             sql.Append("Type = '" + Type + "', ");
