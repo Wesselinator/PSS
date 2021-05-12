@@ -36,16 +36,20 @@ namespace PSS.Presentation_Layer
             this.txtProblemTitle = new System.Windows.Forms.TextBox();
             this.btnUpdateSR = new System.Windows.Forms.Button();
             this.rtbProblem = new System.Windows.Forms.RichTextBox();
-            this.grbxContractInfo = new System.Windows.Forms.GroupBox();
-            this.rtbContracts = new System.Windows.Forms.RichTextBox();
             this.grbxTransfer = new System.Windows.Forms.GroupBox();
             this.btnClientSatisfaction = new System.Windows.Forms.Button();
             this.btnServiceDept = new System.Windows.Forms.Button();
             this.btnClientMaintence = new System.Windows.Forms.Button();
             this.ciwMain = new PSS.Presentation_Layer.ClientInfoWidgit();
+            this.iwCallContract = new PSS.Presentation_Layer.ContractInfoWidget();
+            this.lsbxServices = new System.Windows.Forms.ListBox();
+            this.rtbServiceDetails = new System.Windows.Forms.RichTextBox();
+            this.lsbxPreviousCalls = new System.Windows.Forms.ListBox();
+            this.grbxPreviousCalls = new System.Windows.Forms.GroupBox();
+            this.rtbCallDescription = new System.Windows.Forms.RichTextBox();
             this.grbxProblem.SuspendLayout();
-            this.grbxContractInfo.SuspendLayout();
             this.grbxTransfer.SuspendLayout();
+            this.grbxPreviousCalls.SuspendLayout();
             this.SuspendLayout();
             // 
             // grbxProblem
@@ -55,9 +59,9 @@ namespace PSS.Presentation_Layer
             this.grbxProblem.Controls.Add(this.txtProblemTitle);
             this.grbxProblem.Controls.Add(this.btnUpdateSR);
             this.grbxProblem.Controls.Add(this.rtbProblem);
-            this.grbxProblem.Location = new System.Drawing.Point(18, 183);
+            this.grbxProblem.Location = new System.Drawing.Point(18, 12);
             this.grbxProblem.Name = "grbxProblem";
-            this.grbxProblem.Size = new System.Drawing.Size(770, 240);
+            this.grbxProblem.Size = new System.Drawing.Size(731, 240);
             this.grbxProblem.TabIndex = 1;
             this.grbxProblem.TabStop = false;
             this.grbxProblem.Text = "Problem";
@@ -73,7 +77,7 @@ namespace PSS.Presentation_Layer
             "Servers Hardware",
             "Server Software",
             "Cellphone"});
-            this.cbxProblemType.Location = new System.Drawing.Point(624, 19);
+            this.cbxProblemType.Location = new System.Drawing.Point(588, 18);
             this.cbxProblemType.Name = "cbxProblemType";
             this.cbxProblemType.Size = new System.Drawing.Size(128, 21);
             this.cbxProblemType.TabIndex = 17;
@@ -93,7 +97,7 @@ namespace PSS.Presentation_Layer
             // 
             this.txtProblemTitle.Location = new System.Drawing.Point(86, 19);
             this.txtProblemTitle.Name = "txtProblemTitle";
-            this.txtProblemTitle.Size = new System.Drawing.Size(510, 20);
+            this.txtProblemTitle.Size = new System.Drawing.Size(478, 20);
             this.txtProblemTitle.TabIndex = 3;
             this.txtProblemTitle.Text = "Problem Title";
             // 
@@ -111,43 +115,25 @@ namespace PSS.Presentation_Layer
             // 
             this.rtbProblem.Location = new System.Drawing.Point(6, 45);
             this.rtbProblem.Name = "rtbProblem";
-            this.rtbProblem.Size = new System.Drawing.Size(746, 142);
+            this.rtbProblem.Size = new System.Drawing.Size(710, 142);
             this.rtbProblem.TabIndex = 1;
             this.rtbProblem.Text = "Problem Description...";
-            // 
-            // grbxContractInfo
-            // 
-            this.grbxContractInfo.Controls.Add(this.rtbContracts);
-            this.grbxContractInfo.Location = new System.Drawing.Point(12, 12);
-            this.grbxContractInfo.Name = "grbxContractInfo";
-            this.grbxContractInfo.Size = new System.Drawing.Size(776, 165);
-            this.grbxContractInfo.TabIndex = 1;
-            this.grbxContractInfo.TabStop = false;
-            this.grbxContractInfo.Text = "Contract Information";
-            // 
-            // rtbContracts
-            // 
-            this.rtbContracts.Location = new System.Drawing.Point(6, 19);
-            this.rtbContracts.Name = "rtbContracts";
-            this.rtbContracts.Size = new System.Drawing.Size(764, 140);
-            this.rtbContracts.TabIndex = 0;
-            this.rtbContracts.Text = "";
             // 
             // grbxTransfer
             // 
             this.grbxTransfer.Controls.Add(this.btnClientSatisfaction);
             this.grbxTransfer.Controls.Add(this.btnServiceDept);
             this.grbxTransfer.Controls.Add(this.btnClientMaintence);
-            this.grbxTransfer.Location = new System.Drawing.Point(794, 228);
+            this.grbxTransfer.Location = new System.Drawing.Point(18, 267);
             this.grbxTransfer.Name = "grbxTransfer";
-            this.grbxTransfer.Size = new System.Drawing.Size(332, 195);
+            this.grbxTransfer.Size = new System.Drawing.Size(731, 72);
             this.grbxTransfer.TabIndex = 2;
             this.grbxTransfer.TabStop = false;
             this.grbxTransfer.Text = "Transfer";
             // 
             // btnClientSatisfaction
             // 
-            this.btnClientSatisfaction.Location = new System.Drawing.Point(109, 148);
+            this.btnClientSatisfaction.Location = new System.Drawing.Point(464, 19);
             this.btnClientSatisfaction.Name = "btnClientSatisfaction";
             this.btnClientSatisfaction.Size = new System.Drawing.Size(142, 31);
             this.btnClientSatisfaction.TabIndex = 5;
@@ -157,7 +143,7 @@ namespace PSS.Presentation_Layer
             // 
             // btnServiceDept
             // 
-            this.btnServiceDept.Location = new System.Drawing.Point(109, 87);
+            this.btnServiceDept.Location = new System.Drawing.Point(291, 19);
             this.btnServiceDept.Name = "btnServiceDept";
             this.btnServiceDept.Size = new System.Drawing.Size(142, 31);
             this.btnServiceDept.TabIndex = 4;
@@ -167,7 +153,7 @@ namespace PSS.Presentation_Layer
             // 
             // btnClientMaintence
             // 
-            this.btnClientMaintence.Location = new System.Drawing.Point(109, 19);
+            this.btnClientMaintence.Location = new System.Drawing.Point(110, 19);
             this.btnClientMaintence.Name = "btnClientMaintence";
             this.btnClientMaintence.Size = new System.Drawing.Size(142, 31);
             this.btnClientMaintence.TabIndex = 3;
@@ -180,26 +166,82 @@ namespace PSS.Presentation_Layer
             this.ciwMain.AutoSize = true;
             this.ciwMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ciwMain.Client = null;
-            this.ciwMain.Location = new System.Drawing.Point(794, 12);
+            this.ciwMain.Location = new System.Drawing.Point(761, 12);
             this.ciwMain.Name = "ciwMain";
-            this.ciwMain.Size = new System.Drawing.Size(332, 207);
+            this.ciwMain.Size = new System.Drawing.Size(356, 207);
             this.ciwMain.TabIndex = 3;
+            // 
+            // iwCallContract
+            // 
+            this.iwCallContract.Contract = null;
+            this.iwCallContract.Location = new System.Drawing.Point(761, 228);
+            this.iwCallContract.Name = "iwCallContract";
+            this.iwCallContract.Size = new System.Drawing.Size(356, 158);
+            this.iwCallContract.TabIndex = 4;
+            // 
+            // lsbxServices
+            // 
+            this.lsbxServices.FormattingEnabled = true;
+            this.lsbxServices.Location = new System.Drawing.Point(761, 392);
+            this.lsbxServices.Name = "lsbxServices";
+            this.lsbxServices.Size = new System.Drawing.Size(356, 82);
+            this.lsbxServices.TabIndex = 5;
+            this.lsbxServices.SelectedIndexChanged += new System.EventHandler(this.lsbxServices_SelectedIndexChanged);
+            // 
+            // rtbServiceDetails
+            // 
+            this.rtbServiceDetails.Location = new System.Drawing.Point(761, 481);
+            this.rtbServiceDetails.Name = "rtbServiceDetails";
+            this.rtbServiceDetails.Size = new System.Drawing.Size(356, 64);
+            this.rtbServiceDetails.TabIndex = 6;
+            this.rtbServiceDetails.Text = "";
+            // 
+            // lsbxPreviousCalls
+            // 
+            this.lsbxPreviousCalls.FormattingEnabled = true;
+            this.lsbxPreviousCalls.Location = new System.Drawing.Point(6, 19);
+            this.lsbxPreviousCalls.Name = "lsbxPreviousCalls";
+            this.lsbxPreviousCalls.Size = new System.Drawing.Size(378, 147);
+            this.lsbxPreviousCalls.TabIndex = 7;
+            this.lsbxPreviousCalls.SelectedIndexChanged += new System.EventHandler(this.lsbxPreviousCalls_SelectedIndexChanged);
+            // 
+            // grbxPreviousCalls
+            // 
+            this.grbxPreviousCalls.Controls.Add(this.rtbCallDescription);
+            this.grbxPreviousCalls.Controls.Add(this.lsbxPreviousCalls);
+            this.grbxPreviousCalls.Location = new System.Drawing.Point(18, 362);
+            this.grbxPreviousCalls.Name = "grbxPreviousCalls";
+            this.grbxPreviousCalls.Size = new System.Drawing.Size(731, 183);
+            this.grbxPreviousCalls.TabIndex = 8;
+            this.grbxPreviousCalls.TabStop = false;
+            this.grbxPreviousCalls.Text = "Previous Calls";
+            // 
+            // rtbCallDescription
+            // 
+            this.rtbCallDescription.Location = new System.Drawing.Point(390, 19);
+            this.rtbCallDescription.Name = "rtbCallDescription";
+            this.rtbCallDescription.Size = new System.Drawing.Size(326, 147);
+            this.rtbCallDescription.TabIndex = 9;
+            this.rtbCallDescription.Text = "";
             // 
             // CallCentre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1129, 429);
+            this.ClientSize = new System.Drawing.Size(1129, 557);
+            this.Controls.Add(this.grbxPreviousCalls);
+            this.Controls.Add(this.rtbServiceDetails);
+            this.Controls.Add(this.lsbxServices);
+            this.Controls.Add(this.iwCallContract);
             this.Controls.Add(this.ciwMain);
             this.Controls.Add(this.grbxTransfer);
-            this.Controls.Add(this.grbxContractInfo);
             this.Controls.Add(this.grbxProblem);
             this.Name = "CallCentre";
             this.Text = "Call Center";
             this.grbxProblem.ResumeLayout(false);
             this.grbxProblem.PerformLayout();
-            this.grbxContractInfo.ResumeLayout(false);
             this.grbxTransfer.ResumeLayout(false);
+            this.grbxPreviousCalls.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,8 +249,6 @@ namespace PSS.Presentation_Layer
 
         #endregion
         private System.Windows.Forms.GroupBox grbxProblem;
-        private System.Windows.Forms.GroupBox grbxContractInfo;
-        private System.Windows.Forms.RichTextBox rtbContracts;
         private System.Windows.Forms.Button btnUpdateSR;
         private System.Windows.Forms.RichTextBox rtbProblem;
         private System.Windows.Forms.GroupBox grbxTransfer;
@@ -219,5 +259,11 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.TextBox txtProblemTitle;
         private System.Windows.Forms.ComboBox cbxProblemType;
         private ClientInfoWidgit ciwMain;
+        private ContractInfoWidget iwCallContract;
+        private System.Windows.Forms.ListBox lsbxServices;
+        private System.Windows.Forms.RichTextBox rtbServiceDetails;
+        private System.Windows.Forms.ListBox lsbxPreviousCalls;
+        private System.Windows.Forms.GroupBox grbxPreviousCalls;
+        private System.Windows.Forms.RichTextBox rtbCallDescription;
     }
 }

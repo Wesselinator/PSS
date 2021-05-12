@@ -18,12 +18,21 @@ namespace PSS.Presentation_Layer
             currentClient = client;
             ciwMain.Client = client;
 
-            List<string> lines = new List<string>();
-            foreach (Contract contract in client.GetContracts())
-            {
-                lines.Add(contract.ToString());
-            }
-            rtbContracts.Lines = lines.ToArray();
+            //List<string> lines = new List<string>();
+            //foreach (Contract contract in client.GetContracts())
+            //{
+            //    lines.Add(contract.ToString());
+            //}
+            Contract contract = client.GetCurrentContract();
+
+            iwCallContract.Contract = contract;
+            Service[] services = contract?.GetServices().ToArray();
+
+            lsbxServices.DisplayMember = "DisplayMember";
+            lsbxServices.Items.AddRange(services);
+
+            lsbxPreviousCalls.DisplayMember = "DisplayMember";
+            lsbxPreviousCalls.Items.AddRange(Call.GetPreviousCallsFrom(client).ToArray());
         }
 
         //TODO: Consider removal
@@ -81,7 +90,6 @@ namespace PSS.Presentation_Layer
         private void showLink()
         {
             System.Diagnostics.Process.Start("http://localhost:1337/");
-
         }
 
 
@@ -101,6 +109,16 @@ namespace PSS.Presentation_Layer
             currentRequest.Save(); //specifically only save the request (I shouldn't have change antying in the client)
             MessageBox.Show("Ticket Updated!", "Success!");
             EnableTransfer();
+        }
+
+        private void lsbxServices_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rtbServiceDetails.Text = ((Service)lsbxServices.SelectedItem)?.ServiceDescription; //TODO: nicer service string
+        }
+
+        private void lsbxPreviousCalls_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rtbCallDescription.Text = ((Call)lsbxPreviousCalls.SelectedItem)?.Description;
         }
     }
 }
