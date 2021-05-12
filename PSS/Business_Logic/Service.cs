@@ -15,6 +15,8 @@ namespace PSS.Business_Logic
         public string Type { get; set; }
         public string ServiceDescription { get; set; }
 
+        public string DisplayMember => ServiceName;
+
         private static readonly string tableName = "Service";
         private static readonly string idColumn = "ServiceID";
 

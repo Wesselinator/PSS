@@ -53,6 +53,8 @@ namespace PSS.Presentation_Layer
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label7);
@@ -68,7 +70,7 @@ namespace PSS.Presentation_Layer
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(13, 35);
+            this.label3.Location = new System.Drawing.Point(2, 35);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(140, 20);
             this.label3.TabIndex = 17;
@@ -78,7 +80,7 @@ namespace PSS.Presentation_Layer
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(13, 55);
+            this.label6.Location = new System.Drawing.Point(2, 55);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(102, 20);
             this.label6.TabIndex = 16;
@@ -88,7 +90,7 @@ namespace PSS.Presentation_Layer
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(12, 10);
+            this.label7.Location = new System.Drawing.Point(1, 10);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(143, 25);
             this.label7.TabIndex = 15;
@@ -98,7 +100,7 @@ namespace PSS.Presentation_Layer
             // 
             this.lblBusinessIdentifier.AutoSize = true;
             this.lblBusinessIdentifier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBusinessIdentifier.Location = new System.Drawing.Point(182, 35);
+            this.lblBusinessIdentifier.Location = new System.Drawing.Point(188, 35);
             this.lblBusinessIdentifier.Name = "lblBusinessIdentifier";
             this.lblBusinessIdentifier.Size = new System.Drawing.Size(122, 20);
             this.lblBusinessIdentifier.TabIndex = 14;
@@ -108,7 +110,7 @@ namespace PSS.Presentation_Layer
             // 
             this.lblServiceLevel.AutoSize = true;
             this.lblServiceLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblServiceLevel.Location = new System.Drawing.Point(182, 55);
+            this.lblServiceLevel.Location = new System.Drawing.Point(188, 55);
             this.lblServiceLevel.Name = "lblServiceLevel";
             this.lblServiceLevel.Size = new System.Drawing.Size(68, 20);
             this.lblServiceLevel.TabIndex = 13;
@@ -116,11 +118,12 @@ namespace PSS.Presentation_Layer
             // 
             // lblContractName
             // 
-            this.lblContractName.AutoSize = true;
+            this.lblContractName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblContractName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblContractName.Location = new System.Drawing.Point(181, 10);
+            this.lblContractName.Location = new System.Drawing.Point(187, 10);
             this.lblContractName.Name = "lblContractName";
-            this.lblContractName.Size = new System.Drawing.Size(139, 25);
+            this.lblContractName.Size = new System.Drawing.Size(161, 25);
             this.lblContractName.TabIndex = 12;
             this.lblContractName.Text = "Basic Contract";
             // 
@@ -139,7 +142,7 @@ namespace PSS.Presentation_Layer
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 36);
+            this.label1.Location = new System.Drawing.Point(3, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 17);
             this.label1.TabIndex = 17;
@@ -157,19 +160,19 @@ namespace PSS.Presentation_Layer
             // 
             // lblMonthlyFee
             // 
-            this.lblMonthlyFee.AutoSize = true;
-            this.lblMonthlyFee.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMonthlyFee.Location = new System.Drawing.Point(89, 36);
+            this.lblMonthlyFee.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMonthlyFee.Location = new System.Drawing.Point(94, 37);
             this.lblMonthlyFee.Name = "lblMonthlyFee";
+            this.lblMonthlyFee.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblMonthlyFee.Size = new System.Drawing.Size(78, 17);
             this.lblMonthlyFee.TabIndex = 15;
-            this.lblMonthlyFee.Text = "R 1 000,00";
+            this.lblMonthlyFee.Text = "R1 000,00";
+            this.lblMonthlyFee.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblDurationInMonth
             // 
-            this.lblDurationInMonth.AutoSize = true;
-            this.lblDurationInMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDurationInMonth.Location = new System.Drawing.Point(149, 9);
+            this.lblDurationInMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDurationInMonth.Location = new System.Drawing.Point(148, 9);
             this.lblDurationInMonth.Name = "lblDurationInMonth";
             this.lblDurationInMonth.Size = new System.Drawing.Size(24, 17);
             this.lblDurationInMonth.TabIndex = 14;
@@ -198,7 +201,7 @@ namespace PSS.Presentation_Layer
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 13);
+            this.label5.Location = new System.Drawing.Point(3, 11);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 13);
             this.label5.TabIndex = 13;
@@ -216,7 +219,7 @@ namespace PSS.Presentation_Layer
             // lblContractStartDate
             // 
             this.lblContractStartDate.AutoSize = true;
-            this.lblContractStartDate.Location = new System.Drawing.Point(90, 13);
+            this.lblContractStartDate.Location = new System.Drawing.Point(90, 11);
             this.lblContractStartDate.Name = "lblContractStartDate";
             this.lblContractStartDate.Size = new System.Drawing.Size(65, 13);
             this.lblContractStartDate.TabIndex = 11;

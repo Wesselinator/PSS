@@ -134,6 +134,28 @@ namespace PSS.Business_Logic
             return ServiceLevelAgreements.GetServices();
         }
 
+        public static int GetContractNum(Contract contract)
+        {
+            string sql = "SELECT ContractID, COUNT(ContractID) AS `Count` " + //figure out why COUNT returns int64 for fun later
+                         "FROM " +
+                         "(SELECT ContractID FROM individualclientcontract UNION SELECT ContractID FROM businessclientcontract) AS `Combine` " +
+                         "WHERE ContractID = " + contract.ContractID.ToString() + " " +
+                         "GROUP BY ContractID " +
+                         "ORDER BY ContractID; ";
+
+            DataTable dt = DataHandler.GetDataTable(sql);
+            DataRowCollection rows = dt.Rows;
+
+            if (rows.Count == 0)//Can't use Linq firstordefault on collection and brain is ded so can't figure out nice way to work around that... have an if
+            {
+                return 0;
+            }
+
+            long ret = rows[0].Field<long>("Count");
+
+            return Convert.ToInt32(ret);
+        }
+
         #endregion
 
         public override bool Equals(object obj)

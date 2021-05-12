@@ -483,9 +483,9 @@ namespace PSS.Presentation_Layer
             currentClient.AddContract(selectedContract, DateTime.Now);
         }
 
-        private void btnModifyContract_Click(object sender, EventArgs e)
+        private void cbxCurentContract_SelectedIndexChanged(object sender, EventArgs e) //Maybe on text changed?
         {
-            //selectedClientContract = selectedContract; //TODO: Figure out this set
+            iwMainContract.Contract = (Contract)cbxCurentContract.SelectedItem;
         }
 
         #endregion

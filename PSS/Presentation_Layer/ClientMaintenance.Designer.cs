@@ -85,6 +85,7 @@ namespace PSS.Presentation_Layer
             this.lblClientMaintenance = new System.Windows.Forms.Label();
             this.cbxChooseClient = new System.Windows.Forms.ComboBox();
             this.btnCM = new System.Windows.Forms.Button();
+            this.iwMainContract = new PSS.Presentation_Layer.ContractInfoWidget();
             this.nudPostalCode = new PSS.Presentation_Layer.ArrowlessNumericUpDown();
             this.groupBox3.SuspendLayout();
             this.Contract.SuspendLayout();
@@ -117,6 +118,7 @@ namespace PSS.Presentation_Layer
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.iwMainContract);
             this.groupBox3.Controls.Add(this.Contract);
             this.groupBox3.Controls.Add(this.cbxType);
             this.groupBox3.Controls.Add(this.lblClientType);
@@ -138,7 +140,7 @@ namespace PSS.Presentation_Layer
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(682, 485);
+            this.groupBox3.Size = new System.Drawing.Size(979, 485);
             this.groupBox3.TabIndex = 46;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Client Management";
@@ -149,7 +151,7 @@ namespace PSS.Presentation_Layer
             this.Contract.Controls.Add(this.lsbxPreviousContracts);
             this.Contract.Location = new System.Drawing.Point(521, 37);
             this.Contract.Name = "Contract";
-            this.Contract.Size = new System.Drawing.Size(156, 152);
+            this.Contract.Size = new System.Drawing.Size(447, 253);
             this.Contract.TabIndex = 57;
             this.Contract.TabStop = false;
             this.Contract.Text = "Contracts";
@@ -160,9 +162,10 @@ namespace PSS.Presentation_Layer
             this.cbxCurentContract.Location = new System.Drawing.Point(5, 18);
             this.cbxCurentContract.Margin = new System.Windows.Forms.Padding(2);
             this.cbxCurentContract.Name = "cbxCurentContract";
-            this.cbxCurentContract.Size = new System.Drawing.Size(146, 21);
+            this.cbxCurentContract.Size = new System.Drawing.Size(436, 21);
             this.cbxCurentContract.TabIndex = 35;
             this.cbxCurentContract.Text = "Choose a contract...";
+            this.cbxCurentContract.SelectedIndexChanged += new System.EventHandler(this.cbxCurentContract_SelectedIndexChanged);
             // 
             // lsbxPreviousContracts
             // 
@@ -170,7 +173,7 @@ namespace PSS.Presentation_Layer
             this.lsbxPreviousContracts.FormattingEnabled = true;
             this.lsbxPreviousContracts.Location = new System.Drawing.Point(6, 44);
             this.lsbxPreviousContracts.Name = "lsbxPreviousContracts";
-            this.lsbxPreviousContracts.Size = new System.Drawing.Size(144, 95);
+            this.lsbxPreviousContracts.Size = new System.Drawing.Size(435, 199);
             this.lsbxPreviousContracts.TabIndex = 56;
             // 
             // cbxType
@@ -706,6 +709,14 @@ namespace PSS.Presentation_Layer
             this.btnCM.UseVisualStyleBackColor = true;
             this.btnCM.Click += new System.EventHandler(this.btnCM_Click);
             // 
+            // iwMainContract
+            // 
+            this.iwMainContract.Contract = null;
+            this.iwMainContract.Location = new System.Drawing.Point(521, 296);
+            this.iwMainContract.Name = "iwMainContract";
+            this.iwMainContract.Size = new System.Drawing.Size(447, 158);
+            this.iwMainContract.TabIndex = 51;
+            // 
             // nudPostalCode
             // 
             this.nudPostalCode.Location = new System.Drawing.Point(85, 68);
@@ -722,7 +733,7 @@ namespace PSS.Presentation_Layer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1001, 619);
+            this.ClientSize = new System.Drawing.Size(1298, 619);
             this.Controls.Add(this.btnCM);
             this.Controls.Add(this.cbxChooseClient);
             this.Controls.Add(this.groupBox3);
@@ -808,5 +819,6 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Button btnCM;
         private ArrowlessNumericUpDown nudPostalCode;
         private System.Windows.Forms.GroupBox Contract;
+        private ContractInfoWidget iwMainContract;
     }
 }
