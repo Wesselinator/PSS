@@ -7,6 +7,7 @@ using PSS.Business_Logic;
 
 namespace PSS.Presentation_Layer
 {
+    //TODO: cbxClientPerson not curently used, Person fields are, figure out what should be used
     public partial class ClientMaintenance : Form
     {
         public bool registerMode { get; set; } //bool for logic if form is in registration mode or update mode
@@ -42,6 +43,7 @@ namespace PSS.Presentation_Layer
             cbxCurentContract.DataSource = AllContracts;
             cbxCurentContract.SelectedItem = currentClient?.GetCurrentContract();
 
+            lsbxPreviousContracts.SelectedIndex = -1;
             lsbxPreviousContracts.DisplayMember = "DisplayMember";
             lsbxPreviousContracts.DataSource = currentClient?.GetContracts();
 
@@ -89,15 +91,19 @@ namespace PSS.Presentation_Layer
         /// </summary>
         private void RegisterMode()
         {
+            registerMode = true; //sets form to registration mode
+
             lblTask.Text = "Register Client";
             btnClient.Text = "Finalize Registration";
 
             cbxChooseClient.Enabled = false;
+            cbxChooseClient.SelectedIndex = -1;
+
             rbtnIndvidual.Enabled = true;
             rbtnBusiness.Enabled = true;
-            rbtnBusiness.Checked = true; //controll pivot onChenged event
 
-            registerMode = true; //sets form to registration mode
+            rbtnBusiness.Checked = true; //controll pivot onChenged event
+            //we do this to set up something, anything, on the !
         }
 
         /// <summary>
@@ -105,13 +111,13 @@ namespace PSS.Presentation_Layer
         /// </summary>
         private void UpdateMode()
         {
+            registerMode = false; //sets form to update mode
+
             lblTask.Text = "Update Client";
             btnClient.Text = "Update Client";
             cbxChooseClient.Enabled = true;
 
             cbxChooseClient.SelectedItem = currentClient;
-
-            registerMode = false; //sets form to update mode
 
             Populate();
         }
@@ -155,7 +161,6 @@ namespace PSS.Presentation_Layer
         }
 
         #region Confirm
-        private string GetStatus => cbxStatus.SelectedIndex == -1 ? "Status Unknown" : cbxStatus.Text;
         private void ConfirmRegister()
         {
             PopulateClientFromControls(currentClient); //created new client in radio controls with type
@@ -212,6 +217,11 @@ namespace PSS.Presentation_Layer
 
         private void cbxChooseClient_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (registerMode)
+            {
+                return;
+            }
+
             currentClient = (Client)cbxChooseClient.SelectedItem;
 
             rbtnIndvidual.Enabled = false;
@@ -290,7 +300,7 @@ namespace PSS.Presentation_Layer
         {
             if (registerMode)
             {
-                ConfirmRegister(); //aaaaaa
+                ConfirmRegister();
             }
             else
             {
