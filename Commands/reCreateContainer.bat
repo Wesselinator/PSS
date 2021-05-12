@@ -6,12 +6,13 @@ set "ports=%3"
 set "dir=%4"
 
 docker container stop %containerName%
-docker container rm %containerName% --force
-echo "Container removed..."
+docker container rm --force --volumes %containerName%
+echo "Container removed with volumes..."
 echo.
-docker image rm %imageName% --force
+docker image rm --force %imageName%
 echo "Image removed..."
 echo.
+
 
 docker build %dir% -t %imageName%
 echo "Image Built..."

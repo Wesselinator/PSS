@@ -1,6 +1,31 @@
 USE PremierServiceSolutionsDB;
+DROP TABLE IF EXISTS CallChangeAssociation;
+DROP TABLE IF EXISTS CallInstance;
+DROP TABLE IF EXISTS TechnicianTaskFeedback;
+DROP TABLE IF EXISTS TechnicianTask;
+DROP TABLE IF EXISTS Technician;
+DROP TABLE IF EXISTS Task;
+DROP TABLE IF EXISTS BusinessClientServiceRequest;
+DROP TABLE IF EXISTS IndividualClientServiceRequest;
+DROP TABLE IF EXISTS ServiceRequest;
+DROP TABLE IF EXISTS BusinessClientFollowUp;
+DROP TABLE IF EXISTS IndividualClientFollowUp;
+DROP TABLE IF EXISTS FollowUpReport;
+DROP TABLE IF EXISTS IndividualClientContract;
+DROP TABLE IF EXISTS BusinessClientContract;
+DROP TABLE IF EXISTS BusinessClientPerson;
+DROP TABLE IF EXISTS BusinessClient;
+DROP TABLE IF EXISTS IndividualClient;
+DROP TABLE IF EXISTS `User`;
+DROP TABLE IF EXISTS Person;
+DROP TABLE IF EXISTS Address;
+DROP TABLE IF EXISTS ServiceLevelAgreement;
+DROP TABLE IF EXISTS Contract;
+DROP TABLE IF EXISTS Service;
+DROP TABLE IF EXISTS Province;
+DROP TABLE IF EXISTS ServiceLevel;
 
-CREATE OR REPLACE TABLE Service (
+CREATE TABLE Service (
  ServiceID INT PRIMARY KEY,
  ServiceName VARCHAR(30) NOT NULL,
  `Type` VARCHAR(30) NOT NULL,
@@ -9,18 +34,18 @@ CREATE OR REPLACE TABLE Service (
 
 #TODO: Connect these tables when time allows
 
-CREATE OR REPLACE TABLE ServiceLevel
+CREATE TABLE ServiceLevel
 (ServiceLevelID INT PRIMARY KEY,
  ServiceLevelName VARCHAR(30)
 );
 
-CREATE OR REPLACE TABLE Province
+CREATE TABLE Province
 (ProvinceName VARCHAR(20) PRIMARY KEY
 );
 
 #----------------------#
 
-CREATE OR REPLACE TABLE Contract (
+CREATE TABLE Contract (
  ContractID INT PRIMARY KEY,
  ContractName VARCHAR(45) NOT NULL,
  `ServiceLevel` VARCHAR(15) NOT NULL,
@@ -33,7 +58,7 @@ CREATE OR REPLACE TABLE Contract (
 ALTER TABLE Contract
 ADD CONSTRAINT CK_OfferEndDateAfterStartDate CHECK(OfferEndDate>=OfferStartDate);
 
-CREATE OR REPLACE TABLE ServiceLevelAgreement
+CREATE TABLE ServiceLevelAgreement
 (ServiceID INT REFERENCES `Service`(ServiceID),
  ContractID INT REFERENCES `Contract`(ContractID),
  Agreement VARCHAR(500) NOT NULL,
@@ -41,7 +66,7 @@ CREATE OR REPLACE TABLE ServiceLevelAgreement
  PRIMARY KEY(ServiceID,ContractID)
 );
 
-CREATE OR REPLACE TABLE IndividualClient
+CREATE TABLE IndividualClient
 (IndividualClientID INT PRIMARY KEY,
  `Type` VARCHAR(30) NOT NULL,
  `Status` VARCHAR(30) NOT NULL,
@@ -49,23 +74,23 @@ CREATE OR REPLACE TABLE IndividualClient
  AddressID INT NOT NULL
 );
 
-CREATE OR REPLACE TABLE BusinessClient
-(`BusinessClientID` INT PRIMARY KEY,
- `BusinessName` VARCHAR(50),
+CREATE TABLE BusinessClient
+(BusinessClientID INT PRIMARY KEY,
+ BusinessName VARCHAR(50),
  `Type` VARCHAR(30) NOT NULL,
  `Status` VARCHAR(30) NOT NULL,
- `Notes` VARCHAR(500),
- `PrimaryContactPersonID` INT NOT NULL, #If you want to remove this you have to fix the code
- `AddressID` INT NOT NULL
+ Notes VARCHAR(500),
+ PrimaryContactPersonID INT NOT NULL, #If you want to remove this you have to fix the code
+ AddressID INT NOT NULL
 );
 
-CREATE OR REPLACE TABLE Technician
+CREATE TABLE Technician
 (TechnicianID INT PRIMARY KEY,
  Speciality VARCHAR(30) NOT NULL,
  PayRate DECIMAL NOT NULL
 );
 
-CREATE OR REPLACE TABLE Address
+CREATE TABLE Address
 (AddressID INT PRIMARY KEY,
  Street VARCHAR(50) NOT NULL,
  City VARCHAR(30) NOT NULL,
@@ -73,7 +98,7 @@ CREATE OR REPLACE TABLE Address
  `Province` VARCHAR(20) NOT NULL
 );
 
-CREATE OR REPLACE TABLE Person
+CREATE TABLE Person
 (PersonID INT PRIMARY KEY,
  FirstName VARCHAR(50) NOT NULL,
  LastName VARCHAR(50) NOT NULL,
@@ -98,31 +123,31 @@ ALTER TABLE Technician
 ADD CONSTRAINT FK_Technician_Person FOREIGN KEY (TechnicianID) REFERENCES Person(PersonID);
 
 
-CREATE OR REPLACE TABLE `User`
+CREATE TABLE `User`
 (UserID INT PRIMARY KEY,
  UserName VARCHAR(50) NOT NULL,
  `Password` VARCHAR(50) NOT NULL,
  Role VARCHAR(50) NOT NULL
 );
 
-CREATE OR REPLACE TABLE BusinessClientPerson
+CREATE TABLE BusinessClientPerson
 (BusinessClientID INT REFERENCES `BusinessClient`(BusinessClientID),
  PersonID INT REFERENCES `Person`(PersonID),
- `Role` VARCHAR(50) NOT NULL,
+ Role VARCHAR(50) NOT NULL,
  #IsPrimaryContact BOOLEAN NOT NULL,
  PRIMARY KEY(BusinessClientID,PersonID)
 );
 
 # Remember to add instead of trigger such that a client can only have 1 active contract at a time
 
-CREATE OR REPLACE TABLE BusinessClientContract
+CREATE TABLE BusinessClientContract
 (BusinessClientContractID INT PRIMARY KEY,
  ContractID INT NOT NULL REFERENCES `Contract`(ContractID),
  BusinessClientID INT NOT NULL REFERENCES `BusinessClient`(BusinessClientID),
  EffectiveDate DATETIME NOT NULL
 );
 
-CREATE OR REPLACE TABLE IndividualClientContract
+CREATE TABLE IndividualClientContract
 (IndividualClientContractID INT PRIMARY KEY,
  ContractID INT NOT NULL REFERENCES `Contract`(ContractID),
  IndividualClientID INT NOT NULL REFERENCES `IndividualClient`(IndividualClientID),
@@ -131,7 +156,7 @@ CREATE OR REPLACE TABLE IndividualClientContract
 
 
 
-CREATE OR REPLACE TABLE FollowUpReport
+CREATE TABLE FollowUpReport
 (FollowUpReportID INT PRIMARY KEY,
  FollowUpTitle VARCHAR(80) NOT NULL,
  FollowUpType VARCHAR(20) NOT NULL,
@@ -143,19 +168,19 @@ CREATE OR REPLACE TABLE FollowUpReport
 
 
 
-CREATE OR REPLACE TABLE IndividualClientFollowUp
+CREATE TABLE IndividualClientFollowUp
 (IndividualClientID INT NOT NULL REFERENCES IndividualClient(IndividualClientID),
  FollowUpReportID INT NOT NULL REFERENCES FollowUpReport(FollowUpReportID),
  PRIMARY KEY(IndividualClientID, FollowUpReportID)
 );
 
-CREATE OR REPLACE TABLE BusinessClientFollowUp
+CREATE TABLE BusinessClientFollowUp
 (BusinessClientID INT NOT NULL REFERENCES BusinessClient(BusinessClientID),
  FollowUpReportID INT NOT NULL REFERENCES FollowUpReport(FollowUpReportID),
  PRIMARY KEY(BusinessClientID, FollowUpReportID)
 );
 
-CREATE OR REPLACE TABLE TechnicianTaskFeedback
+CREATE TABLE TechnicianTaskFeedback
 (TechnicianTaskFeedbackID INT PRIMARY KEY,
  TimeArrived DATETIME NOT NULL,
  TimeDeparture DATETIME NOT NULL,
@@ -164,15 +189,15 @@ CREATE OR REPLACE TABLE TechnicianTaskFeedback
  TechnicianTaskID INT NOT NULL
 );
 
-CREATE OR REPLACE TABLE TechnicianTask
+CREATE TABLE TechnicianTask
 (TechnicianTaskID INT PRIMARY KEY,
- TechnicianID INT NOT NULL REFERENCES Technician(TechnicianID),
- TaskID INT NOT NULL REFERENCES Task(TaskID),
+ TechnicianID INT NOT NULL,
+ TaskID INT NOT NULL,
  TimeToArrive DATETIME NOT NULL,
  TimeToDepart DATETIME NOT NULL
 );
 
-CREATE OR REPLACE TABLE Task
+CREATE TABLE Task
 (TaskID INT PRIMARY KEY,
  TaskTitle VARCHAR(80) NOT NULL,
  TaskType VARCHAR(20) NOT NULL,
@@ -184,7 +209,7 @@ CREATE OR REPLACE TABLE Task
  IsFinished BOOLEAN NOT NULL DEFAULT 0
 );
 
-CREATE OR REPLACE TABLE ServiceRequest
+CREATE TABLE ServiceRequest
 (ServiceRequestID INT PRIMARY KEY,
  ServiceRequestTitle VARCHAR(80) NOT NULL,
  ServiceRequestType VARCHAR(20) NOT NULL,
@@ -197,18 +222,19 @@ ALTER TABLE Task
 ADD CONSTRAINT FK_Task_ServiceRequest FOREIGN KEY (ServiceRequestID) REFERENCES `ServiceRequest`(ServiceRequestID);
 
 ALTER TABLE TechnicianTask
-ADD CONSTRAINT FK_TechnicianTask_Task FOREIGN KEY (TaskID) REFERENCES `Task`(TaskID);
+ADD CONSTRAINT FK_TechnicianTask_Task FOREIGN KEY (TaskID) REFERENCES `Task`(TaskID),
+ADD CONSTRAINT FK_TechnicianTask_Technician FOREIGN KEY (TechnicianID) REFERENCES Technician(TechnicianID);
 
 ALTER TABLE TechnicianTaskFeedback
 ADD CONSTRAINT FK_TechnicianTaskFeedback_Person FOREIGN KEY (TechnicianTaskID) REFERENCES `TechnicianTask`(TechnicianTaskID);
 
-CREATE OR REPLACE TABLE BusinessClientServiceRequest
+CREATE TABLE BusinessClientServiceRequest
 (BusinessClientID INT,
  ServiceRequestID INT,
  PRIMARY KEY(BusinessClientID,ServiceRequestID)
 );
 
-CREATE OR REPLACE TABLE IndividualClientServiceRequest
+CREATE TABLE IndividualClientServiceRequest
 (IndividualClientID INT,
  ServiceRequestID INT,
  PRIMARY KEY(IndividualClientID,ServiceRequestID)
@@ -216,14 +242,14 @@ CREATE OR REPLACE TABLE IndividualClientServiceRequest
 
 
 
-CREATE OR REPLACE TABLE CallInstance
+CREATE TABLE CallInstance
 (CallInstanceID INT PRIMARY KEY,
  StartTime DATETIME NOT NULL,
  EndTime DATETIME NOT NULL,
  Description VARCHAR(120) NOT NULL
 );
 
-CREATE OR REPLACE TABLE CallChangeAssociation
+CREATE TABLE CallChangeAssociation
 (CallChangeAssociationID INT PRIMARY KEY,
  CallInstanceID INT NOT NULL REFERENCES CallInstance(CallInstanceID),
  TableName VARCHAR(30) NOT NULL,
@@ -464,7 +490,8 @@ INSERT INTO	BusinessClientPerson (BusinessClientID, PersonID, `Role`)
 INSERT INTO IndividualClientContract (IndividualClientContractID, ContractID, IndividualClientID, EffectiveDate)
 	VALUES (1,10, 1, '2021/01/13'),
 		   (2,5, 9, '2021/01/04'),
-		   (3,6, 9, '2021/02/18');
+		   (3,5, 15, '2021/01/30'),
+		   (4,6, 9, '2021/02/18');
 
 INSERT INTO BusinessClientContract (BusinessClientContractID, ContractID, BusinessClientID, EffectiveDate)
 	VALUES (1,7, 2, '2020/04/02'),
@@ -479,7 +506,7 @@ INSERT INTO ServiceRequest (ServiceRequestID, ServiceRequestTitle, ServiceReques
 		   (3, 'Routine maintenance on computer lab', 'Routine Maintenance', 'Perform maintenance tasks on computer lab computers per contract agreement.','2021/04/15'),
 		   (4, 'Fix 3x Broken Computers in computer lab', 'Client Requested', 'Serious "fan" noise comming from 3x computers in computer lab. 2x of these computers also suffer from random restarts','2021/04/16'),
 		   (5, 'Routine maintenance on computer lab', 'Routine Maintenance', 'Perform maintenance tasks on computer lab computers. Availible times for client include 2pm to 5pm Monday to Friday','2021/04/15'),
-		   (6, 'Fix or Replace Broken PC', 'Client Requested', 'Computer does not turn and cannot boot into diagnostic mode','2021/04/17'),
+		   (6, 'Fix Broken PC', 'Client Requested', 'Computer does not turn and cannot boot into diagnostic mode','2021/04/17'),
 		   (7, 'Pickup Repair for 2x faulty fat clients', 'Technician Requested', 'Fat clients suffer from random restarts, errors include "IRQL NOT LESS OR EQUAL" and "KERNAL SECURITY CHECK FAILURE". Harddrive, Fan and CPU temperatures are healthy','2021/04/19');
 
 INSERT INTO BusinessClientServiceRequest (BusinessClientID, ServiceRequestID)
@@ -532,7 +559,7 @@ INSERT INTO CallInstance (CallInstanceID, StartTime, EndTime, Description)
 		    (3, '2021/04/25 12:00:00', '2021/04/25 12:15:12', 'Conviced customer PSS is the best solution for them'),
 		    (4, '2021/04/18 14:52:00', '2021/04/18 15:23:05', 'After much convincing, client is satisfied');
 		   
-INSERT INTO callchangeassociation (CallChangeAssociationID, CallInstanceID, TableName, TableRecordID)
+INSERT INTO CallChangeAssociation (CallChangeAssociationID, CallInstanceID, TableName, TableRecordID)
 	VALUES (1, 1, "IndividualClient", "1"),
 			 (2, 2, "BusinessClient", "2"),
 			 (3, 3, "BusinessClient", "4"),
