@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data;
 using PSS.Data_Access;
 
-//CHECK
 namespace PSS.Business_Logic
 {
     public class Contract : SingleIntID
@@ -27,9 +26,23 @@ namespace PSS.Business_Logic
         #region BusinessIdentifier
         private Random RNG => new Random(ContractID);
         private static readonly string ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private char contractType => ALPHA[RNG.Next(0,26)]; //lol no contract type
+        private char contractType => ALPHA[RNG.Next(0, 26)]; //lol no contract type
         private static readonly string[] LEVEL = { "Peasant", "Commoner", "Noble", "Feudal lord" };
-        private char serviceLevelAlpha => ALPHA[LEVEL.ToList().FindIndex(s => ServiceLevel.Contains(s))]; //TODO: error handling
+        private char serviceLevelAlpha
+        {
+            get
+            {
+                try
+                {
+                    return ALPHA[LEVEL.ToList().FindIndex(s => ServiceLevel.Contains(s))];
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    //return 'Z'; 
+                    throw new BadDataBaseData("Contract service level is invalid!", e);
+                }
+            }
+        }
         private string numeric => RNG.Next(0,999999).ToString().PadLeft(6, '0');
         #endregion
 
