@@ -38,12 +38,12 @@ namespace PSS.Presentation_Layer
             this.label2 = new System.Windows.Forms.Label();
             this.btnConfirmService = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtServiceDescription = new System.Windows.Forms.TextBox();
             this.txtServiceType = new System.Windows.Forms.Label();
             this.cbxServiceChange = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tcContractMaintance = new System.Windows.Forms.TabControl();
             this.tpContracts = new System.Windows.Forms.TabPage();
+            this.cbxAllContracts = new System.Windows.Forms.ComboBox();
             this.btnNewContract = new System.Windows.Forms.Button();
             this.btnStopContract = new System.Windows.Forms.Button();
             this.grbxContractInfo = new System.Windows.Forms.GroupBox();
@@ -83,7 +83,7 @@ namespace PSS.Presentation_Layer
             this.rtbContractDetails = new System.Windows.Forms.RichTextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
-            this.cbxAllContracts = new System.Windows.Forms.ComboBox();
+            this.rtbServiceDescription = new System.Windows.Forms.RichTextBox();
             this.gbxCreateModifyServices.SuspendLayout();
             this.tcContractMaintance.SuspendLayout();
             this.tpContracts.SuspendLayout();
@@ -98,6 +98,7 @@ namespace PSS.Presentation_Layer
             // 
             // gbxCreateModifyServices
             // 
+            this.gbxCreateModifyServices.Controls.Add(this.rtbServiceDescription);
             this.gbxCreateModifyServices.Controls.Add(this.label18);
             this.gbxCreateModifyServices.Controls.Add(this.rbModifyService);
             this.gbxCreateModifyServices.Controls.Add(this.rbCreateService);
@@ -106,15 +107,14 @@ namespace PSS.Presentation_Layer
             this.gbxCreateModifyServices.Controls.Add(this.label2);
             this.gbxCreateModifyServices.Controls.Add(this.btnConfirmService);
             this.gbxCreateModifyServices.Controls.Add(this.label9);
-            this.gbxCreateModifyServices.Controls.Add(this.txtServiceDescription);
             this.gbxCreateModifyServices.Controls.Add(this.txtServiceType);
             this.gbxCreateModifyServices.Controls.Add(this.cbxServiceChange);
             this.gbxCreateModifyServices.Controls.Add(this.label6);
-            this.gbxCreateModifyServices.Location = new System.Drawing.Point(136, 85);
+            this.gbxCreateModifyServices.Location = new System.Drawing.Point(135, 69);
             this.gbxCreateModifyServices.Margin = new System.Windows.Forms.Padding(1);
             this.gbxCreateModifyServices.Name = "gbxCreateModifyServices";
             this.gbxCreateModifyServices.Padding = new System.Windows.Forms.Padding(1);
-            this.gbxCreateModifyServices.Size = new System.Drawing.Size(235, 179);
+            this.gbxCreateModifyServices.Size = new System.Drawing.Size(235, 221);
             this.gbxCreateModifyServices.TabIndex = 47;
             this.gbxCreateModifyServices.TabStop = false;
             this.gbxCreateModifyServices.Text = "Create or Modify Services";
@@ -186,7 +186,7 @@ namespace PSS.Presentation_Layer
             // btnConfirmService
             // 
             this.btnConfirmService.Enabled = false;
-            this.btnConfirmService.Location = new System.Drawing.Point(49, 150);
+            this.btnConfirmService.Location = new System.Drawing.Point(60, 188);
             this.btnConfirmService.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmService.Name = "btnConfirmService";
             this.btnConfirmService.Size = new System.Drawing.Size(115, 21);
@@ -204,14 +204,6 @@ namespace PSS.Presentation_Layer
             this.label9.Size = new System.Drawing.Size(60, 13);
             this.label9.TabIndex = 35;
             this.label9.Text = "Description";
-            // 
-            // txtServiceDescription
-            // 
-            this.txtServiceDescription.Location = new System.Drawing.Point(92, 116);
-            this.txtServiceDescription.Margin = new System.Windows.Forms.Padding(2);
-            this.txtServiceDescription.Name = "txtServiceDescription";
-            this.txtServiceDescription.Size = new System.Drawing.Size(132, 20);
-            this.txtServiceDescription.TabIndex = 34;
             // 
             // txtServiceType
             // 
@@ -272,6 +264,15 @@ namespace PSS.Presentation_Layer
             this.tpContracts.TabIndex = 0;
             this.tpContracts.Text = "Contracts";
             this.tpContracts.UseVisualStyleBackColor = true;
+            // 
+            // cbxAllContracts
+            // 
+            this.cbxAllContracts.FormattingEnabled = true;
+            this.cbxAllContracts.Location = new System.Drawing.Point(87, 24);
+            this.cbxAllContracts.Name = "cbxAllContracts";
+            this.cbxAllContracts.Size = new System.Drawing.Size(121, 21);
+            this.cbxAllContracts.TabIndex = 57;
+            this.cbxAllContracts.SelectedIndexChanged += new System.EventHandler(this.cbxAllContracts_SelectedIndexChanged);
             // 
             // btnNewContract
             // 
@@ -707,14 +708,13 @@ namespace PSS.Presentation_Layer
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // cbxAllContracts
+            // rtbServiceDescription
             // 
-            this.cbxAllContracts.FormattingEnabled = true;
-            this.cbxAllContracts.Location = new System.Drawing.Point(87, 24);
-            this.cbxAllContracts.Name = "cbxAllContracts";
-            this.cbxAllContracts.Size = new System.Drawing.Size(121, 21);
-            this.cbxAllContracts.TabIndex = 57;
-            this.cbxAllContracts.SelectedIndexChanged += new System.EventHandler(this.cbxAllContracts_SelectedIndexChanged);
+            this.rtbServiceDescription.Location = new System.Drawing.Point(90, 119);
+            this.rtbServiceDescription.Name = "rtbServiceDescription";
+            this.rtbServiceDescription.Size = new System.Drawing.Size(134, 58);
+            this.rtbServiceDescription.TabIndex = 40;
+            this.rtbServiceDescription.Text = "";
             // 
             // ContractMaintenance
             // 
@@ -750,7 +750,6 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.ComboBox cbxServiceChange;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtServiceDescription;
         private System.Windows.Forms.Label txtServiceType;
         private System.Windows.Forms.TabControl tcContractMaintance;
         private System.Windows.Forms.TabPage tpContracts;
@@ -801,5 +800,6 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.ListBox lsbxContracts;
         private System.Windows.Forms.ListBox lsbxCurrentService;
         private System.Windows.Forms.ComboBox cbxAllContracts;
+        private System.Windows.Forms.RichTextBox rtbServiceDescription;
     }
 }

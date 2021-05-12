@@ -8,7 +8,7 @@ namespace PSS.Presentation_Layer
 {
     public partial class ContractMaintenance : Form
     {
-        //TODO: find/make space for contract info
+        //TODO: find/make space for contract info widget
         public ContractMaintenance()
         {
             InitializeComponent();
@@ -118,7 +118,7 @@ namespace PSS.Presentation_Layer
         {
             //TODO: Remove the comment for master
             lsbxCurrentService.Items.Remove(lsbxCurrentService.SelectedItem);
-            //there is no way to remove things permently at the momment, just look like this
+            //there is no way to remove things permently at the momment, just look like they are  :P
         }
 
         #region Services
@@ -162,7 +162,7 @@ namespace PSS.Presentation_Layer
 
             currentService.ServiceName = txtServiceName.Text;
             currentService.Type = cbxServiceType.Text;
-            currentService.ServiceDescription = txtServiceDescription.Text;     //TODO: change to rich text box
+            currentService.ServiceDescription = rtbServiceDescription.Text;
 
             currentService.Save();
             AllServices.Add(currentService); //reduce database acesses
@@ -185,8 +185,8 @@ namespace PSS.Presentation_Layer
 
         private void CalculateContractPerformance()
         {
-            //TODO: Calculate Performance
-            rtbPerformance.Text = "Performance Number: " + Contract.GetContractNum((Contract)lsbxContracts.SelectedItem);
+            //TODO: Calculate Performance better?
+            rtbPerformance.Text = "Performance Index: " + Contract.GetContractNum((Contract)lsbxContracts.SelectedItem); //Index sounds fancy
         }
 
         #endregion
