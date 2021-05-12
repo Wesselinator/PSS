@@ -16,5 +16,7 @@ for (var i = 0; i < iOptions.length; i++) {
     var createElement = document.createElement("option")
     createElement.textContent = opt;
     createElement.value = opt;
-    dropDown.append(createElement);
+    //dropDown.append(createElement);
 }
+
+//curl - X POST "http://localhost:3000/testconn"
