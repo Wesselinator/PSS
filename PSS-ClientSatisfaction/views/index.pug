@@ -16,13 +16,13 @@ block content
           label(for='BusinessClient') BusinessClient
       #SelectClient.contentdiv
         h3#lblSelectClient(for='SelectClient') Select a client
-        select#dropdownSelectClient.inputbars
+        select#dropdownSelectClient.inputbars(name='dropdownSelectClient')
       #FollowUpTitle.contentdiv
         h3(for='FollowUpTitle') Follow up Title
         input#FollowUpText.inputbars(type='text' placeholder='Enter title')
       #FollowUpType.contentdiv
         h3#lblFollowUpType(for='FollowUpType') Select a Type
-        select#dropdownFollowUpType.inputbars
+        select#dropdownFollowUpType.inputbars(name='dropdownFollowUpType')
       #FollowUpDescription.contentdiv
         h3(for='FollowUpDescription') Follow up Description
         textarea#FollowUpDescriptionText(name='DescriptionTextArea' placeholder='Enter description')
@@ -37,7 +37,7 @@ block content
           #addComp
       #DateTime.contentdiv
         h3(for='DateTime') Date/Time the follow up occurred/was received
-        input#DateTimeText.inputbars(type='date' size='10' maxlength='10')
+        input#DateTimeText.inputbars(type='date' size='10' maxlength='10' name='DateTimeText')
       #IssueResolved.contentdiv
         h3#lblIssueResolved(for='IssueResolved') Is issue resolved?
         form#IssueResolved
