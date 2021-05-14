@@ -1,9 +1,17 @@
-include formcontrol
+include fheader
 
-mixin combo(controlID, controlName, labelText, comboGroups)
-    +formcontrol(controlName, labelText)
-        select(name=controlName, id=controlID)
-            each group in comboGroups
-                optgroup(label=group.label)
-                    each item in group.items
+mixin combo(formID, headerText, comboSet)
+    +fheader(formID, attributes.id, headerText)
+        select.inputbars(name!=attributes.id, form=formID)&attributes(attributes)
+            if comboSet[0].label
+                each group in comboSet
+                    optgroup(label=group.label)
+                        each item in group.items
+                            option(value=item)= item
+            else
+                each item in comboSet
                         option(value=item)= item
+                else
+                    option Nothing in mixin
+
+            //the else is to handle if the comboset was just an array

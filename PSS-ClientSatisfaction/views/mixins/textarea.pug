@@ -1,0 +1,5 @@
+include fheader
+
+mixin textarea(formID, headerText, placeholder)
+    +fheader(formID, attributes.id, headerText)
+        textarea(name!=attributes.id, placeholder=placeholder)&attributes(attributes)

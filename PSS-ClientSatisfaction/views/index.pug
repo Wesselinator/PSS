@@ -1,66 +1,38 @@
 extends layout
 block content 
-  - var i1 = ["test1", "item2", "item3"]
-  - var i2 = ["fuck1", "fuck2", "fuck3"]
-  - var g1 = {label: "test", items: i1}
-  - var g2 = {label: "fuck", items: i2}
-  - var testgroup = [g1, g2]
+  - var i1 = ["test1", "item2", "item3"];
+  - var i2 = ["fuck1", "fuck2", "fuck3"];
+  - var g1 = {label: "test", items: i1};
+  - var g2 = {label: "fuck", items: i2};
+  - var testgroup = [g1, g2];
+
+  - var formID = "MainForm";
+  - var FollowUpTypes = ["Please Select", "Post-Repair", "Complaint", "Post-Maintenance"];
+  - var radioResolved = [{name: "IsNotResolved", item: "Yes"}, {name: "IsResolved", item: "No"}]
+  - var radioFollowUpRequired = [{name: "FlolowupRequired", item: "Yes"}, {name: "FlolowupNotRequired", item: "No"}]
   #Header
     h1#Mainheader Premier Service Solutions
   #Main
     #VoidLeft
-    #Content
-      #testfuck.contentdiv
-        +combo('testid', 'testname', 'testlabel', testgroup) 
-      #SelectClientType.contentdiv
-        h3#lblClienttype(for='SelectClientType') Select a Client Type
-        form#ClientTypes
-          input#IndividualClient.RadioClientType(type='radio' name='ClientTypeRadio' value='Individual Client' onclick='displayIndividual()')
-          label(for='IndividualClient') IndividualClient
-          br
-          input#BusinessClient.RadioClientType(type='radio' name='ClientTypeRadio' value='Business Client' onclick='displayBusiness()')
-          label(for='BusinessClient') BusinessClient
+    form(id=formID, action='Submit()')
       #SelectClient.contentdiv
-        h3#lblSelectClient(for='SelectClient') Select a client
-        select#dropdownSelectClient.inputbars(name='dropdownSelectClient')
+        +combo(formID, 'Select a Client', testgroup)(id='dropdownSelectClient')
       #FollowUpTitle.contentdiv
-        h3(for='FollowUpTitle') Follow up Title
-        input#FollowUpText.inputbars(type='text' placeholder='Enter title')
+        +text(formID, 'Follow up Title', 'Enter title')(id='FollowUpText')  
       #FollowUpType.contentdiv
-        h3#lblFollowUpType(for='FollowUpType') Select a Type
-        select#dropdownFollowUpType.inputbars(name='dropdownFollowUpType')
-          option Please Select
-          option Post-Repair
-          option Complaint
-          option Post-Maintenance
+        +combo(formID, 'Select a Type', FollowUpTypes)(id='dropdownFollowUpType')
       #FollowUpDescription.contentdiv
-        h3(for='FollowUpDescription') Follow up Description
-        textarea#FollowUpDescriptionText(name='DescriptionTextArea' placeholder='Enter description')
-      #DateTimeMode.contentdiv
-        h3#lblDateTimeMode(for='DateTimeMode') Follow up date received
-        form#DateTypes
-          input#CurrentDateTime.RadioDateType(type='radio' name='DateTypeRadio' value='Current Date' onclick='getCurrentDate()')
-          label(for='CurrentDateTime') Use current date/time
-          br
-          input#SpecifyDateTime.RadioDateType(type='radio' name='DateTypeRadio' value='Specified Date' onclick='getSpecifiedDate()')
-          label(for='SpecifyDateTime') Specify date/time
-          #addComp
+        +textarea(formID, 'Follow up Description', 'Enter description')(id='FollowUpDescriptionText')
+      #FollowUpRequired.contentdiv
+        +radiogroup(formID, 'Is a folowup action required?', 'IsFollowUpRequired', radioFollowUpRequired)(id='rgpIsFollowUpRequired')
       #DateTime.contentdiv
-        h3(for='DateTime' ) Follow up date processed
-        input#DateTimeText.inputbars(type='date' size='10' maxlength='10')
+        +date(formID, 'Date to follow up')
       #IssueResolved.contentdiv
-        h3#lblIssueResolved(for='IssueResolved') Is issue resolved?
-        form#IssueResolved
-          input#IsResolved.IsIssueResolved(type='radio' name='IsIssueResolvedRadio' value='Yes')
-          label(for='IsResolved') Yes
-          br
-          input#IsNotResolved.IsIssueResolved(type='radio' name='IsIssueResolvedRadio' value='No')
-          label(for='IsNotResolved') No
+        +radiogroup(formID, 'Is issue resolved?', 'IsIssueResolved', radioResolved)(id='rgpIsIssueResolved')
       #SatisfactionLevel.contentdiv
-        h3#lblSatisfactionLvl Satisfaction Level
-        input#edtSatisfactionLvl.inputbars(type='number' data-type='input-spinner' placeholder='0' data-component='spinner' min='0' max='10')
+        +number(formID, 'Satisfaction Level', '1', '4')(id='edtSatisfactionLvl')
       #Submit.contentdiv
-        button#btnSubmit(type='submit' data-component='button' onclick='Submit()') Submit
+        button#btnSubmit(type='submit' data-component='button', form=FormID) Submit
     #VoidRight
 
   
