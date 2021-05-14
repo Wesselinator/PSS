@@ -1,3 +1,7 @@
+const { type } = require("os");
+
+var id;
+
 function displayIndividual() {
     var dropDown = document.getElementById("dropdownSelectClient");
 
@@ -6,6 +10,8 @@ function displayIndividual() {
     }
 
     var iOptions = ["1", "3", "5"]; //here is where the database information is going to go in
+
+    id = iOptions[0];
 
     var select = document.createElement("option");
     select.textContent = "Please Select";
@@ -30,6 +36,8 @@ function displayBusiness() {
 
     var bOptions = ["2", "4", "6"];//here is where the database infromation is going to go in
 
+    id = iOptions[0];
+
     var select = document.createElement("option");
     select.textContent = "Please Select";
     select.value = "Please Select";
@@ -47,7 +55,7 @@ function displayBusiness() {
 function displayType() {
     var dropDown = document.getElementById("dropdownFollowUpType");
 
-    var tOptions = ["69", "420", "469"];// here is where the database information is going to go in
+    var tOptions = ["Post-Repair", "Complaint", "Post-Maintenance"];
 
     var select = document.createElement("option");
     select.textContent = "Please Select";
@@ -73,6 +81,7 @@ function getCurrentDate() {
     document.getElementById("addedDate").remove();
 }
 
+var specified;
 function getSpecifiedDate() {
     var addDateComponent = document.getElementById("addComp");
     var specificDate = document.createElement("input");
@@ -82,6 +91,8 @@ function getSpecifiedDate() {
     specificDate.setAttribute("class", "inputbars");
     specificDate.setAttribute("id", "addedDate")
     addDateComponent.appendChild(specificDate);
+
+    specified = document.getElementById("addedDate").innerText;
 }
 
 function Submit() {
@@ -94,10 +105,51 @@ function Submit() {
     //    client = document.getElementById("BusinessClient").innerText;
     //}
 
-    //var title = document.getElementById().innerText;
-    //var Type = document.getElementById().innerText;
-    //var description = document.getElementById().innerText;
-    //var 
+    var title;
+    if (document.getElementById("FollowUpText").value == null) {
+        alert("Please fill in all the fields");
+    } else {
+        title = document.getElementById("FollowUpText").value;
+    }
 
-    alert(today);
+    var Type;
+    if (document.getElementById("dropdownFollowUpType").value == null || document.getElementById("dropdownFollowUpType").value == "Please Select") {
+        alert("Please fill in all the fields");
+    } else {
+        Type = document.getElementById("dropdownFollowUpType").value;
+    }
+
+    var description;
+    if (document.getElementById("FollowUpDescriptionText").value == null) {
+        alert("Please fill in all the fields");
+    } else {
+        description = document.getElementById("FollowUpDescriptionText").value;
+    }
+
+    var dateReceived;
+    if (document.getElementById(CurrentDateTime).checked = true) {
+        dateReceived = today;
+    } else {
+        dateReceived = document.getElementById("addedDate").value;
+    }
+
+    var dateProcessed = document.getElementById("DateTimeText").value;
+
+    var isIssueResolved;
+    if (document.getElementById("IsResolved").checked = true) {
+        isIssueResolved = 1;
+    } else {
+        isIssueResolved = 0;
+    }
+
+    var satisfaction
+    if (document.getElementById("edtSatisfactionLvl").value == null) {
+        alert("Please fill in all the fields");
+    } else {
+        satisfaction = document.getElementById("edtSatisfactionLvl").value;
+    }
+
+    var arrSubmission = [id, title, type, description, dateReceived, dateProcessed, isIssueResolved, satisfaction];
+
+    alert(arrSubmission[0]);
 }

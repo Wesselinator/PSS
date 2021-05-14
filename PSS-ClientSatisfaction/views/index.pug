@@ -27,7 +27,7 @@ block content
         h3(for='FollowUpDescription') Follow up Description
         textarea#FollowUpDescriptionText(name='DescriptionTextArea' placeholder='Enter description')
       #DateTimeMode.contentdiv
-        h3#lblDateTimeMode(for='DateTimeMode') Mode for date/time of followup
+        h3#lblDateTimeMode(for='DateTimeMode') Follow up date received
         form#DateTypes
           input#CurrentDateTime.RadioDateType(type='radio' name='DateTypeRadio' value='Current Date' onclick='getCurrentDate()')
           label(for='CurrentDateTime') Use current date/time
@@ -36,7 +36,7 @@ block content
           label(for='SpecifyDateTime') Specify date/time
           #addComp
       #DateTime.contentdiv
-        h3(for='DateTime') Date/Time the follow up occurred/was received
+        h3(for='DateTime' ) Follow up date processed
         input#DateTimeText.inputbars(type='date' size='10' maxlength='10')
       #IssueResolved.contentdiv
         h3#lblIssueResolved(for='IssueResolved') Is issue resolved?
