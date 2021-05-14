@@ -1,11 +1,17 @@
 extends layout
-//- website solong
 block content 
+  - var i1 = ["test1", "item2", "item3"]
+  - var i2 = ["fuck1", "fuck2", "fuck3"]
+  - var g1 = {label: "test", items: i1}
+  - var g2 = {label: "fuck", items: i2}
+  - var testgroup = [g1, g2]
   #Header
     h1#Mainheader Premier Service Solutions
   #Main
     #VoidLeft
     #Content
+      #testfuck.contentdiv
+        +combo('testid', 'testname', 'testlabel', testgroup) 
       #SelectClientType.contentdiv
         h3#lblClienttype(for='SelectClientType') Select a Client Type
         form#ClientTypes

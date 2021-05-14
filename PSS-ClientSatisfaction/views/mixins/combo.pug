@@ -1,0 +1,9 @@
+include formcontrol
+
+mixin combo(controlID, controlName, labelText, comboGroups)
+    +formcontrol(controlName, labelText)
+        select(name=controlName, id=controlID)
+            each group in comboGroups
+                optgroup(label=group.label)
+                    each item in group.items
+                        option(value=item)= item
