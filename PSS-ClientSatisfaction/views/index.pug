@@ -23,6 +23,10 @@ block content
       #FollowUpType.contentdiv
         h3#lblFollowUpType(for='FollowUpType') Select a Type
         select#dropdownFollowUpType.inputbars(name='dropdownFollowUpType')
+          option Please Select
+          option Post-Repair
+          option Complaint
+          option Post-Maintenance
       #FollowUpDescription.contentdiv
         h3(for='FollowUpDescription') Follow up Description
         textarea#FollowUpDescriptionText(name='DescriptionTextArea' placeholder='Enter description')

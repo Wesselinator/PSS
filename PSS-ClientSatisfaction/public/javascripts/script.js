@@ -52,29 +52,6 @@ function displayBusiness() {
     }
 }
 
-function displayType() {
-    var dropDown = document.getElementById("dropdownFollowUpType");
-
-    var tOptions = ["Post-Repair", "Complaint", "Post-Maintenance"];
-
-    var select = document.createElement("option");
-    select.textContent = "Please Select";
-    select.value = "Please Select";
-    dropDown.append(select);
-
-    for (var i = 0; i < tOptions.length; i++) {
-        var opt = tOptions[i];
-        var createElement = document.createElement("option");
-        createElement.textContent = opt;
-        createElement.value = opt;
-        dropDown.append(createElement);
-    }
-}
-
-window.onload = function () {
-    displayType();
-}
-
 var today;
 function getCurrentDate() {
     today = new Date();
@@ -92,7 +69,7 @@ function getSpecifiedDate() {
     specificDate.setAttribute("id", "addedDate")
     addDateComponent.appendChild(specificDate);
 
-    specified = document.getElementById("addedDate").innerText;
+    specified = document.getElementById("addedDate").value;
 }
 
 function Submit() {
@@ -105,51 +82,51 @@ function Submit() {
     //    client = document.getElementById("BusinessClient").innerText;
     //}
 
-    var title;
-    if (document.getElementById("FollowUpText").value == null) {
-        alert("Please fill in all the fields");
-    } else {
-        title = document.getElementById("FollowUpText").value;
-    }
+    //var title;
+    //if (document.getElementById("FollowUpText").value == null) {
+    //    alert("Please fill in all the fields");
+    //} else {
+    //    title = document.getElementById("FollowUpText").value;
+    //}
 
-    var Type;
-    if (document.getElementById("dropdownFollowUpType").value == null || document.getElementById("dropdownFollowUpType").value == "Please Select") {
-        alert("Please fill in all the fields");
-    } else {
-        Type = document.getElementById("dropdownFollowUpType").value;
-    }
+    //var Type;
+    //if (document.getElementById("dropdownFollowUpType").value == null || document.getElementById("dropdownFollowUpType").value == "Please Select") {
+    //    alert("Please fill in all the fields");
+    //} else {
+    //    Type = document.getElementById("dropdownFollowUpType").value;
+    //}
 
-    var description;
-    if (document.getElementById("FollowUpDescriptionText").value == null) {
-        alert("Please fill in all the fields");
-    } else {
-        description = document.getElementById("FollowUpDescriptionText").value;
-    }
+    //var description;
+    //if (document.getElementById("FollowUpDescriptionText").value == null) {
+    //    alert("Please fill in all the fields");
+    //} else {
+    //    description = document.getElementById("FollowUpDescriptionText").value;
+    //}
 
-    var dateReceived;
-    if (document.getElementById(CurrentDateTime).checked = true) {
-        dateReceived = today;
-    } else {
-        dateReceived = document.getElementById("addedDate").value;
-    }
+    //var dateReceived;
+    //if (document.getElementById(CurrentDateTime).checked = true) {
+    //    dateReceived = today;
+    //} else {
+    //    dateReceived = document.getElementById("addedDate").value;
+    //}
 
-    var dateProcessed = document.getElementById("DateTimeText").value;
+    //var dateProcessed = document.getElementById("DateTimeText").value;
 
-    var isIssueResolved;
-    if (document.getElementById("IsResolved").checked = true) {
-        isIssueResolved = 1;
-    } else {
-        isIssueResolved = 0;
-    }
+    //var isIssueResolved;
+    //if (document.getElementById("IsResolved").checked = true) {
+    //    isIssueResolved = 1;
+    //} else {
+    //    isIssueResolved = 0;
+    //}
 
-    var satisfaction
-    if (document.getElementById("edtSatisfactionLvl").value == null) {
-        alert("Please fill in all the fields");
-    } else {
-        satisfaction = document.getElementById("edtSatisfactionLvl").value;
-    }
+    //var satisfaction
+    //if (document.getElementById("edtSatisfactionLvl").value == null) {
+    //    alert("Please fill in all the fields");
+    //} else {
+    //    satisfaction = document.getElementById("edtSatisfactionLvl").value;
+    //}
 
-    var arrSubmission = [id, title, type, description, dateReceived, dateProcessed, isIssueResolved, satisfaction];
+    //var arrSubmission = [id, title, type, description, dateReceived, dateProcessed, isIssueResolved, satisfaction];
 
-    alert(arrSubmission[0]);
+    //alert(arrSubmission[0]);
 }
