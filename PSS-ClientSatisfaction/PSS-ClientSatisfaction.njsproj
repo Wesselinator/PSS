@@ -80,6 +80,7 @@
     <Content Include="views\error.pug" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="PSS\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
@@ -89,7 +90,12 @@
     <Folder Include="views\mixins\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="DataHandler.ts">
+    <TypeScriptCompile Include="PSS\client.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="PSS\comboGroup.ts" />
+    <TypeScriptCompile Include="PSS\dataHandler.ts" />
+    <TypeScriptCompile Include="PSS\feedback.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="routes\clients.ts">

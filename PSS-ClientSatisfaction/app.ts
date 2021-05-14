@@ -4,6 +4,8 @@ import * as path from 'path';
 
 import routes from './routes/index';
 import users from './routes/user';
+import feedback from './routes/feedback';
+import clients from './routes/clients';
 
 const debug = require('debug')('PSS-ClientSatisfaction Microservice');
 const app = express();
@@ -17,6 +19,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/feedback', feedback);
+app.use('/clients', clients);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -553,6 +553,8 @@ INSERT INTO BusinessClientFollowUp (BusinessClientID, FollowUpReportID)
 		    (2, 3);
 		   #(8, 4);
 
+#IndividualClientFollowUp has nothing
+
 INSERT INTO CallInstance (CallInstanceID, StartTime, EndTime, Description)
 	VALUES (1, '2021/04/13 10:00:00', '2021/04/13 10:12:23', 'Got a new customer!'),
 		    (2, '2021/04/18 11:00:00', '2021/04/18 11:17:04', 'Handled clients issue'),
