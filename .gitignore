@@ -364,8 +364,7 @@ FodyWeavers.xsd
 
 
 #PSS ignore
-#ignore app.js and app.js.map becuase these should be generated from the .ts file
-app.js
-app.js.map
-
-#add routes files aswell
+#ignore *.js and *.js.map becuase these should be generated from the *.ts files
+*.js
+*.js.map
+!Public/javascripts/*.js
