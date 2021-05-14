@@ -82,22 +82,22 @@ function Submit() {
     //    client = document.getElementById("BusinessClient").innerText;
     //}
 
-    //var title;
-    //if (document.getElementById("FollowUpText").value == null) {
+    //var title = document.getElementById("FollowUpText").value;
+    //if (title == null) {
     //    alert("Please fill in all the fields");
     //} else {
     //    title = document.getElementById("FollowUpText").value;
     //}
 
-    //var Type;
-    //if (document.getElementById("dropdownFollowUpType").value == null || document.getElementById("dropdownFollowUpType").value == "Please Select") {
+    //var type = document.getElementById("dropdownFollowUpType").value;
+    //if (type == null || type == "Please Select") {
     //    alert("Please fill in all the fields");
     //} else {
     //    Type = document.getElementById("dropdownFollowUpType").value;
     //}
 
-    //var description;
-    //if (document.getElementById("FollowUpDescriptionText").value == null) {
+    //var description = document.getElementById("FollowUpDescriptionText").value;
+    //if (description == null) {
     //    alert("Please fill in all the fields");
     //} else {
     //    description = document.getElementById("FollowUpDescriptionText").value;
@@ -119,8 +119,8 @@ function Submit() {
     //    isIssueResolved = 0;
     //}
 
-    //var satisfaction
-    //if (document.getElementById("edtSatisfactionLvl").value == null) {
+    //var satisfaction = document.getElementById("edtSatisfactionLvl").value;
+    //if (satisfaction == null) {
     //    alert("Please fill in all the fields");
     //} else {
     //    satisfaction = document.getElementById("edtSatisfactionLvl").value;
