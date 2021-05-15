@@ -32,6 +32,7 @@ namespace PSS.Presentation_Layer
             this.txtBusinessName = new System.Windows.Forms.TextBox();
             this.lblBusinessName = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.iwMainContract = new PSS.Presentation_Layer.ContractInfoWidget();
             this.btnCM = new System.Windows.Forms.Button();
             this.Contract = new System.Windows.Forms.GroupBox();
             this.cbxCurentContract = new System.Windows.Forms.ComboBox();
@@ -48,6 +49,7 @@ namespace PSS.Presentation_Layer
             this.btnAddToBP = new System.Windows.Forms.Button();
             this.lsbxBusinessPeople = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.nudPostalCode = new PSS.Presentation_Layer.ArrowlessNumericUpDown();
             this.cbxProvince = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -84,21 +86,19 @@ namespace PSS.Presentation_Layer
             this.btnBack = new System.Windows.Forms.Button();
             this.lblClientMaintenance = new System.Windows.Forms.Label();
             this.cbxChooseClient = new System.Windows.Forms.ComboBox();
-            this.iwMainContract = new PSS.Presentation_Layer.ContractInfoWidget();
-            this.nudPostalCode = new PSS.Presentation_Layer.ArrowlessNumericUpDown();
             this.groupBox3.SuspendLayout();
             this.Contract.SuspendLayout();
             this.grbBPeople.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPostalCode)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.grbPerson.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPostalCode)).BeginInit();
             this.SuspendLayout();
             // 
             // txtBusinessName
             // 
             this.txtBusinessName.Location = new System.Drawing.Point(104, 127);
-            this.txtBusinessName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBusinessName.Margin = new System.Windows.Forms.Padding(2);
             this.txtBusinessName.Name = "txtBusinessName";
             this.txtBusinessName.Size = new System.Drawing.Size(152, 20);
             this.txtBusinessName.TabIndex = 48;
@@ -137,13 +137,21 @@ namespace PSS.Presentation_Layer
             this.groupBox3.Controls.Add(this.rbtnIndvidual);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Location = new System.Drawing.Point(313, 83);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(957, 485);
             this.groupBox3.TabIndex = 46;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Client Management";
+            // 
+            // iwMainContract
+            // 
+            this.iwMainContract.Contract = null;
+            this.iwMainContract.Location = new System.Drawing.Point(527, 223);
+            this.iwMainContract.Name = "iwMainContract";
+            this.iwMainContract.Size = new System.Drawing.Size(425, 158);
+            this.iwMainContract.TabIndex = 58;
             // 
             // btnCM
             // 
@@ -170,7 +178,7 @@ namespace PSS.Presentation_Layer
             // 
             this.cbxCurentContract.FormattingEnabled = true;
             this.cbxCurentContract.Location = new System.Drawing.Point(5, 18);
-            this.cbxCurentContract.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbxCurentContract.Margin = new System.Windows.Forms.Padding(2);
             this.cbxCurentContract.Name = "cbxCurentContract";
             this.cbxCurentContract.Size = new System.Drawing.Size(407, 21);
             this.cbxCurentContract.TabIndex = 35;
@@ -220,7 +228,6 @@ namespace PSS.Presentation_Layer
             this.lblPerson.Size = new System.Drawing.Size(40, 13);
             this.lblPerson.TabIndex = 52;
             this.lblPerson.Text = "Person";
-            this.lblPerson.Visible = false;
             // 
             // btnClient
             // 
@@ -310,10 +317,22 @@ namespace PSS.Presentation_Layer
             this.panel2.Controls.Add(this.txtStreet);
             this.panel2.Controls.Add(this.label19);
             this.panel2.Location = new System.Drawing.Point(277, 52);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(225, 129);
             this.panel2.TabIndex = 30;
+            // 
+            // nudPostalCode
+            // 
+            this.nudPostalCode.Location = new System.Drawing.Point(85, 68);
+            this.nudPostalCode.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nudPostalCode.Name = "nudPostalCode";
+            this.nudPostalCode.Size = new System.Drawing.Size(52, 20);
+            this.nudPostalCode.TabIndex = 24;
             // 
             // cbxProvince
             // 
@@ -329,7 +348,7 @@ namespace PSS.Presentation_Layer
             "North West",
             "Western Cape"});
             this.cbxProvince.Location = new System.Drawing.Point(85, 101);
-            this.cbxProvince.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbxProvince.Margin = new System.Windows.Forms.Padding(2);
             this.cbxProvince.Name = "cbxProvince";
             this.cbxProvince.Size = new System.Drawing.Size(129, 21);
             this.cbxProvince.TabIndex = 23;
@@ -358,7 +377,7 @@ namespace PSS.Presentation_Layer
             // txtCity
             // 
             this.txtCity.Location = new System.Drawing.Point(85, 40);
-            this.txtCity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCity.Margin = new System.Windows.Forms.Padding(2);
             this.txtCity.Name = "txtCity";
             this.txtCity.Size = new System.Drawing.Size(129, 20);
             this.txtCity.TabIndex = 19;
@@ -376,7 +395,7 @@ namespace PSS.Presentation_Layer
             // txtStreet
             // 
             this.txtStreet.Location = new System.Drawing.Point(85, 13);
-            this.txtStreet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtStreet.Margin = new System.Windows.Forms.Padding(2);
             this.txtStreet.Name = "txtStreet";
             this.txtStreet.Size = new System.Drawing.Size(129, 20);
             this.txtStreet.TabIndex = 17;
@@ -395,9 +414,9 @@ namespace PSS.Presentation_Layer
             // 
             this.groupBox4.Controls.Add(this.rtbNotes);
             this.groupBox4.Location = new System.Drawing.Point(20, 182);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(482, 93);
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
@@ -406,7 +425,7 @@ namespace PSS.Presentation_Layer
             // rtbNotes
             // 
             this.rtbNotes.Location = new System.Drawing.Point(11, 16);
-            this.rtbNotes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rtbNotes.Margin = new System.Windows.Forms.Padding(2);
             this.rtbNotes.Name = "rtbNotes";
             this.rtbNotes.Size = new System.Drawing.Size(460, 64);
             this.rtbNotes.TabIndex = 0;
@@ -420,7 +439,7 @@ namespace PSS.Presentation_Layer
             "Status 2",
             "Status"});
             this.cbxStatus.Location = new System.Drawing.Point(104, 153);
-            this.cbxStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbxStatus.Margin = new System.Windows.Forms.Padding(2);
             this.cbxStatus.Name = "cbxStatus";
             this.cbxStatus.Size = new System.Drawing.Size(152, 21);
             this.cbxStatus.TabIndex = 24;
@@ -430,7 +449,7 @@ namespace PSS.Presentation_Layer
             // 
             this.rbtnBusiness.AutoSize = true;
             this.rbtnBusiness.Location = new System.Drawing.Point(189, 17);
-            this.rbtnBusiness.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtnBusiness.Margin = new System.Windows.Forms.Padding(2);
             this.rbtnBusiness.Name = "rbtnBusiness";
             this.rbtnBusiness.Size = new System.Drawing.Size(67, 17);
             this.rbtnBusiness.TabIndex = 43;
@@ -453,7 +472,7 @@ namespace PSS.Presentation_Layer
             // 
             this.rbtnIndvidual.AutoSize = true;
             this.rbtnIndvidual.Location = new System.Drawing.Point(105, 17);
-            this.rbtnIndvidual.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtnIndvidual.Margin = new System.Windows.Forms.Padding(2);
             this.rbtnIndvidual.Name = "rbtnIndvidual";
             this.rbtnIndvidual.Size = new System.Drawing.Size(70, 17);
             this.rbtnIndvidual.TabIndex = 42;
@@ -492,9 +511,9 @@ namespace PSS.Presentation_Layer
             this.grbPerson.Controls.Add(this.label24);
             this.grbPerson.Controls.Add(this.label25);
             this.grbPerson.Location = new System.Drawing.Point(19, 83);
-            this.grbPerson.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grbPerson.Margin = new System.Windows.Forms.Padding(2);
             this.grbPerson.Name = "grbPerson";
-            this.grbPerson.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grbPerson.Padding = new System.Windows.Forms.Padding(2);
             this.grbPerson.Size = new System.Drawing.Size(276, 485);
             this.grbPerson.TabIndex = 44;
             this.grbPerson.TabStop = false;
@@ -552,7 +571,7 @@ namespace PSS.Presentation_Layer
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(107, 166);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(151, 20);
             this.txtEmail.TabIndex = 29;
@@ -570,7 +589,7 @@ namespace PSS.Presentation_Layer
             // txtTelephone
             // 
             this.txtTelephone.Location = new System.Drawing.Point(107, 138);
-            this.txtTelephone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTelephone.Margin = new System.Windows.Forms.Padding(2);
             this.txtTelephone.Name = "txtTelephone";
             this.txtTelephone.Size = new System.Drawing.Size(151, 20);
             this.txtTelephone.TabIndex = 27;
@@ -588,7 +607,7 @@ namespace PSS.Presentation_Layer
             // dtpDOB
             // 
             this.dtpDOB.Location = new System.Drawing.Point(107, 87);
-            this.dtpDOB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpDOB.Margin = new System.Windows.Forms.Padding(2);
             this.dtpDOB.Name = "dtpDOB";
             this.dtpDOB.Size = new System.Drawing.Size(151, 20);
             this.dtpDOB.TabIndex = 25;
@@ -596,7 +615,7 @@ namespace PSS.Presentation_Layer
             // txtCellphone
             // 
             this.txtCellphone.Location = new System.Drawing.Point(107, 111);
-            this.txtCellphone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCellphone.Margin = new System.Windows.Forms.Padding(2);
             this.txtCellphone.Name = "txtCellphone";
             this.txtCellphone.Size = new System.Drawing.Size(151, 20);
             this.txtCellphone.TabIndex = 24;
@@ -624,7 +643,7 @@ namespace PSS.Presentation_Layer
             // txtSurname
             // 
             this.txtSurname.Location = new System.Drawing.Point(107, 58);
-            this.txtSurname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSurname.Margin = new System.Windows.Forms.Padding(2);
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(151, 20);
             this.txtSurname.TabIndex = 21;
@@ -632,7 +651,7 @@ namespace PSS.Presentation_Layer
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(107, 34);
-            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(151, 20);
             this.txtName.TabIndex = 20;
@@ -670,7 +689,7 @@ namespace PSS.Presentation_Layer
             // btnBack
             // 
             this.btnBack.Location = new System.Drawing.Point(1144, 35);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(135, 33);
             this.btnBack.TabIndex = 36;
@@ -698,26 +717,6 @@ namespace PSS.Presentation_Layer
             this.cbxChooseClient.TabIndex = 49;
             this.cbxChooseClient.SelectedIndexChanged += new System.EventHandler(this.cbxChooseClient_SelectedIndexChanged);
             // 
-            // iwMainContract
-            // 
-            this.iwMainContract.Contract = null;
-            this.iwMainContract.Location = new System.Drawing.Point(527, 223);
-            this.iwMainContract.Name = "iwMainContract";
-            this.iwMainContract.Size = new System.Drawing.Size(425, 158);
-            this.iwMainContract.TabIndex = 58;
-            // 
-            // nudPostalCode
-            // 
-            this.nudPostalCode.Location = new System.Drawing.Point(85, 68);
-            this.nudPostalCode.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.nudPostalCode.Name = "nudPostalCode";
-            this.nudPostalCode.Size = new System.Drawing.Size(52, 20);
-            this.nudPostalCode.TabIndex = 24;
-            // 
             // ClientMaintenance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -738,10 +737,10 @@ namespace PSS.Presentation_Layer
             this.grbBPeople.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPostalCode)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.grbPerson.ResumeLayout(false);
             this.grbPerson.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPostalCode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

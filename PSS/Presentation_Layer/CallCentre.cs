@@ -79,14 +79,14 @@ namespace PSS.Presentation_Layer
 
         private void btnClientSatisfaction_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("call forwarded to clientsatisfaction department");
+            MessageBox.Show("Call forwarded to clientsatisfaction department");
             try
             {
                 showLink();
             }
             catch (Exception)
             {
-                MessageBox.Show("Unable to fine webpage");
+                MessageBox.Show("Unable to load the webpage.");
             }
         }
 

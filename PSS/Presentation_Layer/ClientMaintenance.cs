@@ -333,6 +333,8 @@ namespace PSS.Presentation_Layer
             rtbNotes.Text = client.Notes;
             cbxStatus.Text = client.Status;
             cbxType.Text = client.Type;
+            cbxClientPerson.SelectedItem = currentClient.Person;
+            cbxClientPerson.Text = cbxChooseClient.Text; // TODO: check if there is a better way
 
             if (client is BusinessClient bc)
             {
