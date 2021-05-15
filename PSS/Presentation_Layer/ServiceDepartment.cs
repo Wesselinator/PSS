@@ -81,7 +81,6 @@ namespace PSS.Presentation_Layer
 
         private void PopulateTaskList()
         {
-            // TODO: We need to update ALLUnifinished tasks thus I dont think a readonly datasource would work.
             lsbxActiveTasks.DataSource = AllUnfinishedTasks;
             //Tech Feedback tab
             cbxSchedueledTask.DisplayMember = "DisplayMember";
@@ -192,7 +191,7 @@ namespace PSS.Presentation_Layer
             txtTaskType.Clear();
             txtTaskDescription.Clear();
             dtpDeparture.Value = DateTime.Now;
-            dtpArival.Value = DateTime.Now;
+            dtpArival.Value = DateTime.Now.AddHours(2);
             rtbNotes.Clear();
         }
 
