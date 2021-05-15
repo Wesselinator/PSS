@@ -122,7 +122,7 @@ namespace PSS.Business_Logic
         public override string ToString()
         {
             //return string.Format("ServiceRequestID: {0} | Title: {1} | Type: {2} | Description: {3} | Address: [{4}]", ServiceRequestID, Title, Type, Description, Address);
-            return string.Format("ServiceRequestID: {0} | Title: {1} | Type: {2} | Description: {3}", ServiceRequestID, Title, Type, Description);
+            return string.Format("Title: {0} | Type: {1} |\nDescription: {2}", Title, Type, Description);
         }
     }
 }

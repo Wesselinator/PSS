@@ -34,7 +34,7 @@ namespace PSS.Presentation_Layer
             this.tpCreate = new System.Windows.Forms.TabPage();
             this.lblCurentClient = new System.Windows.Forms.Label();
             this.grbCreate = new System.Windows.Forms.GroupBox();
-            this.rtbSLAdetails = new System.Windows.Forms.RichTextBox();
+            this.rtbSLDetails = new System.Windows.Forms.RichTextBox();
             this.lsbxUnclaimedServiceRequests = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnCreateJob = new System.Windows.Forms.Button();
@@ -143,7 +143,7 @@ namespace PSS.Presentation_Layer
             // grbCreate
             // 
             this.grbCreate.Controls.Add(this.label1);
-            this.grbCreate.Controls.Add(this.rtbSLAdetails);
+            this.grbCreate.Controls.Add(this.rtbSLDetails);
             this.grbCreate.Controls.Add(this.lsbxUnclaimedServiceRequests);
             this.grbCreate.Controls.Add(this.label3);
             this.grbCreate.Controls.Add(this.btnCreateJob);
@@ -154,13 +154,13 @@ namespace PSS.Presentation_Layer
             this.grbCreate.TabStop = false;
             this.grbCreate.Text = "Create";
             // 
-            // rtbSLAdetails
+            // rtbSLDetails
             // 
-            this.rtbSLAdetails.Location = new System.Drawing.Point(277, 42);
-            this.rtbSLAdetails.Name = "rtbSLAdetails";
-            this.rtbSLAdetails.Size = new System.Drawing.Size(267, 95);
-            this.rtbSLAdetails.TabIndex = 4;
-            this.rtbSLAdetails.Text = "";
+            this.rtbSLDetails.Location = new System.Drawing.Point(277, 42);
+            this.rtbSLDetails.Name = "rtbSLDetails";
+            this.rtbSLDetails.Size = new System.Drawing.Size(267, 95);
+            this.rtbSLDetails.TabIndex = 4;
+            this.rtbSLDetails.Text = "";
             // 
             // lsbxUnclaimedServiceRequests
             // 
@@ -176,9 +176,9 @@ namespace PSS.Presentation_Layer
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(274, 26);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(154, 13);
+            this.label3.Size = new System.Drawing.Size(121, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Service level agreement details";
+            this.label3.Text = "Service Request Details";
             // 
             // btnCreateJob
             // 
@@ -678,7 +678,7 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox rtbTechDetails;
-        private System.Windows.Forms.RichTextBox rtbSLAdetails;
+        private System.Windows.Forms.RichTextBox rtbSLDetails;
         private System.Windows.Forms.Button btnCreateJob;
         private System.Windows.Forms.Label lblTasks;
         private System.Windows.Forms.Button btnReturn;

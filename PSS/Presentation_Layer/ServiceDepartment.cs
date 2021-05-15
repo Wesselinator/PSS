@@ -135,6 +135,7 @@ namespace PSS.Presentation_Layer
         private void lsbxUnclaimedServiceRequests_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentRequest = (ServiceRequest)lsbxUnclaimedServiceRequests.SelectedItem;
+            rtbSLDetails.Text = currentRequest.ToString();
         }
 
 
