@@ -1,4 +1,7 @@
-include input
+include fheader
 
+//placeholder doesn't work for date
 mixin date(formID, headerText)
-    +input(formID, headerText, 'date', '2020-01-01')(size='10', maxlength='10')&attributes(attributes)
+    +fheader(formID, attributes.id, headerText)
+        input.inputbars(name!=attributes.id, type='date', form=formID)&attributes(attributes)
+    //+input(formID, headerText, 'date', '2020-01-01')&attributes(attributes)

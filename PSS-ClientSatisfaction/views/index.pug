@@ -1,11 +1,5 @@
 extends layout
 block content 
-  - var i1 = ["test1", "item2", "item3"];
-  - var i2 = ["fuck1", "fuck2", "fuck3"];
-  - var g1 = {label: "test", items: i1};
-  - var g2 = {label: "fuck", items: i2};
-  - var testgroup = [g1, g2];
-
   - var formID = "MainForm";
   - var FollowUpTypes = ["Please Select", "Post-Repair", "Complaint", "Post-Maintenance"];
   - var radioResolved = [{name: "IsNotResolved", item: "Yes"}, {name: "IsResolved", item: "No"}]
@@ -14,9 +8,9 @@ block content
     h1#Mainheader Premier Service Solutions
   #Main
     #VoidLeft
-    form(id=formID, action='Submit()')
+    form(id=formID, action='/feedback', method='POST', target="DisplayFrame")
       #SelectClient.contentdiv
-        +combo(formID, 'Select a Client', testgroup)(id='dropdownSelectClient')
+        +combo(formID, 'Select a Client', clientGroup)(id='dropdownSelectClient')
       #FollowUpTitle.contentdiv
         +text(formID, 'Follow up Title', 'Enter title')(id='FollowUpText')  
       #FollowUpType.contentdiv
@@ -32,7 +26,9 @@ block content
       #SatisfactionLevel.contentdiv
         +number(formID, 'Satisfaction Level', '1', '4')(id='edtSatisfactionLvl')
       #Submit.contentdiv
-        button#btnSubmit(type='submit' data-component='button', form=FormID) Submit
+        input#btnSubmit(type='submit', form=FormID, value='Submit')
+    iframe#DisplayFrame(name="DisplayFrame", style="display: none;")
+        p this can be used to display server response.
     #VoidRight
 
   

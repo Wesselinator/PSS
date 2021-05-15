@@ -367,4 +367,4 @@ FodyWeavers.xsd
 #ignore *.js and *.js.map becuase these should be generated from the *.ts files
 *.js
 *.js.map
-!Public/javascripts/*.js
+!*/Public/javascripts/*.js

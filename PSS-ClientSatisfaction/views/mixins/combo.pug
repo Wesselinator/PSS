@@ -2,12 +2,14 @@ include fheader
 
 mixin combo(formID, headerText, comboSet)
     +fheader(formID, attributes.id, headerText)
-        select.inputbars(name!=attributes.id, form=formID)&attributes(attributes)
+        select.inputbars(name!=attributes.id, form=formID, required)&attributes(attributes)
             if comboSet[0].label
+
                 each group in comboSet
                     optgroup(label=group.label)
                         each item in group.items
-                            option(value=item)= item
+                            option(value=item.value)= item.name
+
             else
                 each item in comboSet
                         option(value=item)= item

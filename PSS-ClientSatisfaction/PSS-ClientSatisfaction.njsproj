@@ -30,10 +30,10 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="views\mixins\date.pug">
+    <Content Include="public\javascripts\clientSide.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="views\mixins\formcontent.pug">
+    <Content Include="views\mixins\date.pug">
       <SubType>Code</SubType>
     </Content>
     <Content Include="views\mixins\input.pug">
@@ -60,10 +60,6 @@
     <Content Include="Dockerfile">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="public\javascripts\DB.js">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="public\javascripts\script.js" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\main.css" />
@@ -96,6 +92,9 @@
     <TypeScriptCompile Include="PSS\comboGroup.ts" />
     <TypeScriptCompile Include="PSS\dataHandler.ts" />
     <TypeScriptCompile Include="PSS\feedback.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="PSS\itemPair.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="routes\clients.ts">

@@ -2,4 +2,4 @@ include fheader
 
 mixin input(formID, headerText, type, placeholder)
     +fheader(formID, attributes.id, headerText)
-        input.inputbars(name!=attributes.id, type=type, placeholder=placeholder, form=formID)&attributes(attributes)
+        input.inputbars(name!=attributes.id, type=type, placeholder=placeholder, form=formID, required)&attributes(attributes)

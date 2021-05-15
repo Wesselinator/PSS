@@ -11,6 +11,10 @@ const debug = require('debug')('PSS-ClientSatisfaction Microservice');
 const app = express();
 
 
+//allows for the parsing of application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
