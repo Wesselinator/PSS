@@ -7,7 +7,7 @@ using PSS.Business_Logic;
 
 namespace PSS.Presentation_Layer
 {
-    //TODO: cbxClientPerson not curently used, Person fields are, figure out what should be used
+    //TODO: cbxNonClientPerson not curently used, Person fields are, figure out what should be used
     public partial class ClientMaintenance : Form
     {
         public bool registerMode { get; set; } //bool for logic if form is in registration mode or update mode
@@ -33,9 +33,9 @@ namespace PSS.Presentation_Layer
             lsbxBusinessPeople.Items.Clear();
             lsbxExistingPeople.Items.AddRange(People.ToArray());
 
-            cbxClientPerson.DisplayMember = "DisplayMember";
-            cbxClientPerson.Items.Clear();
-            cbxClientPerson.Items.AddRange(NonClients.ToArray());
+            cbxNonClientPerson.DisplayMember = "FullName";
+            cbxNonClientPerson.Items.Clear();
+            cbxNonClientPerson.Items.AddRange(NonClients.ToArray()); //NOTE: cbxNonClientPerson is only used to change the exsitng or new clients. It should not be used as the main client sellect
 
             lsbxBusinessPeople.DisplayMember = "DisplayMember";
 
@@ -227,15 +227,24 @@ namespace PSS.Presentation_Layer
             rbtnIndvidual.Enabled = false;
             rbtnBusiness.Enabled = false;
 
-            if (currentClient is IndividualClient)
+            if (currentClient is IndividualClient) //cbx should be changed when radio butons are changed
             {
                 rbtnIndvidual.Checked = true;
+
+                cbxNonClientPerson.Enabled = false;
             }
             else if (currentClient is BusinessClient bCl)
             {
                 txtBusinessName.Text = bCl.BusinessName;
                 rbtnBusiness.Checked = true;
+
+                cbxNonClientPerson.Enabled = true;
+                //NonClients.Add(bCl);
+                //too scared to add that line, also might not need it.
             }
+
+            cbxNonClientPerson.Text = currentClient.Person.DisplayMember;
+            //NOTE: if you choose a new one you won't be able to sellect the old one
 
             Populate();
         }
@@ -251,11 +260,6 @@ namespace PSS.Presentation_Layer
                 if (registerMode)
                 {
                     currentClient = new IndividualClient();
-                }
-                else
-                {
-                    cbxClientPerson.Enabled = false;
-                    cbxClientPerson.Text = currentClient.DisplayMember;
                 }
             }
         }
@@ -275,10 +279,6 @@ namespace PSS.Presentation_Layer
                 {
                     currentClient = new BusinessClient();
                 }
-                else
-                {
-                    cbxClientPerson.Enabled = true;
-                }
             }
 
             lblBusinessName.Enabled = businessChecked;
@@ -291,9 +291,9 @@ namespace PSS.Presentation_Layer
 
         #endregion
 
-        private void cbxClientPerson_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbxNonClientPerson_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lsbxExistingPeople.SelectedItem = cbxClientPerson.SelectedItem;
+            lsbxExistingPeople.SelectedItem = cbxNonClientPerson.SelectedItem;
         }
 
         private void btnClient_Click(object sender, EventArgs e)
@@ -333,8 +333,7 @@ namespace PSS.Presentation_Layer
             rtbNotes.Text = client.Notes;
             cbxStatus.Text = client.Status;
             cbxType.Text = client.Type;
-            cbxClientPerson.SelectedItem = currentClient.Person;
-            cbxClientPerson.Text = cbxChooseClient.Text; // TODO: check if there is a better way
+            cbxNonClientPerson.SelectedItem = People.Find(p => p.PersonID == currentClient.Person.PersonID);
 
             if (client is BusinessClient bc)
             {
@@ -397,8 +396,8 @@ namespace PSS.Presentation_Layer
             lsbxExistingPeople.Items.Clear();
             lsbxExistingPeople.Items.AddRange(People.ToArray());
 
-            cbxClientPerson.Items.Clear();
-            cbxClientPerson.Items.AddRange(NonClients.ToArray());
+            cbxNonClientPerson.Items.Clear();
+            cbxNonClientPerson.Items.AddRange(NonClients.ToArray());
         }
 
         //TODO: add a nice enabled/disabled on the Person txt
@@ -533,5 +532,7 @@ namespace PSS.Presentation_Layer
                     return;
             }
         }
+
+        
     }
 }

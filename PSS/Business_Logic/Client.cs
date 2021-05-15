@@ -18,7 +18,7 @@ namespace PSS.Business_Logic
         public Address Address { get; set; }
         public Person Person { get; set; }
 
-        public string DisplayMember { get => Person.CellphoneNumber + " | " + Person.FirstName; }
+        public virtual string DisplayMember { get => Person.CellphoneNumber; }
 
 
         #region Business Identifier

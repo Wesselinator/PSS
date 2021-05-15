@@ -14,6 +14,8 @@ namespace PSS.Business_Logic
         public MultiIDList<IndividualClientContract> IndividualClientContracts { get; set; }
         public MultiIDList<IndividualClientFollowUp> IndividualClientFollowUps { get; set; }
 
+        public override string DisplayMember { get => Person.CellphoneNumber + " | " + Person.FirstName; }
+
         public static readonly string tableName = "IndividualClient";
         public static readonly string idColumn = "IndividualClientID";
         private static readonly string personColumn = idColumn;

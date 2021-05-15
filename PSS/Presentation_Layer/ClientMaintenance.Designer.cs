@@ -41,7 +41,7 @@ namespace PSS.Presentation_Layer
             this.lblClientType = new System.Windows.Forms.Label();
             this.lblPerson = new System.Windows.Forms.Label();
             this.btnClient = new System.Windows.Forms.Button();
-            this.cbxClientPerson = new System.Windows.Forms.ComboBox();
+            this.cbxNonClientPerson = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.grbBPeople = new System.Windows.Forms.GroupBox();
             this.lblRole = new System.Windows.Forms.Label();
@@ -124,7 +124,7 @@ namespace PSS.Presentation_Layer
             this.groupBox3.Controls.Add(this.lblClientType);
             this.groupBox3.Controls.Add(this.lblPerson);
             this.groupBox3.Controls.Add(this.btnClient);
-            this.groupBox3.Controls.Add(this.cbxClientPerson);
+            this.groupBox3.Controls.Add(this.cbxNonClientPerson);
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.txtBusinessName);
             this.groupBox3.Controls.Add(this.grbBPeople);
@@ -239,15 +239,15 @@ namespace PSS.Presentation_Layer
             this.btnClient.UseVisualStyleBackColor = true;
             this.btnClient.Click += new System.EventHandler(this.btnClient_Click);
             // 
-            // cbxClientPerson
+            // cbxNonClientPerson
             // 
-            this.cbxClientPerson.FormattingEnabled = true;
-            this.cbxClientPerson.Location = new System.Drawing.Point(104, 52);
-            this.cbxClientPerson.Name = "cbxClientPerson";
-            this.cbxClientPerson.Size = new System.Drawing.Size(152, 21);
-            this.cbxClientPerson.TabIndex = 51;
-            this.cbxClientPerson.Text = "Choose Person...";
-            this.cbxClientPerson.SelectedIndexChanged += new System.EventHandler(this.cbxClientPerson_SelectedIndexChanged);
+            this.cbxNonClientPerson.FormattingEnabled = true;
+            this.cbxNonClientPerson.Location = new System.Drawing.Point(104, 52);
+            this.cbxNonClientPerson.Name = "cbxNonClientPerson";
+            this.cbxNonClientPerson.Size = new System.Drawing.Size(152, 21);
+            this.cbxNonClientPerson.TabIndex = 51;
+            this.cbxNonClientPerson.Text = "Choose Person...";
+            this.cbxNonClientPerson.SelectedIndexChanged += new System.EventHandler(this.cbxNonClientPerson_SelectedIndexChanged);
             // 
             // label15
             // 
@@ -713,7 +713,7 @@ namespace PSS.Presentation_Layer
             this.cbxChooseClient.FormattingEnabled = true;
             this.cbxChooseClient.Location = new System.Drawing.Point(156, 42);
             this.cbxChooseClient.Name = "cbxChooseClient";
-            this.cbxChooseClient.Size = new System.Drawing.Size(139, 21);
+            this.cbxChooseClient.Size = new System.Drawing.Size(303, 21);
             this.cbxChooseClient.TabIndex = 49;
             this.cbxChooseClient.SelectedIndexChanged += new System.EventHandler(this.cbxChooseClient_SelectedIndexChanged);
             // 
@@ -788,7 +788,7 @@ namespace PSS.Presentation_Layer
         private System.Windows.Forms.GroupBox grbBPeople;
         private System.Windows.Forms.ComboBox cbxChooseClient;
         private System.Windows.Forms.Label lblPerson;
-        private System.Windows.Forms.ComboBox cbxClientPerson;
+        private System.Windows.Forms.ComboBox cbxNonClientPerson;
         private System.Windows.Forms.Button btnPerson;
         private System.Windows.Forms.Label lblExistingPerson;
         private System.Windows.Forms.ListBox lsbxExistingPeople;

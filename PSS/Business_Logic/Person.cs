@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data;
 using PSS.Data_Access;
 
-//PERSON
 namespace PSS.Business_Logic
 {
     public class Person : SingleIntID
@@ -153,10 +152,11 @@ namespace PSS.Business_Logic
                    FirstName == person.FirstName &&
                    LastName == person.LastName &&
                    FullName == person.FullName &&
-                   BirthDay == person.BirthDay &&
-                   CellphoneNumber == person.CellphoneNumber &&
-                   TellephoneNumber == person.TellephoneNumber &&
-                   Email == person.Email;
+                   BirthDay == person.BirthDay;
+                   //TODO: nulls are a problem
+                   //CellphoneNumber == person.CellphoneNumber &&
+                   //TellephoneNumber == person.TellephoneNumber &&
+                   //Email == person.Email;
         }
 
         public override int GetHashCode()
