@@ -17,6 +17,7 @@ namespace PSS.Presentation_Layer
         {
             InitializeComponent();
             LoadViews();
+            ClearTaskControls();
             cbxClient.Enabled = true;
         }
 
@@ -32,7 +33,6 @@ namespace PSS.Presentation_Layer
 
             PopulateClients();
             PopulateUnclaimedClientServiceRequests();
-            PopulateSLA();
         }
 
         private void LoadViews()
@@ -81,9 +81,11 @@ namespace PSS.Presentation_Layer
 
         private void PopulateTaskList()
         {
+            // TODO: We need to update ALLUnifinished tasks thus I dont think a readonly datasource would work.
             lsbxActiveTasks.DataSource = AllUnfinishedTasks;
             //Tech Feedback tab
             cbxSchedueledTask.DisplayMember = "DisplayMember";
+            cbxSchedueledTask.Items.Clear();
             cbxSchedueledTask.Items.AddRange(TechnicianTask.GetUnfinishedTechTasks().ToArray());
         }
 
@@ -95,15 +97,11 @@ namespace PSS.Presentation_Layer
             }
 
             txtTaskTitle.Text = techTaskToModify.Task.Title;
+            txtTaskType.Text = techTaskToModify.Task.Type;
             txtTaskDescription.Text = techTaskToModify.Task.Description;
             dtpDeparture.Value = techTaskToModify.TimeToDepart;
             dtpArival.Value = techTaskToModify.TimeToArrive;
             rtbNotes.Text = techTaskToModify.Task.Notes;
-        }
-
-        private void PopulateSLA()
-        {
-            //TODO: the frick is this?
         }
 
         #region Tree
@@ -136,6 +134,7 @@ namespace PSS.Presentation_Layer
         {
             currentRequest = (ServiceRequest)lsbxUnclaimedServiceRequests.SelectedItem;
             rtbSLDetails.Text = currentRequest.ToString();
+            ClearTaskControls();
         }
 
 
@@ -187,6 +186,16 @@ namespace PSS.Presentation_Layer
             dtpArival.Value = dtpArival.Value.AddHours(2);
         }
 
+        private void ClearTaskControls()
+        {
+            txtTaskTitle.Clear();
+            txtTaskType.Clear();
+            txtTaskDescription.Clear();
+            dtpDeparture.Value = DateTime.Now;
+            dtpArival.Value = DateTime.Now;
+            rtbNotes.Clear();
+        }
+
         #endregion
 
         #region Buttons
@@ -203,6 +212,8 @@ namespace PSS.Presentation_Layer
             AllTechnicians.Remove(techTaskToModify.Technician); //reduce database accesses
 
             techTaskToModify.Save();
+
+            MessageBox.Show("Task Updated and Re-Assigned", "Success");
         }
 
         private void btnReAssignTech_Click(object sender, EventArgs e)
@@ -226,6 +237,10 @@ namespace PSS.Presentation_Layer
             AllTechnicianTasks.Add(techTask);   //reduce database calls
 
             techTask.Save(); //actually put in database
+
+            // TODO: (fix) Update Unclaimed service request and active tasks
+            PopulateUnclaimedClientServiceRequests();
+            PopulateTaskList();
 
             MessageBox.Show("Task Created and Assigned", "Success");
         }
@@ -256,6 +271,9 @@ namespace PSS.Presentation_Layer
             lblTaskServiceRequest.Text = techTaskToModify.Task.ServiceRequest.ToString();
 
             PopulateTask();
+            //Change DateTimePicker controls to select the day the tech is suppose to arrive, makes sure that the correct Date is already selected.
+            dtpActualTimeArrived.Value = techTaskToModify.TimeToArrive;
+            dtpActualTimeDep.Value = techTaskToModify.TimeToArrive;
         }
         
         private void btnSubmitFeedback_Click(object sender, EventArgs e)
@@ -271,7 +289,10 @@ namespace PSS.Presentation_Layer
             technicianTaskFeedback.TimeDeparture = dtpActualTimeDep.Value;
             technicianTaskFeedback.Notes = rtbFeedbackNotes.Text;
             technicianTaskFeedback.Status = cbxReportStatus.SelectedItem.ToString();
-            technicianTaskFeedback.TechnicianTask = techTaskToModify; 
+            technicianTaskFeedback.TechnicianTask = techTaskToModify;
+
+            //Update Active Task lists
+            PopulateTaskList();
 
             MessageBox.Show("Task Feedback succesfully submitted", "Success!");
         }
