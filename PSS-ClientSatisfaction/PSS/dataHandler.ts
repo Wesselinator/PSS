@@ -5,7 +5,7 @@ import itemPair = require('./itemPair');
 import feedbackReport = require('./feedback');
 
 const pool = mariadb.createPool({
-    host: "localhost", //use env when in container maybe
+    host: process.env.SQLHOST || 'localhost',
     port: 7331,
     user: "PSSuser",
     password: "τнιsραssωοяδιsωεακ",

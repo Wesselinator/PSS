@@ -10,9 +10,11 @@ COPY package*.json ./
 # set development mode
 ENV NODE_ENV=development
 # set env port
-ENV PORT=1337
+ENV PORT=80
 # set env port
 ENV HOST=0.0.0.0
+# set for sql container
+ENV SQLHOST=host.docker.internal
 
 # install npm packages in development mode
 RUN npm install --development
@@ -26,7 +28,7 @@ RUN npm run-script clean
 RUN npm run-script build
 
 # publish port to docker
-EXPOSE 1337
+EXPOSE 80
 
 # set container entrypoint
 CMD [ "npm", "start" ]
