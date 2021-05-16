@@ -20,7 +20,7 @@ block content
       #FollowUpRequired.contentdiv
         +radiogroup(formID, 'Is a folowup action required?', 'IsFollowUpRequired', radioFollowUpRequired)(id='rgpIsFollowUpRequired')
       #DateTime.contentdiv
-        +date(formID, 'Date to follow up')
+        +date(formID, 'Date to follow up')(id='dtpFollowUpDate')
       #IssueResolved.contentdiv
         +radiogroup(formID, 'Is issue resolved?', 'IsIssueResolved', radioResolved)(id='rgpIsIssueResolved')
       #SatisfactionLevel.contentdiv

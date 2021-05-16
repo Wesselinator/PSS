@@ -7,13 +7,16 @@ const router = express.Router();
 import dh = require('./../PSS/dataHandler');
 
 router.get('/', (req: express.Request, res: express.Response) => {
+    //TODO: add a proper fail to get clients
+
     dh.getClients().then(cbxClient => {
-        console.log(cbxClient);
         res.render('index', { title: 'Client Satisfaction', clientGroup: cbxClient });
     })
     .catch(err => {
         console.error("Failed to get sql items back with: " + err);
-        res.status(500).send("OwO yuw fogodt yrrrr esi-qewly swerver...");
+        var error = { status: "SQL Server Unreachable", stack: err };
+        res.render('error', { title: 'SQL Connection Fail', message: "Couldn't connect SQL Server", error: error });
+        res.status(500);
     });
 });
 

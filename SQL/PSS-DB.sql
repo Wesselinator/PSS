@@ -161,7 +161,7 @@ CREATE TABLE FollowUpReport
  FollowUpTitle VARCHAR(80) NOT NULL,
  FollowUpType VARCHAR(20) NOT NULL,
  FollowUpDescription VARCHAR(500) NOT NULL,
- FollowUpDate DATETIME NOT NULL,
+ FollowUpDate DATETIME,
  IsIssueResolved BOOLEAN NOT NULL,
  SatisfactionLevel INT
 );
