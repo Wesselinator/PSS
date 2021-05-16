@@ -51,7 +51,7 @@ namespace PSS.Business_Logic
             this.TimeDeparture = row.Field<DateTime>("TimeDuration");
             this.Notes = row.Field<string>("Notes");
             this.Status = row.Field<string>("Status");
-            this.TechnicianTask = DataEngine.GetDataObject<TechnicianTask>(row.Field<int>("TechnicianTaskID"));
+            this.TechnicianTask =  GetDataObject<TechnicianTask>(row.Field<int>("TechnicianTaskID"));
         }
 
         public override void Save()

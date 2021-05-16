@@ -45,7 +45,7 @@ namespace PSS.Business_Logic
 
         public override void FillFromRow(DataRow row)
         {
-            this.Service = DataEngine.GetDataObject<Service>(row.Field<int>("ServiceID"));
+            this.Service =  SingleIntID.GetDataObject<Service>(row.Field<int>("ServiceID"));
             this.ContractID = row.Field<int>(idColumn2);           
             this.Agreement = row.Field<string>("Agreement");
             this.ServiceQuantity = row.Field<int>("ServiceQuantity");

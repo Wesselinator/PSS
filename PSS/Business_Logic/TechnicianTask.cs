@@ -58,8 +58,8 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             this.TechnicianTaskID = row.Field<int>(IDColumn);
-            this.Technician = DataEngine.GetDataObject<Technician>(row.Field<int>("TechnicianID"));
-            this.Task = DataEngine.GetDataObject<Task>(row.Field<int>("TaskID"));
+            this.Technician = GetDataObject<Technician>(row.Field<int>("TechnicianID"));
+            this.Task = GetDataObject<Task>(row.Field<int>("TaskID"));
             this.TimeToArrive = row.Field<DateTime>("TimeToArrive");
             this.TimeToDepart = row.Field<DateTime>("TimeToDepart");
         }

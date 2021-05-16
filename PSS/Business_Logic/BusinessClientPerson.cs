@@ -42,7 +42,7 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             this.BusinessClientID = row.Field<int>(idColumn1);
-            this.Person = DataEngine.GetDataObject<Person>(row.Field<int>("PersonID"));
+            this.Person = SingleIntID.GetDataObject<Person>(row.Field<int>("PersonID"));
             this.Role = row.Field<string>("Role");
         }
 

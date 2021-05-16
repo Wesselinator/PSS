@@ -18,5 +18,12 @@ namespace PSS.Business_Logic
         {
             return base.GetNextIDFor(IDColumn);
         }
+
+
+        public new static TObject GetDataObject<TObject>(int id) 
+            where TObject : SingleIntID, new()
+        {
+            return BaseSingleID<int>.GetDataObject<TObject>(id);
+        }
     }
 }

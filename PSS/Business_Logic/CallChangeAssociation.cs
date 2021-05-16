@@ -40,7 +40,7 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             this.CallChangeAssociationID = row.Field<int>(idColumn);
-            this.CallInstanceID = DataEngine.GetDataObject<Call>(row.Field<int>("CallInstanceID"));
+            this.CallInstanceID = GetDataObject<Call>(row.Field<int>("CallInstanceID"));
             this.fTableName = row.Field<string>("TableName");
             this.TableRecordID = row.Field<string>("TableRecordID");
         }

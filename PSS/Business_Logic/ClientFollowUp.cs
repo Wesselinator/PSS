@@ -42,7 +42,7 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             this.ClientID = row.Field<int>(ID1);
-            this.FollowUp = DataEngine.GetDataObject<FollowUpReport>(row.Field<int>(idColumn2));
+            this.FollowUp =  SingleIntID.GetDataObject<FollowUpReport>(row.Field<int>(idColumn2));
         }
 
         public override void Save()

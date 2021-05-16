@@ -56,7 +56,7 @@ namespace PSS.Business_Logic
             this.Type = row.Field<string>("TaskType");
             this.Description = row.Field<string>("TaskDescription");
             this.Notes = row.Field<string>("TaskNotes");
-            this.ServiceRequest = DataEngine.GetDataObject<ServiceRequest>(row.Field<int>("ServiceRequestID"));
+            this.ServiceRequest = GetDataObject<ServiceRequest>(row.Field<int>("ServiceRequestID"));
             this.DateProcessed = row.Field<DateTime>("DateProcessed");
             this.IsFinished = row.Field<bool>("IsFinished");
         }

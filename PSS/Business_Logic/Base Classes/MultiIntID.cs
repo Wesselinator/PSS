@@ -83,5 +83,14 @@ namespace PSS.Business_Logic
         {
             return base.GetNextIDFor(IDColumns[column]);
         }
+
+
+
+        public static T GetDataObject<T>(params int[] ids) where T : MultiIntID, new()
+        {
+            T ret = new T();
+            ret.FillWithIDs(ids);
+            return ret;
+        }
     }
 }

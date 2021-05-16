@@ -58,7 +58,7 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             this.ClientContractID = row.Field<int>(ID1);
-            this.Contract = DataEngine.GetDataObject<Contract>(row.Field<int>(idColumn2));
+            this.Contract =  SingleIntID.GetDataObject<Contract>(row.Field<int>(idColumn2));
             this.ClientID = row.Field<int>(ID3);
             this.EffectiveDate = row.Field<DateTime>("EffectiveDate");
         }

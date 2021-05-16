@@ -42,5 +42,15 @@ namespace PSS.Business_Logic
         {
             FillFromRow(GetRowByID(ID));
         }
+
+
+
+        public static TObject GetDataObject<TObject>(T id)
+            where TObject : BaseSingleID<T>, new()
+        {
+            TObject ret = new TObject();
+            ret.FillWithID(id);
+            return ret;
+        }
     }
 }

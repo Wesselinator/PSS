@@ -41,7 +41,7 @@ namespace PSS.Business_Logic
         public override void FillFromRow(DataRow row)
         {
             this.ClientID = row.Field<int>(ID1);
-            this.ServiceRequest = DataEngine.GetDataObject<ServiceRequest>(row.Field<int>(idColumn2));
+            this.ServiceRequest =  SingleIntID.GetDataObject<ServiceRequest>(row.Field<int>(idColumn2));
         }
 
         public override void Save()

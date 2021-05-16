@@ -14,7 +14,7 @@ namespace PSS.Presentation_Layer
 
         private void btnDisplayAll_Click(object sender, EventArgs e)
         {
-            //IndividualClient ass = DataEngine.GetDataObject<IndividualClient>(1);
+            //IndividualClient ass =  SingleIntID.GetDataObject<IndividualClient>(1);
             //Console.WriteLine(ass.Person.FullName);
         }
     }

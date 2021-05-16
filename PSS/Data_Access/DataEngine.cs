@@ -1,74 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using PSS.Business_Logic;
 
 namespace PSS.Data_Access
 {
+    [Obsolete("Data Engine has been deprecated. Code left here for posterity", true)]
     public static class DataEngine
     {
-        public static List<Client> GetAllClients() //move to Client.cs
-        {
-            DataTable IC = GetAll("IndividualClient");
-            DataTable BC = GetAll("BusinessClient");
-
-
-            List<Client> ret = new List<Client>();
-
-
-            foreach (DataRow row in IC.Rows)
-            {
-                IndividualClient ic = new IndividualClient();
-                ic.FillFromRow(row);
-                ret.Add(ic);
-            }
-
-            foreach (DataRow row in BC.Rows)
-            {
-                BusinessClient bc = new BusinessClient();
-                bc.FillFromRow(row);
-                ret.Add(bc);
-            }
-
-
-            return ret;
-        }
-
-        public static DataTable GetAll(string TableName) //remove after GetAllClients are re/moved
-        {
-            string sql = string.Format("SELECT * FROM {0}", TableName);
-            return DataHandler.GetDataTable(sql);
-        }
-
-        #region DataObjects
-
-        public static T GetDataObject<T>(params int[] ids) where T : MultiIntID, new()
-        {
-            T ret = new T();
-            ret.FillWithIDs(ids);
-            return ret;
-        }
-
-        public static T GetDataObject<T>(int id) where T : SingleIntID, new()
-        {
-            T ret = new T();
-            ret.FillWithID(id);
-            return ret;
-        }
-
-        public static TObject GetDataObject<TObject, TID>(TID id) 
-            where TObject : BaseSingleID<TID>, new()
-            where TID : struct
-        {
-            TObject ret = new TObject();
-            ret.FillWithID(id);
-            return ret;
-        }
-
-        #endregion
-
-        
-        
-
         public static string GetProgressRapport(string ticketNo)
         {
             string progressRapport = "";
@@ -102,31 +40,32 @@ namespace PSS.Data_Access
             return progressRapport;
         }
 
-        //public static Technician GetWorkRequest(int technicianID)
-        //{
-        //    //Query is still a work in progress, currently only works for individual clients
-        //    string query = " SELECT tt.TechnicianID, p.FirstName, c.CellNumber, sr.Description, a.Street, a.City, t.Notes" +
-        //                   " FROM ServiceRequest sr" +
-        //                   " JOIN Task ts ON sr.ServiceRequestID = ts.ServiceRequestID" +
-        //                   " JOIN TechnicianTask tt ON ts.TaskID = tt.TaskID" +
-        //                   " JOIN Person p ON sr.ClientEntityID = p.PersonID" +
-        //                   " JOIN ContactInfo c ON p.ContactInfoID = c.ContactInfoID" +
-        //                   " JOIN IndividualClient ic ON p.PersonID = ic.IndividualClientID" +
-        //                   " JOIN Address a ON ic.AddressID = a.AddressID" +
-        //                   " WHERE tt.TechnicianID = " + technicianID;
+        public static Technician GetWorkRequest(int technicianID)
+        {
+            //Query is still a work in progress, currently only works for individual clients
+            string query = " SELECT tt.TechnicianID, p.FirstName, c.CellNumber, sr.Description, a.Street, a.City, t.Notes" +
+                           " FROM ServiceRequest sr" +
+                           " JOIN Task ts ON sr.ServiceRequestID = ts.ServiceRequestID" +
+                           " JOIN TechnicianTask tt ON ts.TaskID = tt.TaskID" +
+                           " JOIN Person p ON sr.ClientEntityID = p.PersonID" +
+                           " JOIN ContactInfo c ON p.ContactInfoID = c.ContactInfoID" +
+                           " JOIN IndividualClient ic ON p.PersonID = ic.IndividualClientID" +
+                           " JOIN Address a ON ic.AddressID = a.AddressID" +
+                           " WHERE tt.TechnicianID = " + technicianID;
 
-        //    DataTable tbl = DataHandler.getDataTable(query);
+            DataTable tbl = DataHandler.GetDataTable(query);
 
-        //    Technician teccy = new Technician();
+            Technician teccy = new Technician();
 
-        //    teccy.ClientName = (string)tbl.Rows[0][1];
-        //    teccy.ClientContactNum = (string)tbl.Rows[0][2];
-        //    teccy.RequestDescription = (string)tbl.Rows[0][3];
-        //    teccy.ClientStreetAddress = (string)tbl.Rows[0][4];
-        //    teccy.ClientCity = (string)tbl.Rows[0][5];
-        //    teccy.Notes = (string)tbl.Rows[0][6];
+            //Non existant methods prevent program from building
+            //teccy.ClientName = (string)tbl.Rows[0][1];
+            //teccy.ClientContactNum = (string)tbl.Rows[0][2];
+            //teccy.RequestDescription = (string)tbl.Rows[0][3];
+            //teccy.ClientStreetAddress = (string)tbl.Rows[0][4];
+            //teccy.ClientCity = (string)tbl.Rows[0][5];
+            //teccy.Notes = (string)tbl.Rows[0][6];
 
-        //    return teccy;
-        //}
+            return teccy;
+        }
     }
 }

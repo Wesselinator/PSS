@@ -52,7 +52,7 @@ namespace PSS.Business_Logic
             this.TechnicianID = row.Field<int>(idColumn);
             this.Specialty = row.Field<string>("Speciality");
             this.PayRate = row.Field<decimal>("PayRate");
-            this.Person = DataEngine.GetDataObject<Person>(row.Field<int>(idColumn));
+            this.Person = GetDataObject<Person>(row.Field<int>(idColumn));
         }
 
         protected override string Update()

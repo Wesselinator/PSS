@@ -13,8 +13,8 @@ namespace PSS.Presentation_Layer
 
         private void btnGetProgressReport_Click(object sender, EventArgs e)
         {
-            
-            rtxtRaport.Text = DataEngine.GetProgressRapport(txtTicketNumber.Text);
+            MessageBox.Show("You shouldn't be here", "wut");
+            Application.Exit();
         }
 
         private void btnExit_Click(object sender, EventArgs e)

@@ -57,7 +57,7 @@ namespace PSS.Business_Logic
             this.UserName = row.Field<string>("UserName");
             this.Password = row.Field<string>("Password");
             this.Role = row.Field<string>("Role");
-            this.Person = DataEngine.GetDataObject<Person>(row.Field<int>(IDColumn));
+            this.Person =  GetDataObject<Person>(row.Field<int>(IDColumn));
         }
 
         protected override string Update()

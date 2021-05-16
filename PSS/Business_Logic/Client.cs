@@ -72,8 +72,8 @@ namespace PSS.Business_Logic
             Type = row.Field<string>("Type");
             Status = row.Field<string>("Status");
             Notes = row.Field<string>("Notes");
-            Address = DataEngine.GetDataObject<Address>(row.Field<int>("AddressID"));
-            Person = DataEngine.GetDataObject<Person>(row.Field<int>(personColumn));
+            Address = GetDataObject<Address>(row.Field<int>("AddressID"));
+            Person = GetDataObject<Person>(row.Field<int>(personColumn));
 
             FillLists(ClientID);
         }
@@ -140,8 +140,18 @@ namespace PSS.Business_Logic
 
         public static List<Client> GetAllClients()
         {
-            return DataEngine.GetAllClients();//move code here
+            BaseList<IndividualClient> individualClients = BaseList<IndividualClient>.GrabAll();
+            BaseList<BusinessClient> businessClients = BaseList<BusinessClient>.GrabAll();
+
+            List<Client> ret = new List<Client>();
+
+            ret.AddRange(individualClients);
+            ret.AddRange(businessClients);
+
+            return ret;
         }
+
+        //SHOULD NOT OVERIDE GetALL() method. This is an abstract class and shouldn't use the base system for getting a mixture of types
 
         public override bool Equals(object obj)
         {
