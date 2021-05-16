@@ -7,6 +7,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSS", "PSS\PSS.csproj", "{6
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "PSS-ClientSatisfaction", "PSS-ClientSatisfaction\PSS-ClientSatisfaction.njsproj", "{CAF14C2C-2B35-473D-AB0D-89B66DA16FDB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{7D740ADD-C704-4048-90FB-99B27E3FF660}"
+	ProjectSection(SolutionItems) = preProject
+		SQL\Dockerfile = SQL\Dockerfile
+		SQL\PSS-DB.sql = SQL\PSS-DB.sql
+		SQL\README.md = SQL\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commands", "Commands", "{6739EAAE-975C-4410-A03A-19F4F0960FF4}"
+	ProjectSection(SolutionItems) = preProject
+		Commands\ClientSatisfactionContainer.bat = Commands\ClientSatisfactionContainer.bat
+		Commands\MariaDBContainer.bat = Commands\MariaDBContainer.bat
+		Commands\README.md = Commands\README.md
+		Commands\reCreateContainer.bat = Commands\reCreateContainer.bat
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
