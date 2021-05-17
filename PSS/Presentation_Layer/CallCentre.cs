@@ -112,6 +112,12 @@ namespace PSS.Presentation_Layer
             currentRequest.Save(); //specifically only save the request (I shouldn't have change antying in the client)
             MessageBox.Show("Ticket Updated!", "Success!");
             EnableTransfer();
+
+            //Clear inputs
+            txtProblemTitle.Clear();
+            rtbProblem.Clear();
+            cbxProblemType.Text = "Type...";
+            cbxProblemType.SelectedIndex = 0;
         }
 
         private void lsbxServices_SelectedIndexChanged(object sender, EventArgs e)

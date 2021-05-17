@@ -107,7 +107,7 @@ namespace PSS.Presentation_Layer
             this.btnUpdateSR.Name = "btnUpdateSR";
             this.btnUpdateSR.Size = new System.Drawing.Size(202, 41);
             this.btnUpdateSR.TabIndex = 2;
-            this.btnUpdateSR.Text = "Update Service Request";
+            this.btnUpdateSR.Text = "Submit Service Request";
             this.btnUpdateSR.UseVisualStyleBackColor = true;
             this.btnUpdateSR.Click += new System.EventHandler(this.btnUpdateTicket_Click);
             // 
