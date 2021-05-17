@@ -195,5 +195,15 @@ namespace PSS.Presentation_Layer
         {
             Close();
         }
+
+        private void lsbxCurrentService_KeyDown(object sender, KeyEventArgs e)
+        {
+            Console.WriteLine("fuck");
+            if (e.KeyCode == Keys.Delete)
+            {
+                EventArgs eventArgs = new EventArgs();
+                btnRemoveCurrentService_Click(sender, eventArgs);
+            } 
+        }
     }
 }

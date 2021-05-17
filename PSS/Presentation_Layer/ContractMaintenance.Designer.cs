@@ -30,6 +30,7 @@ namespace PSS.Presentation_Layer
         private void InitializeComponent()
         {
             this.gbxCreateModifyServices = new System.Windows.Forms.GroupBox();
+            this.rtbServiceDescription = new System.Windows.Forms.RichTextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.rbModifyService = new System.Windows.Forms.RadioButton();
             this.rbCreateService = new System.Windows.Forms.RadioButton();
@@ -83,7 +84,6 @@ namespace PSS.Presentation_Layer
             this.rtbContractDetails = new System.Windows.Forms.RichTextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
-            this.rtbServiceDescription = new System.Windows.Forms.RichTextBox();
             this.gbxCreateModifyServices.SuspendLayout();
             this.tcContractMaintance.SuspendLayout();
             this.tpContracts.SuspendLayout();
@@ -118,6 +118,14 @@ namespace PSS.Presentation_Layer
             this.gbxCreateModifyServices.TabIndex = 47;
             this.gbxCreateModifyServices.TabStop = false;
             this.gbxCreateModifyServices.Text = "Create or Modify Services";
+            // 
+            // rtbServiceDescription
+            // 
+            this.rtbServiceDescription.Location = new System.Drawing.Point(90, 119);
+            this.rtbServiceDescription.Name = "rtbServiceDescription";
+            this.rtbServiceDescription.Size = new System.Drawing.Size(134, 58);
+            this.rtbServiceDescription.TabIndex = 40;
+            this.rtbServiceDescription.Text = "";
             // 
             // label18
             // 
@@ -331,6 +339,7 @@ namespace PSS.Presentation_Layer
             this.lsbxCurrentService.Name = "lsbxCurrentService";
             this.lsbxCurrentService.Size = new System.Drawing.Size(247, 43);
             this.lsbxCurrentService.TabIndex = 58;
+            this.lsbxCurrentService.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lsbxCurrentService_KeyDown);
             // 
             // numDuration
             // 
@@ -707,14 +716,6 @@ namespace PSS.Presentation_Layer
             this.btnBack.Text = "Return to Call Centre";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // rtbServiceDescription
-            // 
-            this.rtbServiceDescription.Location = new System.Drawing.Point(90, 119);
-            this.rtbServiceDescription.Name = "rtbServiceDescription";
-            this.rtbServiceDescription.Size = new System.Drawing.Size(134, 58);
-            this.rtbServiceDescription.TabIndex = 40;
-            this.rtbServiceDescription.Text = "";
             // 
             // ContractMaintenance
             // 
