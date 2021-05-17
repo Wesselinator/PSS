@@ -13,7 +13,7 @@ namespace PSS.Business_Logic
         public string Title { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
-        public DateTime FollowUpDate { get; set; }
+        public DateTime? FollowUpDate { get; set; }
         public bool IsIssueResolved { get; set; }
         public int SatisfactionLevel { get; set; }
 
@@ -25,7 +25,7 @@ namespace PSS.Business_Logic
         public FollowUpReport() : base(tableName, idColumn) 
         { }
 
-        public FollowUpReport(int followupReportID, string title, string type, string description, DateTime followUpDate, bool isIssueResolved, int satisfactionLevel) : this()
+        public FollowUpReport(int followupReportID, string title, string type, string description, DateTime? followUpDate, bool isIssueResolved, int satisfactionLevel) : this()
         {
             this.FollowupReportID = followupReportID;
             this.Title = title;
@@ -44,7 +44,7 @@ namespace PSS.Business_Logic
             this.Title = row.Field<string>("FollowUpTitle");
             this.Type = row.Field<string>("FollowUpType");
             this.Description = row.Field<string>("FollowUpDescription");
-            this.FollowUpDate = row.Field<DateTime>("FollowUpDate");
+            this.FollowUpDate = row.Field<DateTime?>("FollowUpDate");
             this.IsIssueResolved = row.Field<bool>("IsIssueResolved");
             this.SatisfactionLevel = row.Field<int>("SatisfactionLevel");           
         }
@@ -58,7 +58,7 @@ namespace PSS.Business_Logic
             sql.Append("FollowUpTitle = '" + Title + "', ");
             sql.Append("FollowUpType = '" + Type + "', ");
             sql.Append("FollowUpDescription = '" + Description + "', ");
-            sql.Append("FollowUpDate = '" + FollowUpDate + "', ");
+            sql.Append("FollowUpDate = '" + FollowUpDate?.ToString("s") + "', ");
             sql.Append("IsIssueResolved = " + (IsIssueResolved ? 1 : 0) + ", ");
             sql.Append("SatisfactionLevel = " + SatisfactionLevel + " ");
 
@@ -78,7 +78,7 @@ namespace PSS.Business_Logic
             sql.Append("'" + Title + "'");
             sql.Append("'" + Type + "'");
             sql.Append("'" + Description + "'");
-            sql.Append("'" + FollowUpDate + "', ");
+            sql.Append("'" + FollowUpDate?.ToString("s") + "', ");
             sql.Append("'" + IsIssueResolved + "', ");
             sql.Append("" + SatisfactionLevel.ToString() + " ");          
 
