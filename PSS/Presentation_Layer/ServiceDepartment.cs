@@ -81,6 +81,7 @@ namespace PSS.Presentation_Layer
 
         private void PopulateTaskList()
         {
+            lsbxActiveTasks.DataSource = null;
             lsbxActiveTasks.DataSource = AllUnfinishedTasks;
             //Tech Feedback tab
             cbxSchedueledTask.DisplayMember = "DisplayMember";
@@ -148,7 +149,7 @@ namespace PSS.Presentation_Layer
         private void lsbxTasks_SelectedIndexChanged(object sender, EventArgs e)
         {
             Task taskToModify = (Task)lsbxActiveTasks.SelectedItem;
-            techTaskToModify = AllTechnicianTasks.Find(tt => tt.Task.TaskID == taskToModify.TaskID); //might not find it?
+            techTaskToModify = AllTechnicianTasks.Find(tt => tt.Task.TaskID == taskToModify?.TaskID); //might not find it?
             if (!(techTaskToModify is null))
             {
                 txtCurrentTech.Text = techTaskToModify.Technician.Person.FullName; //can I do this with a datasource?
@@ -289,6 +290,7 @@ namespace PSS.Presentation_Layer
             technicianTaskFeedback.Notes = rtbFeedbackNotes.Text;
             technicianTaskFeedback.Status = cbxReportStatus.SelectedItem.ToString();
             technicianTaskFeedback.TechnicianTask = techTaskToModify;
+            technicianTaskFeedback.Save();
 
             //Update Active Task lists
             PopulateTaskList();
