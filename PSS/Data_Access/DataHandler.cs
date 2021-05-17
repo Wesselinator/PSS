@@ -91,7 +91,7 @@ namespace PSS.Data_Access
 
         private static void YaForgotTheEscape(ref string Query)
         {
-            Query = Regex.Replace(Query, @"(?<= '[\w\s']+?)'+(?=['\w\s]+?',)", "\'\'"); //this shits wild
+            Query = Regex.Replace(Query, @"(?<= '['\w\s.?!#@()/\\]+?)'+?(?=[\w\s'.?!#@()/\\]+?',)", "\'\'"); //this shits wild
             //(?<= ').+?(?=',) is the easisit to understand
             // it tries to match [_' ANYTHING ',] and removes the lookbehind/lookahead characters
 
