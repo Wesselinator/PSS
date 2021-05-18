@@ -97,12 +97,12 @@ namespace PSS.Business_Logic
             sql.Append("'" + Type + "', ");
             sql.Append("'" + Status + "', ");
             sql.Append("'" + Notes + "', ");
-            sql.Append(Address.AddressID + ", ");
-            sql.Append(ContactPerson.PersonID);
+            sql.Append(ContactPerson.PersonID + ", ");
+            sql.Append(Address.AddressID);
 
             sql.AppendLine(");");
 
-            return base.InsertPartial(sql);
+            return sql.ToString();
         }
 
         #endregion
