@@ -67,7 +67,7 @@ namespace PSS.Business_Logic
         protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO " + TableName + " (ServiceID, ServiceName, [Type], ServiceDescription)");
+            sql.AppendLine("INSERT INTO " + TableName + " (ServiceID, ServiceName, `Type`, ServiceDescription)");
             sql.Append("VALUES (");
 
             sql.Append(ServiceID + ", ");

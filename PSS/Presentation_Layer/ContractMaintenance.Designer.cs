@@ -424,7 +424,6 @@ namespace PSS.Presentation_Layer
             this.rbUnlimited.TabStop = true;
             this.rbUnlimited.Text = "Unlimited";
             this.rbUnlimited.UseVisualStyleBackColor = true;
-            this.rbUnlimited.CheckedChanged += new System.EventHandler(this.rbUnlimited_CheckedChanged);
             // 
             // lblQuantity
             // 

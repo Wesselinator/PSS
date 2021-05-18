@@ -58,7 +58,7 @@ namespace PSS.Business_Logic
             sql.Append("SET ");
 
             sql.Append("CallAssociationID = " + CallChangeAssociationID + ", ");
-            sql.Append("CallInstanceID = " + CallInstanceID + ", ");
+            sql.Append("CallInstanceID = " + CallInstanceID.CallInstanceID + ", ");
             sql.Append("TableName = " + fTableName + ", ");
             sql.Append("TableRecordID = " + TableRecordID);
 
@@ -74,9 +74,9 @@ namespace PSS.Business_Logic
             sql.Append("VALUES (");
 
             sql.Append(CallChangeAssociationID + ", ");
-            sql.Append("'" + CallInstanceID + "' ,");
-            sql.Append("'" + fTableName + "' ,");
-            sql.Append("'" + TableRecordID + "'");
+            sql.Append("'" + CallInstanceID.CallInstanceID + "', ");
+            sql.Append("'" + fTableName + "', ");
+            sql.Append("'" + TableRecordID + "' ");
 
             sql.Append(");");
 

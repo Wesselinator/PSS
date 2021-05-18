@@ -109,7 +109,16 @@ namespace PSS.Business_Logic
             sql.Append("ContractName = '" + ContractName + "', ");
             sql.Append("ServiceLevel = '" + ServiceLevel + "', ");
             sql.Append("OfferStartDate = '" + StartDate.ToString("s") + "', ");
-            sql.AppendLine("OfferEndDate = '" + EndDate?.ToString("s") + "', ");
+
+            if (EndDate is null)
+            {
+                sql.AppendLine("OfferEndDate =  NULL, ");
+            }
+            else
+            {
+                sql.AppendLine("OfferEndDate = '" + EndDate?.ToString("s") + "', ");
+            }
+            
             sql.AppendLine("ContractDurationInMonths = " + ContractDurationInMonths + ", ");
             sql.AppendLine("MonthlyFee = " + MonthlyFee.ToString("0.00"));
 

@@ -82,7 +82,7 @@ namespace PSS.Presentation_Layer
         private void PopulateTaskList()
         {
             lsbxActiveTasks.DataSource = null;
-            lsbxActiveTasks.DataSource = AllUnfinishedTasks;
+            lsbxActiveTasks.DataSource = Task.GetAllUnFinishedTasks();
             //Tech Feedback tab
             cbxSchedueledTask.DisplayMember = "DisplayMember";
             cbxSchedueledTask.Items.Clear();
@@ -288,12 +288,13 @@ namespace PSS.Presentation_Layer
             technicianTaskFeedback.TimeArived = dtpActualTimeArrived.Value;
             technicianTaskFeedback.TimeDeparture = dtpActualTimeDep.Value;
             technicianTaskFeedback.Notes = rtbFeedbackNotes.Text;
-            technicianTaskFeedback.Status = cbxReportStatus.SelectedItem.ToString();
+            technicianTaskFeedback.Status = cbxReportStatus.SelectedItem?.ToString();
             technicianTaskFeedback.TechnicianTask = techTaskToModify;
             technicianTaskFeedback.Save();
 
             //Update Active Task lists
             PopulateTaskList();
+            PopulateTree();
 
             MessageBox.Show("Task Feedback succesfully submitted", "Success!");
         }

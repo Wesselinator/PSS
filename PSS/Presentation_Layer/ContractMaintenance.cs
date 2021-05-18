@@ -32,6 +32,12 @@ namespace PSS.Presentation_Layer
             cbxServiceChange.DataSource = AllServices;
         }
 
+        private void LoadCurentServices()
+        {
+            lsbxCurrentService.Items.Clear();
+            lsbxCurrentService.Items.AddRange(currentContract.GetServices().ToArray());
+        }
+
         #region Data
 
         private readonly BaseList<Contract> AllContracts = BaseList<Contract>.GrabAll();
@@ -48,14 +54,6 @@ namespace PSS.Presentation_Layer
             RadioButton rb = (RadioButton)sender;
             nudSpecificQuanity.Enabled = rb.Checked;
         }
-        private void rbUnlimited_CheckedChanged(object sender, EventArgs e)
-        {
-            RadioButton rb = (RadioButton)sender;
-            if (rb.Checked)
-            {
-                nudSpecificQuanity.Value = -1; //TODO: this ok with the bounds?
-            }
-        }
 
 
         private void cbxAllContracts_SelectedIndexChanged(object sender, EventArgs e)
@@ -64,8 +62,7 @@ namespace PSS.Presentation_Layer
 
             currentContract  = (Contract)cbxAllContracts.SelectedItem;
 
-            lsbxCurrentService.Items.Clear();
-            lsbxCurrentService.Items.AddRange(currentContract.GetServices().ToArray());
+            LoadCurentServices();
         }
 
         #endregion
@@ -96,9 +93,21 @@ namespace PSS.Presentation_Layer
         private void btnAddServiceToContract_Click(object sender, EventArgs e)
         {
             Service service = (Service)cbxContractService.SelectedItem;
-            int quantity = (int)Math.Round(nudSpecificQuanity.Value);
+            int quantity;
+            if (rbUnlimited.Checked)
+            {
+                quantity = -1;
+            }
+            else
+            {
+                quantity = (int)Math.Round(nudSpecificQuanity.Value);
+            }
 
             currentContract?.AddService(service, rtbAgreement.Text, quantity);
+            currentContract.Save();
+
+            LoadCurentServices();
+            MessageBox.Show("Added Service Agreement to Contract!", "Success!");
         }
 
         private void btnStopContract_Click(object sender, EventArgs e)
@@ -107,7 +116,7 @@ namespace PSS.Presentation_Layer
             contract.EndDate = DateTime.Now;
             contract.Save();
 
-            MessageBox.Show("Success!", "Contract stoped!");
+            MessageBox.Show("Contract stoped!", "Success!");
         }
 
         #endregion
@@ -166,6 +175,7 @@ namespace PSS.Presentation_Layer
 
             currentService.Save();
             AllServices.Add(currentService); //reduce database acesses
+            MessageBox.Show("Service successfully created");
         }
 
         #endregion

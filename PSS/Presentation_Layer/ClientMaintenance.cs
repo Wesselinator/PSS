@@ -161,11 +161,24 @@ namespace PSS.Presentation_Layer
         }
 
         #region Confirm
+        private bool registered = false;
         private void ConfirmRegister()
         {
+            registered = true;
             PopulateClientFromControls(currentClient); //created new client in radio controls with type
-
+            currentClient.SetNextID();
+            Console.WriteLine(currentClient.ClientID);
             currentClient.Save();
+            Hide();
+        }
+
+        public Client GetNewlyRegistered()
+        {
+            if (registered)
+            {
+                return currentClient;
+            }
+            else return null;
         }
 
         private void ConfirmModify()
@@ -173,6 +186,7 @@ namespace PSS.Presentation_Layer
             PopulateClientFromControls(currentClient);
 
             currentClient.Save();
+            Close();
         }
         #endregion
 
@@ -281,8 +295,8 @@ namespace PSS.Presentation_Layer
                 }
             }
 
-            lblBusinessName.Enabled = businessChecked;
-            txtBusinessName.Enabled = businessChecked;
+            lblBusinessName.Visible = businessChecked;
+            txtBusinessName.Visible = businessChecked;
 
             grbBPeople.Enabled = businessChecked;
             btnAddToBP.Enabled = businessChecked;
@@ -301,13 +315,13 @@ namespace PSS.Presentation_Layer
             if (registerMode)
             {
                 ConfirmRegister();
+                MessageBox.Show("Client Registration complete.", "Success!", MessageBoxButtons.OK);
             }
             else
             {
-                ConfirmModify();
+                //ConfirmModify(); //TODO: to make master stable
+                MessageBox.Show("Client successfully updated.", "Success!", MessageBoxButtons.OK);
             }
-
-            Close();
         }
 
         private void PopulateClientFromControls(Client client)
@@ -481,6 +495,8 @@ namespace PSS.Presentation_Layer
             btnAddToBP.Text = "Add " + selectedPersonInExisting.FirstName + " To Business People";
 
             PopulateControlsFromPerson(selectedPersonInExisting);
+
+            cbxNonClientPerson.Text = ((Person)lsbxExistingPeople.SelectedItem).DisplayMember;
         }
 
         #endregion
@@ -494,7 +510,7 @@ namespace PSS.Presentation_Layer
             currentClient.AddContract(selectedContract, DateTime.Now);
         }
 
-        private void cbxCurentContract_SelectedIndexChanged(object sender, EventArgs e) //Maybe on text changed?
+        private void cbxCurentContract_SelectedIndexChanged_1(object sender, EventArgs e) //Maybe on text changed?
         {
             iwMainContract.Contract = (Contract)cbxCurentContract.SelectedItem;
         }
@@ -532,7 +548,5 @@ namespace PSS.Presentation_Layer
                     return;
             }
         }
-
-        
     }
 }
