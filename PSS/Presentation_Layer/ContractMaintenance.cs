@@ -174,6 +174,7 @@ namespace PSS.Presentation_Layer
 
             currentService.Save();
             AllServices.Add(currentService); //reduce database acesses
+            MessageBox.Show("Service successfully created");
         }
 
         #endregion
