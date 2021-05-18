@@ -5,7 +5,7 @@ Weclome to the SQL Container Build Files!
 Here you will find the Dockerfile to build the container aswell as the SQL file to build the database with some database
 
 ## Basic Database Atributes
-```js
+```sh
 Database Username: 'PSSuser'
 Database Password: 'τнιsραssωοяδιsωεακ'
 Database Name: 'PremierServiceSolutionsDB'

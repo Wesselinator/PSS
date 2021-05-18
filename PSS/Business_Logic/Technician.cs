@@ -61,8 +61,8 @@ namespace PSS.Business_Logic
             sql.AppendLine("UPDATE " + tableName);
             sql.Append("SET ");
 
-            sql.Append("Speciality = '" + Specialty + "', ");
-            sql.Append("PayRate = " + PayRate.ToString("0.00"));
+            sql.Append("Speciality = \"" + Specialty + "\", ");
+            sql.AppendLine("PayRate = " + PayRate.ToString("0.00"));
 
             sql.Append("WHERE " + idColumn + " = " + TechnicianID);
 
@@ -101,7 +101,7 @@ namespace PSS.Business_Logic
                 "ON t.TechnicianID = tt.TechnicianID " +
                 "LEFT JOIN TechnicianTaskFeedback ttf " +
                 "ON tt.TechnicianTaskID = ttf.TechnicianTaskID " +
-                "WHERE ('2021/04/18 10:00:00' BETWEEN tt.TimeToArrive AND tt.TimeToDepart)" +
+                "WHERE (\"2021/04/18 10:00:00\" BETWEEN tt.TimeToArrive AND tt.TimeToDepart)" +
             ")";
             DataTable dataTable = DataHandler.GetDataTable(sql);
 

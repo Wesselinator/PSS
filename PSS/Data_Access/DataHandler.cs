@@ -91,13 +91,13 @@ namespace PSS.Data_Access
 
         private static void YaForgotTheEscape(ref string Query)
         {
-            Query = Regex.Replace(Query, @"(?<!, |\(|,)'(?!, ['\d,]|\))", @"''"); //this shits wild
+            //Query = Regex.Replace(Query, @"(?<![,\(] *)'(?! *, *['\d,]| ?\))", @"''"); //this shits wild
             //()'()
             // this is the most important part. It finds all the ' in the string.
 
             //(?<!, |\(|,)' is a negative look behind that that will discard a match if it looks like:      [, '] OR [('] OR [,']                       ignore the []
 
-            //'(?!, ['\d,]|\)) is a negative lookahead that will discard a match if it looks like:          [', '] OR [', 999...] OR [', ,] OR [')]     ignore the [] and where 999... represents any number
+            //'(?!, ['\d,]|\)) is a negative lookahead that will discard a match if it looks like:          [', '] OR [', 999...] OR [', ,] OR [')] OR [' )]     ignore the [] and where 999... represents any number
 
             //TODO: This is a bandaid fix. Proper maybe?
         }

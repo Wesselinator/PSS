@@ -288,7 +288,7 @@ namespace PSS.Presentation_Layer
             technicianTaskFeedback.TimeArived = dtpActualTimeArrived.Value;
             technicianTaskFeedback.TimeDeparture = dtpActualTimeDep.Value;
             technicianTaskFeedback.Notes = rtbFeedbackNotes.Text;
-            technicianTaskFeedback.Status = cbxReportStatus.SelectedItem.ToString();
+            technicianTaskFeedback.Status = cbxReportStatus.SelectedItem?.ToString();
             technicianTaskFeedback.TechnicianTask = techTaskToModify;
             technicianTaskFeedback.Save();
 

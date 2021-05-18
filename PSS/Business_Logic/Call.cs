@@ -84,7 +84,7 @@ namespace PSS.Business_Logic
         {
             string sql = "SELECT calli.* FROM callinstance calli " +
                          "INNER JOIN callchangeassociation cca ON cca.CallInstanceID = calli.CallInstanceID " +
-                         "WHERE TableName =  '" + client.TableName + "' " +
+                         "WHERE TableName =  \"" + client.TableName + "\" " +
                          "AND cca.TableRecordID = " + client.ClientID + ";";
 
             return BaseList<Call>.GrabFill(sql);

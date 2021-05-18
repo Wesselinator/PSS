@@ -66,8 +66,8 @@ namespace PSS.Business_Logic
             sql.AppendLine("UPDATE " + TableName);
             sql.Append("SET ");
 
-            sql.Append("TechnicianTaskFeedID = " + TechnicianTaskFeedID + ", ");
-            sql.Append("TimeArived = '" + TimeArived.ToString("s") + "', ");
+            sql.Append("TechnicianTaskFeedbackID = " + TechnicianTaskFeedID + ", ");
+            sql.Append("TimeArrived = '" + TimeArived.ToString("s") + "', ");
             sql.Append("TimeDeparture = '" + TimeDeparture.ToString("s") + "', ");
             sql.Append("Status = '" + Status + "', ");
             sql.Append("Notes = '" + Notes + "', ");            
@@ -81,7 +81,7 @@ namespace PSS.Business_Logic
         protected override string Insert()
         {
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO " + TableName + " (TechnicianTaskFeedID, TimeArived, TimeDeparture, Status, Notes, TechnicianTaskID) ");
+            sql.AppendLine("INSERT INTO " + TableName + " (TechnicianTaskFeedbackID, TimeArrived, TimeDeparture, Status, Notes, TechnicianTaskID) ");
             sql.Append("VALUES (");
 
             sql.Append(TechnicianTaskFeedID + ", ");
