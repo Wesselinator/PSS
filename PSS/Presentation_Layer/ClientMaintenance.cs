@@ -319,7 +319,7 @@ namespace PSS.Presentation_Layer
             }
             else
             {
-                ConfirmModify();
+                //ConfirmModify(); //TODO: to make master stable
                 MessageBox.Show("Client successfully updated.", "Success!", MessageBoxButtons.OK);
             }
         }
