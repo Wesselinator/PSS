@@ -8,7 +8,6 @@ namespace PSS.Business_Logic
 {
     public class BusinessClient : Client
     {
-        public override int ClientID { get; protected set; }
         public string BusinessName { get; set; }
         public Person ContactPerson { get => Person; set => Person = value; }
         private MultiIDList<BusinessClientPerson> BusinessClientPeople { get; set; }
