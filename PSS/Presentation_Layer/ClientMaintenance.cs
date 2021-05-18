@@ -161,11 +161,23 @@ namespace PSS.Presentation_Layer
         }
 
         #region Confirm
+        private bool registered = false;
         private void ConfirmRegister()
         {
+            registered = true;
             PopulateClientFromControls(currentClient); //created new client in radio controls with type
 
             currentClient.Save();
+            Hide();
+        }
+
+        public Client GetNewlyRegistered()
+        {
+            if (registered)
+            {
+                return currentClient;
+            }
+            else return null;
         }
 
         private void ConfirmModify()
@@ -173,6 +185,7 @@ namespace PSS.Presentation_Layer
             PopulateClientFromControls(currentClient);
 
             currentClient.Save();
+            Close();
         }
         #endregion
 
@@ -306,8 +319,6 @@ namespace PSS.Presentation_Layer
             {
                 ConfirmModify();
             }
-
-            Close();
         }
 
         private void PopulateClientFromControls(Client client)

@@ -117,7 +117,18 @@ namespace PSS.Presentation_Layer
         private void btnRegister_Click(object sender, EventArgs e)
         {
             ClientMaintenance clientMaintenanceForm = new ClientMaintenance();
-            clientMaintenanceForm.Show();
+            clientMaintenanceForm.ShowDialog();
+            Client newClient = clientMaintenanceForm.GetNewlyRegistered();
+            clientMaintenanceForm.Close();
+
+            if (newClient is null)
+            {
+                Close();
+            }
+
+            cbClientDropDown.DataSource = null;
+            cbClientDropDown.Items.Add(newClient);
+            cbClientDropDown.SelectedItem = newClient;
         }
 
         private void btnFollowUp_Click(object sender, EventArgs e)
