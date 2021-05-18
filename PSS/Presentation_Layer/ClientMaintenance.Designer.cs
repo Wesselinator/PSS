@@ -436,9 +436,8 @@ namespace PSS.Presentation_Layer
             // 
             this.cbxStatus.FormattingEnabled = true;
             this.cbxStatus.Items.AddRange(new object[] {
-            "Stat",
-            "Status 2",
-            "Status"});
+            "Active",
+            "Inactive"});
             this.cbxStatus.Location = new System.Drawing.Point(104, 153);
             this.cbxStatus.Margin = new System.Windows.Forms.Padding(2);
             this.cbxStatus.Name = "cbxStatus";

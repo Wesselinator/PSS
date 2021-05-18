@@ -301,10 +301,12 @@ namespace PSS.Presentation_Layer
             if (registerMode)
             {
                 ConfirmRegister();
+                MessageBox.Show("Client Registration complete.", "Success!", MessageBoxButtons.OK);
             }
             else
             {
                 ConfirmModify();
+                MessageBox.Show("Client successfully updated.", "Success!", MessageBoxButtons.OK);
             }
 
             Close();
