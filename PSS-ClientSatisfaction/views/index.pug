@@ -24,9 +24,9 @@ block content
       #IssueResolved.contentdiv
         +radiogroup(formID, 'Is issue resolved?', 'IsIssueResolved', radioResolved)(id='rgpIsIssueResolved')
       #SatisfactionLevel.contentdiv
-        +number(formID, 'Satisfaction Level', '1', '4')(id='edtSatisfactionLvl')
+        +number(formID, 'Satisfaction Level', '1', '5')(id='edtSatisfactionLvl')
       #Submit.contentdiv
-        input#btnSubmit(type='submit', form=FormID, value='Submit')
+        input#btnSubmit(type='submit', form=FormID, value='Submit' onclick='confirm()')
     iframe#DisplayFrame(name="DisplayFrame", style="display: none;")
         p this can be used to display server response.
     #VoidRight
