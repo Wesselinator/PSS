@@ -175,6 +175,7 @@ namespace PSS.Presentation_Layer
             this.cbxCurentContract.Size = new System.Drawing.Size(407, 21);
             this.cbxCurentContract.TabIndex = 35;
             this.cbxCurentContract.Text = "Choose a contract...";
+            this.cbxCurentContract.SelectedIndexChanged += new System.EventHandler(this.cbxCurentContract_SelectedIndexChanged_1);
             // 
             // lsbxPreviousContracts
             // 
@@ -417,9 +418,8 @@ namespace PSS.Presentation_Layer
             // 
             this.cbxStatus.FormattingEnabled = true;
             this.cbxStatus.Items.AddRange(new object[] {
-            "Stat",
-            "Status 2",
-            "Status"});
+            "Active",
+            "Inactive"});
             this.cbxStatus.Location = new System.Drawing.Point(104, 153);
             this.cbxStatus.Margin = new System.Windows.Forms.Padding(2);
             this.cbxStatus.Name = "cbxStatus";
