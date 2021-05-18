@@ -281,8 +281,8 @@ namespace PSS.Presentation_Layer
                 }
             }
 
-            lblBusinessName.Enabled = businessChecked;
-            txtBusinessName.Enabled = businessChecked;
+            lblBusinessName.Visible = businessChecked;
+            txtBusinessName.Visible = businessChecked;
 
             grbBPeople.Enabled = businessChecked;
             btnAddToBP.Enabled = businessChecked;
