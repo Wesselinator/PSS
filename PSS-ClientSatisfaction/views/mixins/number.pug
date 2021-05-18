@@ -1,0 +1,4 @@
+include input
+
+mixin number(formID, headerText, numMin, numMax)
+    +input(formID, headerText, 'number', numMin)(data-type='input-spinner', data-component='spinner', min=numMin, max=numMax)&attributes(attributes)

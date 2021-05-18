@@ -1,0 +1,34 @@
+extends layout
+block content 
+  - var formID = "MainForm";
+  - var FollowUpTypes = ["Please Select", "Post-Repair", "Complaint", "Post-Maintenance"];
+  - var radioResolved = [{name: "IsNotResolved", item: "Yes"}, {name: "IsResolved", item: "No"}]
+  - var radioFollowUpRequired = [{name: "FlolowupRequired", item: "Yes"}, {name: "FlolowupNotRequired", item: "No"}]
+  #Header
+    h1#Mainheader Premier Service Solutions
+  #Main
+    #VoidLeft
+    form(id=formID, action='/feedback', method='POST', target="DisplayFrame")
+      #SelectClient.contentdiv
+        +combo(formID, 'Select a Client', clientGroup)(id='dropdownSelectClient')
+      #FollowUpTitle.contentdiv
+        +text(formID, 'Follow up Title', 'Enter title')(id='FollowUpText')  
+      #FollowUpType.contentdiv
+        +combo(formID, 'Select a Type', FollowUpTypes)(id='dropdownFollowUpType')
+      #FollowUpDescription.contentdiv
+        +textarea(formID, 'Follow up Description', 'Enter description')(id='FollowUpDescriptionText')
+      #FollowUpRequired.contentdiv
+        +radiogroup(formID, 'Is a folowup action required?', 'IsFollowUpRequired', radioFollowUpRequired)(id='rgpIsFollowUpRequired')
+      #DateTime.contentdiv
+        +date(formID, 'Date to follow up')(id='dtpFollowUpDate')
+      #IssueResolved.contentdiv
+        +radiogroup(formID, 'Is issue resolved?', 'IsIssueResolved', radioResolved)(id='rgpIsIssueResolved')
+      #SatisfactionLevel.contentdiv
+        +number(formID, 'Satisfaction Level', '1', '4')(id='edtSatisfactionLvl')
+      #Submit.contentdiv
+        input#btnSubmit(type='submit', form=FormID, value='Submit')
+    iframe#DisplayFrame(name="DisplayFrame", style="display: none;")
+        p this can be used to display server response.
+    #VoidRight
+
+  

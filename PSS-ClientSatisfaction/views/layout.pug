@@ -1,0 +1,14 @@
+include mixins/combo
+include mixins/text
+include mixins/number
+include mixins/date
+include mixins/textarea
+include mixins/radiogroup
+doctype html
+html
+  head
+    title= title
+    script(src='/javascripts/clientSide.js')
+    link(rel='stylesheet', href='/stylesheets/main.css')
+  body
+    block content

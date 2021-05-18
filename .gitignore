@@ -361,3 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+
+#PSS ignore
+#ignore *.js and *.js.map becuase these should be generated from the *.ts files
+*.js
+*.js.map
+!*/Public/javascripts/*.js

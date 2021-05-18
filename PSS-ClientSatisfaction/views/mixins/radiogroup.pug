@@ -1,0 +1,9 @@
+include fheader
+
+mixin radiogroup(formID, headerText, group, radios)
+    +fheader(formID, attributes.id, headerText)
+        each radio in radios
+            input(for=attributes.id, type='radio', name=group, id=radio.name, value=radio.item, form=formID, required)
+            label(for=radio.name)= radio.item
+            br
+            
