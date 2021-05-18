@@ -166,7 +166,8 @@ namespace PSS.Presentation_Layer
         {
             registered = true;
             PopulateClientFromControls(currentClient); //created new client in radio controls with type
-
+            currentClient.SetNextID();
+            Console.WriteLine(currentClient.ClientID);
             currentClient.Save();
             Hide();
         }
