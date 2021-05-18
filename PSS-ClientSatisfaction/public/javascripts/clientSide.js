@@ -33,3 +33,7 @@ function getclients() {
 
     //no populate combobox
 }
+
+function confirm() {
+    alert("Followup succesfully submitted!!!");
+}
