@@ -125,10 +125,14 @@ namespace PSS.Presentation_Layer
             {
                 Close();
             }
+            else
+            {
+                cbClientDropDown.DataSource = null;
+                cbClientDropDown.Items.Add(newClient);
+                cbClientDropDown.SelectedItem = newClient;
+            }
 
-            cbClientDropDown.DataSource = null;
-            cbClientDropDown.Items.Add(newClient);
-            cbClientDropDown.SelectedItem = newClient;
+            
         }
 
         private void btnFollowUp_Click(object sender, EventArgs e)
