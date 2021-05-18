@@ -495,6 +495,8 @@ namespace PSS.Presentation_Layer
             btnAddToBP.Text = "Add " + selectedPersonInExisting.FirstName + " To Business People";
 
             PopulateControlsFromPerson(selectedPersonInExisting);
+
+            cbxNonClientPerson.Text = ((Person)lsbxExistingPeople.SelectedItem).DisplayMember;
         }
 
         #endregion
