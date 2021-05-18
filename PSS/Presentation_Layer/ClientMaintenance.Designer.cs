@@ -183,6 +183,7 @@ namespace PSS.Presentation_Layer
             this.cbxCurentContract.Size = new System.Drawing.Size(407, 21);
             this.cbxCurentContract.TabIndex = 35;
             this.cbxCurentContract.Text = "Choose a contract...";
+            this.cbxCurentContract.SelectedIndexChanged += new System.EventHandler(this.cbxCurentContract_SelectedIndexChanged_1);
             // 
             // lsbxPreviousContracts
             // 

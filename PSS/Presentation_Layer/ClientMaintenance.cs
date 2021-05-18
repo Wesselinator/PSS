@@ -494,7 +494,7 @@ namespace PSS.Presentation_Layer
             currentClient.AddContract(selectedContract, DateTime.Now);
         }
 
-        private void cbxCurentContract_SelectedIndexChanged(object sender, EventArgs e) //Maybe on text changed?
+        private void cbxCurentContract_SelectedIndexChanged_1(object sender, EventArgs e) //Maybe on text changed?
         {
             iwMainContract.Contract = (Contract)cbxCurentContract.SelectedItem;
         }
@@ -532,7 +532,5 @@ namespace PSS.Presentation_Layer
                     return;
             }
         }
-
-        
     }
 }
