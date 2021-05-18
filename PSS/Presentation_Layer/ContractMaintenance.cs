@@ -107,6 +107,7 @@ namespace PSS.Presentation_Layer
             currentContract.Save();
 
             LoadCurentServices();
+            MessageBox.Show("Added Service Agreement to Contract!", "Success!");
         }
 
         private void btnStopContract_Click(object sender, EventArgs e)
@@ -115,7 +116,7 @@ namespace PSS.Presentation_Layer
             contract.EndDate = DateTime.Now;
             contract.Save();
 
-            MessageBox.Show("Success!", "Contract stoped!");
+            MessageBox.Show("Contract stoped!", "Success!");
         }
 
         #endregion
