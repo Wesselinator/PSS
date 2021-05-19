@@ -7,7 +7,6 @@ using PSS.Business_Logic;
 
 namespace PSS.Presentation_Layer
 {
-    //TODO: cbxNonClientPerson not curently used, Person fields are, figure out what should be used
     public partial class ClientMaintenance : Form
     {
         public bool registerMode { get; set; } //bool for logic if form is in registration mode or update mode
@@ -184,46 +183,9 @@ namespace PSS.Presentation_Layer
         private void ConfirmModify()
         {
             PopulateClientFromControls(currentClient);
-
-            currentClient.Save();
             Close();
         }
         #endregion
-
-        //private void cbxServiceLevel_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    // TODO: move this somewhere?
-        //    switch (cbxServiceLevel.SelectedIndex)
-        //    {
-        //        case 0: rtbServiceLevelDetails.Text = "Service level details:\n"
-        //                                            + "Response time: 48+ hours\n  "
-        //                                            + "Repair times: Between 08:00 and 18:00 on Weekdays."
-        //                                            + "              No repair ons weekends";
-        //            break;
-        //        case 1:
-        //            rtbServiceLevelDetails.Text = "Service level details:\n"
-        //                                        + "Response time: 24+ hours\n  "
-        //                                        + "Repair times: Between 06:00 and 20:00 on Weekdays."
-        //                                        +"              No repair ons weekends";
-
-        //            break;
-        //        case 2:
-        //            rtbServiceLevelDetails.Text = "Service level details:\n"
-        //                                        + "Response time: 12+ hours\n  "
-        //                                        + "Repair times: Any time during weekdays"
-        //                                        + "              Between 08:00 and 18:00 on weekends";
-        //            break;
-        //        case 3:
-        //            rtbServiceLevelDetails.Text = "Service level details:\n"
-        //                                        + "Response time: 24/7 instant responses\n  "
-        //                                        + "Repair times: If technicians are available they can assist at any time that suits the client ";
-        //            break;
-        //        default:
-        //            rtbServiceLevelDetails.Text = "Service level details:\n";
-        //            break;
-        //    }
-
-        //}
 
         #region Client
         private Client currentClient = null;
@@ -319,7 +281,7 @@ namespace PSS.Presentation_Layer
             }
             else
             {
-                //ConfirmModify(); //TODO: to make master stable
+                ConfirmModify();
                 MessageBox.Show("Client successfully updated.", "Success!", MessageBoxButtons.OK);
             }
         }
@@ -414,7 +376,6 @@ namespace PSS.Presentation_Layer
             cbxNonClientPerson.Items.AddRange(NonClients.ToArray());
         }
 
-        //TODO: add a nice enabled/disabled on the Person txt
         private void btnModifyPerson_Click(object sender, EventArgs e)
         {
             if (lsbxExistingPeople.SelectedIndex == -1)
@@ -438,7 +399,6 @@ namespace PSS.Presentation_Layer
             AddMode = true;
             btnPerson.Enabled = true;
         }
-        //---------
 
         private void ClearPerson()
         {

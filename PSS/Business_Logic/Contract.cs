@@ -156,7 +156,7 @@ namespace PSS.Business_Logic
             return ServiceLevelAgreements.GetServices();
         }
 
-        public static int GetContractNum(Contract contract)
+        public static int CalculateContractPerf(Contract contract)
         {
             string sql = "SELECT ContractID, COUNT(ContractID) AS `Count` " + //figure out why COUNT returns int64 for fun later
                          "FROM " +

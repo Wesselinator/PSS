@@ -4,7 +4,6 @@ using System.Data;
 using System.Text;
 using PSS.Data_Access;
 
-//CHECK
 namespace PSS.Business_Logic
 {
     public class Service : SingleIntID

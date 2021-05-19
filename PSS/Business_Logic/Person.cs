@@ -123,7 +123,6 @@ namespace PSS.Business_Logic
                          "WHERE ic.IndividualClientID IS NULL " +
                          "AND bc.PrimaryContactPersonID IS NULL " +
                          "AND bcp.PersonID IS NULL;";
-            //TODO: Should people whom are part of a business client be allowed to become an individual client aswell?
             return BaseList<Person>.GrabFill(sql);
         }
 
@@ -153,7 +152,6 @@ namespace PSS.Business_Logic
                    LastName == person.LastName &&
                    FullName == person.FullName &&
                    BirthDay == person.BirthDay;
-                   //TODO: nulls are a problem
                    //CellphoneNumber == person.CellphoneNumber &&
                    //TellephoneNumber == person.TellephoneNumber &&
                    //Email == person.Email;

@@ -2,7 +2,6 @@
 using System.Data;
 using System.Collections.Generic;
 
-//CHECK
 namespace PSS.Business_Logic
 {
     public class Address : SingleIntID

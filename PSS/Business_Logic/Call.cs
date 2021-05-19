@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 
-//REWORK
 namespace PSS.Business_Logic
 {
     public class Call : SingleIntID

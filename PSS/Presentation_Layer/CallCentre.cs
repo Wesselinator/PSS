@@ -38,7 +38,7 @@ namespace PSS.Presentation_Layer
             lsbxPreviousCalls.Items.AddRange(Call.GetPreviousCallsFrom(client).ToArray());
         }
 
-        //TODO: This is in the requirements but we never access it
+        //This is in the requirements
         public CallCentre(Client client, ServiceRequest existingRequest) : this(client)
         {
             currentRequest = existingRequest; //assumes existing requesst refers to an object in client
@@ -122,7 +122,7 @@ namespace PSS.Presentation_Layer
 
         private void lsbxServices_SelectedIndexChanged(object sender, EventArgs e)
         {
-            rtbServiceDetails.Text = ((Service)lsbxServices.SelectedItem)?.ServiceDescription; //TODO: nicer service string
+            rtbServiceDetails.Text = ((Service)lsbxServices.SelectedItem)?.ServiceDescription;
         }
 
         private void lsbxPreviousCalls_SelectedIndexChanged(object sender, EventArgs e)

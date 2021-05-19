@@ -4,7 +4,6 @@ using System.Data;
 using PSS.Data_Access;
 using System.Collections.Generic;
 
-//CHECK
 namespace PSS.Business_Logic
 {
     public class BusinessClientPerson : MultiIntID

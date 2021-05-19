@@ -8,7 +8,6 @@ namespace PSS.Presentation_Layer
 {
     public partial class ContractMaintenance : Form
     {
-        //TODO: find/make space for contract info widget
         public ContractMaintenance()
         {
             InitializeComponent();
@@ -125,9 +124,7 @@ namespace PSS.Presentation_Layer
 
         private void btnRemoveCurrentService_Click(object sender, EventArgs e)
         {
-            //TODO: Remove the comment for master
             lsbxCurrentService.Items.Remove(lsbxCurrentService.SelectedItem);
-            //there is no way to remove things permently at the momment, just look like they are  :P
         }
 
         #region Services
@@ -188,15 +185,14 @@ namespace PSS.Presentation_Layer
         private void lsbxContracts_SelectedIndexChanged(object sender, EventArgs e)
         {
             ListBox lb = (ListBox)sender;
-            rtbContractDetails.Text = lb.SelectedItem.ToString(); //TODO: create nice Contract toFormattedString
+            rtbContractDetails.Text = lb.SelectedItem.ToString();
             currentPerformance = (Contract)lsbxContracts.SelectedItem;
             CalculateContractPerformance();
         }
 
         private void CalculateContractPerformance()
         {
-            //TODO: Calculate Performance better?
-            rtbPerformance.Text = "Performance Index: " + Contract.GetContractNum((Contract)lsbxContracts.SelectedItem); //Index sounds fancy
+            rtbPerformance.Text = "Performance Index: " + Contract.CalculateContractPerf((Contract)lsbxContracts.SelectedItem);
         }
 
         #endregion

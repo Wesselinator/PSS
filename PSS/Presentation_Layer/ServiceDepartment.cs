@@ -12,7 +12,6 @@ namespace PSS.Presentation_Layer
         private ServiceRequest currentRequest = null;
         //private string requestType = null;
 
-        //TODO: Should Service Dept. ever be accesed without a client?
         private ServiceDepartment()
         {
             InitializeComponent();
@@ -105,7 +104,7 @@ namespace PSS.Presentation_Layer
         }
 
         #region Tree
-        private TreeNode[] TechnicianTaskNodes(Technician t) => AllTechnicianTasks.Where(tt => tt.Technician.TechnicianID == t.TechnicianID).Select(tt => new TreeNode(tt.Task.Title)).ToArray(); //TODO: order
+        private TreeNode[] TechnicianTaskNodes(Technician t) => AllTechnicianTasks.Where(tt => tt.Technician.TechnicianID == t.TechnicianID).Select(tt => new TreeNode(tt.Task.Title)).ToArray();
         private TreeNode[] TechnicianNodes => AllTechnicians.Select(t => new TreeNode(t.Person.FullName, TechnicianTaskNodes(t))).ToArray();
 
         private TreeNode[] DanglingTaskNodes => Task.GetAllDanglingTasks().Select(t => new TreeNode(t.Title)).ToArray();
@@ -238,7 +237,6 @@ namespace PSS.Presentation_Layer
 
             techTask.Save(); //actually put in database
 
-            // TODO: (fix) Update Unclaimed service request and active tasks
             PopulateUnclaimedClientServiceRequests();
             PopulateTaskList();
 

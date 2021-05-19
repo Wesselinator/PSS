@@ -3,7 +3,6 @@ using System.Linq;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using System.Data;
-using System.Text.RegularExpressions;
 
 namespace PSS.Data_Access
 {
@@ -14,7 +13,6 @@ namespace PSS.Data_Access
         public static DataTable GetDataTable(string Query)
         {
             TerminateSQL(ref Query);
-            YaForgotTheEscape(ref Query);
 
             DataTable data = new DataTable();
 
@@ -39,7 +37,6 @@ namespace PSS.Data_Access
         private static void ExecuteNonQuery(string Query)//for insert, update and delete statements
         {
             TerminateSQL(ref Query);
-            YaForgotTheEscape(ref Query);
 
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {
@@ -87,19 +84,6 @@ namespace PSS.Data_Access
                     Query += ";";
                     break;
             }
-        }
-
-        private static void YaForgotTheEscape(ref string Query)
-        {
-            //Query = Regex.Replace(Query, @"(?<![,\(] *)'(?! *, *['\d,]| ?\))", @"''"); //this shits wild
-            //()'()
-            // this is the most important part. It finds all the ' in the string.
-
-            //(?<!, |\(|,)' is a negative look behind that that will discard a match if it looks like:      [, '] OR [('] OR [,']                       ignore the []
-
-            //'(?!, ['\d,]|\)) is a negative lookahead that will discard a match if it looks like:          [', '] OR [', 999...] OR [', ,] OR [')] OR [' )]     ignore the [] and where 999... represents any number
-
-            //TODO: This is a bandaid fix. Proper maybe?
         }
     }
 }

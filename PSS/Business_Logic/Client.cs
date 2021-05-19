@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data;
 using PSS.Data_Access;
 
-//CHECK
 namespace PSS.Business_Logic
 {
     public abstract class Client : SingleIntID
