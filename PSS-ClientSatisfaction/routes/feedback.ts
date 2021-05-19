@@ -28,7 +28,6 @@ router.post('/', (req: express.Request, res: express.Response) => {
     
     res.status(200).send("Recieved!");
 
-    //res.status(400); //you fuckyfukyedup
 });
 
 export default router;

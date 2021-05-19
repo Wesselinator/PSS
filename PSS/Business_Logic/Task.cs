@@ -61,7 +61,6 @@ namespace PSS.Business_Logic
             this.IsFinished = row.Field<bool>("IsFinished");
         }
 
-        //P4
         public override void Save()
         {
             ServiceRequest.Save();

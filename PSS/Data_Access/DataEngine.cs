@@ -42,7 +42,7 @@ namespace PSS.Data_Access
 
         public static Technician GetWorkRequest(int technicianID)
         {
-            //Query is still a work in progress, currently only works for individual clients
+            
             string query = " SELECT tt.TechnicianID, p.FirstName, c.CellNumber, sr.Description, a.Street, a.City, t.Notes" +
                            " FROM ServiceRequest sr" +
                            " JOIN Task ts ON sr.ServiceRequestID = ts.ServiceRequestID" +
@@ -56,14 +56,6 @@ namespace PSS.Data_Access
             DataTable tbl = DataHandler.GetDataTable(query);
 
             Technician teccy = new Technician();
-
-            //Non existant methods prevent program from building
-            //teccy.ClientName = (string)tbl.Rows[0][1];
-            //teccy.ClientContactNum = (string)tbl.Rows[0][2];
-            //teccy.RequestDescription = (string)tbl.Rows[0][3];
-            //teccy.ClientStreetAddress = (string)tbl.Rows[0][4];
-            //teccy.ClientCity = (string)tbl.Rows[0][5];
-            //teccy.Notes = (string)tbl.Rows[0][6];
 
             return teccy;
         }

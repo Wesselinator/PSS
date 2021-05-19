@@ -18,11 +18,6 @@ namespace PSS.Presentation_Layer
             currentClient = client;
             ciwMain.Client = client;
 
-            //List<string> lines = new List<string>();
-            //foreach (Contract contract in client.GetContracts())
-            //{
-            //    lines.Add(contract.ToString());
-            //}
             Contract contract = client.GetCurrentContract();
 
             iwCallContract.Contract = contract;
@@ -58,7 +53,7 @@ namespace PSS.Presentation_Layer
 
 
         private ServiceRequest currentRequest = null;
-        private readonly Client currentClient = null; //I shouldn't set client
+        private readonly Client currentClient = null;
 
 
         private void btnClientMaintence_Click(object sender, EventArgs e)
@@ -100,7 +95,7 @@ namespace PSS.Presentation_Layer
         {
             if (currentRequest is null)
             {
-                currentRequest = new ServiceRequest(txtProblemTitle.Text, cbxProblemType.Text, rtbProblem.Text, DateTime.Now); //creates a new one
+                currentRequest = new ServiceRequest(txtProblemTitle.Text, cbxProblemType.Text, rtbProblem.Text, DateTime.Now); //creates a new service request
                 currentClient.AddServiceRequest(currentRequest);
             }
             else

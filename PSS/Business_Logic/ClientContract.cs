@@ -7,7 +7,7 @@ using PSS.Data_Access;
 
 namespace PSS.Business_Logic
 {
-    //This isn't 100% what hapens in the DB but it simplifies the code a LOT
+    //This simplifies what happens in the database
     public abstract class ClientContract : MultiIntID
     {
         private Contract c;

@@ -10,8 +10,7 @@ namespace PSS.Presentation_Layer
     public partial class ServiceDepartment : Form
     {
         private ServiceRequest currentRequest = null;
-        //private string requestType = null;
-
+        
         private ServiceDepartment()
         {
             InitializeComponent();
@@ -47,7 +46,7 @@ namespace PSS.Presentation_Layer
         //change '=' to '=>' if update is prefered
         private readonly List<Client> AllClients = Client.GetAllClients(); 
 
-        private readonly BaseList<Technician> AllTechnicians = BaseList<Technician>.GrabAll(); //we do need all technicians becuase we want all. If you have a problem, write a DataEngine for this
+        private readonly BaseList<Technician> AllTechnicians = BaseList<Technician>.GrabAll(); 
         private readonly BaseList<TechnicianTask> AllTechnicianTasks = BaseList<TechnicianTask>.GrabAll();
         private readonly BaseList<Task> AllUnfinishedTasks = Task.GetAllUnFinishedTasks();
 
@@ -75,7 +74,7 @@ namespace PSS.Presentation_Layer
         {
             cbxClient.DisplayMember = "DisplayMember";
             cbxClient.Items.AddRange(AllClients.ToArray());
-            cbxClient.SelectedItem = currentClient; //this line usually breaks things
+            cbxClient.SelectedItem = currentClient; 
         }
 
         private void PopulateTaskList()
@@ -148,10 +147,10 @@ namespace PSS.Presentation_Layer
         private void lsbxTasks_SelectedIndexChanged(object sender, EventArgs e)
         {
             Task taskToModify = (Task)lsbxActiveTasks.SelectedItem;
-            techTaskToModify = AllTechnicianTasks.Find(tt => tt.Task.TaskID == taskToModify?.TaskID); //might not find it?
+            techTaskToModify = AllTechnicianTasks.Find(tt => tt.Task.TaskID == taskToModify?.TaskID); 
             if (!(techTaskToModify is null))
             {
-                txtCurrentTech.Text = techTaskToModify.Technician.Person.FullName; //can I do this with a datasource?
+                txtCurrentTech.Text = techTaskToModify.Technician.Person.FullName;
             }
 
             PopulateTask(); //quality of life
@@ -224,7 +223,7 @@ namespace PSS.Presentation_Layer
 
             techTaskToModify.Technician = technician;
 
-            txtCurrentTech.Text = technician.Person.FullName; //can I do this with a datasource?
+            txtCurrentTech.Text = technician.Person.FullName; 
         }
 
         private void btnCreateJob_Click(object sender, EventArgs e)

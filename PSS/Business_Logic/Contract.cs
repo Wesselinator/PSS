@@ -26,7 +26,7 @@ namespace PSS.Business_Logic
         #region BusinessIdentifier
         private Random RNG => new Random(ContractID);
         private static readonly string ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private char contractType => ALPHA[RNG.Next(0, 26)]; //lol no contract type
+        private char contractType => ALPHA[RNG.Next(0, 26)]; //no contract type
         private static readonly string[] LEVEL = { "Peasant", "Commoner", "Noble", "Feudal lord" };
         private char serviceLevelAlpha
         {

@@ -101,8 +101,8 @@ namespace PSS.Presentation_Layer
             rbtnIndvidual.Enabled = true;
             rbtnBusiness.Enabled = true;
 
-            rbtnBusiness.Checked = true; //controll pivot onChenged event
-            //we do this to set up something, anything, on the !
+            rbtnBusiness.Checked = true; //controll pivot onChanged event
+            //we do this to fire the event
         }
 
         /// <summary>
@@ -138,10 +138,7 @@ namespace PSS.Presentation_Layer
 
             lsbxPreviousContracts.DataSource = currentClient?.GetContracts();
 
-            //BaseList<Contract> contracts = new BaseList<Contract>(); //move to local?
-            //contracts = currentClient.GetContracts();
-            //cbxCurentContract.DisplayMember = "ContractName";
-            //cbxCurentContract.Items.AddRange(contracts.ToArray());
+            
         }
 
         #endregion
@@ -361,7 +358,7 @@ namespace PSS.Presentation_Layer
             else
             {
                 PopulatePersonFromControls(selectedPersonInExisting);
-                PopulatePersonFromControls(selectedPersonInNonClient); //This is a lazy way of ceeping the 2 list synced. I'm not allowed to use Binding lists
+                PopulatePersonFromControls(selectedPersonInNonClient); //This is a lazy way of keeping the 2 list synced. I'm not allowed to use Binding lists
                 selectedPersonInExisting.Save();
 
                 MessageBox.Show("Person Sucessfully Modified!", "Success!", MessageBoxButtons.OK);
@@ -470,7 +467,7 @@ namespace PSS.Presentation_Layer
             currentClient.AddContract(selectedContract, DateTime.Now);
         }
 
-        private void cbxCurentContract_SelectedIndexChanged_1(object sender, EventArgs e) //Maybe on text changed?
+        private void cbxCurentContract_SelectedIndexChanged_1(object sender, EventArgs e) 
         {
             iwMainContract.Contract = (Contract)cbxCurentContract.SelectedItem;
         }

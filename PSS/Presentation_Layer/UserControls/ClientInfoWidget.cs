@@ -79,7 +79,7 @@ namespace PSS.Presentation_Layer
         private void PopulateIndividual(IndividualClient individual)
         {
             lblTitle.Text = individual.Person.FullName;
-            lblSubtitle.Text = ""; //something nicer?
+            lblSubtitle.Text = ""; 
             lblBuildingIcon.Text = HouseBuilding;
         }
 

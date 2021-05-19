@@ -1,4 +1,4 @@
-//this is an unused approach. changes made where will not effect anything
+//this is an unused approach. changes made here will not effect anything
 async function Submit() {
     var form = document.getElementById("MainForm");
     var formData = new FormData(form);

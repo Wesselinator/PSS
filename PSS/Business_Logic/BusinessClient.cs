@@ -107,7 +107,7 @@ namespace PSS.Business_Logic
         #endregion
 
         #region List Getters/Setters
-        //Because of how Lists work and becuase we are in C#7.3 this is sadly the best way to do it     :(
+        //Because of how Lists work and becuase we are in C#7.3 this is the best way to do it
 
         public override BaseList<ServiceRequest> GetServiceRequests()
         {

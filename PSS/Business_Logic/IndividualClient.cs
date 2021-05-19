@@ -7,7 +7,7 @@ namespace PSS.Business_Logic
 {
     class IndividualClient : Client
     {
-        public override int ClientID { get => Person.PersonID; } //needed?
+        public override int ClientID { get => Person.PersonID; }
 
         public MultiIDList<IndividualClientServiceRequest> IndividualClientServiceRequests { get; set; }
         public MultiIDList<IndividualClientContract> IndividualClientContracts { get; set; }
@@ -35,7 +35,7 @@ namespace PSS.Business_Logic
         public IndividualClient(string type, string status, string notes, Address address) : base(tableName, idColumn, type, status, notes, address)
         {
             ID = Person.PersonID;
-            FillLists(ClientID); // this has a value now
+            FillLists(ClientID);
         }
 
         protected override int GetNextID()
@@ -61,7 +61,7 @@ namespace PSS.Business_Logic
         public override void Save()
         {
             Address.Save();
-            Person.Save(); //what will this do?
+            Person.Save(); 
             base.Save();
             IndividualClientContracts.SaveAll();
             IndividualClientFollowUps.SaveAll();
@@ -92,7 +92,7 @@ namespace PSS.Business_Logic
         #endregion
 
         #region List Getters/Setters
-        //Because of how Lists work and becuase we are in C#7.3 this is sadly the best way to do it     :(
+        //Because of how Lists work and becuase we are in C#7.3 this is the best way to do it
 
         public override BaseList<ServiceRequest> GetServiceRequests()
         {

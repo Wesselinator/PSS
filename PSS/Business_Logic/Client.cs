@@ -25,10 +25,10 @@ namespace PSS.Business_Logic
         private string ClientIdentifierLetter { get {
                 string s = ClientID.ToString("D8")[0].ToString();
                 int x = int.Parse(s);
-                if (x > 4 || x < 0) { throw new BadDataBaseData("ClientIdentifier is Wrong!"); } //bad data is in the database!!!
+                if (x > 4 || x < 0) { throw new BadDataBaseData("ClientIdentifier is Wrong!"); } //bad data is in the database
                 return IdentifierLetter[x].ToString();
             } }
-        private string ClientID7Digits { get { return ClientID.ToString("D8").Remove(0, 1); } } //remove first digit no matter what it is
+        private string ClientID7Digits { get { return ClientID.ToString("D8").Remove(0, 1); } } //always remove frst character
         #endregion
         public string BusinessIdentifier { get => ClientIdentifierLetter + ClientID7Digits; }
 
@@ -41,7 +41,7 @@ namespace PSS.Business_Logic
             Person.SetNextID();
         }
 
-        protected Client(string tableName, string idColumn, string type, string status, string notes, Address address, Person person) : this(tableName, idColumn) //Protected Becuase you should not be able to create half a client
+        protected Client(string tableName, string idColumn, string type, string status, string notes, Address address, Person person) : this(tableName, idColumn) //Protected as you should not be able to create half a client
         {
             this.Type = type;
             this.Status = status;
@@ -51,7 +51,7 @@ namespace PSS.Business_Logic
         }
 
         //Special for Individual Client
-        protected Client(string tableName, string idColumn, string type, string status, string notes, Address address) : this(tableName, idColumn) //Protected Becuase you should not be able to create half a client
+        protected Client(string tableName, string idColumn, string type, string status, string notes, Address address) : this(tableName, idColumn) //Protected as you should not be able to create half a client
         {
             Person newPerson = new Person();
             newPerson.SetNextID();
@@ -122,7 +122,7 @@ namespace PSS.Business_Logic
 
 
         #region List Getters/Setters
-        //Because of how Lists work and becuase we are in C#7.3 this is sadly the best way to do it     :(
+        //Because of how Lists work and becuase we are in C#7.3 this is the best way to do it
 
         public abstract BaseList<ServiceRequest> GetServiceRequests();
         public abstract void AddServiceRequest(ServiceRequest serviceRequest);

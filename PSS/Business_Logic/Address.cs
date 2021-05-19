@@ -26,7 +26,7 @@ namespace PSS.Business_Logic
             this.Province = province;
         }
 
-        public Address(string street, string city, string postalCode, string province) : this() //no chainning  :(
+        public Address(string street, string city, string postalCode, string province) : this() //no chainning
         {
             this.AddressID = GetNextID();
             this.Street = street;

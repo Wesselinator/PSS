@@ -11,7 +11,7 @@ namespace PSS.Business_Logic
     {
         protected int[] IDs { get; set; }
         protected string[] IDColumns { get; private set; }
-        private int CLength{ get => IDColumns.Length; } //Use this a bunch here
+        private int CLength{ get => IDColumns.Length; } //To save time accessing the length of the IDColumn
 
         protected MultiIntID(string tableName, params string[] idColumns) : base(tableName)
         {
