@@ -7,8 +7,6 @@ const router = express.Router();
 import dh = require('./../PSS/dataHandler');
 
 router.get('/', (req: express.Request, res: express.Response) => {
-    //TODO: add a proper fail to get clients
-
     dh.getClients().then(cbxClient => {
         res.render('index', { title: 'Client Satisfaction', clientGroup: cbxClient });
     })

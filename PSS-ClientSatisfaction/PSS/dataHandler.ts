@@ -46,7 +46,7 @@ function saveFeedback(report: feedbackReport, clien: client): void {
 
         var dtfrm: string = "NULL";
         if (report.followupdate) {
-            dtfrm =`'${report.followupdate.toISOString().slice(0, 19)}'`; //replace() required?
+            dtfrm =`'${report.followupdate.toISOString().slice(0, 19)}'`;
         }
         let reportSql = "INSERT INTO FollowUpReport (FollowUpReportID, FollowUpTitle, FollowUpType, FollowUpDescription, FollowUpDate, IsIssueResolved, SatisfactionLevel) " +
             `VALUES (${nextInt}, '${report.title}', '${report.type}', '${report.description}', ${dtfrm}, ${report.isIssueResolved}, ${report.satisfactionLevel});`;
@@ -73,7 +73,6 @@ function clientCrossOver(clien: client, reportId: number) {
 }
 
 
-//TODO: move that block to its own function
 async function getClients(): Promise<comboGroup[]> {
     let indSql = "SELECT ic.IndividualClientID, CONCAT(p.FirstName , ' ', p.LastName) AS FullName FROM individualclient ic " +
                  "INNER JOIN person p ON ic.IndividualClientID = p.PersonID;";
